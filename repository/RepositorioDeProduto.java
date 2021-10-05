@@ -4,6 +4,7 @@ import modelo.Produto;
 
 public interface RepositorioDeProduto {
 	
+	public void add(Produto produto);
 	public Produto find(int id);
 	public Produto findByNome(String nome);
 	public Produto findByAutor(String autor);

@@ -2,10 +2,10 @@ package view;
 
 import java.awt.Color;
 
-import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.DevConfig;
+import view.produto.GerenciadorProduto;
 
 public class GerenciadorPrincipal extends JPanel {
 
@@ -57,26 +57,17 @@ public class GerenciadorPrincipal extends JPanel {
 		
 	}
 	
-	/*
-	 * Menus Cliente
-	 */
+	
 	public void apagarDadosPessoais() {
 		
 	}
-	
-	/*
-	 * Menus Funcionario
-	 */
-	
-	/*
-	 * Menu Gerente
-	 */
+
 	public void menuFuncionario() {
 		
 	}
 	
 	public void menuProduto() {
-		
+		this.trocarTela(new GerenciadorProduto());
 	}
 	
 	public void menuFornecedor() {
