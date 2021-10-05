@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import config.DevConfig;
@@ -15,13 +16,15 @@ public class GerenciadorPrincipal extends JPanel {
 	private JPanel barraDeMenu;
 
 	public GerenciadorPrincipal() {
-
 		setLayout(null);
 
 		this.barraDeMenu = new MenuBarUsuario(this);
+		barraDeMenu.setSize(270, 760);
+		barraDeMenu.setLocation(0, 0);
 		add(this.barraDeMenu);
 		if (DevConfig.devMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
+			redimencionar();
 		}
 		redimencionar();
 	}
@@ -38,9 +41,9 @@ public class GerenciadorPrincipal extends JPanel {
 	public void redimencionar() {
 		int altura = super.getHeight();
 		int largura = super.getWidth();
-		this.barraDeMenu.setBounds(0, 0, larguraDaBarraDeMenu, altura);
-		if (this.menuSelecionado != null)
-			;
+		if (this.menuSelecionado != null) {
+			
+		}
 	}
 	
 	/*
