@@ -18,19 +18,20 @@ public class MenuBarUsuario extends JPanel {
 		btnPesquisarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorPrincipal.pesquisarProduto();
+				
 			}
 		});
 		btnPesquisarProduto.setBounds(41, 11, 160, 25);
 		add(btnPesquisarProduto);
 		
-		JButton btnAlterarSenha = new JButton("Editar Dados da Conta");
-		btnAlterarSenha.addActionListener(new ActionListener() {
+		JButton btnEditarDadosDAConta = new JButton("Editar Dados da Conta");
+		btnEditarDadosDAConta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorPrincipal.alterarSenha();
 			}
 		});
-		add(btnAlterarSenha);
-		btnAlterarSenha.setBounds(41, 47, 160, 25);
+		add(btnEditarDadosDAConta);
+		btnEditarDadosDAConta.setBounds(41, 47, 160, 25);
 
 	}
 }
