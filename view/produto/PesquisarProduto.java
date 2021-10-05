@@ -1,7 +1,10 @@
 package view.produto;
 
+import java.util.List;
+
 import javax.swing.JPanel;
-import javax.swing.JLabel;
+
+import modelo.Produto;
 
 public class PesquisarProduto extends JPanel {
 
@@ -13,5 +16,9 @@ public class PesquisarProduto extends JPanel {
 		
 
 	}
-
+	public void exibirprodutos( List<Produto> produto) {
+		
+	}
+	
+	
 }
