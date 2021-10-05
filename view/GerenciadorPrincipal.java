@@ -18,7 +18,7 @@ public class GerenciadorPrincipal extends JPanel {
 	public GerenciadorPrincipal() {
 		setLayout(null);
 
-		this.barraDeMenu = new MenuBarUsuario(this);
+		this.barraDeMenu = new MenuBarFuncionario(this);
 		barraDeMenu.setSize(270, 760);
 		barraDeMenu.setLocation(0, 0);
 		add(this.barraDeMenu);

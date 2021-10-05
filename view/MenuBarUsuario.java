@@ -20,17 +20,17 @@ public class MenuBarUsuario extends JPanel {
 				gerenciadorPrincipal.pesquisarProduto();
 			}
 		});
-		btnPesquisarProduto.setBounds(10, 11, 160, 25);
+		btnPesquisarProduto.setBounds(41, 11, 160, 25);
 		add(btnPesquisarProduto);
 		
-		JButton btnAlterarSenha = new JButton("Aterar Senha");
+		JButton btnAlterarSenha = new JButton("Editar Dados da Conta");
 		btnAlterarSenha.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorPrincipal.alterarSenha();
 			}
 		});
 		add(btnAlterarSenha);
-		btnAlterarSenha.setBounds(10, 47, 160, 25);
+		btnAlterarSenha.setBounds(41, 47, 160, 25);
 
 	}
 }
