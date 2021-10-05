@@ -1,10 +1,15 @@
 package view.produto;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import modelo.Livro;
 import modelo.Produto;
 import repository.RepositorioLivros;
 
@@ -16,7 +21,7 @@ public class AdicionarLivro extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarLivro(GerenciadorProduto garenciadorProduto, RepositorioLivros repositorioLivros, Produto produto) {
+	public AdicionarLivro(GerenciadorProduto gerenciadorProduto, RepositorioLivros repositorio, Produto produto) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("ISBN");
@@ -47,6 +52,17 @@ public class AdicionarLivro extends JPanel {
 		tfeditora.setColumns(10);
 		
 		JButton btnCadastrarLivro = new JButton("Cadastrar");
+		btnCadastrarLivro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String autor= tfAutor.getText();
+				long isbn= Long.parseLong(tfIsbn.getText());
+				String editora= tfeditora.getText();
+				Livro livro= new Livro(produto.getNome(), produto.getDescriçao(), produto.getPreco(), produto.getQuantidade(), isbn, autor, editora);
+				repositorio.add(livro);
+				JOptionPane.showMessageDialog(btnCadastrarLivro, "Livro cadastrado com sucesso");
+				gerenciadorProduto.menuProduto();
+			}
+		});
 		btnCadastrarLivro.setBounds(10, 164, 89, 23);
 		add(btnCadastrarLivro);
 		

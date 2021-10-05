@@ -25,6 +25,28 @@ public class Produto {
 		this.descriçao = descriçao;
 		this.quantidade = quantidade;
 	}
-//gett e setter
+	//setters
+
+	public int getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public Real getPreco() {
+		return preco;
+	}
+
+	public String getDescriçao() {
+		return descriçao;
+	}
+
+	public int getQuantidade() {
+		return quantidade;
+	}
+	
+	
 	
 }
