@@ -68,6 +68,30 @@ public class GerenciadorPrincipal extends JPanel {
 	 * Menus Funcionario
 	 */
 	
+	/*
+	 * Menu Gerente
+	 */
+	public void menuFuncionario() {
+		
+	}
+	
+	public void menuProduto() {
+		
+	}
+	
+	public void menuFornecedor() {
+		
+	}
+	
+	public void menuSetor() {
+		
+	}
 	
 	
+	public void menuCompras() {
+		
+	}
 }
+
+
+
