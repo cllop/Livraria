@@ -8,6 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
 
 import modelo.Produto;
 import repository.RepositorioDeProduto;
@@ -15,7 +16,7 @@ import util.Real;
 
 public class AdicionarProduto extends JPanel {
 	private JTextField tfNome;
-	private JTextField tfDescricao;
+	private JTextPane tfDescricao;
 	private JTextField tfPreco;
 	private JTextField tfQuantidade;
 	private JButton btnCadastrarProduto;
@@ -32,34 +33,34 @@ public class AdicionarProduto extends JPanel {
 		add(lblNewLabel);
 		
 		tfNome = new JTextField();
-		tfNome.setBounds(10, 30, 86, 20);
+		tfNome.setBounds(10, 30, 259, 20);
 		add(tfNome);
 		tfNome.setColumns(10);
 		
 		JLabel lblNewLabel_1 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_1.setBounds(29, 67, 46, 14);
+		lblNewLabel_1.setBounds(307, 11, 52, 14);
 		add(lblNewLabel_1);
 		
-		tfDescricao = new JTextField();
-		tfDescricao.setBounds(10, 81, 86, 20);
+		tfDescricao = new JTextPane();
+		tfDescricao.setBounds(307, 30, 364, 225);
 		add(tfDescricao);
-		tfDescricao.setColumns(10);
+		
 		
 		JLabel lblNewLabel_2 = new JLabel("Pre\u00E7o");
-		lblNewLabel_2.setBounds(29, 135, 46, 14);
+		lblNewLabel_2.setBounds(29, 61, 46, 14);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Quantidade");
-		lblNewLabel_3.setBounds(20, 200, 86, 14);
+		lblNewLabel_3.setBounds(20, 106, 86, 14);
 		add(lblNewLabel_3);
 		
 		tfPreco = new JTextField();
-		tfPreco.setBounds(10, 150, 86, 20);
+		tfPreco.setBounds(10, 75, 86, 20);
 		add(tfPreco);
 		tfPreco.setColumns(10);
 		
 		tfQuantidade = new JTextField();
-		tfQuantidade.setBounds(10, 212, 86, 20);
+		tfQuantidade.setBounds(10, 119, 86, 20);
 		add(tfQuantidade);
 		tfQuantidade.setColumns(10);
 		

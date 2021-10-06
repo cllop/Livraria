@@ -2,16 +2,18 @@ package view.produto;
 
 import javax.swing.JPanel;
 
+import repository.RepositorioDeProduto;
+import repository.RepositorioLivros;
+
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
-	/**
-	 * Create the panel.
-	 */
-	public GerenciadorProduto() {
+	private RepositorioDeProduto repositorioProduto;
+	private RepositorioLivros repositorioLivros;
+	
+	public GerenciadorProduto(RepositorioDeProduto repositorio, RepositorioLivros repositorioLivros) {
 
 	}
-
 	public void trocarTela(JPanel menuSelecionado) {
 		if (this.menuSelecionado != null) {
 			super.remove(this.menuSelecionado);
@@ -21,10 +23,11 @@ public class GerenciadorProduto extends JPanel {
 		redimencionar();
 	}
 	public void redimencionar() {
-		//copiar de gerenciador principal fazendo alteracoes necessarias 
+		
 	}
 	public void adicionarProduto() {
-		this.trocarTela(new AdicionarProduto(this));
+		this.trocarTela(new AdicionarProduto(this, this.RepositorioDeProduto));
+		
 	}
 	
 	public void deletarProduto() {
