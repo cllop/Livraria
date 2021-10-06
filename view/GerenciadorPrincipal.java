@@ -5,6 +5,7 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import config.DevConfig;
+import repository.FabricaDeRepositorios;
 import view.produto.GerenciadorProduto;
 
 public class GerenciadorPrincipal extends JPanel {
@@ -14,6 +15,8 @@ public class GerenciadorPrincipal extends JPanel {
 	private JPanel menuSelecionado;
 
 	private JPanel barraDeMenu;
+	
+	private FabricaDeRepositorios fabricaDeRepositorios;
 
 	public GerenciadorPrincipal() {
 		setLayout(null);
@@ -67,7 +70,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		this.trocarTela(new GerenciadorProduto());
+		trocarTela(new GerenciadorProduto( this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
 	}
 	
 	public void menuFornecedor() {

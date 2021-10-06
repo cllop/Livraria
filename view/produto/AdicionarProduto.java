@@ -37,7 +37,7 @@ public class AdicionarProduto extends JPanel {
 		add(tfNome);
 		tfNome.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Descri\u00E7\u00E3o");
+		JLabel lblNewLabel_1 = new JLabel("Descricao");
 		lblNewLabel_1.setBounds(307, 11, 52, 14);
 		add(lblNewLabel_1);
 		
@@ -46,7 +46,7 @@ public class AdicionarProduto extends JPanel {
 		add(tfDescricao);
 		
 		
-		JLabel lblNewLabel_2 = new JLabel("Pre\u00E7o");
+		JLabel lblNewLabel_2 = new JLabel("Preco");
 		lblNewLabel_2.setBounds(29, 61, 46, 14);
 		add(lblNewLabel_2);
 		
@@ -92,6 +92,12 @@ public class AdicionarProduto extends JPanel {
 		JButton btnCadastrarLivro = new JButton("Cadastrar Livro");
 		btnCadastrarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				String nome= tfNome.getText();
+				String descricao= tfDescricao.getText();
+				Real preco= new Real(tfPreco.getText());
+				int quantidade= Integer.parseInt(tfQuantidade.getText());
+				Produto produto= new Produto(nome, descricao, preco, quantidade);
+				gerenciadorProduto.adicionarLivro(produto);
 			}
 		});
 		btnCadastrarLivro.setBounds(390, 266, 161, 23);

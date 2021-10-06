@@ -2,6 +2,7 @@ package view.produto;
 
 import javax.swing.JPanel;
 
+import modelo.Produto;
 import repository.RepositorioDeProduto;
 import repository.RepositorioLivros;
 
@@ -12,7 +13,8 @@ public class GerenciadorProduto extends JPanel {
 	private RepositorioLivros repositorioLivros;
 	
 	public GerenciadorProduto(RepositorioDeProduto repositorio, RepositorioLivros repositorioLivros) {
-
+		this.repositorioProduto= repositorio;
+		this.repositorioLivros= repositorioLivros;
 	}
 	public void trocarTela(JPanel menuSelecionado) {
 		if (this.menuSelecionado != null) {
@@ -26,7 +28,7 @@ public class GerenciadorProduto extends JPanel {
 		
 	}
 	public void adicionarProduto() {
-		this.trocarTela(new AdicionarProduto(this, this.RepositorioDeProduto));
+		this.trocarTela(new AdicionarProduto(this, this.repositorioProduto));
 		
 	}
 	
@@ -35,5 +37,8 @@ public class GerenciadorProduto extends JPanel {
 	}
 	public void menuProduto() {
 		this.trocarTela(new MenuProduto(this));
+	}
+	public void adicionarLivro(Produto prod) {
+		this.trocarTela(new AdicionarLivro(this, this.repositorioLivros, prod));
 	}
 }
