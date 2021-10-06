@@ -29,5 +29,35 @@ public class Fornecedor extends Usuario {
 		this.cep = cep;
 		this.numeroDoImovel = numeroDoImovel;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public long getCnpj() {
+		return cnpj;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public String getRua() {
+		return rua;
+	}
+
+	public String getBairro() {
+		return bairro;
+	}
+
+	public int getCep() {
+		return cep;
+	}
+
+	public int getNumeroDoImovel() {
+		return numeroDoImovel;
+	}
+	
+	
 	
 }

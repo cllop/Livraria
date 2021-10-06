@@ -12,6 +12,6 @@ public interface RepositorioFornecedor {
 	
 	public List<Fornecedor> findByNome(String nome);
 	
-	public List<Fornecedor> findByCnpj(long cnpj);
+	public Fornecedor findByCnpj(long cnpj);
 	
 }

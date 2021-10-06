@@ -1,14 +1,39 @@
 package view.fornecedor;
 
-import view.DadosDePesquisa;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
+
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import javax.swing.JButton;
+
+import modelo.Fornecedor;
+import repository.RepositorioFornecedor;
+import view.DadosDePesquisa;
 
 public class DadosDePesquisaFornecedor extends DadosDePesquisa {
 	private JTextField textCNPJ;
 
-	public DadosDePesquisaFornecedor() {
+	public DadosDePesquisaFornecedor(GerenciadorFornecedor gerenciador, RepositorioFornecedor repositorio) {
+		btnPesquisarPorNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome=tfNome.getText();
+				
+				List<Fornecedor> listaDeFornecedor = repositorio.findByNome(nome);
+				gerenciador.exibirFornecedor(listaDeFornecedor);
+			}
+		});
+		btnPesquisarPorId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id=Integer.parseInt(tfId.getText());
+				
+				Fornecedor fornecedor=repositorio.find(id);
+				List<Fornecedor> listaDeFornecedor = Arrays.asList(fornecedor);
+				gerenciador.exibirFornecedor(listaDeFornecedor);
+			}
+		});
 		tfId.setBounds(10, 28, 262, 20);
 		
 		JLabel lblCNPJ = new JLabel("CNPJ");
@@ -21,6 +46,15 @@ public class DadosDePesquisaFornecedor extends DadosDePesquisa {
 		textCNPJ.setColumns(10);
 		
 		JButton btnPesquisarPorCNPJ = new JButton("Pesquisar por CNPJ");
+		btnPesquisarPorCNPJ.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				long cnpj=Long.parseLong(textCNPJ.getText());
+				
+				Fornecedor fornecedor=repositorio.findByCnpj(cnpj);
+				List<Fornecedor> listaDeFornecedor = Arrays.asList(fornecedor);
+				gerenciador.exibirFornecedor(listaDeFornecedor);
+			}
+		});
 		btnPesquisarPorCNPJ.setBounds(282, 139, 158, 23);
 		add(btnPesquisarPorCNPJ);
 

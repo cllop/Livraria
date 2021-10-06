@@ -1,19 +1,23 @@
 package view.fornecedor;
 
+import java.awt.Container;
+import java.util.List;
+
 import javax.swing.JPanel;
 
+import modelo.Fornecedor;
 import repository.RepositorioFornecedor;
 
 public class GerenciadorFornecedor extends JPanel {
 	
-	private JPanel menuSelecionado;
+	private Container menuSelecionado;
 	private RepositorioFornecedor repositorio;
 
 	public GerenciadorFornecedor() {
 
 	}
 	
-	public void trocarTela (JPanel menuSelecionado) {
+	public void trocarTela (Container menuSelecionado) {
 		if(this.menuSelecionado!=null) {
 			super.remove(this.menuSelecionado);
 		}
@@ -44,6 +48,10 @@ public class GerenciadorFornecedor extends JPanel {
 	
 	public void menuFornecedor() {
 		this.trocarTela(new MenuFornecedor(this));
+	}
+	
+	public void exibirFornecedores(List<Fornecedor>listaFornecedor) {
+		this.trocarTela(new ExibirFornecedores(this, listaFornecedor));
 	}
 	
 }
