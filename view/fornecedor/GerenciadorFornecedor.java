@@ -2,9 +2,12 @@ package view.fornecedor;
 
 import javax.swing.JPanel;
 
+import repository.RepositorioFornecedor;
+
 public class GerenciadorFornecedor extends JPanel {
 	
 	private JPanel menuSelecionado;
+	private RepositorioFornecedor repositorio;
 
 	public GerenciadorFornecedor() {
 
@@ -24,7 +27,7 @@ public class GerenciadorFornecedor extends JPanel {
 	}
 	
 	public void adicionarFornecedor() {
-		this.trocarTela(new AdicionarFornecedor(this));
+		this.trocarTela(new AdicionarFornecedor(this, this.repositorio));
 	}
 	
 	public void editarFornecedor() {
