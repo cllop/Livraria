@@ -1,57 +1,73 @@
 package view.produto;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import modelo.Produto;
+
 public class ExibirProduto extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField tfNome;
+	private JTextField tfPreco;
+	private JTextField tfQuantidade;
 
 	/**
 	 * Create the panel.
 	 */
-	public ExibirProduto() {
+	public ExibirProduto(Produto produto) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Produtos");
 		lblNewLabel.setBounds(25, 44, 46, -19);
 		add(lblNewLabel);
 		
+		
 		JLabel lblNewLabel_1 = new JLabel("Nome ");
-		lblNewLabel_1.setBounds(25, 11, 46, 14);
+		lblNewLabel_1.setBounds(25, 11, 60, 14);
 		add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		textField.setEditable(false);
-		textField.setBounds(25, 35, 185, 20);
-		add(textField);
-		textField.setColumns(10);
+		tfNome = new JTextField();
+		tfNome.setEditable(false);
+		tfNome.setBounds(25, 35, 156, 20);
+		add(tfNome);
+		tfNome.setColumns(10);
+		tfNome.setText(produto.getNome());
 		
 		JLabel lblNewLabel_2 = new JLabel("Pre\u00E7o");
-		lblNewLabel_2.setBounds(227, 11, 46, 14);
+		lblNewLabel_2.setBounds(25, 66, 60, 14);
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_3.setBounds(25, 66, 46, 14);
+		lblNewLabel_3.setBounds(202, 19, 73, 14);
 		add(lblNewLabel_3);
 		
-		JTextPane textPane = new JTextPane();
-		textPane.setEditable(false);
-		textPane.setBounds(25, 98, 200, 50);
-		add(textPane);
+		JTextPane tfdescricao = new JTextPane();
+		tfdescricao.setEditable(false);
+		tfdescricao.setBounds(202, 44, 238, 142);
+		add(tfdescricao);
+		tfdescricao.setText(produto.getDescriçao());
 		
-		textField_1 = new JTextField();
-		textField_1.setEditable(false);
-		textField_1.setBounds(227, 35, 202, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		
+		tfPreco = new JTextField();
+		tfPreco.setEditable(false);
+		tfPreco.setBounds(25, 85, 156, 20);
+		add(tfPreco);
+		tfPreco.setColumns(10);
+		tfPreco.setText(produto.getPreco().toString());
+		
+		
+		JLabel lblNewLabel_4 = new JLabel("Quantidade");
+		lblNewLabel_4.setBounds(25, 112, 73, 14);
+		add(lblNewLabel_4);
+		
+		tfQuantidade = new JTextField();
+		tfQuantidade.setEditable(false);
+		tfQuantidade.setBounds(25, 128, 156, 20);
+		add(tfQuantidade);
+		tfQuantidade.setColumns(10);
+		tfQuantidade.setText(Integer.toString(produto.getQuantidade()));
 
 	}
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
-	}
+	
 }
