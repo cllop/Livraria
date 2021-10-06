@@ -10,4 +10,6 @@ private String rua;
 private String bairro;
 private int cep;
 private int numeroDaResidencia;
+
+//criar metodo que diz o numero de perfiz de usuario
 }

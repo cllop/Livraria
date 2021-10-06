@@ -1,10 +1,12 @@
 package view.fornecedor;
 
+import java.awt.Color;
 import java.awt.Container;
 import java.util.List;
 
 import javax.swing.JPanel;
 
+import config.DevConfig;
 import modelo.Fornecedor;
 import repository.RepositorioFornecedor;
 
@@ -14,6 +16,9 @@ public class GerenciadorFornecedor extends JPanel {
 	private RepositorioFornecedor repositorio;
 
 	public GerenciadorFornecedor() {
+		if (DevConfig.guiDevMode) {
+			super.setBackground(Color.blue);
+		}
 
 	}
 	

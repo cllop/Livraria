@@ -1,13 +1,14 @@
 package view;
 
 import java.awt.EventQueue;
+import java.awt.Graphics;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class JanelaPricipal extends JFrame {
 
-	private JPanel contentPane;
+	private GerenciadorPrincipal contentPane;
 
 	/**
 	 * Launch the application.
@@ -17,8 +18,6 @@ public class JanelaPricipal extends JFrame {
 			public void run() {
 				try {
 					JanelaPricipal frame = new JanelaPricipal();
-					frame.setVisible(true); 
-					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -34,6 +33,9 @@ public class JanelaPricipal extends JFrame {
 		this.contentPane = new GerenciadorPrincipal();
 		super.setContentPane(contentPane);
 		super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		super.setVisible(true);
 	}
+	
+	
 
 }
