@@ -53,11 +53,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	
-	public void redimensionar(){// fazer metodo redimensionar nas outras classes gerenciador
+	public void redimensionar(){
 		redimensionar(super.getWidth(), super.getHeight());
 	}
 	
-	public void redimensionar(int largura, int altura) {// fazer metodo redimensionar nas outras classes gerenciador
+	public void redimensionar(int largura, int altura) {
 		if (this.barraDeMenu!=null) {
 			this.barraDeMenu.setBounds(0, 0, larguraDaBarraDeMenu, altura);
 		}		

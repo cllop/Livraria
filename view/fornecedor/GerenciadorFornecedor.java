@@ -19,20 +19,20 @@ public class GerenciadorFornecedor extends JPanel {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.blue);
 		}
-		//seleciona menu fornecedor
+		this.menuFornecedor();
 	}
 	
-	public void trocarTela (Container menuSelecionado) {
+	private void trocarTela (Container menuSelecionado) {
 		if(this.menuSelecionado!=null) {
 			super.remove(this.menuSelecionado);
 		}
 		super.add(menuSelecionado);
 		this.menuSelecionado = menuSelecionado;
-		redimencionar();
+		repaint();
 	}
 	
-	public void redimencionar() {
-		//copiar de gerenciador principal fazendo alteracoes necessarias
+	public void menuFornecedor() {
+		this.trocarTela(new MenuFornecedor(this));
 	}
 	
 	public void adicionarFornecedor() {
@@ -40,23 +40,19 @@ public class GerenciadorFornecedor extends JPanel {
 	}
 	
 	public void editarFornecedor() {
-		this.trocarTela(new EditarFornecedor(this));
+		this.trocarTela(new PesquisarEditarFornecedor(this, repositorio));
 	}
 	
-	public void pesquisarFornecedor() {
-		this.trocarTela(new PesquisarFornecedor(this));
+	public void dadosDePesquisaFornecedor() {
+		this.trocarTela(new DadosDePesquisaFornecedor(this, this.repositorio));
 	}
 	
 	public void deletarFornecedor() {
-		this.trocarTela(new DeletarFornecedor(this));
+		this.trocarTela(new DeletarFornecedor(this, this.repositorio));
 	}
 	
-	public void menuFornecedor() {
-		this.trocarTela(new MenuFornecedor(this));
-	}
-	
-	public void exibirFornecedores(List<Fornecedor>listaFornecedor) {
-		this.trocarTela(new ExibirFornecedores(this, listaFornecedor));
+	public void exibirFornecedores(List<Fornecedor>listaDeFornecedor) {
+		this.trocarTela(new ExibirFornecedores(this, listaDeFornecedor));
 	}
 	
 }

@@ -22,16 +22,17 @@ public class DadosDePesquisaFornecedor extends DadosDePesquisa {
 				String nome=tfNome.getText();
 				
 				List<Fornecedor> listaDeFornecedor = repositorio.findByNome(nome);
-				gerenciador.exibirFornecedor(listaDeFornecedor);
+				gerenciador.exibirFornecedores(listaDeFornecedor);
 			}
 		});
+		
 		btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				int id=Integer.parseInt(tfId.getText());
+				int id = Integer.parseInt(tfId.getText());
 				
 				Fornecedor fornecedor=repositorio.find(id);
 				List<Fornecedor> listaDeFornecedor = Arrays.asList(fornecedor);
-				gerenciador.exibirFornecedor(listaDeFornecedor);
+				gerenciador.exibirFornecedores(listaDeFornecedor);
 			}
 		});
 		tfId.setBounds(10, 28, 262, 20);
@@ -48,11 +49,11 @@ public class DadosDePesquisaFornecedor extends DadosDePesquisa {
 		JButton btnPesquisarPorCNPJ = new JButton("Pesquisar por CNPJ");
 		btnPesquisarPorCNPJ.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				long cnpj=Long.parseLong(textCNPJ.getText());
+				long cnpj = Long.parseLong(textCNPJ.getText());
 				
 				Fornecedor fornecedor=repositorio.findByCnpj(cnpj);
 				List<Fornecedor> listaDeFornecedor = Arrays.asList(fornecedor);
-				gerenciador.exibirFornecedor(listaDeFornecedor);
+				gerenciador.exibirFornecedores(listaDeFornecedor);
 			}
 		});
 		btnPesquisarPorCNPJ.setBounds(282, 139, 158, 23);

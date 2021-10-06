@@ -24,7 +24,7 @@ public class MenuFornecedor extends JPanel {
 		JButton btnPesquisar = new JButton("Pesquisar Fornecedor");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gerenciadorFornecedor.pesquisarFornecedor();
+				gerenciadorFornecedor.dadosDePesquisaFornecedor();
 			}
 		});
 		btnPesquisar.setBounds(10, 143, 430, 23);
