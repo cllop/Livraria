@@ -27,6 +27,10 @@ public class MenuBarCaixa extends MenuBarUsuario {
 		btnDevolucao.setBounds(42, 148, 157, 23);
 		add(btnDevolucao);
 		
+		JButton btnAssinarPlanoVip = new JButton("Assinar Plano Vip");
+		btnAssinarPlanoVip.setBounds(42, 181, 157, 23);
+		add(btnAssinarPlanoVip);
+		
 
 	}
 }

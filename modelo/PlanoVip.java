@@ -1,6 +1,8 @@
 package modelo;
 
+import util.Real;
+
 public class PlanoVip extends AssinaturaVip {
-private int preco;
+private Real preco;
 private String descricao;
 }
