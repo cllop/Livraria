@@ -13,12 +13,18 @@ public class MenuFornecedor extends JPanel {
 		setLayout(null);
 		
 		JButton btnAdicionar = new JButton("Adicionar Fornecedor");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciadorFornecedor.adicionarFornecedor();
+			}
+		});
 		btnAdicionar.setBounds(10, 75, 430, 23);
 		add(btnAdicionar);
 		
 		JButton btnPesquisar = new JButton("Pesquisar Fornecedor");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				gerenciadorFornecedor.pesquisarFornecedor();
 			}
 		});
 		btnPesquisar.setBounds(10, 143, 430, 23);
@@ -27,7 +33,7 @@ public class MenuFornecedor extends JPanel {
 		JButton btnDeletar = new JButton("Deletar Fornecedor");
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				gerenciadorFornecedor.deletarFornecedor();
 			}
 		});
 		btnDeletar.setBounds(10, 177, 430, 23);
@@ -36,10 +42,11 @@ public class MenuFornecedor extends JPanel {
 		JButton btnEditar = new JButton("Editar Fornecedor");
 		btnEditar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				gerenciadorFornecedor.editarFornecedor();
 			}
 		});
 		btnEditar.setBounds(10, 109, 430, 23);
 		add(btnEditar);
-
+		
 	}
 }
