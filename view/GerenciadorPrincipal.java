@@ -30,6 +30,7 @@ public class GerenciadorPrincipal extends JPanel {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
 		}
+		
 		//adicionar tela login
 	}
 
@@ -52,11 +53,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	
-	public void redimensionar(){
+	public void redimensionar(){// fazer metodo redimensionar nas outras classes gerenciador
 		redimensionar(super.getWidth(), super.getHeight());
 	}
 	
-	public void redimensionar(int largura, int altura) {
+	public void redimensionar(int largura, int altura) {// fazer metodo redimensionar nas outras classes gerenciador
 		if (this.barraDeMenu!=null) {
 			this.barraDeMenu.setBounds(0, 0, larguraDaBarraDeMenu, altura);
 		}		
@@ -71,8 +72,8 @@ public class GerenciadorPrincipal extends JPanel {
 	
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
-		redimensionar(width, height);
-		super.setBounds(x, y, width, height);
+		redimensionar(width, height);// chamar metodo redimensionar dentro do setbounds nas outras classes gerenciador
+		super.setBounds(x, y, width, height);// não esquecer de colocar tambem a chamada ao super setbounds
 	}
 	
 	
@@ -97,12 +98,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		System.out.println("prod");
-		try {
-			trocarTela(new GerenciadorProduto( this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		trocarTela(new GerenciadorProduto( this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
 	}
 	
 	public void menuFornecedor() {

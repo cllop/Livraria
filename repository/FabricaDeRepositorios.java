@@ -19,4 +19,6 @@ public class FabricaDeRepositorios {
 	public RepositorioDeProduto criarRepositorioDeProduto() {
 		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
+	
+	//adiconar metodos para criar os outros repositorios
 }

@@ -19,7 +19,7 @@ public class GerenciadorFornecedor extends JPanel {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.blue);
 		}
-
+		//seleciona menu fornecedor
 	}
 	
 	public void trocarTela (Container menuSelecionado) {
