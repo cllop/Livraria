@@ -25,8 +25,10 @@ public class TelaLogin extends JPanel {
 		if (DevConfig.guiDevMode) {
 			this.setBackground(Color.CYAN);
 		}
+		super.setLayout(null);
 		RepositorioDeUsuario repositorio= new RepositorioUsuarioJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria","Login", "09876Logoff"));
 		this.gerenciador = gerenciador;
+		
 		this.trocarTela(new DadosDeLogin(this, repositorio));
 
 	}
@@ -89,7 +91,6 @@ public class TelaLogin extends JPanel {
 	}
 
 	public void redimensionar(int largura, int altura) {
-
 		if (this.telaSelecionada != null) {
 			this.telaSelecionada.setBounds(0, 0, largura, altura);
 		}

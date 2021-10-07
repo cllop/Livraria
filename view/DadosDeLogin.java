@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -10,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import config.DevConfig;
 import modelo.Usuario;
 import repository.RepositorioDeUsuario;
 
@@ -21,6 +24,9 @@ public class DadosDeLogin extends JPanel {
 	 * Create the panel.
 	 */
 	public DadosDeLogin(TelaLogin telaDeLogin, RepositorioDeUsuario repositorio) {
+		if (DevConfig.guiDevMode) {
+			this.setBackground(Color.orange);
+		}
 		setLayout(null);
 		
 		
@@ -53,7 +59,6 @@ public class DadosDeLogin extends JPanel {
 		btnConfirmar.setBounds(256, 216, 89, 23);
 		add(btnConfirmar);
 		//campos de login
-		
 		//ao apertar o boato de logar usa o repositorio de usuario e obtem o usuario
 	}
 }
