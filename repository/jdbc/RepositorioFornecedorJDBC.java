@@ -1,7 +1,6 @@
 package repository.jdbc;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.util.List;
 
 import config.FabricaDeConexao;
@@ -23,20 +22,19 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	public void add(Fornecedor fornecedor) {
 		Connection con = super.getConnection();
 		Boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			super.createConnection();
-		} else {
+		if(con == null){ 
+		   	 jaExisteConexao = false;
+		    	super.createConnection();
+		}else{
 			jaExisteConexao = true;
 		}
-		PreparedStatement ps = conpr.preparedStatement(
-				"INSERT INTO Fornecedor('CNPJ','nome','rua','bairro','CEP','NumeroDoImovel') VALUES (?,?,?,?,?,?)");
+		PrepareStatement ps = con.prepareStatement("INSERT INTO Fornecedor('CNPJ','nome','rua','bairro','CEP','NumeroDoImovel') VALUES (?,?,?,?,?,?)");
 		ps.setLong(1, fornecedor.getCNPJ);
 		ps.setString(2, fornecedor.getNome);
 		ps.setString(3, fornecedor.getRua);
-		ps.setString(4, fornecedor.getBairro);
-		ps.setLong(5, fornecedor.getCEP);
-		ps.setShort(6, fornecedor.getNumeroDoImovel);
+		ps.setString(4, fornecedor.getBairro());
+		ps.setLong(5, fornecedor.getCEP());
+		ps.setShort(6, fornecedor.getNumeroDoImovel());
 	}
 
 	public void remove(Fornecedor fornecedor) {
