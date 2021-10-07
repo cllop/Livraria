@@ -1,5 +1,9 @@
 package repository.jdbc;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 import config.FabricaDeConexao;
 import modelo.Produto;
 import repository.RepositorioDeProduto;
@@ -12,7 +16,32 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 	@Override
 	public void add(Produto produto) {
-		// TODO Auto-generated method stub
+		Connection conecxao = super.getConecxao();
+		boolean conecxaoJaExistia;
+		if(conecxao == null) {
+			conecxaoJaExistia = false;
+			super.criarConecxao();
+		}else {
+			conecxaoJaExistia = true;
+		}
+		
+		PreparedStatement ps = null;
+		
+		try {
+			
+			ps = conecxao.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quanidade) VALUES (?, ?, ?, ?);");
+			
+			
+			 ps.setString(1, produto.getNome());
+			 ps.setString(2, produto.getDescriçao());
+			 ps.setInt(3, produto.getPreco().getCentavos());
+			 ps.setInt(4, produto.getQuantidade());
+			 
+			
+		} catch (SQLException execao) {
+			
+			throw new RuntimeException("Operação não pode ser concluida");
+		}
 		
 	}
 

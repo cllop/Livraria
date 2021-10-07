@@ -40,7 +40,11 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public void remove(Fornecedor fornecedor) {
-
+		this.remove(fornecedor.getId());
+	}
+	
+	public void remove(int id) {
+		
 	}
 
 	public Fornecedor find(int id) {
@@ -61,5 +65,9 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	public void uptade(Fornecedor fornecedor) {
 
 	}
+	
+	
+	
+	
 
 }
