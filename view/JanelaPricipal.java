@@ -10,9 +10,7 @@ public class JanelaPricipal extends JFrame {
 
 	private GerenciadorPrincipal contentPane;
 
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -25,9 +23,7 @@ public class JanelaPricipal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public JanelaPricipal() {
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.contentPane = new GerenciadorPrincipal();

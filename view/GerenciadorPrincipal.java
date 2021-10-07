@@ -1,12 +1,11 @@
 package view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Rectangle;
 
 import javax.swing.JPanel;
 
 import config.DevConfig;
+import modelo.Usuario;
 import repository.FabricaDeRepositorios;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.GerenciadorProduto;
@@ -22,6 +21,8 @@ public class GerenciadorPrincipal extends JPanel {
 	private TelaLogin telaLogin;
 	
 	private FabricaDeRepositorios fabricaDeRepositorios;
+	
+	private Usuario usuarioLogado;
 	
 	//criar atributo usuario logado
 
@@ -114,6 +115,17 @@ public class GerenciadorPrincipal extends JPanel {
 		
 	}
 	
+	public void usuarioLogado() {
+		
+	}
+	
+	public void realizarLogof() {
+		this.barraDeMenu= null;
+		this.menuSelecionado= null;
+		this.usuarioLogado= null;
+		this.fabricaDeRepositorios= null;
+		this.telaLogin= new TelaLogin(this);
+	}
 	//metodo realizar logof no qual ele seta os valores de menu bar, menu selecionado, usuario logado e fabrica de repositorios para null e depois criar uma tela de login
 	
 	//criar metodos selecionar menu bar um para cada menubar
