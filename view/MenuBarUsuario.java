@@ -1,12 +1,14 @@
 package view;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
-import javax.swing.JTree;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 public class MenuBarUsuario extends JPanel {
+	private int quantidadeDeBotoesAdicionada;
 
 	/**
 	 * Create the panel.
@@ -21,7 +23,7 @@ public class MenuBarUsuario extends JPanel {
 				
 			}
 		});
-		btnPesquisarProduto.setBounds(41, 11, 160, 25);
+
 		add(btnPesquisarProduto);
 		
 		JButton btnEditarDadosDAConta = new JButton("Editar Dados da Conta");
@@ -31,7 +33,34 @@ public class MenuBarUsuario extends JPanel {
 			}
 		});
 		add(btnEditarDadosDAConta);
-		btnEditarDadosDAConta.setBounds(41, 47, 160, 25);
-
+	
+		JButton btnPesquisarPlanoVip = new JButton("Pesquisar Plano Vip");
+		btnPesquisarPlanoVip.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				gerenciadorPrincipal.pesquisarPlanoVip();
+				
+			}
+		});
+		add(btnPesquisarPlanoVip);
+	}
+	
+	
+	public Component add(Component comp) {
+		
+		if(comp instanceof JButton) {
+			posicionarBotao((JButton)comp);
+		}
+		
+		return super.add(comp);
+	}
+	public void posicionarBotao(JButton botao) {
+		int y = 10+((10*quantidadeDeBotoesAdicionada)+25*quantidadeDeBotoesAdicionada);
+		botao.setBounds(41, y, 160, 25);
+		
+		
+		quantidadeDeBotoesAdicionada++;
 	}
 }

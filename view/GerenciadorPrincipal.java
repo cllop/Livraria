@@ -114,6 +114,14 @@ public class GerenciadorPrincipal extends JPanel {
 		
 	}
 	
+	public void pesquisarPlanoVip() {
+		
+	}
+	
+	public void cadastrarPlanoVip() {
+		
+	}
+	
 	//metodo realizar logof no qual ele seta os valores de menu bar, menu selecionado, usuario logado e fabrica de repositorios para null e depois criar uma tela de login
 	
 	//criar metodos selecionar menu bar um para cada menubar

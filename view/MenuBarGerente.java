@@ -17,7 +17,7 @@ public class MenuBarGerente extends MenuBarUsuario {
 				gerenciadorPrincipal.menuFuncionario();
 			}
 		});
-		btnFuncionario.setBounds(42, 80, 163, 23);
+		
 		add(btnFuncionario);
 		
 		JButton btnProduto = new JButton("Menu Produto");
@@ -26,7 +26,7 @@ public class MenuBarGerente extends MenuBarUsuario {
 				gerenciadorPrincipal.menuFuncionario();
 			}
 		});
-		btnProduto.setBounds(42, 114, 163, 23);
+		
 		add(btnProduto);
 		
 		JButton btnFornecedor = new JButton("Menu Fornecedor ");
@@ -35,7 +35,7 @@ public class MenuBarGerente extends MenuBarUsuario {
 				gerenciadorPrincipal.menuFornecedor();
 			}
 		});
-		btnFornecedor.setBounds(42, 148, 163, 23);
+	
 		add(btnFornecedor);
 		
 		JButton btnSetor = new JButton("Menu Setor");
@@ -44,7 +44,7 @@ public class MenuBarGerente extends MenuBarUsuario {
 				gerenciadorPrincipal.menuSetor();	
 			}
 		});
-		btnSetor.setBounds(42, 182, 163, 23);
+		
 		add(btnSetor);
 		
 		JButton btnMenuCompras = new JButton("Menu Compras");
@@ -53,7 +53,18 @@ public class MenuBarGerente extends MenuBarUsuario {
 				gerenciadorPrincipal.menuCompras();
 			}
 		});
-		btnMenuCompras.setBounds(42, 216, 163, 23);
+	
 		add(btnMenuCompras);
+		
+		JButton btnCadastrarPlanoVip = new JButton("Cadastrar Plano Vip");
+		btnCadastrarPlanoVip.addActionListener(new ActionListener() {
+			
+			
+			public void actionPerformed(ActionEvent e) {
+			 gerenciadorPrincipal.cadastrarPlanoVip();
+				
+			}
+		});
+		add(btnCadastrarPlanoVip);
 	}
 }
