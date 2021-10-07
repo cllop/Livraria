@@ -74,7 +74,7 @@ public class GerenciadorPrincipal extends JPanel {
 	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		redimensionar(width, height);// chamar metodo redimensionar dentro do setbounds nas outras classes gerenciador
-		super.setBounds(x, y, width, height);// não esquecer de colocar tambem a chamada ao super setbounds
+		super.setBounds(x, y, width, height);// nï¿½o esquecer de colocar tambem a chamada ao super setbounds
 	}
 	
 	
@@ -126,6 +126,14 @@ public class GerenciadorPrincipal extends JPanel {
 		this.fabricaDeRepositorios= null;
 		this.telaLogin= new TelaLogin(this);
 	}
+	public void pesquisarPlanoVip() {
+		
+	}
+	
+	public void cadastrarPlanoVip() {
+		
+	}
+	
 	//metodo realizar logof no qual ele seta os valores de menu bar, menu selecionado, usuario logado e fabrica de repositorios para null e depois criar uma tela de login
 	
 	//criar metodos selecionar menu bar um para cada menubar

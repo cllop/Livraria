@@ -14,7 +14,7 @@ public class MenuBarFuncionario extends MenuBarUsuario {
 		super(gerenciadorprincipal);
 		
 		JButton btnNewButton = new JButton("Menu de Cliente");
-		btnNewButton.setBounds(42, 87, 160, 23);
+		
 		add(btnNewButton);
 
 	}

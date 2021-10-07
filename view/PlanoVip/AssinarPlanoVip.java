@@ -1,4 +1,4 @@
-package view;
+package view.PlanoVip;
 
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;

@@ -10,7 +10,7 @@ public class MenuBarCliente extends MenuBarUsuario {
 		super(gp);
 		
 		JButton btnApagarDadosPessoais = new JButton("Apagar Dados Pessoais");
-		btnApagarDadosPessoais.setBounds(10, 86, 160, 25);
+		
 		add(btnApagarDadosPessoais);
 		
 		
