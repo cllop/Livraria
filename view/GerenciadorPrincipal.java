@@ -24,7 +24,6 @@ public class GerenciadorPrincipal extends JPanel {
 	
 	private Usuario usuarioLogado;
 	
-	//criar atributo usuario logado
 
 	public GerenciadorPrincipal() {
 		setLayout(null);		
@@ -32,7 +31,7 @@ public class GerenciadorPrincipal extends JPanel {
 			super.setBackground(new Color(100, 50, 50, 255));
 		}
 		
-		//adicionar tela login
+		this.realizarLogoff();
 	}
 
 	public void trocarTela(JPanel menuSelecionado) {
@@ -119,12 +118,13 @@ public class GerenciadorPrincipal extends JPanel {
 		
 	}
 	
-	public void realizarLogof() {
+	public void realizarLogoff() {
 		this.barraDeMenu= null;
 		this.menuSelecionado= null;
 		this.usuarioLogado= null;
 		this.fabricaDeRepositorios= null;
 		this.telaLogin= new TelaLogin(this);
+		this.add(this.telaLogin);
 	}
 	public void pesquisarPlanoVip() {
 		
@@ -134,15 +134,33 @@ public class GerenciadorPrincipal extends JPanel {
 		
 	}
 	
+	
+	
 	//metodo realizar logof no qual ele seta os valores de menu bar, menu selecionado, usuario logado e fabrica de repositorios para null e depois criar uma tela de login
 	
-	//criar metodos selecionar menu bar um para cada menubar
+	public void selecionarMenuBarCliente() {
+		trocarBarraDeMenu(new MenuBarCliente(this));	
+	}
 	
+	public void selecionarMenuBarCaixa() {
+		trocarBarraDeMenu(new MenuBarCaixa(this));	
+	}
+	public void selecionarMenuBarGerente() {
+		trocarBarraDeMenu(new MenuBarGerente(this));	
+	}
+	public void selecionarMenuBarVendedor() {
+		trocarBarraDeMenu(new MenuBarVendedor(this));	
+	}
 	
-	//criar metodo selecionar fabrica de repositorios recebe fabrica de repositorios como parametro e seta o valor do atributo fabrica de repositorios
+
+	public void selecionarFabricaDeRepositorios(FabricaDeRepositorios fabricaDeRepositorios) {
+		this.fabricaDeRepositorios = fabricaDeRepositorios;
+	}
 	
-	
-	//criar metodo selecionar usuario
+	public void selecionarUsuarioLogado(Usuario usuario) {
+		this.usuarioLogado = usuario;
+		
+	}
 }
 
 

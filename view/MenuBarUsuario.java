@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.event.AncestorEvent;
+import javax.swing.event.AncestorListener;
 
 public class MenuBarUsuario extends JPanel {
 	private int quantidadeDeBotoesAdicionada;
@@ -15,6 +17,19 @@ public class MenuBarUsuario extends JPanel {
 	 */
 	public MenuBarUsuario(GerenciadorPrincipal gerenciadorPrincipal) {
 		setLayout(null);
+		
+		JButton btnLogoff= new JButton("Logoff");
+		btnLogoff.addActionListener(new ActionListener() {
+			
+		
+			public void actionPerformed(ActionEvent e) {
+				gerenciadorPrincipal.realizarLogoff();
+				
+			}
+		});
+	    this.add(btnLogoff);
+		
+		
 		
 		JButton btnPesquisarProduto = new JButton("Pesquisar Produto");
 		btnPesquisarProduto.addActionListener(new ActionListener() {
@@ -45,6 +60,10 @@ public class MenuBarUsuario extends JPanel {
 			}
 		});
 		add(btnPesquisarPlanoVip);
+		
+		JButton button = new JButton("New button");
+		button.setBounds(270, 193, 89, 23);
+		add(button);
 	}
 	
 	

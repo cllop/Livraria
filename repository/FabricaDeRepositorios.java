@@ -3,6 +3,7 @@ package repository;
 import config.FabricaDeConexao;
 import repository.jdbc.RepositorioLivroJDBC;
 import repository.jdbc.RepositorioProdutoJDBC;
+import repository.jdbc.RepositorioUsuarioJDBC;
 
 public class FabricaDeRepositorios {
 
@@ -19,6 +20,10 @@ public class FabricaDeRepositorios {
 	public RepositorioDeProduto criarRepositorioDeProduto() {
 		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
+	public RepositorioDeUsuario criarRepositorioDeUsuario() {
+		return new RepositorioUsuarioJDBC(this.fabricaDeConexao);
+	}
+	
 	
 	//adiconar metodos para criar os outros repositorios
 }

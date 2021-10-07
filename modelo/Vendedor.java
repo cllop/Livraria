@@ -1,5 +1,5 @@
 package modelo;
 
-public class Vendedor {
+public class Vendedor extends Usuario {
 	private int idVendedor;
 }
