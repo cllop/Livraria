@@ -7,34 +7,37 @@ import config.FabricaDeConexao;
 public class RepositorioJDBC {
 	
 	private FabricaDeConexao fabricadeconexoes;
-	private Connection conecxaoAtual;
+	private Connection conexaoAtual;
 	
 	public RepositorioJDBC(FabricaDeConexao fabricaDeConexoes) {
 		super();
 		this.fabricadeconexoes = fabricaDeConexoes;
 	}
 	
-	public void criarConecxao() {
+	public void criarConexao() {
 		
-		if(conecxaoAtual!=null) {
-			throw new IllegalStateException("Não é possivel criar uma conecxão, se há uma já existente!");
+		if(conexaoAtual!=null) {
+			throw new IllegalStateException("Não é possivel criar uma conexão, se há uma já existente!");
 		}
-		conecxaoAtual = fabricadeconexoes.criarConecxao();
+		conexaoAtual = fabricadeconexoes.criarConecxao();
 		
 	}
 	
-	public void usarConecxao(Connection conecxao){
+	public void usarConexao(Connection conexao){
 		
-		if(conecxaoAtual !=null) {
-			throw new IllegalStateException("Não é possivel usar uma conecxao, se já ha uma existente!");
+		if(conexaoAtual !=null) {
+			throw new IllegalStateException("Não é possivel usar uma conexão, se já ha uma existente!");
 		
 		}
-		conecxaoAtual = conecxao;
-		
+		conexaoAtual = conexao;
 	}
 	
-	public Connection getConecxao() {
-		return conecxaoAtual;
+	public Connection getConexao() {
+		return conexaoAtual;
+	}
+	
+	public void fecharConexao() {
+		
 	}
 	
 	

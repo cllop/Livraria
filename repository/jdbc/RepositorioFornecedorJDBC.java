@@ -1,6 +1,9 @@
 package repository.jdbc;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import config.FabricaDeConexao;
@@ -15,39 +18,102 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public Fornecedor getFornecedor(long cnpj) {
-
 		return null;
 	}
 
 	public void add(Fornecedor fornecedor) {
-		Connection con = super.getConnection();
+		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
-		if(con == null){ 
-		   	 jaExisteConexao = false;
-		    	super.createConnection();
-		}else{
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
 			jaExisteConexao = true;
 		}
-		PrepareStatement ps = con.prepareStatement("INSERT INTO Fornecedor('CNPJ','nome','rua','bairro','CEP','NumeroDoImovel') VALUES (?,?,?,?,?,?)");
-		ps.setLong(1, fornecedor.getCNPJ);
-		ps.setString(2, fornecedor.getNome);
-		ps.setString(3, fornecedor.getRua);
-		ps.setString(4, fornecedor.getBairro());
-		ps.setLong(5, fornecedor.getCEP());
-		ps.setShort(6, fornecedor.getNumeroDoImovel());
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"INSERT INTO Fornecedor('CNPJ','nome','rua','bairro','CEP','numeroDoImovel','nomeFantasia') VALUES (?,?,?,?,?,?,?)");
+			ps.setLong(1, fornecedor.getCnpj());
+			ps.setString(2, fornecedor.getNome());
+			ps.setString(3, fornecedor.getRua());
+			ps.setString(4, fornecedor.getBairro());
+			ps.setLong(5, fornecedor.getCep());
+			ps.setShort(6, fornecedor.getNumeroDoImovel());
+			ps.setString(7, fornecedor.getNomeFantasia());
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 	public void remove(Fornecedor fornecedor) {
-		this.remove(fornecedor.getId());
-	}
-	
-	public void remove(int id) {
-		
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"DELETE INTO Fornecedor WHERE id=?"
+					);
+			ps.setLong(1, fornecedor.getId());
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível remover fornecedor!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
-	public Fornecedor find(int id) {
-
-		return null;
+	public Fornecedor find(int id) {		
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"SELECT * FROM fornecedor WHERE id=?"
+					);
+			ps.setInt(1, id);
+			
+			ResultSet rs = ps.executeQuery();
+			boolean temResultado = rs.next();
+			
+			if(temResultado) {
+				long cnpj = rs.getLong(2);
+				String nome = rs.getString(3);
+				String rua = rs.getString(4);
+				String bairro = rs.getString(5);
+				int cep = rs.getInt(6);
+				short numeroDoImovel = rs.getShort(7);
+				String nomeFantasia = rs.getString(8);
+				
+				return new Fornecedor(id, cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
+			}else {
+				throw new RuntimeException("Fornecedor não cadastrado.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar fornecedor!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 	public List<Fornecedor> findByNome(String nome) {
@@ -61,11 +127,31 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public void uptade(Fornecedor fornecedor) {
-
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"UPTADE Fornecedor SET nomeFantasia=?,rua=?,bairro=?,cep=?,numeroDoImovel=? WHERE=id=?"
+					);
+			ps.setString(1, fornecedor.getNomeFantasia());
+			ps.setString(2, fornecedor.getRua());
+			ps.setString(3, fornecedor.getBairro());
+			ps.setLong(4, fornecedor.getCep());
+			ps.setShort(5, fornecedor.getNumeroDoImovel());
+		}catch (SQLException e){
+			throw new RuntimeException("Não foi possível alterar fornecedor!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 	
-	
-	
-	
-
 }

@@ -20,7 +20,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		boolean conecxaoJaExistia;
 		if(conecxao == null) {
 			conecxaoJaExistia = false;
-			super.criarConecxao();
+			super.criarConexao();
 		}else {
 			conecxaoJaExistia = true;
 		}

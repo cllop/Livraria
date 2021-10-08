@@ -1,29 +1,32 @@
 package modelo;
 
-public class Fornecedor extends Usuario {
+public class Fornecedor{
 	private int id;
 	private long cnpj;
 	private String nome;
+	private String nomeFantasia;
 	private String rua;
 	private String bairro;
 	private int cep;
-	private int numeroDoImovel;
+	private short numeroDoImovel;
 	
-	public Fornecedor(int id, long cnpj, String nome, String rua, String bairro, int cep, int numeroDoImovel) {
+	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel) {
 		super();
 		this.id = id;
 		this.cnpj = cnpj;
 		this.nome = nome;
+		this.nomeFantasia = nomeFantasia;
 		this.rua = rua;
 		this.bairro = bairro;
 		this.cep = cep;
 		this.numeroDoImovel = numeroDoImovel;
 	}
 
-	public Fornecedor(long cnpj, String nome, String rua, String bairro, int cep, int numeroDoImovel) {
+	public Fornecedor(long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel) {
 		super();
 		this.cnpj = cnpj;
 		this.nome = nome;
+		this.nomeFantasia = nomeFantasia;
 		this.rua = rua;
 		this.bairro = bairro;
 		this.cep = cep;
@@ -41,6 +44,10 @@ public class Fornecedor extends Usuario {
 	public String getNome() {
 		return nome;
 	}
+	
+	public String getNomeFantasia() {
+		return nomeFantasia;
+	}
 
 	public String getRua() {
 		return rua;
@@ -54,10 +61,8 @@ public class Fornecedor extends Usuario {
 		return cep;
 	}
 
-	public int getNumeroDoImovel() {
+	public short getNumeroDoImovel() {
 		return numeroDoImovel;
 	}
-	
-	
 	
 }
