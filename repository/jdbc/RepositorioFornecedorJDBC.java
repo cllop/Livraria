@@ -17,48 +17,6 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 
 	}
 
-	public Fornecedor getFornecedor(long cnpj) {
-		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			super.criarConexao();
-		} else {
-			jaExisteConexao = true;
-		}
-		PreparedStatement ps;
-		try {
-			ps = con.prepareStatement(
-					"SELECT * FROM fornecedor WHERE cnpj=?"
-					);
-			ps.setLong(1, cnpj);
-			
-			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-			
-			if(temResultado) {
-				int id = rs.getInt(2);
-				String nome = rs.getString(3);
-				String rua = rs.getString(4);
-				String bairro = rs.getString(5);
-				int cep = rs.getInt(6);
-				short numeroDoImovel = rs.getShort(7);
-				String nomeFantasia = rs.getString(8);
-				
-				return new Fornecedor(id, cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
-			}else {
-				throw new RuntimeException("Fornecedor não cadastrado.");
-			}
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar fornecedor!", e);
-		}finally {
-			if(!jaExisteConexao) {
-				super.fecharConexao();
-			}
-		}
-	}
-
 	public void add(Fornecedor fornecedor) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
@@ -160,7 +118,45 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public Fornecedor findByCnpj(long cnpj) {
-		return null;
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"SELECT * FROM fornecedor WHERE cnpj=?"
+					);
+			ps.setLong(1, cnpj);
+			
+			ResultSet rs = ps.executeQuery();
+			boolean temResultado = rs.next();
+			
+			if(temResultado) {
+				int id = rs.getInt(1);
+				String nome = rs.getString(3);
+				String rua = rs.getString(4);
+				String bairro = rs.getString(5);
+				int cep = rs.getInt(6);
+				short numeroDoImovel = rs.getShort(7);
+				String nomeFantasia = rs.getString(8);
+				
+				return new Fornecedor(id, cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
+			}else {
+				throw new RuntimeException("Fornecedor não cadastrado.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar fornecedor!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 	public void uptade(Fornecedor fornecedor) {

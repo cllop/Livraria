@@ -25,22 +25,26 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
+		boolean transacaoFoiAutomatica;
 		PreparedStatement ps;
 		try {
+			transacaoFoiAutomatica = con.getAutoCommit();
+			
+			if(transacaoFoiAutomatica) {
+				con.setAutoCommit(false);
+			}
+			RepositorioUsuarioJDBC repositorioUsuario = new RepositorioUsuarioJDBC(null);
+			repositorioUsuario.usarConexao(con);
+			repositorioUsuario.add(gerente);
+			
 			ps = con.prepareStatement(
-					"INSERT INTO gerente('cpf','nome','sobrenome','nomeDeUsuario','rua','bairro','CEP','NumeroDaResidencia') VALUES (?,?,?,?,?,?,?,?)");
-			ps.setLong(1, gerente.getCpf());
-			ps.setString(2, gerente.getNome());
-			ps.setString(3, gerente.getSobrenome());
-			ps.setString(4, gerente.getNomeDeUsuario());
-			ps.setString(5, gerente.getRua());
-			ps.setString(6, gerente.getBairro());
-			ps.setInt(7, gerente.getCep());
-			ps.setInt(8, gerente.getNumeroDaResidencia());
+					"INSERT INTO gerente('id') VALUES (?)");
+			ps.setInt(1, gerente.getId());
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {

@@ -8,8 +8,6 @@ import repository.RepositorioDeUsuario;
 
 public class RepositorioUsuarioJDBC extends RepositorioJDBC implements RepositorioDeUsuario {
 	
-	
-	
 	public RepositorioUsuarioJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 		

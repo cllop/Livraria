@@ -14,13 +14,13 @@ public class RepositorioJDBC {
 		this.fabricadeconexoes = fabricaDeConexoes;
 	}
 	
-	public void criarConexao() {
+	public Connection criarConexao() {
 		
 		if(conexaoAtual!=null) {
 			throw new IllegalStateException("Não é possivel criar uma conexão, se há uma já existente!");
 		}
 		conexaoAtual = fabricadeconexoes.criarConecxao();
-		
+		return conexaoAtual;
 	}
 	
 	public void usarConexao(Connection conexao){

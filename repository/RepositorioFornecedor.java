@@ -6,8 +6,6 @@ import modelo.Fornecedor;
 
 public interface RepositorioFornecedor {
 	
-	public Fornecedor getFornecedor(long cnpj);
-	
 	public void add(Fornecedor fornecedor);
 	
 	public void remove(Fornecedor fornecedor);
