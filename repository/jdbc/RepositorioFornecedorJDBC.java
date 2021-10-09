@@ -18,7 +18,45 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public Fornecedor getFornecedor(long cnpj) {
-		return null;
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"SELECT * FROM fornecedor WHERE cnpj=?"
+					);
+			ps.setLong(1, cnpj);
+			
+			ResultSet rs = ps.executeQuery();
+			boolean temResultado = rs.next();
+			
+			if(temResultado) {
+				int id = rs.getInt(2);
+				String nome = rs.getString(3);
+				String rua = rs.getString(4);
+				String bairro = rs.getString(5);
+				int cep = rs.getInt(6);
+				short numeroDoImovel = rs.getShort(7);
+				String nomeFantasia = rs.getString(8);
+				
+				return new Fornecedor(id, cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
+			}else {
+				throw new RuntimeException("Fornecedor não cadastrado.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar fornecedor!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 	public void add(Fornecedor fornecedor) {
@@ -66,7 +104,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 					);
 			ps.setLong(1, fornecedor.getId());
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível remover fornecedor!", e);
+			throw new RuntimeException("Não foi possível remover fornecedor.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
@@ -108,7 +146,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			}
 			
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar fornecedor!", e);
+			throw new RuntimeException("Não foi possível encontrar fornecedor.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
@@ -117,12 +155,11 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public List<Fornecedor> findByNome(String nome) {
-
+		
 		return null;
 	}
 
 	public Fornecedor findByCnpj(long cnpj) {
-
 		return null;
 	}
 
@@ -138,7 +175,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"UPTADE Fornecedor SET nomeFantasia=?,rua=?,bairro=?,cep=?,numeroDoImovel=? WHERE=id=?"
+					"UPTADE fornecedor SET nomeFantasia=?,rua=?,bairro=?,cep=?,numeroDoImovel=? WHERE id=?"
 					);
 			ps.setString(1, fornecedor.getNomeFantasia());
 			ps.setString(2, fornecedor.getRua());
@@ -146,7 +183,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setLong(4, fornecedor.getCep());
 			ps.setShort(5, fornecedor.getNumeroDoImovel());
 		}catch (SQLException e){
-			throw new RuntimeException("Não foi possível alterar fornecedor!", e);
+			throw new RuntimeException("Não foi possível alterar os dados.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();

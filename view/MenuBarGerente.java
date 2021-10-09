@@ -23,7 +23,7 @@ public class MenuBarGerente extends MenuBarUsuario {
 		JButton btnProduto = new JButton("Menu Produto");
 		btnProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gerenciadorPrincipal.menuFuncionario();
+				gerenciadorPrincipal.menuProduto();
 			}
 		});
 		
@@ -58,13 +58,12 @@ public class MenuBarGerente extends MenuBarUsuario {
 		
 		JButton btnCadastrarPlanoVip = new JButton("Cadastrar Plano Vip");
 		btnCadastrarPlanoVip.addActionListener(new ActionListener() {
-			
-			
 			public void actionPerformed(ActionEvent e) {
-			 gerenciadorPrincipal.cadastrarPlanoVip();
-				
+			 gerenciadorPrincipal.cadastrarPlanoVip();	
 			}
 		});
+		
 		add(btnCadastrarPlanoVip);
 	}
+	
 }

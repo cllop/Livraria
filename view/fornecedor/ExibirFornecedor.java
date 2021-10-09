@@ -15,6 +15,7 @@ public class ExibirFornecedor extends JPanel {
 	private JTextField textNumeroDoImovel;
 	private Fornecedor fornecedor;
 	private JTextField textId;
+	private JTextField textNomeFantasia;
 
 	public ExibirFornecedor(Fornecedor fornecedor) {
 		this.fornecedor = fornecedor;
@@ -41,42 +42,42 @@ public class ExibirFornecedor extends JPanel {
 		textNome.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 173, 46, 14);
+		lblRua.setBounds(10, 224, 46, 14);
 		add(lblRua);
 		
 		textRua = new JTextField();
 		textRua.setEditable(false);
-		textRua.setBounds(10, 198, 430, 20);
+		textRua.setBounds(10, 249, 430, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(10, 229, 46, 14);
+		lblBairro.setBounds(10, 280, 46, 14);
 		add(lblBairro);
 		
 		textBairro = new JTextField();
 		textBairro.setEditable(false);
-		textBairro.setBounds(10, 254, 430, 20);
+		textBairro.setBounds(10, 305, 430, 20);
 		add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCEP = new JTextField();
 		textCEP.setEditable(false);
-		textCEP.setBounds(10, 310, 430, 20);
+		textCEP.setBounds(10, 361, 430, 20);
 		add(textCEP);
 		textCEP.setColumns(10);
 		
 		JLabel lblCEP = new JLabel("CEP");
-		lblCEP.setBounds(10, 285, 46, 14);
+		lblCEP.setBounds(10, 336, 46, 14);
 		add(lblCEP);
 		
 		JLabel lblNumeroDoImovel = new JLabel("N\u00FAmero do Im\u00F3vel");
-		lblNumeroDoImovel.setBounds(10, 341, 109, 14);
+		lblNumeroDoImovel.setBounds(10, 392, 109, 14);
 		add(lblNumeroDoImovel);
 		
 		textNumeroDoImovel = new JTextField();
 		textNumeroDoImovel.setEditable(false);
-		textNumeroDoImovel.setBounds(10, 366, 430, 20);
+		textNumeroDoImovel.setBounds(10, 417, 430, 20);
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
 
@@ -98,6 +99,16 @@ public class ExibirFornecedor extends JPanel {
 		add(textId);
 		textId.setColumns(10);
 		
+		JLabel lblNomeFantasia = new JLabel("Nome Fant\u00E1sia");
+		lblNomeFantasia.setBounds(10, 173, 81, 14);
+		add(lblNomeFantasia);
+		
+		textNomeFantasia = new JTextField();
+		textNomeFantasia.setEditable(false);
+		textNomeFantasia.setBounds(10, 193, 430, 20);
+		add(textNomeFantasia);
+		textNomeFantasia.setColumns(10);
+		
 	}
 	
 	public Fornecedor getFornecedor() {
@@ -106,6 +117,7 @@ public class ExibirFornecedor extends JPanel {
 	
 	public void habilitarCamposEditaveis() {
 		textNome.setEditable(true);
+		textNomeFantasia.setEditable(true);
 		textBairro.setEditable(true);
 		textRua.setEditable(true);
 		textCEP.setEditable(true);
@@ -113,7 +125,6 @@ public class ExibirFornecedor extends JPanel {
 	}
 	
 	public Fornecedor lerCamposDigitadosPeloUsuario() {
-		return new Fornecedor (Integer.parseInt(textId.getText()), Long.parseLong(textCNPJ.getText()), textNome.getText(), textRua.getText(), textBairro.getText(), Integer.parseInt(textCEP.getText()), Integer.parseInt(textNumeroDoImovel.getText())); 
+		return new Fornecedor (Integer.parseInt(textId.getText()), Long.parseLong(textCNPJ.getText()), textNome.getText(), textNomeFantasia.getText(), textRua.getText(), textBairro.getText(), Integer.parseInt(textCEP.getText()), Short.parseShort(textNumeroDoImovel.getText())); 
 	}
-	
 }

@@ -43,12 +43,10 @@ public class DeletarFornecedor extends JPanel {
 				try {
 					repositorio.remove(fornecedor);
 					JOptionPane.showMessageDialog(esseDeletarFornecedor, "Removido com sucesso!");
-					
 					gerenciador.menuFornecedor();
 				} catch(Exception ex) {
 					JOptionPane.showMessageDialog(esseDeletarFornecedor, "Erro ao deletar.");
 				}
-				
 			}
 		}	
 		);
@@ -58,16 +56,13 @@ public class DeletarFornecedor extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				esseDeletarFornecedor.remove(esseDeletarFornecedor.fornecedorSendoExibido);
 				esseDeletarFornecedor.remove(btnCancelar);
 				esseDeletarFornecedor.add(btnBuscar);
-				
 				esseDeletarFornecedor.repaint();
 			}
 		}		
 		);
-		
 		btnCancelar.setBounds(249, 35, 89, 23);
 		
 		btnBuscar.addActionListener(new ActionListener() {

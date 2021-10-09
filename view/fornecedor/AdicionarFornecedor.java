@@ -17,7 +17,8 @@ public class AdicionarFornecedor extends JPanel {
 	private JTextField textRua;
 	private JTextField textBairro;
 	private JTextField textCEP;
-	private JTextField textNumeroIDomovel;
+	private JTextField textNumeroDoImovel;
+	private JTextField textNomeFantasia;
 
 	public AdicionarFornecedor(GerenciadorFornecedor gerenciadorFornecedor, RepositorioFornecedor repositorio) {
 		setLayout(null);
@@ -41,57 +42,67 @@ public class AdicionarFornecedor extends JPanel {
 		textNome.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 123, 46, 14);
+		lblRua.setBounds(10, 179, 46, 14);
 		add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(10, 148, 430, 20);
+		textRua.setBounds(10, 204, 430, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(10, 179, 46, 14);
+		lblBairro.setBounds(10, 235, 46, 14);
 		add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(10, 204, 430, 20);
+		textBairro.setBounds(10, 262, 430, 20);
 		add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCEP = new JTextField();
-		textCEP.setBounds(10, 260, 430, 20);
+		textCEP.setBounds(10, 318, 430, 20);
 		add(textCEP);
 		textCEP.setColumns(10);
 		
 		JLabel lblCEP = new JLabel("CEP");
-		lblCEP.setBounds(10, 235, 46, 14);
+		lblCEP.setBounds(10, 293, 46, 14);
 		add(lblCEP);
 		
 		JLabel lblNumeroDoImovel = new JLabel("N\u00FAmero do Im\u00F3vel");
-		lblNumeroDoImovel.setBounds(10, 291, 109, 14);
+		lblNumeroDoImovel.setBounds(10, 349, 109, 14);
 		add(lblNumeroDoImovel);
 		
-		textNumeroIDomovel = new JTextField();
-		textNumeroIDomovel.setBounds(10, 316, 430, 20);
-		add(textNumeroIDomovel);
-		textNumeroIDomovel.setColumns(10);
+		textNumeroDoImovel = new JTextField();
+		textNumeroDoImovel.setBounds(10, 374, 430, 20);
+		add(textNumeroDoImovel);
+		textNumeroDoImovel.setColumns(10);
 		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				long cnpj=Long.parseLong(textCNPJ.getText());
 				String nome=textNome.getText();
+				String nomeFantasia=textNomeFantasia.getText();
 				String rua=textRua.getText();
 				String bairro=textBairro.getText();
 				int cep=Integer.parseInt(textCEP.getText());
-				int numeroDoImovel=Integer.parseInt(textNumeroIDomovel.getText());
+				short numeroDoImovel=Short.parseShort(textNumeroDoImovel.getText());
 				
-				Fornecedor fornecedor=new Fornecedor(cnpj, nome, rua, bairro, cep, numeroDoImovel);
+				Fornecedor fornecedor=new Fornecedor(cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
 				repositorio.add(fornecedor);
 			}
 		});
-		btnConfirmar.setBounds(352, 362, 89, 23);
+		btnConfirmar.setBounds(352, 458, 89, 23);
 		add(btnConfirmar);
+		
+		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
+		lblNomeFantasia.setBounds(10, 123, 98, 14);
+		add(lblNomeFantasia);
+		
+		textNomeFantasia = new JTextField();
+		textNomeFantasia.setBounds(10, 148, 430, 20);
+		add(textNomeFantasia);
+		textNomeFantasia.setColumns(10);
 
 	}
 }

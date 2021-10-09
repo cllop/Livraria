@@ -52,7 +52,6 @@ public class GerenciadorPrincipal extends JPanel {
 		redimensionar();
 	}
 	
-	
 	public void redimensionar(){
 		redimensionar(super.getWidth(), super.getHeight());
 	}
@@ -145,13 +144,14 @@ public class GerenciadorPrincipal extends JPanel {
 	public void selecionarMenuBarCaixa() {
 		trocarBarraDeMenu(new MenuBarCaixa(this));	
 	}
+	
 	public void selecionarMenuBarGerente() {
 		trocarBarraDeMenu(new MenuBarGerente(this));	
 	}
+	
 	public void selecionarMenuBarVendedor() {
 		trocarBarraDeMenu(new MenuBarVendedor(this));	
 	}
-	
 
 	public void selecionarFabricaDeRepositorios(FabricaDeRepositorios fabricaDeRepositorios) {
 		this.fabricaDeRepositorios = fabricaDeRepositorios;
