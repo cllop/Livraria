@@ -15,10 +15,11 @@ public class GerenciadorFornecedor extends JPanel {
 	private Container menuSelecionado;
 	private RepositorioFornecedor repositorio;
 
-	public GerenciadorFornecedor() {
+	public GerenciadorFornecedor(RepositorioFornecedor repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.blue);
 		}
+		this.repositorio = repositorio;
 		this.menuFornecedor();
 	}
 	

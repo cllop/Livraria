@@ -68,7 +68,7 @@ public class DeletarFornecedor extends JPanel {
 		btnBuscar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				long cnpj = Long.parseLong(textCnpj.getText());
-				Fornecedor fornecedor = repositorio.getFornecedor(cnpj);
+				Fornecedor fornecedor = repositorio.findByCnpj(cnpj);
 				
 				if(fornecedor == null) {
 					lblMensagem.setText("Fornecedor não encontrado.");

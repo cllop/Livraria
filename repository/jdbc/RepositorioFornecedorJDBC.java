@@ -38,7 +38,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setShort(6, fornecedor.getNumeroDoImovel());
 			ps.setString(7, fornecedor.getNomeFantasia());
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Não foi possível adicionar fornecedor.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
@@ -58,7 +58,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"DELETE INTO Fornecedor WHERE id=?"
+					"DELETE FROM Fornecedor WHERE id=?"
 					);
 			ps.setLong(1, fornecedor.getId());
 		} catch (SQLException e) {
@@ -178,6 +178,8 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setString(3, fornecedor.getBairro());
 			ps.setLong(4, fornecedor.getCep());
 			ps.setShort(5, fornecedor.getNumeroDoImovel());
+			ps.setInt(6, fornecedor.getId());
+			ps.execute();
 		}catch (SQLException e){
 			throw new RuntimeException("Não foi possível alterar os dados.", e);
 		}finally {
