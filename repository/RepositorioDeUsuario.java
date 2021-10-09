@@ -6,7 +6,13 @@ import modelo.Usuario;
 
 public interface RepositorioDeUsuario {
 	
-	public List<Usuario> findByNomeDeUsuarioAndSenha(String nome,String senha);
+public List<Usuario> findByNomeDeUsuarioAndSenha(String nome,String senha);
 		
+		public void add(Usuario usuario);
+		
+		public void update(Usuario usuario);
 	
+		public Usuario find(int id);
+		
+		public List<Usuario> findByNome(String nome);
 }
