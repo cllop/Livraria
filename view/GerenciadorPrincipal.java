@@ -97,11 +97,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		trocarTela(new GerenciadorProduto( this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
+		trocarTela(new GerenciadorProduto(this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
 	}
 	
 	public void menuFornecedor() {
-		trocarTela(new GerenciadorFornecedor());
+		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositorios.criarRepositorioFornecedor()));
 	}
 	
 	public void menuSetor() {

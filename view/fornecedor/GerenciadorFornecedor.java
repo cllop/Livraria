@@ -19,6 +19,7 @@ public class GerenciadorFornecedor extends JPanel {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.blue);
 		}
+		super.setLayout(null);
 		this.repositorio = repositorio;
 		this.menuFornecedor();
 	}
