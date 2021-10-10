@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import config.FabricaDeConexao;
@@ -14,10 +15,6 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 
 	public RepositorioGerenteJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
-	}
-
-	public Gerente getGerente(long cpf) {
-		return null;
 	}
 
 	public void add(Gerente gerente) {
@@ -40,13 +37,17 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			RepositorioUsuarioJDBC repositorioUsuario = new RepositorioUsuarioJDBC(null);
 			repositorioUsuario.usarConexao(con);
 			repositorioUsuario.add(gerente);
-			
 			ps = con.prepareStatement(
-					"INSERT INTO gerente('id') VALUES (?)");
+					"INSERT INTO gerente('id, 'ativo' 'ehSuperGerente'') VALUES (?,?)");
 			ps.setInt(1, gerente.getId());
+			ps.execute();
 			
+			if(transacaoFoiAutomatica) {
+				con.commit();
+				con.setAutoCommit(true);
+			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new RuntimeException("Não foi possível adicionar gerente.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
@@ -90,15 +91,12 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"UPTADE gerente SET nome=?, sobrenome=?, nomeDeUsuario=?,rua=?,bairro=?,cep=?,numeroDaResidencia=? WHERE id=?"
+					"UPTADE gerente SET ativo=?, superGerente=? WHERE id=?"
 					);
-			ps.setString(1, gerente.getNome());
-			ps.setString(2, gerente.getSobrenome());
-			ps.setString(3, gerente.getNomeDeUsuario());
-			ps.setString(4, gerente.getRua());
-			ps.setString(5, gerente.getBairro());
-			ps.setLong(6, gerente.getCep());
-			ps.setInt(7, gerente.getNumeroDaResidencia());
+			ps.setBoolean(1, gerente.isAtivo());
+			ps.setBoolean(2, gerente.isSuperGerente());
+			ps.setInt(3, gerente.getId());
+			ps.execute();
 		}catch (SQLException e){
 			throw new RuntimeException("Não foi possível alterar os dados do gerente!", e);
 		}finally {
@@ -120,7 +118,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"SELECT * FROM gerente WHERE id=?"
+					"SELECT * FROM usuario INNER JOIN gerente ON usuario.id = gerente.id WHERE gerente.id=?"
 					);
 			ps.setInt(1, id);
 			
@@ -136,8 +134,10 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				String bairro = rs.getString(7);
 				int cep = rs.getInt(8);
 				int numeroDaResidencia = rs.getInt(9);
+				boolean ativo = rs.getBoolean(10);
+				boolean ehSuperGerente = rs.getBoolean(11);
 				
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo, ehSuperGerente);
 			}else {
 				throw new RuntimeException("Gerente não cadastrado.");
 			}
@@ -163,7 +163,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"SELECT * FROM gerente WHERE cpf=?"
+					"SELECT * FROM usuario INNER JOIN gerente ON usuario.id = gerente.id WHERE gerente.id="
 					);
 			ps.setLong(1, cpf);
 			
@@ -171,7 +171,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			boolean temResultado = rs.next();
 			
 			if(temResultado) {
-				int id = rs.getInt(2);
+				int id = rs.getInt(1);
 				String nome = rs.getString(3);
 				String sobrenome = rs.getString(4);
 				String nomeDeUsuario = rs.getString(5);
@@ -179,8 +179,10 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				String bairro = rs.getString(7);
 				int cep = rs.getInt(8);
 				int numeroDaResidencia = rs.getInt(9);
+				boolean ativo = rs.getBoolean(10);
+				boolean ehSuperGerente = rs.getBoolean(11);
 				
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo, ehSuperGerente);
 			}else {
 				throw new RuntimeException("Gerente não cadastrado.");
 			}
@@ -193,9 +195,49 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			}
 		}
 	}
-
-	public List<Gerente> findByNomeDeUsuario(String nomeDeUsuario) {
-		return null;
+		
+	public List<Gerente> findByNome(String nome) {
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"SELECT * FROM usuario INNER JOIN gerente ON usuario.id = gerente.id WHERE gerente.id=?"
+					);
+			ps.setString(1, nome);
+			
+			ResultSet rs = ps.executeQuery();
+			List<Gerente> listaDeGerente = new ArrayList<>(rs.getRow());
+			
+			while(rs.next()) {
+				int id = rs.getInt(1);
+				long cpf = rs.getLong(2);
+				String sobrenome = rs.getString(4);
+				String nomeDeUsuario = rs.getString(5);
+				String rua = rs.getString(6);
+				String bairro = rs.getString(7);
+				int cep = rs.getInt(8);
+				int numeroDaResidencia = rs.getInt(9);
+				boolean ativo = rs.getBoolean(10);
+				boolean ehSuperGerente = rs.getBoolean(11);
+				
+				listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo, ehSuperGerente));
+			}
+			return listaDeGerente;
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar gerente!", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 }

@@ -7,7 +7,7 @@ import config.FabricaDeConexao;
 public class RepositorioJDBC {
 	
 	private FabricaDeConexao fabricadeconexoes;
-	private Connection conexaoAtual;
+	private Connection conexcaoAtual;
 	
 	public RepositorioJDBC(FabricaDeConexao fabricaDeConexoes) {
 		super();
@@ -16,24 +16,24 @@ public class RepositorioJDBC {
 	
 	public Connection criarConexao() {
 		
-		if(conexaoAtual!=null) {
+		if(conexcaoAtual!=null) {
 			throw new IllegalStateException("Não é possivel criar uma conexão, se há uma já existente!");
 		}
-		conexaoAtual = fabricadeconexoes.criarConecxao();
-		return conexaoAtual;
+		conexcaoAtual = fabricadeconexoes.criarConecxao();
+		return conexcaoAtual;
 	}
 	
 	public void usarConexao(Connection conexao){
 		
-		if(conexaoAtual !=null) {
+		if(conexcaoAtual !=null) {
 			throw new IllegalStateException("Não é possivel usar uma conexão, se já ha uma existente!");
 		
 		}
-		conexaoAtual = conexao;
+		conexcaoAtual = conexao;
 	}
 	
 	public Connection getConexao() {
-		return conexaoAtual;
+		return conexcaoAtual;
 	}
 	
 	public void fecharConexao() {

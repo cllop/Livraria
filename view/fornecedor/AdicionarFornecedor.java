@@ -77,6 +77,15 @@ public class AdicionarFornecedor extends JPanel {
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
 		
+		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
+		lblNomeFantasia.setBounds(10, 123, 98, 14);
+		add(lblNomeFantasia);
+		
+		textNomeFantasia = new JTextField();
+		textNomeFantasia.setBounds(10, 148, 430, 20);
+		add(textNomeFantasia);
+		textNomeFantasia.setColumns(10);
+		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,15 +103,5 @@ public class AdicionarFornecedor extends JPanel {
 		});
 		btnConfirmar.setBounds(352, 458, 89, 23);
 		add(btnConfirmar);
-		
-		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
-		lblNomeFantasia.setBounds(10, 123, 98, 14);
-		add(lblNomeFantasia);
-		
-		textNomeFantasia = new JTextField();
-		textNomeFantasia.setBounds(10, 148, 430, 20);
-		add(textNomeFantasia);
-		textNomeFantasia.setColumns(10);
-
 	}
 }

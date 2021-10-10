@@ -41,64 +41,33 @@ public class FabricaDeRepositorios {
 		return new RepositorioUsuarioJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioFornecedor criarRepositorioFornecedor() {
-		return new RepositorioFornecedorJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioCaixa criarRepositorioCaixa();
 	
-	public RepositorioCaixa criarRepositorioCaixa() {
-		return new RepositorioCaixaJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioCompra criarRepositorioCompra();
 	
-	public RepositorioCompra criarRepositorioCompra() {
-		return new RepositorioCompraJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioCliente criarRepositorioCliente();
 	
-	public RepositorioCliente criarRepositorioCliente() {
-		return new RepositorioClienteJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioGerente criarRepositorioGerente();
 	
-	public RepositorioGerente criarRepositorioGerente() {
-		return new RepositorioGerenteJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioVenda criarRepositorioVenda();
 	
-	public RepositorioVenda criarRepositorioVenda() {
-		return new RepositorioVendaJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioVendedor criarRepositorioVendedor();
 	
-	public RepositorioVendedor criarRepositorioVendedor() {
-		return new RepositorioVendedorJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioSetor criarRepositorioSetor();
 	
-	public RepositorioSetor criarRepositorioSetor() {
-		return new RepositorioSetorJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioPlanoVip criarRepositorioPlanoVip();
 	
-	public RepositorioPlanoVip criarRepositorioPlanoVip() {
-		return new RepositorioPlanoVipJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioAssinaturaVip criarRepositorioAssinaturaVip();
 	
-	public RepositorioAssinaturaVip criarRepositorioAssinaturaVip() {
-		return new RepositorioAssinaturaVipJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioProdutoCategoria criarRepositorioProdutoCategoria();
 	
-	public RepositorioProdutoCategoria criarRepositorioProdutoCategoria() {
-		return new RepositorioProdutoCategoriaJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioPagamento criarRepositorioPagamento();
 	
-	public RepositorioPagamento criarRepositorioPagamento() {
-		return new RepositorioPagamentoJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioTelefone criarRepositorioTelefone();
 	
-	public RepositorioTelefone criarRepositorioTelefone() {
-		return new RepositorioTelefoneJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioTelefoneUsuario criarRepositorioTelefoneUsuario();
 	
-	public RepositorioTelefoneUsuario criarRepositorioTelefoneUsuario() {
-		return new RepositorioTelefoneUsuarioJDBC(this.fabricaDeConexao);
-	}
+	public RepositorioTelefoneFornecedor criarRepositorioTelefoneFornecedor();
 	
-	public RepositorioTelefoneFornecedor criarRepositorioTelefoneFornecedor() {
-		return new RepositorioTelefoneFornecedorJDBC(this.fabricaDeConexao);
-	}
-	
+
 }

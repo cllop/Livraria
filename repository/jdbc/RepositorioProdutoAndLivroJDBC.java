@@ -126,9 +126,27 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 		}
 	}
 
-	@Override
+	
 	public Produto findByNome(String nome) {
-		// TODO Auto-generated method stub
+		Connection conecxao = super.getConexao();
+		boolean conecxaoJaExistia;
+		if (conecxao == null) {
+			conecxaoJaExistia = false;
+			super.criarConexao();
+		} else {
+			conecxaoJaExistia = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			ps = conecxao.prepareStatement();
+			
+		} catch (SQLException eexecao) {
+			throw new RuntimeException();
+		}
+		
+		
 		return null;
 	}
 

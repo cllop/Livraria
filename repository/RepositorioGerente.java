@@ -6,8 +6,6 @@ import modelo.Gerente;
 
 public interface RepositorioGerente {
 
-	public Gerente getGerente(long cpf);
-
 	public void add(Gerente gerente);
 
 	public void remove(Gerente gerente);
@@ -18,6 +16,6 @@ public interface RepositorioGerente {
 
 	public Gerente findByCpf(long cpf);
 
-	public List<Gerente> findByNomeDeUsuario(String nomeDeUsuario);
+	public List<Gerente> findByNome(String nome);
 
 }

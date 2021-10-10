@@ -6,6 +6,11 @@ import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import config.ConfiguracoesDeRecursos;
+import repository.FabricaDeFabricaDeRepositorios;
+import repository.FabricaDeRepositorios;
+import repository.jdbc.FabricaDeFabricaDeRepositorioJDBC;
+
 public class JanelaPricipal extends JFrame {
 
 	private GerenciadorPrincipal contentPane;
@@ -15,7 +20,7 @@ public class JanelaPricipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					JanelaPricipal frame = new JanelaPricipal();
+					JanelaPricipal frame = new JanelaPricipal(criarFabricaDeFabricaDeRepositorios());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -23,10 +28,13 @@ public class JanelaPricipal extends JFrame {
 		});
 	}
 
+	public static FabricaDeFabricaDeRepositorios criarFabricaDeFabricaDeRepositorios () {
+		return new FabricaDeFabricaDeRepositorioJDBC(ConfiguracoesDeRecursos.URL_DB_MYSQL);
+	}
 	
-	public JanelaPricipal() {
+	public JanelaPricipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios) {
 		super.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.contentPane = new GerenciadorPrincipal();
+		this.contentPane = new GerenciadorPrincipal(fabricaDeFabricaDeRepositorios);
 		super.setContentPane(contentPane);
 		super.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		super.setVisible(true);

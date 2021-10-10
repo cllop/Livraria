@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 
 import config.DevConfig;
 import modelo.Usuario;
+import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.GerenciadorProduto;
@@ -24,8 +25,10 @@ public class GerenciadorPrincipal extends JPanel {
 	
 	private Usuario usuarioLogado;
 	
+	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
+	
 
-	public GerenciadorPrincipal() {
+	public GerenciadorPrincipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios) {
 		setLayout(null);		
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
@@ -97,11 +100,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		trocarTela(new GerenciadorProduto( this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
+		trocarTela(new GerenciadorProduto(this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
 	}
 	
 	public void menuFornecedor() {
-		trocarTela(new GerenciadorFornecedor());
+		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositorios.criarRepositorioFornecedor()));
 	}
 	
 	public void menuSetor() {
@@ -122,7 +125,7 @@ public class GerenciadorPrincipal extends JPanel {
 		this.menuSelecionado= null;
 		this.usuarioLogado= null;
 		this.fabricaDeRepositorios= null;
-		this.telaLogin= new TelaLogin(this);
+		this.telaLogin= new TelaLogin(this, fabricaDeFabricaDeRepositorios);
 		this.add(this.telaLogin);
 	}
 	public void pesquisarPlanoVip() {
