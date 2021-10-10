@@ -14,16 +14,16 @@ import javax.swing.JTextField;
 
 import config.DevConfig;
 import modelo.Usuario;
-import repository.RepositorioDeUsuario;
+import repository.RepositorioUsuario;
 
-public class DadosDeLogin extends JPanel {
+public class DadosLogin extends JPanel {
 	private JTextField tfNomeDeUsuario;
 	private JPasswordField tfSenha;
 
 	/**
 	 * Create the panel.
 	 */
-	public DadosDeLogin(TelaLogin telaDeLogin, RepositorioDeUsuario repositorio) {
+	public DadosLogin(TelaLogin telaDeLogin, RepositorioUsuario repositorio) {
 		if (DevConfig.guiDevMode) {
 			this.setBackground(Color.orange);
 		}

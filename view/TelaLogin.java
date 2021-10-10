@@ -13,7 +13,7 @@ import modelo.Gerente;
 import modelo.Usuario;
 import modelo.Vendedor;
 import repository.FabricaDeRepositorios;
-import repository.RepositorioDeUsuario;
+import repository.RepositorioUsuario;
 import repository.jdbc.RepositorioUsuarioJDBC;
 
 public class TelaLogin extends JPanel {
@@ -26,10 +26,10 @@ public class TelaLogin extends JPanel {
 			this.setBackground(Color.CYAN);
 		}
 		super.setLayout(null);
-		RepositorioDeUsuario repositorio= new RepositorioUsuarioJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria","Login", "09876Logoff"));
+		RepositorioUsuario repositorio= new RepositorioUsuarioJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria","Login", "09876Logoff"));
 		this.gerenciador = gerenciador;
 		
-		this.trocarTela(new DadosDeLogin(this, repositorio));
+		this.trocarTela(new DadosLogin(this, repositorio));
 
 	}
 

@@ -44,7 +44,7 @@ public class GerenciadorFornecedor extends JPanel {
 	}
 	
 	public void dadosDePesquisaFornecedor() {
-		this.trocarTela(new DadosDePesquisaFornecedor(this, this.repositorio));
+		this.trocarTela(new DadosPesquisaFornecedor(this, this.repositorio));
 	}
 	
 	public void deletarFornecedor() {

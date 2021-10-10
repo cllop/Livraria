@@ -11,7 +11,7 @@ import repository.jdbc.RepositorioLivroJDBC;
 import repository.jdbc.RepositorioPagamentoJDBC;
 import repository.jdbc.RepositorioPlanoVipJDBC;
 import repository.jdbc.RepositorioProdutoCategoriaJDBC;
-import repository.jdbc.RepositorioProdutoJDBC;
+import repository.jdbc.RepositorioProdutoAndLivroJDBC;
 import repository.jdbc.RepositorioSetorJDBC;
 import repository.jdbc.RepositorioTelefoneFornecedorJDBC;
 import repository.jdbc.RepositorioTelefoneJDBC;
@@ -29,15 +29,15 @@ public class FabricaDeRepositorios {
 		this.fabricaDeConexao = fabricaDeConexao;
 	}
 	
-	public RepositorioLivros criarRepositorioLivro() {
+	public RepositorioLivro criarRepositorioLivro() {
 		return new RepositorioLivroJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioDeProduto criarRepositorioDeProduto() {
-		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
+	public RepositorioProdutoAndLivro criarRepositorioDeProduto() {
+		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioDeUsuario criarRepositorioDeUsuario() {
+	public RepositorioUsuario criarRepositorioDeUsuario() {
 		return new RepositorioUsuarioJDBC(this.fabricaDeConexao);
 	}
 	

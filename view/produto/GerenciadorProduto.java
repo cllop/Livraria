@@ -3,16 +3,16 @@ package view.produto;
 import javax.swing.JPanel;
 
 import modelo.Produto;
-import repository.RepositorioDeProduto;
-import repository.RepositorioLivros;
+import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioLivro;
 
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
-	private RepositorioDeProduto repositorioProduto;
-	private RepositorioLivros repositorioLivros;
+	private RepositorioProdutoAndLivro repositorioProduto;
+	private RepositorioLivro repositorioLivros;
 	
-	public GerenciadorProduto(RepositorioDeProduto repositorio, RepositorioLivros repositorioLivros) {
+	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio, RepositorioLivro repositorioLivros) {
 		this.repositorioProduto= repositorio;
 		this.repositorioLivros= repositorioLivros;
 	}

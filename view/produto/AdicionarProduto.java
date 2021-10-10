@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import modelo.Produto;
-import repository.RepositorioDeProduto;
+import repository.RepositorioProdutoAndLivro;
 import util.Real;
 
 public class AdicionarProduto extends JPanel {
@@ -24,7 +24,7 @@ public class AdicionarProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioDeProduto repositorio) {
+	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio) {
 		AdicionarProduto esseAdicionarProduto= this;
 		setLayout(null);
 		

@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-public class DadosDePesquisa extends JPanel {
+public class DadosPesquisa extends JPanel {
 	protected JTextField tfId;
 	protected JTextField tfNome;
 	protected JButton btnPesquisarPorId;
@@ -14,7 +14,7 @@ public class DadosDePesquisa extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DadosDePesquisa() {
+	public DadosPesquisa() {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Id");

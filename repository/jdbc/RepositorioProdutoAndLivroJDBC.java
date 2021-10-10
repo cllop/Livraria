@@ -8,16 +8,15 @@ import java.sql.SQLException;
 import config.FabricaDeConexao;
 import modelo.Livro;
 import modelo.Produto;
-import repository.RepositorioDeProduto;
+import repository.RepositorioProdutoAndLivro;
 import util.Real;
 
-public class RepositorioProdutoJDBC extends RepositorioJDBC implements RepositorioDeProduto {
+public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements RepositorioProdutoAndLivro {
 
-	public RepositorioProdutoJDBC(FabricaDeConexao fabricadeconexoes) {
+	public RepositorioProdutoAndLivroJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
 
-	@Override
 	public void add(Produto produto) {
 		Connection conecxao = super.getConexao();
 		boolean conecxaoJaExistia;
@@ -31,15 +30,38 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps = null;
 
 		try {
-
-			ps = conecxao
-					.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quanidade) VALUES (?, ?, ?, ?);");
-
+			int idAutor= -1;
+			int idEditora= -1;
+			if(produto instanceof Livro) {
+				Livro livro = (Livro) produto;
+				PreparedStatement declaracaoSqlObterIdAutor = conecxao.prepareStatement("SELECT id FROM Autor WHERE nome= ?;");
+				declaracaoSqlObterIdAutor.setString(1, livro.getAutor());
+				ResultSet resultadoIdAutor= declaracaoSqlObterIdAutor.executeQuery();
+				if(resultadoIdAutor.next()) {
+					idAutor = resultadoIdAutor.getInt(1);
+				}else {
+					throw new RuntimeException("Mudar para autor não cadastrado não foi implementado ainda");
+				}
+				
+				
+				ps = conecxao.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quantidade) VALUES (?, ?, ?, ?);"
+						+ "INSERT INTO livros(isbn, autor, editora) VALUES (?, ?, ?);");
+			} else {
+				ps = conecxao
+						.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quantidade) VALUES (?, ?, ?, ?);");
+			}
 			ps.setString(1, produto.getNome());
 			ps.setString(2, produto.getDescriçao());
 			ps.setInt(3, produto.getPreco().getCentavos());
 			ps.setInt(4, produto.getQuantidade());
-
+		
+			if(produto instanceof Livro) {
+				Livro livro = (Livro) produto;
+				ps.setLong(5, livro.getIsbn());
+				ps.setInt(6, idAutor);
+				ps.setInt(7, idEditora);
+			}
+			
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser concluida");
@@ -47,7 +69,6 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 	}
 
-	@Override
 	public Produto find(int id) {
 		Connection conecxao = super.getConexao();
 		boolean conecxaoJaExistia;
@@ -76,7 +97,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 				Real preco = new Real(conjuntoDeResultados.getInt("preco"));
 				String descriçao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
-
+				
 				if (conjuntoDeResultados.getString("isbn") == null) {
 					return new Produto(id, nome, descriçao, preco, quantidade);
 
@@ -91,7 +112,12 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 				}
 
+			}else {
+				throw new RuntimeException("Produto não encontrado");
 			}
+			
+			
+			
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser concluida");

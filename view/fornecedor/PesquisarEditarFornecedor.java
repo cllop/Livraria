@@ -4,12 +4,12 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import repository.RepositorioFornecedor;
-import view.DadosDePesquisa;
+import view.DadosPesquisa;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class PesquisarEditarFornecedor extends DadosDePesquisa{
+public class PesquisarEditarFornecedor extends DadosPesquisa{
 	private JTextField textCnpj;
 
 	public PesquisarEditarFornecedor(GerenciadorFornecedor gerenciadorFornecedor, RepositorioFornecedor repositorio) {

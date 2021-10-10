@@ -11,12 +11,12 @@ import javax.swing.JTextField;
 
 import modelo.Fornecedor;
 import repository.RepositorioFornecedor;
-import view.DadosDePesquisa;
+import view.DadosPesquisa;
 
-public class DadosDePesquisaFornecedor extends DadosDePesquisa {
+public class DadosPesquisaFornecedor extends DadosPesquisa {
 	private JTextField textCNPJ;
 
-	public DadosDePesquisaFornecedor(GerenciadorFornecedor gerenciador, RepositorioFornecedor repositorio) {
+	public DadosPesquisaFornecedor(GerenciadorFornecedor gerenciador, RepositorioFornecedor repositorio) {
 		btnPesquisarPorNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome=tfNome.getText();

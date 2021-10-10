@@ -20,5 +20,14 @@ public class Livro extends Produto {
 		this.autor = autor;
 		this.editora = editora;
 	}
+	public long getIsbn() {
+		return isbn;
+	}
+	public String getAutor() {
+		return autor;
+	}
+	public String getEditora() {
+		return editora;
+	}
 	
 }

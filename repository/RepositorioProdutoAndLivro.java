@@ -2,7 +2,7 @@ package repository;
 
 import modelo.Produto;
 
-public interface RepositorioDeProduto {
+public interface RepositorioProdutoAndLivro {
 	
 	public void add(Produto produto);
 	public Produto find(int id);

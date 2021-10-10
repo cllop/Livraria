@@ -10,17 +10,17 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import modelo.Produto;
-import repository.RepositorioDeProduto;
-import view.DadosDePesquisa;
+import repository.RepositorioProdutoAndLivro;
+import view.DadosPesquisa;
 
-public class DadosDePesquisaDeProdutoLivro extends DadosDePesquisa {
+public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	private JTextField tfCategoria;
 	private JTextField tfAutor;
 
 	/**
 	 * Create the panel.
 	 */
-	public DadosDePesquisaDeProdutoLivro(PesquisarProduto pesquisa,RepositorioDeProduto repositorio) {
+	public DadosPesquisaProdutoLivro(PesquisarProduto pesquisa,RepositorioProdutoAndLivro repositorio) {
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;
