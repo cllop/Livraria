@@ -3,6 +3,7 @@ package repository.jdbc;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 import config.FabricaDeConexao;
 import modelo.PlanoVip;
@@ -91,6 +92,18 @@ public class RepositorioPlanoVipJDBC extends RepositorioJDBC implements Reposito
 				super.fecharConexao();
 			}
 		}
+	}
+
+	@Override
+	public List<PlanoVip> getAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public PlanoVip findByNome(String nome) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

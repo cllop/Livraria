@@ -20,7 +20,7 @@ public class GerenciadorFuncionario extends JPanel {
 
 	public GerenciadorFuncionario(RepositorioFuncionario repositorioFuncionario, RepositorioGerente repositorioGerente, RepositorioCaixa repositorioCaixa, RepositorioVendedor repositorioVendedor) {
 		this.repositorioFuncionario = repositorioFuncionario;
-		this.repositorioGerente
+		this.repositorioGerente = repositorioGerente;
 		
 
 	}

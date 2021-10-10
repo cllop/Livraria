@@ -6,18 +6,17 @@ import repository.RepositorioAssinaturaVip;
 import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioCompra;
-import repository.RepositorioDeProduto;
-import repository.RepositorioDeUsuario;
 import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
-import repository.RepositorioLivros;
 import repository.RepositorioPagamento;
 import repository.RepositorioPlanoVip;
+import repository.RepositorioProdutoAndLivro;
 import repository.RepositorioProdutoCategoria;
 import repository.RepositorioSetor;
 import repository.RepositorioTelefone;
 import repository.RepositorioTelefoneFornecedor;
 import repository.RepositorioTelefoneUsuario;
+import repository.RepositorioUsuario;
 import repository.RepositorioVenda;
 import repository.RepositorioVendedor;
 
@@ -30,15 +29,15 @@ public class FabricaDeRepositoriosJDBC implements FabricaDeRepositorios {
 		this.fabricaDeConexao = fabricaDeConexao;
 	}
 	
-	public RepositorioLivros criarRepositorioLivro() {
-		return new RepositorioLivroJDBC(this.fabricaDeConexao);
+	public RepositorioProdutoAndLivro criarRepositorioLivro() {
+		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioDeProduto criarRepositorioDeProduto() {
-		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
+	public RepositorioProdutoAndLivro  criarRepositorioDeProduto() {
+		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioDeUsuario criarRepositorioDeUsuario() {
+	public RepositorioUsuario criarRepositorioDeUsuario() {
 		return new RepositorioUsuarioJDBC(this.fabricaDeConexao);
 	}
 	

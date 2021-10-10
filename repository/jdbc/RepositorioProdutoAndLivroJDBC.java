@@ -139,7 +139,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 		PreparedStatement ps = null;
 		
 		try {
-			ps = conecxao.prepareStatement();
+			ps = conecxao.prepareStatement("");
 			
 		} catch (SQLException eexecao) {
 			throw new RuntimeException();

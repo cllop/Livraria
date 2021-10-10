@@ -50,7 +50,20 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void update(int id, Usuario usuario){
+	
+
+	public List<Usuario> findByNomeDeUsuarioAndSenha(String nome, String senha) {
+
+		return null;
+	}
+
+	public List<Usuario> findByNome(String nome) {
+		return null;
+		
+	}
+
+	@Override
+	public void update(Usuario usuario) {
 		Connection conexao = super.getConexao();
 
 		boolean conexaoJaExistia;
@@ -66,18 +79,19 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		try {
 			
 			ps= conexao.prepareStatement("UPDATE usuario");
-			
+		
 		} catch (SQLException e) {
 			
 			throw new RuntimeException("Operação não pode ser comcluida");
 			
 		}
 		
-
+		
 	}
 
-	public List<Usuario> findByNomeDeUsuarioAndSenha(String nome, String senha) {
-
+	@Override
+	public Usuario find(int id) {
+		// TODO Auto-generated method stub
 		return null;
 	}
 
