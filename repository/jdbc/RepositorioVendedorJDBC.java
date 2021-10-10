@@ -57,6 +57,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		boolean conecxaoJaExistia;
 		if (conexao == null) {
+			
 			conecxaoJaExistia = false;
 			super.criarConexao();
 		} else {
@@ -217,17 +218,14 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		try {
 			ps = conexao.prepareStatement("UPDATE vendedor"
-					+ "SET nome=?, sobrenome=?, nomeDeUsuário=?, CPF=?, telefone=?, rua=?, bairro=?, CEP=?, númeroDaResidência=?\r\n"
+					+ " SET nomeDeUsuário=?, rua=?, bairro=?, CEP=?, númeroDaResidência=? "
 					+ "WHERE Id=?;");
-
-			ps.setLong(1, vendedor.getCpf());
-			ps.setString(2, vendedor.getNome());
-			ps.setString(3, vendedor.getSobrenome());
-			ps.setString(4, vendedor.getNomeDeUsuario());
-			ps.setString(5, vendedor.getRua());
-			ps.setString(6, vendedor.getBairro());
-			ps.setInt(6, vendedor.getCep());
-			ps.setInt(6, vendedor.getNumeroDaResidencia());
+			
+			ps.setString(1, vendedor.getNomeDeUsuario());
+			ps.setString(2, vendedor.getRua());
+			ps.setString(3, vendedor.getBairro());
+			ps.setInt(4, vendedor.getCep());
+			ps.setInt(5, vendedor.getNumeroDaResidencia());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 			boolean existeResultado = conjuntoDeResultados.next();
