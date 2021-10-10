@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import config.FabricaDeConexao;
-import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import modelo.Livro;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;

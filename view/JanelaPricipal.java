@@ -1,14 +1,11 @@
 package view;
 
 import java.awt.EventQueue;
-import java.awt.Graphics;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 
 import config.ConfiguracoesDeRecursos;
 import repository.FabricaDeFabricaDeRepositorios;
-import repository.FabricaDeRepositorios;
 import repository.jdbc.FabricaDeFabricaDeRepositorioJDBC;
 
 public class JanelaPricipal extends JFrame {

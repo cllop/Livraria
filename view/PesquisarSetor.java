@@ -1,7 +1,7 @@
 package view;
 
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class PesquisarSetor extends JPanel {

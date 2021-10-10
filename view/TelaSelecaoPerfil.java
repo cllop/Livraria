@@ -2,11 +2,11 @@ package view;
 
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
 import modelo.Usuario;
-import javax.swing.JComboBox;
-import javax.swing.JButton;
 
 public class TelaSelecaoPerfil extends JPanel {
 

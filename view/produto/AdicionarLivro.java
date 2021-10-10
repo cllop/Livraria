@@ -11,7 +11,6 @@ import javax.swing.JTextField;
 
 import modelo.Livro;
 import modelo.Produto;
-import repository.RepositorioLivro;
 
 public class AdicionarLivro extends JPanel {
 	private JTextField tfIsbn;

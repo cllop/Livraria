@@ -6,7 +6,6 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import config.DevConfig;
-import config.FabricaDeConexao;
 import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Gerente;
@@ -14,9 +13,6 @@ import modelo.Usuario;
 import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
-import repository.RepositorioDeUsuario;
-import repository.jdbc.FabricaDeRepositoriosJDBC;
-import repository.jdbc.RepositorioUsuarioJDBC;
 
 public class TelaLogin extends JPanel {
 

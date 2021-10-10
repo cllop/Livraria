@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 
 import repository.RepositorioFornecedor;
-import view.JanelaPricipal;
 import view.fornecedor.GerenciadorFornecedor;
 
 public class JanelaTesteGerenciadorFornecedor extends JFrame {

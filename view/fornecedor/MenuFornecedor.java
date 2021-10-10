@@ -1,15 +1,13 @@
 package view.fornecedor;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
-import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JPanel;
 
 import config.DevConfig;
-
-import javax.swing.JLabel;
 
 public class MenuFornecedor extends JPanel {
 

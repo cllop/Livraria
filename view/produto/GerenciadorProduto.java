@@ -3,8 +3,8 @@ package view.produto;
 import javax.swing.JPanel;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
 import repository.RepositorioLivro;
+import repository.RepositorioProdutoAndLivro;
 
 public class GerenciadorProduto extends JPanel {
 

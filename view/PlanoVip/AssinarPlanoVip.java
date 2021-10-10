@@ -1,10 +1,9 @@
 package view.PlanoVip;
 
-import javax.swing.JPanel;
-import javax.swing.BoxLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class AssinarPlanoVip extends JPanel {
 	private JTextField tfNomeDoPlano;
