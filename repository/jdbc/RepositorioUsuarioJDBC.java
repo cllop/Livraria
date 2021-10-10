@@ -2,6 +2,7 @@ package repository.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -11,12 +12,14 @@ import repository.RepositorioUsuario;
 
 public class RepositorioUsuarioJDBC extends RepositorioJDBC implements RepositorioUsuario {
 
+	private List<Usuario> usuario;
+	
 	public RepositorioUsuarioJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 
 	}
 
-	public void add(Usuario usuario){
+	public void add(Usuario usuario) {
 
 		Connection conexao = super.getConexao();
 
@@ -43,24 +46,19 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			ps.setString(7, usuario.getBairro());
 			ps.setInt(8, usuario.getCep());
 			ps.setInt(9, usuario.getNumeroDaResidencia());
-			
+
 			ps.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException("Operação não pode ser comcluida");
 		}
 	}
 
-	
-
 	public List<Usuario> findByNomeDeUsuarioAndSenha(String nome, String senha) {
 
 		return null;
 	}
 
-	public List<Usuario> findByNome(String nome) {
-		return null;
-		
-	}
+	
 
 	@Override
 	public void update(Usuario usuario) {
@@ -91,8 +89,46 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 	@Override
 	public Usuario find(int id) {
-		// TODO Auto-generated method stub
+		
 		return null;
+	}
+
+	@Override
+	public List<Usuario> findByNome(String nome) {
+		Connection conexao = super.getConexao();
+
+		boolean conexaoJaExistia;
+		if (conexao == null) {
+			conexaoJaExistia = false;
+			super.criarConexao();
+		} else {
+			conexaoJaExistia = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			
+			ps = conexao.prepareStatement("SELECT * usuario WHERE nome=? ");
+			
+		
+			
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			boolean existeResultado = conjuntoDeResultados.next();
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+			
+			return usuario;
+		}catch (Exception e) {
+			
+			throw new RuntimeException("Operação não pode ser comcluida");
+		}
+		
 	}
 
 }
