@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import config.FabricaDeConexao;
+import jdk.jshell.spi.ExecutionControl.NotImplementedException;
 import modelo.Livro;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
@@ -40,7 +41,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				if(resultadoIdAutor.next()) {
 					idAutor = resultadoIdAutor.getInt(1);
 				}else {
-					throw new RuntimeException("Mudar para autor não cadastrado não foi implementado ainda");
+					throw new UnsupportedOperationException("Mudar para autor não cadastrado não foi implementado ainda");
 				}
 				
 				
