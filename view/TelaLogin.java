@@ -12,25 +12,28 @@ import modelo.Cliente;
 import modelo.Gerente;
 import modelo.Usuario;
 import modelo.Vendedor;
+import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioDeUsuario;
+import repository.jdbc.FabricaDeRepositoriosJDBC;
 import repository.jdbc.RepositorioUsuarioJDBC;
 
 public class TelaLogin extends JPanel {
 
 	private GerenciadorPrincipal gerenciador;
 	private JPanel telaSelecionada;
+	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 
-	public TelaLogin(GerenciadorPrincipal gerenciador) {
+	public TelaLogin(GerenciadorPrincipal gerenciador, FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios) {
 		if (DevConfig.guiDevMode) {
 			this.setBackground(Color.CYAN);
 		}
 		super.setLayout(null);
-		RepositorioDeUsuario repositorio= new RepositorioUsuarioJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria","Login", "09876Logoff"));
+		RepositorioDeUsuario repositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaLogin().criarRepositorioDeUsuario();
 		this.gerenciador = gerenciador;
 		
 		this.trocarTela(new DadosDeLogin(this, repositorio));
-
+		this.fabricaDeFabricaDeRepositorios = fabricaDeFabricaDeRepositorios;
 	}
 
 	public void realizarLogin(List<Usuario> perfisDeUsuario) {
@@ -46,29 +49,27 @@ public class TelaLogin extends JPanel {
 	public void realizarLogin(Usuario usuario) {
 
 		if (usuario instanceof Cliente) {
-			FabricaDeRepositorios fabricaDeRepositorio = new FabricaDeRepositorios(
-					new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria", "Cliente", "3reaix"));
+			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaCliente();
 
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarCliente();
+			
 		}else if(usuario instanceof Gerente) {
-			FabricaDeRepositorios fabricaDeRepositorio = new FabricaDeRepositorios(
-					new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria", "Gerente", "38964"));
-
+			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaGerente();
+					
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarGerente();
+			
 		}else if(usuario instanceof Caixa) {
-			FabricaDeRepositorios fabricaDeRepositorio = new FabricaDeRepositorios(
-					new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria", "Caixa", "reporepo"));
+			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaCaixa();
 
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarCaixa();
 		}else if(usuario instanceof Vendedor) {
-			FabricaDeRepositorios fabricaDeRepositorio = new FabricaDeRepositorios(
-					new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria", "Vendedor", "comsono"));
+			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaVendedor();
 
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
