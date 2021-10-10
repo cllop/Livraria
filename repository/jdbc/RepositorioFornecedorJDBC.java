@@ -37,6 +37,8 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setLong(5, fornecedor.getCep());
 			ps.setShort(6, fornecedor.getNumeroDoImovel());
 			ps.setString(7, fornecedor.getNomeFantasia());
+			
+			ps.execute();
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível adicionar fornecedor.", e);
 		}finally {
