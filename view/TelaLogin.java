@@ -13,6 +13,7 @@ import modelo.Usuario;
 import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
+import repository.RepositorioUsuario;
 
 public class TelaLogin extends JPanel {
 
@@ -25,10 +26,10 @@ public class TelaLogin extends JPanel {
 			this.setBackground(Color.CYAN);
 		}
 		super.setLayout(null);
-		RepositorioDeUsuario repositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaLogin().criarRepositorioDeUsuario();
+		RepositorioUsuario repositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaLogin().criarRepositorioDeUsuario();
 		this.gerenciador = gerenciador;
 		
-		this.trocarTela(new DadosDeLogin(this, repositorio));
+		this.trocarTela(new DadosLogin(this, repositorio));
 		this.fabricaDeFabricaDeRepositorios = fabricaDeFabricaDeRepositorios;
 	}
 

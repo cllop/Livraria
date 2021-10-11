@@ -12,8 +12,7 @@ public class GerenciadorProduto extends JPanel {
 	private RepositorioProdutoAndLivro repositorioProduto;
 	private RepositorioProdutoAndLivroJDBC repositorioLivros;
 	
-	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio, RepositorioProdutoAndLivroJDBC repositorioLivros) {
-		this.repositorioProduto= repositorio;
+	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio) {
 		this.repositorioLivros= repositorioLivros;
 		this.repositorioProduto = repositorioProduto;
 	}

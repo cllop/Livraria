@@ -12,7 +12,7 @@ import repository.RepositorioUsuario;
 
 public class RepositorioUsuarioJDBC extends RepositorioJDBC implements RepositorioUsuario {
 
-	private List<Usuario> usuario;
+	
 	
 	public RepositorioUsuarioJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
@@ -53,7 +53,40 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public List<Usuario> findByNomeDeUsuarioAndSenha(String nome, String senha) {
+	public List<Usuario> findByNomeDeUsuarioAndSenha(String nomeDeUsuario, String senha) {
+		Connection conexao = super.getConexao();
+
+		boolean conexaoJaExistia;
+		if (conexao == null) {
+			conexaoJaExistia = false;
+			super.criarConexao();
+		} else {
+			conexaoJaExistia = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			
+			ps = conexao.prepareStatement("SELECT * usuario WHERE nomeDeUsuario=? AND senha=? ");
+			
+			ps.setString(1,nomeDeUsuario);
+			ps.setString(2, senha);
+			
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			boolean existeResultado = conjuntoDeResultados.next();
+			if(existeResultado) {
+				long cpf = conjuntoDeResultados.getLong("cpf");
+				String sobrenome = conjuntoDeResultados.getString("sobrenome");
+				String rua = conjuntoDeResultados.getString("rua");
+				String bairro = conjuntoDeResultados.getString("bairro");
+				int cep = conjuntoDeResultados.getInt("cep");
+				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+			}
+			
+		}catch (SQLException e) {
+			throw new RuntimeException("Operação não pode ser comcluida");
+		}
 
 		return null;
 	}
@@ -111,10 +144,26 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			
 			ps = conexao.prepareStatement("SELECT * usuario WHERE nome=? ");
 			
-		
+			
 			
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			boolean existeResultado = conjuntoDeResultados.next();
+			
+			
+			return 
+		}catch (Exception e) {
+			
+			throw new RuntimeException("Operação não pode ser comcluida");
+		}
+		
+	}
+	
+	private Usuario lerConjuntoDeResultados(ResultSet conjuntoDeResultados)throws SQLException{
+		
+		
+		boolean existeResultado = conjuntoDeResultados.next();
+		
+		if(existeResultado) {
+			int id = conjuntoDeResultados.getInt("id");
 			long cpf = conjuntoDeResultados.getLong("cpf");
 			String sobrenome = conjuntoDeResultados.getString("sobrenome");
 			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
@@ -123,11 +172,19 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
 			
-			return usuario;
-		}catch (Exception e) {
+			return new Usuario(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
 			
-			throw new RuntimeException("Operação não pode ser comcluida");
+		}else {
+			
+			throw new RuntimeException("Usuario não enconrado");
+			
 		}
+
+		
+	}
+	private Usuario lerListaDeUsuario() {
+		
+		
 		
 	}
 

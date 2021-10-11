@@ -29,7 +29,7 @@ public class GerenciadorPrincipal extends JPanel {
 	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 	
 
-	public GerenciadorPrincipal(FabricaDeRepositoriosJDBC fabricaDeFabricaDeRepositoriosJDBC) {
+	public GerenciadorPrincipal(FabricaDeRepositoriosJDBC fabricaDeFabricaDeRepositoriosJDBC, FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorio) {
 		setLayout(null);		
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
@@ -101,7 +101,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		trocarTela(new GerenciadorProduto(this.fabricaDeRepositoriosJDBC.criarRepositorioDeProduto(), ));
+		trocarTela(new GerenciadorProduto(this.fabricaDeRepositoriosJDBC.criarRepositorioDeProduto()));
 	}
 	
 	public void menuFornecedor() {
@@ -125,7 +125,7 @@ public class GerenciadorPrincipal extends JPanel {
 		this.barraDeMenu= null;
 		this.menuSelecionado= null;
 		this.usuarioLogado= null;
-		this.fabricaDeRepositorios= null;
+		this.fabricaDeRepositoriosJDBC= null;
 		this.telaLogin= new TelaLogin(this, fabricaDeFabricaDeRepositorios);
 		this.add(this.telaLogin);
 	}
@@ -158,7 +158,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 
 	public void selecionarFabricaDeRepositorios(FabricaDeRepositorios fabricaDeRepositorios) {
-		this.fabricaDeRepositorios = fabricaDeRepositorios;
+		this.fabricaDeRepositoriosJDBC = fabricaDeRepositoriosJDBC;
 	}
 	
 	public void selecionarUsuarioLogado(Usuario usuario) {
