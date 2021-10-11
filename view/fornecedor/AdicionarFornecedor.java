@@ -86,8 +86,8 @@ public class AdicionarFornecedor extends JPanel {
 		add(textNomeFantasia);
 		textNomeFantasia.setColumns(10);
 		
-		JButton btnConfirmar = new JButton("Confirmar");
-		btnConfirmar.addActionListener(new ActionListener() {
+		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				long cnpj=Long.parseLong(textCNPJ.getText());
 				String nome=textNome.getText();
@@ -101,7 +101,16 @@ public class AdicionarFornecedor extends JPanel {
 				repositorio.add(fornecedor);
 			}
 		});
-		btnConfirmar.setBounds(352, 458, 89, 23);
-		add(btnConfirmar);
+		btnAdicionar.setBounds(343, 458, 98, 23);
+		add(btnAdicionar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciadorFornecedor.menuFornecedor();
+			}
+		});
+		btnCancelar.setBounds(235, 458, 98, 23);
+		add(btnCancelar);
 	}
 }

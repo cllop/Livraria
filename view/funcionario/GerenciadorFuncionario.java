@@ -21,45 +21,61 @@ public class GerenciadorFuncionario extends JPanel {
 	public GerenciadorFuncionario(RepositorioFuncionario repositorioFuncionario, RepositorioGerente repositorioGerente, RepositorioCaixa repositorioCaixa, RepositorioVendedor repositorioVendedor) {
 		this.repositorioFuncionario = repositorioFuncionario;
 		this.repositorioGerente = repositorioGerente;
-		
-
+		this.repositorioCaixa = repositorioCaixa;
+		this.repositorioVendedor = repositorioVendedor;
 	}
-	
-	private void trocarTela (Container menuSelecionado) {
-		if(this.menuSelecionado!=null) {
+
+	private void trocarTela(Container menuSelecionado) {
+		if (this.menuSelecionado != null) {
 			super.remove(this.menuSelecionado);
 		}
 		super.add(menuSelecionado);
 		this.menuSelecionado = menuSelecionado;
-		repaint();
+		redimensionar();
 	}
-	
+
+	public void redimensionar() {
+		redimensionar(super.getWidth(), super.getHeight());
+	}
+
+	public void redimensionar(int largura, int altura) {
+		if (this.menuSelecionado != null) {
+			this.menuSelecionado.setBounds(0, 0, largura, altura);
+		}
+	}
+
+	public void setBounds(int x, int y, int width, int height) {
+		redimensionar(width, height);
+		super.setBounds(x, y, width, height);
+	}
+
 	public void menuFuncionario() {
-		
+		this.trocarTela(new MenuFuncionario(this));
+
 	}
-	
+
 	public void cadastrarFuncionario() {
-		
+
 	}
-	
+
 	public void atualizarFuncionario() {
-		
+
 	}
-	
+
 	public void exibirFuncionarios(List<Funcionario> listaDeFuncionario) {
-		
+
 	}
-	
+
 	public void cadastrarGerente(Funcionario funcionario) {
-		
+
 	}
-	
+
 	public void cadastrarCaixa(Funcionario funcionario) {
-		
+
 	}
-	
+
 	public void cadastrarVendedor(Funcionario funcionario) {
-		
+
 	}
 
 }

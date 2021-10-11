@@ -34,7 +34,6 @@ public class Usuario {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.numeroDaResidencia = numeroDaResidencia;
-
 	}
 
 	public int getId() {

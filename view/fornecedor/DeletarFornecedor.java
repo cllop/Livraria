@@ -90,5 +90,14 @@ public class DeletarFornecedor extends JPanel {
 		btnBuscar.setBounds(351, 35, 89, 23);
 		add(btnBuscar);
 		
+		JButton btnNewButton = new JButton("Cancelar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciador.menuFornecedor();
+			}
+		});
+		btnNewButton.setBounds(351, 266, 89, 23);
+		add(btnNewButton);
+		
 	}
 }

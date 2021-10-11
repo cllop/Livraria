@@ -58,6 +58,15 @@ public class DadosPesquisaFornecedor extends DadosPesquisa {
 		});
 		btnPesquisarPorCNPJ.setBounds(282, 139, 158, 23);
 		add(btnPesquisarPorCNPJ);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciador.menuFornecedor();
+			}
+		});
+		btnCancelar.setBounds(351, 266, 89, 23);
+		add(btnCancelar);
 
 	}
 

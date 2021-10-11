@@ -16,10 +16,6 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		super(fabricadeconexoes);
 	}
 
-	public Cliente getCliente(long cpf) { //metodo igual de findByCpf?
-		return null;
-	}
-	
 	public void add(Cliente cliente) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
@@ -29,20 +25,28 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		} else {
 			jaExisteConexao = true;
 		}
+		boolean transacaoFoiAutomatica;
 		PreparedStatement ps;
 		try {
+			transacaoFoiAutomatica = con.getAutoCommit();
+			
+			if(transacaoFoiAutomatica) {
+				con.setAutoCommit(false);
+			}
+			RepositorioUsuarioJDBC repositorioUsuario = new RepositorioUsuarioJDBC(null);
+			repositorioUsuario.usarConexao(con);
+			repositorioUsuario.add(cliente);
 			ps = con.prepareStatement(
-					"INSERT INTO cliente('cpf','nome','sobrenome','nomeDeUsuario','rua','bairro','CEP','NumeroDaResidencia') VALUES (?,?,?,?,?,?,?,?)");
-			ps.setLong(1, cliente.getCpf());
-			ps.setString(2, cliente.getNome());
-			ps.setString(3, cliente.getSobrenome());
-			ps.setString(4, cliente.getNomeDeUsuario());
-			ps.setString(5, cliente.getRua());
-			ps.setString(6, cliente.getBairro());
-			ps.setInt(7, cliente.getCep());
-			ps.setInt(8, cliente.getNumeroDaResidencia());
-		} catch (SQLException e) {
-			e.printStackTrace();
+					"INSERT INTO cliente('id') VALUES (?)"); //cliente nao possui atributo proprio.
+			ps.setInt(1, cliente.getId());
+			ps.execute();
+			
+			if(transacaoFoiAutomatica) {
+				con.commit();
+				con.setAutoCommit(true);
+			}
+		}catch(SQLException e){
+			throw new RuntimeException("Não foi possível adicionar cliente.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();

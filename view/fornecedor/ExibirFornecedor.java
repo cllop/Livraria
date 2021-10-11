@@ -80,14 +80,6 @@ public class ExibirFornecedor extends JPanel {
 		textNumeroDoImovel.setBounds(10, 417, 430, 20);
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
-
-		
-		textCNPJ.setText(Long.toString(fornecedor.getCnpj()));
-		textNome.setText(fornecedor.getNome());
-		textRua.setText(fornecedor.getRua());
-		textBairro.setText(fornecedor.getBairro());
-		textCEP.setText(Integer.toString(fornecedor.getCep()));
-		textNumeroDoImovel.setText(Integer.toString(fornecedor.getNumeroDoImovel()));
 		
 		JLabel lblId = new JLabel("ID");
 		lblId.setBounds(10, 67, 46, 14);
@@ -108,6 +100,16 @@ public class ExibirFornecedor extends JPanel {
 		textNomeFantasia.setBounds(10, 193, 430, 20);
 		add(textNomeFantasia);
 		textNomeFantasia.setColumns(10);
+		
+		textId.setText(Integer.toString(fornecedor.getId()));
+		textCNPJ.setText(Long.toString(fornecedor.getCnpj()));
+		textNome.setText(fornecedor.getNome());
+		textNomeFantasia.setText(fornecedor.getNomeFantasia());
+		textRua.setText(fornecedor.getRua());
+		textBairro.setText(fornecedor.getBairro());
+		textCEP.setText(Integer.toString(fornecedor.getCep()));
+		textNumeroDoImovel.setText(Integer.toString(fornecedor.getNumeroDoImovel()));
+
 		
 	}
 	

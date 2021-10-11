@@ -5,9 +5,7 @@ import java.util.List;
 import modelo.Cliente;
 
 public interface RepositorioCliente{
-	
-	public Cliente getCliente(long cpf);
-	
+		
 	public void add(Cliente cliente);
 	
 	public void remove(Cliente cliente);

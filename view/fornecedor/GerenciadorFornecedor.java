@@ -11,7 +11,6 @@ import modelo.Fornecedor;
 import repository.RepositorioFornecedor;
 
 public class GerenciadorFornecedor extends JPanel {
-	
 	private Container menuSelecionado;
 	private RepositorioFornecedor repositorio;
 
@@ -23,38 +22,53 @@ public class GerenciadorFornecedor extends JPanel {
 		this.repositorio = repositorio;
 		this.menuFornecedor();
 	}
-	
-	private void trocarTela (Container menuSelecionado) {
-		if(this.menuSelecionado!=null) {
+
+	private void trocarTela(Container menuSelecionado) {
+		if (this.menuSelecionado != null) {
 			super.remove(this.menuSelecionado);
 		}
 		super.add(menuSelecionado);
 		this.menuSelecionado = menuSelecionado;
-		repaint();
+		redimensionar();
 	}
-	
+
+	public void redimensionar() {
+		redimensionar(super.getWidth(), super.getHeight());
+	}
+
+	public void redimensionar(int largura, int altura) {
+		if (this.menuSelecionado != null) {
+			this.menuSelecionado.setBounds(0, 0, largura, altura);
+		}
+	}
+
+	public void setBounds(int x, int y, int width, int height) {
+		redimensionar(width, height);
+		super.setBounds(x, y, width, height);
+	}
+
 	public void menuFornecedor() {
 		this.trocarTela(new MenuFornecedor(this));
 	}
-	
+
 	public void adicionarFornecedor() {
 		this.trocarTela(new AdicionarFornecedor(this, this.repositorio));
 	}
-	
+
 	public void editarFornecedor() {
 		this.trocarTela(new PesquisarEditarFornecedor(this, repositorio));
 	}
-	
+
 	public void dadosDePesquisaFornecedor() {
 		this.trocarTela(new DadosPesquisaFornecedor(this, this.repositorio));
 	}
-	
+
 	public void deletarFornecedor() {
 		this.trocarTela(new DeletarFornecedor(this, this.repositorio));
 	}
-	
-	public void exibirFornecedores(List<Fornecedor>listaDeFornecedor) {
+
+	public void exibirFornecedores(List<Fornecedor> listaDeFornecedor) {
 		this.trocarTela(new ExibirFornecedores(this, listaDeFornecedor));
 	}
-	
+
 }
