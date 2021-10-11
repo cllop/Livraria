@@ -14,7 +14,15 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 	@Override
 	public void add(Caixa Caixa) {
-		// TODO Auto-generated method stub
+		
+		
+		//ver se existe usuario existe com aquele cpf
+		
+		//se o usuario existe voce pega o id dele com  aquele cpf
+		
+		//se o usuario não existe voce cria ele e pega o id dele com aquele cpf
+		
+		// cria um perfilcaixa com id de usuario
 		
 	}
 
