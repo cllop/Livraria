@@ -3,18 +3,19 @@ package view.produto;
 import javax.swing.JPanel;
 
 import modelo.Produto;
-import repository.RepositorioLivro;
 import repository.RepositorioProdutoAndLivro;
+import repository.jdbc.RepositorioProdutoAndLivroJDBC;
 
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
 	private RepositorioProdutoAndLivro repositorioProduto;
-	private RepositorioLivro repositorioLivros;
+	private RepositorioProdutoAndLivroJDBC repositorioLivros;
 	
-	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio, RepositorioLivro repositorioLivros) {
+	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio, RepositorioProdutoAndLivroJDBC repositorioLivros) {
 		this.repositorioProduto= repositorio;
 		this.repositorioLivros= repositorioLivros;
+		this.repositorioProduto = repositorioProduto;
 	}
 	public void trocarTela(JPanel menuSelecionado) {
 		if (this.menuSelecionado != null) {

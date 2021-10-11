@@ -8,6 +8,7 @@ import config.DevConfig;
 import modelo.Usuario;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
+import repository.jdbc.FabricaDeRepositoriosJDBC;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.GerenciadorProduto;
 
@@ -21,14 +22,14 @@ public class GerenciadorPrincipal extends JPanel {
 	
 	private TelaLogin telaLogin;
 	
-	private FabricaDeRepositorios fabricaDeRepositorios;
+	private FabricaDeRepositoriosJDBC fabricaDeRepositoriosJDBC;
 	
 	private Usuario usuarioLogado;
 	
 	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 	
 
-	public GerenciadorPrincipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios) {
+	public GerenciadorPrincipal(FabricaDeRepositoriosJDBC fabricaDeFabricaDeRepositoriosJDBC) {
 		setLayout(null);		
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
@@ -100,11 +101,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		trocarTela(new GerenciadorProduto(this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioLivro()));
+		trocarTela(new GerenciadorProduto(this.fabricaDeRepositoriosJDBC.criarRepositorioDeProduto(), ));
 	}
 	
 	public void menuFornecedor() {
-		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositorios.criarRepositorioFornecedor()));
+		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositoriosJDBC.criarRepositorioFornecedor()));
 	}
 	
 	public void menuSetor() {
