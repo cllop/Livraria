@@ -4,9 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import config.FabricaDeConexao;
+import modelo.Cliente;
+import modelo.Gerente;
 import modelo.Usuario;
 import repository.RepositorioUsuario;
 
@@ -49,11 +52,12 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 			ps.execute();
 		} catch (SQLException e) {
+			
 			throw new RuntimeException("Operação não pode ser comcluida");
 		}
 	}
 
-	public List<Usuario> findByNomeDeUsuarioAndSenha(String nomeDeUsuario, String senha) {
+	public List<Usuario> findTodosPerfisByNomeDeUsuarioAndSenha(String nomeDeUsuario, String senha) {
 		Connection conexao = super.getConexao();
 
 		boolean conexaoJaExistia;
@@ -68,27 +72,25 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		
 		try {
 			
-			ps = conexao.prepareStatement("SELECT * usuario WHERE nomeDeUsuario=? AND senha=? ");
+			ps = conexao.prepareStatement("SELECT usuario.*,"
+					+ " perfilCliente.id as idCliente,"
+					+ " perfilGerente.id as idGerente, gerente.ativo as perfilDeGerenteEstaAtivo, perfilGerente.superGerente,"
+					+ " perfilVendedor.id as idVendedor, perfilVendedor.estaAtivo as perfilVendedorEstaAtivo, "
+					+ " pefilCaixa.id as idCaixa, perfilCaixa.estaAtivo as perfilCaixa"
+					+ " usuario LEFT JOIN perfilCliente ON usuario.id =  perfilCliente.id  LEFT JOIN perfilGerente ON usuario.id= perfilGerente LEFT JOIN perfilCaixa ON usuario.id = perfil.id LEFT JOIN perfilVendedor ON usuario.id = perfilVendedor.id WHERE nomeDeUsuario=? AND senha=? ");
 			
 			ps.setString(1,nomeDeUsuario);
 			ps.setString(2, senha);
 			
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			boolean existeResultado = conjuntoDeResultados.next();
-			if(existeResultado) {
-				long cpf = conjuntoDeResultados.getLong("cpf");
-				String sobrenome = conjuntoDeResultados.getString("sobrenome");
-				String rua = conjuntoDeResultados.getString("rua");
-				String bairro = conjuntoDeResultados.getString("bairro");
-				int cep = conjuntoDeResultados.getInt("cep");
-				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			}
+			
+			return lerPerfisDeUsuario(conjuntoDeResultados);
 			
 		}catch (SQLException e) {
 			throw new RuntimeException("Operação não pode ser comcluida");
 		}
 
-		return null;
+		
 	}
 
 	
@@ -123,7 +125,35 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 	@Override
 	public Usuario find(int id) {
 		
-		return null;
+		Connection conexao = super.getConexao();
+
+		boolean conexaoJaExistia;
+		if (conexao == null) {
+			conexaoJaExistia = false;
+			super.criarConexao();
+		} else {
+			conexaoJaExistia = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			
+			ps = conexao.prepareStatement("SELECT * usuario WHERE id=? ");
+			
+			
+			
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			
+			
+			return lerUsuario(conjuntoDeResultados);
+			
+			
+		}catch (Exception e) {
+			
+			throw new RuntimeException("Operação não pode ser comcluida");
+		}
+		
 	}
 
 	@Override
@@ -149,7 +179,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 			
 			
-			return 
+			return lerListaDeUsuario(conjuntoDeResultados);
 		}catch (Exception e) {
 			
 			throw new RuntimeException("Operação não pode ser comcluida");
@@ -157,7 +187,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		
 	}
 	
-	private Usuario lerConjuntoDeResultados(ResultSet conjuntoDeResultados)throws SQLException{
+	private Usuario lerUsuario(ResultSet conjuntoDeResultados)throws SQLException{
 		
 		
 		boolean existeResultado = conjuntoDeResultados.next();
@@ -182,9 +212,70 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 		
 	}
-	private Usuario lerListaDeUsuario() {
+	private List<Usuario> lerListaDeUsuario(ResultSet conjuntoDeResultados) throws SQLException{
 		
+		List<Usuario> usuarios = new ArrayList<>(conjuntoDeResultados.getRow());
 		
+	
+		while(conjuntoDeResultados.next()) {
+			int id = conjuntoDeResultados.getInt("id");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+			
+			usuarios.add(new Usuario(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia));
+			
+		}
+		return usuarios;
+		
+	}
+	
+	private List<Usuario> lerPerfisDeUsuario(ResultSet conjuntoDeResultados) throws SQLException{
+		
+		if(conjuntoDeResultados.next()) {
+			List<Usuario> perfisUsuario = new ArrayList<>(4);
+			
+			if(conjuntoDeResultados.getString("idCliente")!= null) {
+				int id = conjuntoDeResultados.getInt("id");
+				long cpf = conjuntoDeResultados.getLong("cpf");
+				String sobrenome = conjuntoDeResultados.getString("sobrenome");
+				String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+				String rua = conjuntoDeResultados.getString("rua");
+				String bairro = conjuntoDeResultados.getString("bairro");
+				int cep = conjuntoDeResultados.getInt("cep");
+				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+				
+				// Quando tiver dados de cliente leia aqui
+				
+				perfisUsuario.add(new Cliente(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia));
+				
+			}
+			
+			if(conjuntoDeResultados.getString("idGerente")!= null) {
+				int id = conjuntoDeResultados.getInt("id");
+				long cpf = conjuntoDeResultados.getLong("cpf");
+				String sobrenome = conjuntoDeResultados.getString("sobrenome");
+				String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+				String rua = conjuntoDeResultados.getString("rua");
+				String bairro = conjuntoDeResultados.getString("bairro");
+				int cep = conjuntoDeResultados.getInt("cep");
+				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+				
+				
+				boolean ativo = conjuntoDeResultados.getBoolean("perfilDeGerenteEstaAtivo");
+				boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
+				
+				perfisUsuario.add(new Gerente(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo, superGerente));
+			}
+			
+			
+		}else {
+			throw new RuntimeException("Usuario não encontrado");
+		}
 		
 	}
 
