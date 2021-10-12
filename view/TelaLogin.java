@@ -26,9 +26,10 @@ public class TelaLogin extends JPanel {
 			this.setBackground(Color.CYAN);
 		}
 		super.setLayout(null);
-		RepositorioUsuario repositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaLogin().criarRepositorioDeUsuario();
+		RepositorioUsuario repositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaLogin()
+				.criarRepositorioDeUsuario();
 		this.gerenciador = gerenciador;
-		
+
 		this.trocarTela(new DadosLogin(this, repositorio));
 		this.fabricaDeFabricaDeRepositorios = fabricaDeFabricaDeRepositorios;
 	}
@@ -51,28 +52,28 @@ public class TelaLogin extends JPanel {
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarCliente();
-			
-		}else if(usuario instanceof Gerente) {
+
+		} else if (usuario instanceof Gerente) {
 			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaGerente();
-					
+
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarGerente();
-			
-		}else if(usuario instanceof Caixa) {
+
+		} else if (usuario instanceof Caixa) {
 			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaCaixa();
 
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarCaixa();
-		}else if(usuario instanceof Vendedor) {
+
+		} else if (usuario instanceof Vendedor) {
 			FabricaDeRepositorios fabricaDeRepositorio = fabricaDeFabricaDeRepositorios.criarFabricaParaVendedor();
 
 			this.gerenciador.selecionarFabricaDeRepositorios(fabricaDeRepositorio);
 			this.gerenciador.selecionarUsuarioLogado(usuario);
 			this.gerenciador.selecionarMenuBarVendedor();
 		}
-
 	}
 
 	public void trocarTela(JPanel telaSelecionada) {
@@ -94,11 +95,9 @@ public class TelaLogin extends JPanel {
 		}
 	}
 
-	@Override
 	public void setBounds(int x, int y, int width, int height) {
 		redimensionar(width, height);
 		super.setBounds(x, y, width, height);
 	}
 
 }
-

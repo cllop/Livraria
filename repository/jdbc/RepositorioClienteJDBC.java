@@ -16,7 +16,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		super(fabricadeconexoes);
 	}
 
-	public void add(Cliente cliente) {
+	public void add(Cliente cliente) { // corrigir metodo
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -108,7 +108,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public Cliente find(int id) {
+	public Cliente find(int id) { // corrigir metodo
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
