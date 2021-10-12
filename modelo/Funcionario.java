@@ -11,6 +11,8 @@ public class Funcionario extends Usuario{
 
 	public Funcionario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String rua, String bairro, int cep, int numeroDaResidencia) {
 		super(cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+		
+		ativo = true;
 	}
 
 	public boolean isAtivo() {

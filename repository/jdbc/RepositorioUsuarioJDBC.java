@@ -253,6 +253,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				
 				perfisUsuario.add(new Cliente(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia));
 				
+				return perfisUsuario;
 			}
 			
 			if(conjuntoDeResultados.getString("idGerente")!= null) {
@@ -270,6 +271,8 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
 				
 				perfisUsuario.add(new Gerente(id, cpf, nomeDeUsuario, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo, superGerente));
+				
+				return perfisUsuario;
 			}
 			
 			
