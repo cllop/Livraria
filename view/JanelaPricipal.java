@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -34,6 +35,7 @@ public class JanelaPricipal extends JFrame {
 		this.contentPane = new GerenciadorPrincipal(fabricaDeFabricaDeRepositorios);
 		super.setContentPane(contentPane);
 		super.setExtendedState(JFrame.MAXIMIZED_BOTH);
+		super.setMinimumSize(new Dimension(700, 400));
 		super.setVisible(true);
 	}
 	

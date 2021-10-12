@@ -22,7 +22,7 @@ public class DadosLogin extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public DadosLogin(TelaLogin telaDeLogin, RepositorioUsuario repositorio) {
+	public DadosLogin(TelaLogin telaLogin, RepositorioUsuario repositorio) {
 		if (DevConfig.guiDevMode) {
 			this.setBackground(Color.orange);
 		}
@@ -47,16 +47,35 @@ public class DadosLogin extends JPanel {
 		tfSenha.setBounds(42, 145, 278, 20);
 		add(tfSenha);
 		
+		JLabel lblMensagem = new JLabel("");
+		lblMensagem.setForeground(Color.RED);
+		lblMensagem.setBounds(42, 11, 172, 14);
+		add(lblMensagem);
+		
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				List <Usuario> perfisDeUsuario= repositorio.findByNomeDeUsuarioAndSenha(tfNomeDeUsuario.getText(),tfSenha.getText() );
+				List <Usuario> perfisDeUsuario= repositorio.findTodosPerfisByNomeDeUsuarioAndSenha(tfNomeDeUsuario.getText(),tfSenha.getText() );
+				
+				if(perfisDeUsuario.size()>0) {
+					
+					telaLogin.realizarLogin(perfisDeUsuario);
+					
+				}else {
+					
+					lblMensagem.setText("Usuario não encotrado");
+					
+				}
+				
+				
 				
 				
 			}
 		});
 		btnConfirmar.setBounds(256, 216, 89, 23);
 		add(btnConfirmar);
+		
+		
 		//campos de login
 		//ao apertar o boato de logar usa o repositorio de usuario e obtem o usuario
 	}

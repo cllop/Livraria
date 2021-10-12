@@ -24,9 +24,13 @@ public class FabricaDeConexao {
 			 
 			 conecxao = DriverManager.getConnection(url, usuario, senha);
 			 
-		} catch (SQLException excecao) {
-			
-			throw new RuntimeException("Conecxão não pode ser criada");
+		} catch (SQLException execao) {
+			if(DevConfig.devMode) {
+				System.out.println("----------------------------------------------------------------");
+				execao.printStackTrace();
+				System.out.println("----------------------------------------------------------------");
+			}
+			throw new RuntimeException("Conecxão não pode ser criada",execao);
 			
 		}
 		 

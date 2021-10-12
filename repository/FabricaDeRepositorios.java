@@ -68,6 +68,9 @@ public interface FabricaDeRepositorios{
 	
 	public RepositorioTelefoneFornecedor criarRepositorioTelefoneFornecedor();
 	
+	
+	public RepositorioFornecedor criarRepositorioFornecedor();
+	
 		
 }
 	

@@ -29,7 +29,7 @@ public class FabricaDeFabricaDeRepositorioJDBC implements FabricaDeFabricaDeRepo
 	}
 
 	public FabricaDeRepositorios criarFabricaParaLogin() {
-		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "Login", "09876Logoff"));
+		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "paraLogin", "09876Logoff"));
 	}
 
 }

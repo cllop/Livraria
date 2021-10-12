@@ -61,7 +61,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 		boolean conexaoJaExistia;
 		if (conexao == null) {
 			conexaoJaExistia = false;
-			super.criarConexao();
+			conexao= super.criarConexao();
 		} else {
 			conexaoJaExistia = true;
 		}
@@ -70,11 +70,16 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 		try {
 
-			ps = conexao.prepareStatement("SELECT usuario.*," + " perfilCliente.id as idCliente,"
-					+ " perfilGerente.id as idGerente, gerente.ativo as perfilDeGerenteEstaAtivo, perfilGerente.superGerente,"
-					+ " perfilVendedor.id as idVendedor, perfilVendedor.estaAtivo as perfilVendedorEstaAtivo, "
-					+ " pefilCaixa.id as idCaixa, perfilCaixa.estaAtivo as perfilCaixa"
-					+ " usuario LEFT JOIN perfilCliente ON usuario.id =  perfilCliente.id  LEFT JOIN perfilGerente ON usuario.id= perfilGerente LEFT JOIN perfilCaixa ON usuario.id = perfil.id LEFT JOIN perfilVendedor ON usuario.id = perfilVendedor.id WHERE nomeDeUsuario=? AND senha=? ");
+			ps = conexao.prepareStatement("SELECT usuario.*,"
+					+ " perfilCliente.id as idCliente,"
+					+ " perfilGerente.id as idGerente, perfilGerente.ativo as perfilDeGerenteEstaAtivo, perfilGerente.superGerente,"
+					+ " perfilVendedor.id as idVendedor, perfilVendedor.ativo as perfilVendedorEstaAtivo,"
+					+ " perfilCaixa.id as idCaixa, perfilCaixa.ativo as perfilCaixa"
+					+ " FROM usuario LEFT JOIN perfilCliente ON usuario.id = perfilCliente.id"
+					+ " LEFT JOIN perfilGerente ON usuario.id= perfilGerente.id"
+					+ " LEFT JOIN perfilCaixa ON usuario.id = perfilCaixa.id"
+					+ " LEFT JOIN perfilVendedor ON usuario.id = perfilVendedor.id"
+					+ " WHERE nomeDeUsuario=? AND senha=?;");
 
 			ps.setString(1, nomeDeUsuario);
 			ps.setString(2, senha);
@@ -84,7 +89,10 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			return lerPerfisDeUsuario(conjuntoDeResultados);
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Opera��o n�o pode ser comcluida");
+			System.out.println("------------------------------------------");
+			e.printStackTrace();
+			System.out.println("------------------------------------------");
+			throw new RuntimeException("Operacao nao pode ser comcluida",e);
 		}
 	}
 
@@ -207,6 +215,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 	private List<Usuario> lerPerfisDeUsuario(ResultSet conjuntoDeResultados) throws SQLException {
 		if (conjuntoDeResultados.next()) {
+			
 			List<Usuario> perfisUsuario = new ArrayList<>(4);
 
 			if (conjuntoDeResultados.getString("idCliente") != null) {
@@ -235,7 +244,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String rua = conjuntoDeResultados.getString("rua");
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
-				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
 
 				boolean ativo = conjuntoDeResultados.getBoolean("perfilDeGerenteEstaAtivo");
 				boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
@@ -254,9 +263,10 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
 				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-
+				boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+				
 				perfisUsuario.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia));
+						numeroDaResidencia, true));
 			}
 
 			if (conjuntoDeResultados.getString("idCaixa") != null) {
@@ -273,10 +283,15 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				perfisUsuario.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
 						numeroDaResidencia));
 			}
-
+			
+			return perfisUsuario;
+			
 		} else {
+			
 			throw new RuntimeException("Usuario n�o encontrado");
 		}
 	}
+
+	
 
 }

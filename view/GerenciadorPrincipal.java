@@ -22,20 +22,22 @@ public class GerenciadorPrincipal extends JPanel {
 	
 	private TelaLogin telaLogin;
 	
-	private FabricaDeRepositoriosJDBC fabricaDeRepositoriosJDBC;
-	
 	private Usuario usuarioLogado;
+	
+	private FabricaDeRepositorios fabricaDeRepositorios;
 	
 	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 	
 
-	public GerenciadorPrincipal(FabricaDeRepositoriosJDBC fabricaDeFabricaDeRepositoriosJDBC, FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorio) {
+	public GerenciadorPrincipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorio) {
 		setLayout(null);		
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(100, 50, 50, 255));
 		}
 		
+		this.fabricaDeFabricaDeRepositorios = fabricaDeFabricaDeRepositorio;
 		this.realizarLogoff();
+		
 	}
 
 	public void trocarTela(JPanel menuSelecionado) {
@@ -101,11 +103,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuProduto() {
-		trocarTela(new GerenciadorProduto(this.fabricaDeRepositoriosJDBC.criarRepositorioDeProduto()));
+		trocarTela(new GerenciadorProduto(this.fabricaDeRepositorios.criarRepositorioDeProduto()));
 	}
 	
 	public void menuFornecedor() {
-		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositoriosJDBC.criarRepositorioFornecedor()));
+		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositorios.criarRepositorioFornecedor()));
 	}
 	
 	public void menuSetor() {
@@ -125,7 +127,7 @@ public class GerenciadorPrincipal extends JPanel {
 		this.barraDeMenu= null;
 		this.menuSelecionado= null;
 		this.usuarioLogado= null;
-		this.fabricaDeRepositoriosJDBC= null;
+		this.fabricaDeRepositorios= null;
 		this.telaLogin= new TelaLogin(this, fabricaDeFabricaDeRepositorios);
 		this.add(this.telaLogin);
 	}
@@ -158,7 +160,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 
 	public void selecionarFabricaDeRepositorios(FabricaDeRepositorios fabricaDeRepositorios) {
-		this.fabricaDeRepositoriosJDBC = fabricaDeRepositoriosJDBC;
+		this.fabricaDeRepositorios = fabricaDeRepositorios;
 	}
 	
 	public void selecionarUsuarioLogado(Usuario usuario) {

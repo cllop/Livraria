@@ -65,4 +65,10 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		return null;
 	}
 
+	@Override
+	public void update(Caixa caixa) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }
