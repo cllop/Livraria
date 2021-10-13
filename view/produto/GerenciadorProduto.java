@@ -19,6 +19,7 @@ public class GerenciadorProduto extends JPanel {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}
+		super.setLayout(null);
 		this.repositorioLivros= repositorioLivros;
 		this.repositorioProduto = repositorioProduto;
 		this.menuProduto();
