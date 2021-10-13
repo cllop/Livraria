@@ -1,5 +1,6 @@
 package view.produto;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
+import config.DevConfig;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
 import util.Real;
@@ -25,6 +27,9 @@ public class AdicionarProduto extends JPanel {
 	 * Create the panel.
 	 */
 	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio) {
+		if (DevConfig.guiDevMode) {
+			super.setBackground(Color.pink);
+		}
 		AdicionarProduto esseAdicionarProduto= this;
 		setLayout(null);
 		
@@ -65,15 +70,16 @@ public class AdicionarProduto extends JPanel {
 		tfQuantidade.setColumns(10);
 		
 		JButton btnVoltarAoMenuProduto = new JButton("Voltar ao Menu Produto");
+		btnVoltarAoMenuProduto.setBounds(104, 266, 145, 23);
 		btnVoltarAoMenuProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorProduto.menuProduto();
 			}
 		});
-		btnVoltarAoMenuProduto.setBounds(104, 266, 145, 23);
 		add(btnVoltarAoMenuProduto);
 		
 		btnCadastrarProduto = new JButton("Cadastrar Produto");
+		btnCadastrarProduto.setBounds(259, 266, 121, 23);
 		btnCadastrarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome= tfNome.getText();
@@ -86,10 +92,10 @@ public class AdicionarProduto extends JPanel {
 				gerenciadorProduto.menuProduto();
 			}
 		});
-		btnCadastrarProduto.setBounds(259, 266, 121, 23);
 		add(btnCadastrarProduto);
 		
 		JButton btnCadastrarLivro = new JButton("Cadastrar Livro");
+		btnCadastrarLivro.setBounds(390, 266, 161, 23);
 		btnCadastrarLivro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome= tfNome.getText();
@@ -100,7 +106,6 @@ public class AdicionarProduto extends JPanel {
 				gerenciadorProduto.adicionarLivro(produto);
 			}
 		});
-		btnCadastrarLivro.setBounds(390, 266, 161, 23);
 		add(btnCadastrarLivro);
 
 	}
