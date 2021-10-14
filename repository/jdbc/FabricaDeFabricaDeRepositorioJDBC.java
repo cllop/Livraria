@@ -13,19 +13,19 @@ public class FabricaDeFabricaDeRepositorioJDBC implements FabricaDeFabricaDeRepo
 	}
 
 	public FabricaDeRepositorios criarFabricaParaGerente() {
-		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "Gerente", "38964"));
+		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "gerente", "reporepo"));
 	}
 
 	public FabricaDeRepositorios criarFabricaParaCliente() {
-		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "Cliente", "3reaix"));
+		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "cliente", "3reaix"));
 	}
 
 	public FabricaDeRepositorios criarFabricaParaCaixa() {
-		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "Caixa", "reporepo"));
+		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "caixa", "comsono"));
 	}
 
 	public FabricaDeRepositorios criarFabricaParaVendedor() {
-		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "Vendedor", "comsono"));
+		return new FabricaDeRepositoriosJDBC(new FabricaDeConexao(this.host, "vendedor", "38964"));
 	}
 
 	public FabricaDeRepositorios criarFabricaParaLogin() {

@@ -12,16 +12,16 @@ import repository.jdbc.RepositorioProdutoAndLivroJDBC;
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
-	private RepositorioProdutoAndLivro repositorioProduto;
-	private RepositorioProdutoAndLivroJDBC repositorioLivros;
+	private RepositorioProdutoAndLivro repositorioProdutoAndLivro;
+
 	
 	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}
 		super.setLayout(null);
-		this.repositorioLivros= repositorioLivros;
-		this.repositorioProduto = repositorioProduto;
+		this.repositorioProdutoAndLivro = repositorio;
+		
 		this.menuProduto();
 	}
 	public void trocarTela(JPanel menuSelecionado) {
@@ -47,7 +47,7 @@ public class GerenciadorProduto extends JPanel {
 		super.setBounds(x, y, width, height);
 	}
 	public void adicionarProduto() {
-		this.trocarTela(new AdicionarProduto(this, this.repositorioProduto));
+		this.trocarTela(new AdicionarProduto(this, this.repositorioProdutoAndLivro));
 		
 	}
 	
@@ -58,6 +58,6 @@ public class GerenciadorProduto extends JPanel {
 		this.trocarTela(new MenuProduto(this));
 	}
 	public void adicionarLivro(Produto prod) {
-		this.trocarTela(new AdicionarLivro(this, this.repositorioLivros, prod));
+		this.trocarTela(new AdicionarLivro(this, this.repositorioProdutoAndLivro, prod));
 	}
 }

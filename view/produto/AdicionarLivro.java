@@ -11,7 +11,7 @@ import javax.swing.JTextField;
 
 import modelo.Livro;
 import modelo.Produto;
-import repository.jdbc.RepositorioProdutoAndLivroJDBC;
+import repository.RepositorioProdutoAndLivro;
 
 public class AdicionarLivro extends JPanel {
 	private JTextField tfIsbn;
@@ -21,7 +21,7 @@ public class AdicionarLivro extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarLivro(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivroJDBC repositorio, Produto produto) {
+	public AdicionarLivro(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("ISBN");
