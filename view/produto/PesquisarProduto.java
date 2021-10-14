@@ -16,9 +16,6 @@ public class PesquisarProduto extends JPanel {
 		
 
 	}
-	public void exibirprodutos( List<Produto> produto) {
-		
-	}
 	
 	
 }

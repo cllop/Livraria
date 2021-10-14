@@ -1,6 +1,7 @@
 package view.produto;
 
 import java.awt.Color;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -14,16 +15,16 @@ public class GerenciadorProduto extends JPanel {
 	private JPanel menuSelecionado;
 	private RepositorioProdutoAndLivro repositorioProdutoAndLivro;
 
-	
 	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}
 		super.setLayout(null);
 		this.repositorioProdutoAndLivro = repositorio;
-		
+
 		this.menuProduto();
 	}
+
 	public void trocarTela(JPanel menuSelecionado) {
 		if (this.menuSelecionado != null) {
 			super.remove(this.menuSelecionado);
@@ -32,6 +33,7 @@ public class GerenciadorProduto extends JPanel {
 		this.menuSelecionado = menuSelecionado;
 		redimensionar();
 	}
+
 	public void redimensionar() {
 		redimensionar(super.getWidth(), super.getHeight());
 	}
@@ -46,18 +48,26 @@ public class GerenciadorProduto extends JPanel {
 		redimensionar(width, height);
 		super.setBounds(x, y, width, height);
 	}
+
 	public void adicionarProduto() {
 		this.trocarTela(new AdicionarProduto(this, this.repositorioProdutoAndLivro));
-		
+
 	}
-	
+
 	public void deletarProduto() {
 		this.trocarTela(new DeletarProduto(this));
 	}
+
 	public void menuProduto() {
 		this.trocarTela(new MenuProduto(this));
 	}
+
 	public void adicionarLivro(Produto prod) {
 		this.trocarTela(new AdicionarLivro(this, this.repositorioProdutoAndLivro, prod));
 	}
+
+	public void exibirprodutos(List<Produto> produto) {
+
+	}
+
 }

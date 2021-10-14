@@ -20,7 +20,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public DadosPesquisaProdutoLivro(PesquisarProduto pesquisa,RepositorioProdutoAndLivro repositorio) {
+	public DadosPesquisaProdutoLivro(GerenciadorProduto gerenciador,RepositorioProdutoAndLivro repositorio) {
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;
@@ -28,7 +28,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 				Produto p;
 				p= repositorio.find(id);
 				List<Produto> listaDeProduto= Arrays.asList(p);
-				pesquisa.exibirprodutos(listaDeProduto);
+				gerenciador.exibirprodutos(listaDeProduto);
 			}
 		});
 		

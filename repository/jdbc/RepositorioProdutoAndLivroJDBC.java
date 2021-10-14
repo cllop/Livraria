@@ -18,23 +18,23 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 	}
 
 	public void add(Produto produto) {
-		Connection conecxao = super.getConexao();
-		boolean conecxaoJaExistia;
-		if (conecxao == null) {
-			conecxaoJaExistia = false;
-			super.criarConexao();
+		Connection conexao = super.getConexao();
+		boolean conexaoJaExistia;
+		if (conexao == null) {
+			conexaoJaExistia = false;
+			conexao=super.criarConexao();
 		} else {
-			conecxaoJaExistia = true;
+			conexaoJaExistia = true;
 		}
 
-		PreparedStatement ps = null;
+		PreparedStatement comandoSql = null;
 
 		try {
 			int idAutor= -1;
 			int idEditora= -1;
 			if(produto instanceof Livro) {
 				Livro livro = (Livro) produto;
-				PreparedStatement declaracaoSqlObterIdAutor = conecxao.prepareStatement("SELECT id FROM Autor WHERE nome= ?;");
+				PreparedStatement declaracaoSqlObterIdAutor = conexao.prepareStatement("SELECT id FROM Autor WHERE nome= ?;");
 				declaracaoSqlObterIdAutor.setString(1, livro.getAutor());
 				ResultSet resultadoIdAutor= declaracaoSqlObterIdAutor.executeQuery();
 				if(resultadoIdAutor.next()) {
@@ -44,24 +44,24 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				}
 				
 				
-				ps = conecxao.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quantidade) VALUES (?, ?, ?, ?);"
+				comandoSql = conexao.prepareStatement("INSERT INTO produto(nome, descricao, preço, quantidade) VALUES (?, ?, ?, ?);"
 						+ "INSERT INTO livros(isbn, autor, editora) VALUES (?, ?, ?);");
 			} else {
-				ps = conecxao
-						.prepareStatement("INSERT INTO produtos(nome, descrição, preço, quantidade) VALUES (?, ?, ?, ?);");
+				comandoSql = conexao
+						.prepareStatement("INSERT INTO produtos(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
 			}
-			ps.setString(1, produto.getNome());
-			ps.setString(2, produto.getDescriçao());
-			ps.setInt(3, produto.getPreco().getCentavos());
-			ps.setInt(4, produto.getQuantidade());
+			comandoSql.setString(1, produto.getNome());
+			comandoSql.setString(2, produto.getDescriçao());
+			comandoSql.setInt(3, produto.getPreco().getCentavos());
+			comandoSql.setInt(4, produto.getQuantidade());
 		
 			if(produto instanceof Livro) {
 				Livro livro = (Livro) produto;
-				ps.setLong(5, livro.getIsbn());
-				ps.setInt(6, idAutor);
-				ps.setInt(7, idEditora);
+				comandoSql.setLong(5, livro.getIsbn());
+				comandoSql.setInt(6, idAutor);
+				comandoSql.setInt(7, idEditora);
 			}
-			
+			comandoSql.execute();
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser concluida");
