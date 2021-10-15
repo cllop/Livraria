@@ -15,7 +15,7 @@ public class ConfigurarBancoDeDados {
 		// fazer menu com 3 opcoes: cadastrar usuarios, conceder permissoes e deletar
 		// usuarios
 
-		deletarUsuarios();
+		System.out.println(definicaoDB.toString()); 
 	}
 
 	private static void cadastrarUsuarios() {
@@ -58,38 +58,83 @@ public class ConfigurarBancoDeDados {
 	}
 
 	private static void concederPermissoes() {
-		StringBuilder construtorDeString = new StringBuilder();
+		try {
+			StringBuilder construtorDeString = null;
+			Connection conexao = fabricaDeConexao.criarConecxao();
+
+			conexao.setAutoCommit(false);
+
+			for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
+				System.out.println("Usuario nome ="+ usuario.getNome());
+				
+				for (AtorDB papel : usuario.getPapeis()) {
+					System.out.println("AtorDB nome="+papel.getNome());
+					
+					for (CasoDeUsoDB casoDeUsos : papel.getCasoDeUso()) {
+						System.out.println("Caso de uso ="+ casoDeUsos.getNome());
+						
+						for (PermissoesDB permissao : casoDeUsos.getPermissoes()) {
+							construtorDeString = new StringBuilder();
+							construtorDeString.append("GRANT ");
+							construtorDeString.append(permissao.getPermicoes());
+							construtorDeString.append(" ON ");
+							construtorDeString.append(definicaoDB.getNomeDB());
+							construtorDeString.append('.');
+							construtorDeString.append(permissao.getTabela());
+							construtorDeString.append(" TO ");
+							construtorDeString.append(usuario.getNome());
+							construtorDeString.append(" @");
+							construtorDeString.append('\'');
+							construtorDeString.append(usuario.getHost());
+							construtorDeString.append('\'');
+							construtorDeString.append(';');
+							System.out.println(construtorDeString.toString());
+//							Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
+//							comandos.execute(construtorDeString.toString());
+						}
+					}
+				}
+			}
+//			conexao.commit();
+
+			System.out.println("Permissões concedidas com sucesso!");
+
+		} catch (Exception e) {
+			
+			System.out.println("Nao foi possivel conceder permissoes");
+			e.printStackTrace();
+		}
 
 	}
 
 	private static void deletarUsuarios() {
-		
+
 		try {
 			StringBuilder construtorDeString = null;
 
 			Connection conexao = fabricaDeConexao.criarConecxao();
 
 			conexao.setAutoCommit(false);
-			
+
 			for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
-				
+
 				construtorDeString = new StringBuilder();
-				
+
 				construtorDeString.append("DROP");
 				construtorDeString.append(" USER ");
 				construtorDeString.append(usuario.getNome());
 				construtorDeString.append(";");
-				
+
 				Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
 				comandos.execute(construtorDeString.toString());
 			}
-			
+
 			conexao.commit();
-			
+
 			System.out.println("Deletado com sucesso!!");
-			
+
 		} catch (Exception e) {
-			
+
 			System.out.println("Não foi possivel deletar usuario");
 			e.printStackTrace();
 		}

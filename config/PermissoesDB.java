@@ -18,5 +18,11 @@ public class PermissoesDB {
 	public String getTabela() {
 		return tabela;
 	}
+
+	@Override
+	public String toString() {
+		return "PermissoesDB [permicoes=" + permicoes + ", tabela=" + tabela + "]";
+	}
+	
 	
 }

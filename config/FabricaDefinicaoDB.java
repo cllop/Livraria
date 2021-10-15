@@ -99,7 +99,7 @@ public class FabricaDefinicaoDB {
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "produto"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
 		
-
+		
 	}
 
 }

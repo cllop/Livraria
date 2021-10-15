@@ -31,6 +31,11 @@ public class CasoDeUsoDB {
 	public void adicionarPermicao(PermissoesDB permissao) {
 		this.permissoes.add(permissao);
 	}
+
+	@Override
+	public String toString() {
+		return "CasoDeUsoDB [numero=" + numero + ", nome=" + nome + ", permissoes=" + permissoes + "]";
+	}
 	
 	
 	

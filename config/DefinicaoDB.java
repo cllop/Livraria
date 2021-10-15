@@ -20,6 +20,11 @@ public class DefinicaoDB {
 	public String getNomeDB() {
 		return nomeDB;
 	}
+
+	@Override
+	public String toString() {
+		return "DefinicaoDB [usuarios=" + usuarios + ", nomeDB=" + nomeDB + "]";
+	}
 	
 	
 }

@@ -27,6 +27,11 @@ public class AtorDB {
 		this.casoDeUsos.add(casoDeUso);
 		
 	}
+
+	@Override
+	public String toString() {
+		return "AtorDB [casoDeUsos=" + casoDeUsos + ", nome=" + nome + "]";
+	}
 	
 	
 

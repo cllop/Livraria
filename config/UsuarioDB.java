@@ -33,6 +33,11 @@ public class UsuarioDB {
 		return papeis;
 	}
 
+	@Override
+	public String toString() {
+		return "UsuarioDB [nome=" + nome + ", host=" + host + ", senha=" + senha + ", papeis=" + papeis + "]";
+	}
+
 	
 
 }
