@@ -2,8 +2,9 @@ package config;
 
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Scanner;
 
-import javax.sql.ConnectionEventListener;
+
 
 public class ConfigurarBancoDeDados {
 	private static FabricaDeConexao fabricaDeConexao;
@@ -15,7 +16,30 @@ public class ConfigurarBancoDeDados {
 		// fazer menu com 3 opcoes: cadastrar usuarios, conceder permissoes e deletar
 		// usuarios
 
-		System.out.println(definicaoDB.toString()); 
+		System.out.println("Digite o menu desejado");
+		System.out.println("a-Cadastrar Usuario");
+		System.out.println("b-Conceder Permissoes");
+		System.out.println("c-Deletar Usuarios");
+		Scanner sc = new Scanner(System.in);
+				
+		char opcao= sc.nextLine().charAt(0);
+		
+		switch (opcao) {
+		
+		case 'a': 
+			cadastrarUsuarios();
+			break;
+		case 'b':
+			concederPermissoes();
+			break;
+		case 'c':
+			deletarUsuarios();
+			break;
+		default:
+			
+			throw new IllegalArgumentException("Ta errado");
+		}
+		
 	}
 
 	private static void cadastrarUsuarios() {
@@ -65,13 +89,13 @@ public class ConfigurarBancoDeDados {
 			conexao.setAutoCommit(false);
 
 			for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
-				System.out.println("Usuario nome ="+ usuario.getNome());
+//				System.out.println("Usuario nome ="+ usuario.getNome());
 				
 				for (AtorDB papel : usuario.getPapeis()) {
-					System.out.println("AtorDB nome="+papel.getNome());
+//					System.out.println("AtorDB nome="+papel.getNome());
 					
 					for (CasoDeUsoDB casoDeUsos : papel.getCasoDeUso()) {
-						System.out.println("Caso de uso ="+ casoDeUsos.getNome());
+//						System.out.println("Caso de uso ="+ casoDeUsos.getNome());
 						
 						for (PermissoesDB permissao : casoDeUsos.getPermissoes()) {
 							construtorDeString = new StringBuilder();
@@ -88,14 +112,15 @@ public class ConfigurarBancoDeDados {
 							construtorDeString.append(usuario.getHost());
 							construtorDeString.append('\'');
 							construtorDeString.append(';');
-							System.out.println(construtorDeString.toString());
-//							Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
-//							comandos.execute(construtorDeString.toString());
+//							System.out.println("SQL ="+construtorDeString.toString());
+							Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
+							comandos.execute(construtorDeString.toString());
 						}
 					}
 				}
 			}
-//			conexao.commit();
+			
+			conexao.commit();
 
 			System.out.println("Permissões concedidas com sucesso!");
 

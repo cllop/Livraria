@@ -7,8 +7,8 @@ import java.util.Map;
 
 public class FabricaDefinicaoDB {
 
-	public  DefinicaoDB criarDefinicaoDB(){
-		return new DefinicaoDB(criarUsuarioDB(),"livraria");
+	public DefinicaoDB criarDefinicaoDB() {
+		return new DefinicaoDB(criarUsuarioDB(), "livraria");
 	}
 
 	private List<UsuarioDB> criarUsuarioDB() {
@@ -23,7 +23,7 @@ public class FabricaDefinicaoDB {
 		papeisCliente.add(atores.get("usuario"));
 		papeisCliente.add(atores.get("cliente"));
 
-		usuarios.add(new UsuarioDB("cliente","%", "3reaix", papeisCliente));
+		usuarios.add(new UsuarioDB("cliente", "%", "3reaix", papeisCliente));
 
 		// Gerente
 
@@ -33,7 +33,7 @@ public class FabricaDefinicaoDB {
 		papeisGerente.add(atores.get("funcionario"));
 		papeisGerente.add(atores.get("gerente"));
 
-		usuarios.add(new UsuarioDB("gerente", "%", "reporepo", papeisCliente));
+		usuarios.add(new UsuarioDB("gerente", "%", "reporepo", papeisGerente));
 
 		// Vendedor
 
@@ -41,18 +41,18 @@ public class FabricaDefinicaoDB {
 
 		papeisVendedor.add(atores.get("usuario"));
 		papeisVendedor.add(atores.get("funcionario"));
-		papeisVendedor.add(atores.get("caixa"));
+		papeisVendedor.add(atores.get("vendedor"));
 
-		usuarios.add(new UsuarioDB("vendedor", "%", "38964", papeisCliente));
+		usuarios.add(new UsuarioDB("vendedor", "%", "38964", papeisVendedor));
 		// Caixa
 
 		List<AtorDB> papeisCaixa = new ArrayList<>(3);
 
-		papeisVendedor.add(atores.get("usuario"));
-		papeisVendedor.add(atores.get("funcionario"));
-		papeisVendedor.add(atores.get("caixa"));
+		papeisCaixa.add(atores.get("usuario"));
+		papeisCaixa.add(atores.get("funcionario"));
+		papeisCaixa.add(atores.get("caixa"));
 
-		usuarios.add(new UsuarioDB("caixa", "%", "comsono", papeisCliente));
+		usuarios.add(new UsuarioDB("caixa", "%", "comsono", papeisCaixa));
 
 		return usuarios;
 	}
@@ -60,12 +60,14 @@ public class FabricaDefinicaoDB {
 	private Map<String, AtorDB> criarAtoresDB() {
 
 		List<AtorDB> atores = criarListasDeAtores();
+
 		Map<String, AtorDB> mapaDeAtores = new HashMap();
 
 		for (AtorDB ator : atores) {
 
 			mapaDeAtores.put(ator.getNome(), ator);
 		}
+
 		atribuiCasosDeUsoAtores(mapaDeAtores);
 
 		return mapaDeAtores;
@@ -81,6 +83,7 @@ public class FabricaDefinicaoDB {
 		atores.add(new AtorDB("vendedor"));
 		atores.add(new AtorDB("cliente"));
 		atores.add(new AtorDB("funcionario"));
+		atores.add(new AtorDB("usuario"));
 
 		return atores;
 	}
@@ -94,12 +97,11 @@ public class FabricaDefinicaoDB {
 		uc = new CasoDeUsoDB(1, "CR Usuario");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "Usuario"));
 		atores.get("funcionario").atribuirCasoDeUso(uc);
-		
+
 		uc = new CasoDeUsoDB(1, "CR Produto");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "produto"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
-		
-		
+
 	}
 
 }
