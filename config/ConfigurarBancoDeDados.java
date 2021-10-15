@@ -15,7 +15,7 @@ public class ConfigurarBancoDeDados {
 		// fazer menu com 3 opcoes: cadastrar usuarios, conceder permissoes e deletar
 		// usuarios
 
-		cadastrarUsuarios();
+		deletarUsuarios();
 	}
 
 	private static void cadastrarUsuarios() {
@@ -27,9 +27,9 @@ public class ConfigurarBancoDeDados {
 			conexao.setAutoCommit(false);
 
 			for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
-				
+
 				construtorDeString = new StringBuilder();
-				
+
 				construtorDeString.append("CREATE USER ");
 				construtorDeString.append(usuario.getNome());
 				construtorDeString.append(" @");
@@ -46,9 +46,10 @@ public class ConfigurarBancoDeDados {
 				comandos.execute(construtorDeString.toString());
 
 			}
-			
+
 			conexao.commit();
-			
+			System.out.println("Cadastrado com sucesso!!");
+
 		} catch (Exception e) {
 			System.out.println("Não foi possivel cadastrar usuario");
 			e.printStackTrace();
@@ -62,14 +63,36 @@ public class ConfigurarBancoDeDados {
 	}
 
 	private static void deletarUsuarios() {
-		StringBuilder construtorDeString = new StringBuilder();
+		
+		try {
+			StringBuilder construtorDeString = null;
 
-		for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
-			construtorDeString.append("DROP");
-			construtorDeString.append(" USER ");
-			construtorDeString.append(usuario.getNome());
-			construtorDeString.append(";");
+			Connection conexao = fabricaDeConexao.criarConecxao();
+
+			conexao.setAutoCommit(false);
+			
+			for (UsuarioDB usuario : definicaoDB.getUsuarios()) {
+				
+				construtorDeString = new StringBuilder();
+				
+				construtorDeString.append("DROP");
+				construtorDeString.append(" USER ");
+				construtorDeString.append(usuario.getNome());
+				construtorDeString.append(";");
+				
+				Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
+				comandos.execute(construtorDeString.toString());
+			}
+			
+			conexao.commit();
+			
+			System.out.println("Deletado com sucesso!!");
+			
+		} catch (Exception e) {
+			
+			System.out.println("Não foi possivel deletar usuario");
+			e.printStackTrace();
 		}
-		System.out.println(construtorDeString.toString());
+
 	}
 }
