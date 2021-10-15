@@ -28,12 +28,12 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 	}
 
-	public void uptade(Caixa caixa){
+	public void update(Caixa caixa){
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
@@ -63,12 +63,6 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 	public List<Caixa> findBynome(String nome) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public void update(Caixa caixa) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

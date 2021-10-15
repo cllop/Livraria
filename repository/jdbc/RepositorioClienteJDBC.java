@@ -78,7 +78,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void uptade(Cliente cliente) {
+	public void update(Cliente cliente) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -90,7 +90,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"UPTADE cliente SET nome=?, sobrenome=?, nomeDeUsuario=?,rua=?,bairro=?,cep=?,numeroDaResidencia=? WHERE id=?"
+					"UPDATE cliente SET nome=?, sobrenome=?, nomeDeUsuario=?,rua=?,bairro=?,cep=?,numeroDaResidencia=? WHERE id=?"
 					);
 			ps.setString(1, cliente.getNome());
 			ps.setString(2, cliente.getSobrenome());

@@ -71,4 +71,8 @@ public class GerenciadorFornecedor extends JPanel {
 		this.trocarTela(new ExibirFornecedores(this, listaDeFornecedor));
 	}
 
+	public void exibirFornecedor(Fornecedor fornecedor) {
+		this.trocarTela(new ExibirFornecedor(fornecedor));
+	}
+	
 }

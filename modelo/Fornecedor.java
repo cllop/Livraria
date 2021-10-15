@@ -9,8 +9,11 @@ public class Fornecedor{
 	private String bairro;
 	private int cep;
 	private short numeroDoImovel;
-	
-	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel) {
+	private short ddd;
+	private short ddi;
+	private int numeroTelefone;
+
+	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();
 		this.id = id;
 		this.cnpj = cnpj;
@@ -20,9 +23,12 @@ public class Fornecedor{
 		this.bairro = bairro;
 		this.cep = cep;
 		this.numeroDoImovel = numeroDoImovel;
+		this.ddd = ddd;
+		this.ddi = ddi;
+		this.numeroTelefone = numeroTelefone;
 	}
 
-	public Fornecedor(long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel) {
+	public Fornecedor(long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();
 		this.cnpj = cnpj;
 		this.nome = nome;
@@ -31,6 +37,9 @@ public class Fornecedor{
 		this.bairro = bairro;
 		this.cep = cep;
 		this.numeroDoImovel = numeroDoImovel;
+		this.ddd = ddd;
+		this.ddi = ddi;
+		this.numeroTelefone = numeroTelefone;
 	}
 
 	public int getId() {
@@ -63,6 +72,18 @@ public class Fornecedor{
 
 	public short getNumeroDoImovel() {
 		return numeroDoImovel;
+	}
+	
+	public short getDdd() {
+		return ddd;
+	}
+
+	public short getDdi() {
+		return ddi;
+	}
+
+	public int getNumeroTelefone() {
+		return numeroTelefone;
 	}
 	
 }

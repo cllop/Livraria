@@ -19,6 +19,9 @@ public class AdicionarFornecedor extends JPanel {
 	private JTextField textCEP;
 	private JTextField textNumeroDoImovel;
 	private JTextField textNomeFantasia;
+	private JTextField textDdd;
+	private JTextField textDdi;
+	private JTextField textNumeroTelefone;
 
 	public AdicionarFornecedor(GerenciadorFornecedor gerenciadorFornecedor, RepositorioFornecedor repositorio) {
 		setLayout(null);
@@ -28,7 +31,7 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblNome);
 		
 		textCNPJ = new JTextField();
-		textCNPJ.setBounds(10, 36, 430, 20);
+		textCNPJ.setBounds(10, 36, 365, 20);
 		add(textCNPJ);
 		textCNPJ.setColumns(10);
 		
@@ -37,16 +40,16 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblCNPJ);
 		
 		textNome = new JTextField();
-		textNome.setBounds(10, 92, 430, 20);
+		textNome.setBounds(10, 92, 365, 20);
 		add(textNome);
 		textNome.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 179, 46, 14);
+		lblRua.setBounds(10, 291, 46, 14);
 		add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(10, 204, 430, 20);
+		textRua.setBounds(10, 316, 365, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
@@ -55,17 +58,17 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(10, 262, 430, 20);
+		textBairro.setBounds(10, 260, 365, 20);
 		add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCEP = new JTextField();
-		textCEP.setBounds(10, 318, 430, 20);
+		textCEP.setBounds(10, 204, 365, 20);
 		add(textCEP);
 		textCEP.setColumns(10);
 		
 		JLabel lblCEP = new JLabel("CEP");
-		lblCEP.setBounds(10, 293, 46, 14);
+		lblCEP.setBounds(10, 179, 46, 14);
 		add(lblCEP);
 		
 		JLabel lblNumeroDoImovel = new JLabel("N\u00FAmero do Im\u00F3vel");
@@ -73,7 +76,7 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblNumeroDoImovel);
 		
 		textNumeroDoImovel = new JTextField();
-		textNumeroDoImovel.setBounds(10, 374, 430, 20);
+		textNumeroDoImovel.setBounds(10, 374, 365, 20);
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
 		
@@ -82,9 +85,36 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblNomeFantasia);
 		
 		textNomeFantasia = new JTextField();
-		textNomeFantasia.setBounds(10, 148, 430, 20);
+		textNomeFantasia.setBounds(10, 148, 365, 20);
 		add(textNomeFantasia);
 		textNomeFantasia.setColumns(10);
+		
+		JLabel lblDdd = new JLabel("DDD");
+		lblDdd.setBounds(425, 11, 46, 14);
+		add(lblDdd);
+		
+		textDdd = new JTextField();
+		textDdd.setBounds(425, 36, 365, 20);
+		add(textDdd);
+		textDdd.setColumns(10);
+		
+		JLabel lblDdi = new JLabel("DDI");
+		lblDdi.setBounds(425, 67, 46, 14);
+		add(lblDdi);
+		
+		textDdi = new JTextField();
+		textDdi.setBounds(425, 92, 365, 20);
+		add(textDdi);
+		textDdi.setColumns(10);
+		
+		JLabel lblNumeroTelefone = new JLabel("N\u00FAmero de Telefone");
+		lblNumeroTelefone.setBounds(425, 123, 119, 14);
+		add(lblNumeroTelefone);
+		
+		textNumeroTelefone = new JTextField();
+		textNumeroTelefone.setBounds(425, 148, 365, 20);
+		add(textNumeroTelefone);
+		textNumeroTelefone.setColumns(10);
 		
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
@@ -96,12 +126,15 @@ public class AdicionarFornecedor extends JPanel {
 				String bairro=textBairro.getText();
 				int cep=Integer.parseInt(textCEP.getText());
 				short numeroDoImovel=Short.parseShort(textNumeroDoImovel.getText());
+				short ddd = Short.parseShort(textDdd.getText());
+				short ddi = Short.parseShort(textDdi.getText());
+				int numeroTelefone = Integer.parseInt(textNumeroTelefone.getText());
 				
-				Fornecedor fornecedor=new Fornecedor(cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel);
+				Fornecedor fornecedor=new Fornecedor(cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel, ddd, ddi, numeroTelefone);
 				repositorio.add(fornecedor);
 			}
 		});
-		btnAdicionar.setBounds(343, 458, 98, 23);
+		btnAdicionar.setBounds(692, 458, 98, 23);
 		add(btnAdicionar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -110,7 +143,9 @@ public class AdicionarFornecedor extends JPanel {
 				gerenciadorFornecedor.menuFornecedor();
 			}
 		});
-		btnCancelar.setBounds(235, 458, 98, 23);
+		btnCancelar.setBounds(584, 458, 98, 23);
 		add(btnCancelar);
+		
+		
 	}
 }

@@ -10,7 +10,7 @@ public interface RepositorioCliente{
 	
 	public void remove(Cliente cliente);
 	
-	public void uptade(Cliente cliente);
+	public void update(Cliente cliente);
 	
 	public Cliente find(int id);
 	

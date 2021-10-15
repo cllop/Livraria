@@ -10,11 +10,11 @@ public interface RepositorioFornecedor {
 	
 	public void remove(Fornecedor fornecedor);
 	
-	public void uptade(Fornecedor fornecedor);
+	public void update(Fornecedor fornecedor);
 	
 	public Fornecedor find(int id);
 	
-	public List<Fornecedor> findByNome(String nome);
+	public Fornecedor findByNome(String nome);
 	
 	public Fornecedor findByCnpj(long cnpj);
 

@@ -11,9 +11,6 @@ public class DadosPesquisa extends JPanel {
 	protected JButton btnPesquisarPorId;
 	protected JButton btnPesquisarPorNome;
  
-	/**
-	 * Create the panel.
-	 */
 	public DadosPesquisa() {
 		setLayout(null);
 		
@@ -22,7 +19,7 @@ public class DadosPesquisa extends JPanel {
 		add(lblNewLabel);
 		
 		tfId = new JTextField();
-		tfId.setBounds(10, 28, 161, 20);
+		tfId.setBounds(10, 28, 262, 20);
 		add(tfId);
 		tfId.setColumns(10);
 		

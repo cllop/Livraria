@@ -23,6 +23,7 @@ public class ExibirFornecedores extends JScrollPane {
 		JButton btnVoltarMenu = new JButton("Voltar Para Menu Fornecedor");
 		btnVoltarMenu.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				gerenciador.menuFornecedor();
 			}
 		});
 		setColumnHeaderView(btnVoltarMenu);
