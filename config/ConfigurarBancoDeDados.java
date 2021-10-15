@@ -43,10 +43,12 @@ public class ConfigurarBancoDeDados {
 				construtorDeString.append(";");
 
 				Statement comandos = fabricaDeConexao.criarConecxao().createStatement();
-				comandos.execute("CREATE USER usuario3 @'%'; CREATE USER usuario2 @'%';");
+				comandos.execute(construtorDeString.toString());
 
 			}
-
+			
+			conexao.commit();
+			
 		} catch (Exception e) {
 			System.out.println("Não foi possivel cadastrar usuario");
 			e.printStackTrace();
