@@ -7,8 +7,8 @@ public class MenuBarFuncionario extends MenuBarUsuario {
 	/**
 	 * Create the panel.
 	 */
-	public MenuBarFuncionario(GerenciadorPrincipal gerenciadorprincipal) {
-		super(gerenciadorprincipal);
+	public MenuBarFuncionario(GerenciadorPrincipal gerenciadorPrincipal) {
+		super(gerenciadorPrincipal);
 		
 		JButton btnNewButton = new JButton("Menu de Cliente");
 		

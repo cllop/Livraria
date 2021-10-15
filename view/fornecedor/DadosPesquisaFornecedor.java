@@ -19,6 +19,7 @@ public class DadosPesquisaFornecedor extends DadosPesquisa {
 	public DadosPesquisaFornecedor(GerenciadorFornecedor gerenciador, RepositorioFornecedor repositorio) {
 		btnPesquisarPorNome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				String nome=tfNome.getText();
 				
 				List<Fornecedor> listaDeFornecedor = repositorio.findByNome(nome);

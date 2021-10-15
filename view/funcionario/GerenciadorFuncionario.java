@@ -10,6 +10,7 @@ import repository.RepositorioCaixa;
 import repository.RepositorioFuncionario;
 import repository.RepositorioGerente;
 import repository.RepositorioVendedor;
+import view.GerenciadorPrincipal;
 import view.MenuBarFuncionario;
 
 public class GerenciadorFuncionario extends JPanel {
@@ -51,7 +52,7 @@ public class GerenciadorFuncionario extends JPanel {
 	}
 
 	public void menuFuncionario() {
-		this.trocarTela(new MenuBarFuncionario(this));
+		this.trocarTela(new MenuBarFuncionario());
 
 	}
 
