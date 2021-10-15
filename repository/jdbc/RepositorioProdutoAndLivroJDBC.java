@@ -48,7 +48,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 						+ "INSERT INTO livros(isbn, autor, editora) VALUES (?, ?, ?);");
 			} else {
 				comandoSql = conexao
-						.prepareStatement("INSERT INTO produtos(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
+						.prepareStatement("INSERT INTO produto(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
 			}
 			comandoSql.setString(1, produto.getNome());
 			comandoSql.setString(2, produto.getDescriçao());

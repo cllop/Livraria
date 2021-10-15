@@ -102,7 +102,43 @@ public class FabricaDefinicaoDB {
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "produto"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
 		
-		terminar aqui!!
+		uc = new CasoDeUsoDB(1, "CR ProdutoLivro");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "produtoLivro"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(1, "CR Fornecedor");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "fornecedor"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(1, "CR Plano VIP");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "planoVip"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(2, "CR Venda");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "venda"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+//		uc = new CasoDeUsoDB(3, "CR Estornar");
+//		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "estorno"));
+//		atores.get("gerente").atribuirCasoDeUso(uc);
+//		
+//		uc = new CasoDeUsoDB(4, "CR Devolver");
+//		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "devolver"));
+//		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(6, "CR PagamentoEmCheque");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "venda"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(8,  "CR Funcionario");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT, UPDATE", "funcionario"));
+		atores.get("gerente").atribuirCasoDeUso(uc);
+		
+		
+		
+		
+		
+		
 	}
 
 }
