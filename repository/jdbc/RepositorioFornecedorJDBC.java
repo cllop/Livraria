@@ -63,7 +63,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"DELETE FROM Fornecedor WHERE id=?"
+					"DELETE FROM fornecedor WHERE id=?"
 					);
 			ps.setLong(1, fornecedor.getId());
 			ps.execute();
