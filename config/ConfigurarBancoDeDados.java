@@ -100,7 +100,7 @@ public class ConfigurarBancoDeDados {
 						for (PermissoesDB permissao : casoDeUsos.getPermissoes()) {
 							construtorDeString = new StringBuilder();
 							construtorDeString.append("GRANT ");
-							construtorDeString.append(permissao.getPermicoes());
+							construtorDeString.append(permissao.getComandos());
 							construtorDeString.append(" ON ");
 							construtorDeString.append(definicaoDB.getNomeDB());
 							construtorDeString.append('.');

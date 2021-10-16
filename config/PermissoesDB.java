@@ -11,7 +11,7 @@ public class PermissoesDB {
 		this.tabela = tabela;
 	}
 
-	public String getPermicoes() {
+	public String getComandos() {
 		return permicoes;
 	}
 
