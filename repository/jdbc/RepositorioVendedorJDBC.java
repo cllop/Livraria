@@ -130,7 +130,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		} catch (SQLException execao) {
 			
-			throw new RuntimeException("Operação não pode ser comcluida");
+			throw new RuntimeException("Operação não pode ser concluida");
 		}
 
 	}

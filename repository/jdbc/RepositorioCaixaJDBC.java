@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import config.FabricaDeConexao;
 import modelo.Caixa;
 import modelo.Fornecedor;
+import modelo.Vendedor;
 import repository.RepositorioCaixa;
 
 public class RepositorioCaixaJDBC extends RepositorioJDBC implements RepositorioCaixa {
@@ -110,47 +112,39 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 	public Caixa find(int id) {
 		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
+
+		boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
 			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
-		PreparedStatement ps;
+
+		PreparedStatement ps = null;
+
 		try {
-			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE id=?");
+
+			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE id= ?; ");
+			
 			ps.setInt(1, id);
-			ps.execute();
 
-			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-			if (temResultado) {
-				String nome = rs.getString("nome");
-				String sobrenome = rs.getString("sobrenome");
-				String nomeDeUsuario = rs.getString("nomeDeUsuario");
-				String rua = rs.getString("rua");
-				String bairro = rs.getString("bairro");
-				int cep = rs.getInt("cep");
-				short numeroDaResidencia = rs.getShort("numeroDaResidencia");
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			
+			return lerCaixa(conjuntoDeResultados);
+			
+		} catch (SQLException execao) {
 
-				return new Caixa(id, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
-			} else {
-				throw new RuntimeException("Caixa não cadastrado.");
-			}
-		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar fornecedor.", e);
-		} finally {
-			if (!jaExisteConexao) {
-				super.fecharConexao();
-			}
+			throw new RuntimeException("Operação não pode ser comcluida");
 		}
+
 	}
+	
 
 	@Override
 	public List<Caixa> findBynome(String nome) {
 		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
+		boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
 			con = super.criarConexao();
@@ -159,37 +153,60 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		}
 		PreparedStatement ps;
 		try {
-			ps = con.prepareStatement(
-					"SELECT * FROM perfilcaixa WHERE nome=?"
-					);
-			ps.setString(1, nome);
-			ps.execute();
-			
-			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-			
-			if(temResultado) {
-				int id = rs.getInt("id");
-				String sobrenome = rs.getString("sobrenome");
-				String nomeDeUsuario = rs.getString("nomeDeUsuario");
-				String rua = rs.getString("rua");
-				String bairro = rs.getString("bairro");
-				int cep = rs.getInt("cep");
-				short numeroDaResidencia = rs.getShort("numeroDaResidencia");
-				
-				return (List<Caixa>) new Caixa(id, sobrenome, nome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
-		  }else {
-			throw new RuntimeException("Caixa não cadastrado.");
-			
-		  }
-		}catch(SQLException e){
-			throw new RuntimeException("Não foi possível encontrar o caixa.", e);
-		}finally {
-			if(!jaExisteConexao) {
-				super.fecharConexao();
-		   }
-		}	
+		ps = con.prepareStatement("SELECT * FROM caixa WHERE nome=?;");
+
+		ResultSet conjuntoDeResultados = ps.executeQuery();
+		
+		return lerCaixas(conjuntoDeResultados);
+
+	} catch (SQLException execao) {
+		
+		throw new RuntimeException("Operação não pode ser concluida");
+	  }
+
+    }
+
+	private List<Caixa> lerCaixas(ResultSet conjuntoDeResultados) throws SQLException {
+
+		List<Caixa> caixa = new ArrayList<>();
+
+		while (conjuntoDeResultados.next()) {
+
+			int id = conjuntoDeResultados.getInt("id");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String nome = conjuntoDeResultados.getString("nome");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+
+			caixa.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia));
+
+		}
+
+		return caixa;
 	}
- }
-			
-	   
+	
+	private Caixa lerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
+
+		if (conjuntoDeResultados.next()) {
+
+			int id = conjuntoDeResultados.getInt("id");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String nome = conjuntoDeResultados.getString("nome");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+
+			return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+		} else {
+			throw new RuntimeException("Vendedor não encontrado");
+		}
+
+	}
+}
