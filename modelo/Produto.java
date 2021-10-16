@@ -39,13 +39,15 @@ public class Produto {
 		return preco;
 	}
 
-	public String getDescriçao() {
+	public String getDescricao() {
 		return descricao;
 	}
 
 	public int getQuantidade() {
 		return quantidade;
 	}
+
+	
 	
 	
 	

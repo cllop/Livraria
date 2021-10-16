@@ -40,18 +40,18 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				if(resultadoIdAutor.next()) {
 					idAutor = resultadoIdAutor.getInt(1);
 				}else {
-					throw new UnsupportedOperationException("Mudar para autor nï¿½o cadastrado nï¿½o foi implementado ainda");
+					throw new UnsupportedOperationException("Mudar para autor não cadastrado não foi implementado ainda");
 				}
 				
 				
-				comandoSql = conexao.prepareStatement("INSERT INTO produto(nome, descricao, preï¿½o, quantidade) VALUES (?, ?, ?, ?);"
+				comandoSql = conexao.prepareStatement("INSERT INTO produto(nome, descricao, preço, quantidade) VALUES (?, ?, ?, ?);"
 						+ "INSERT INTO livros(isbn, autor, editora) VALUES (?, ?, ?);");
 			} else {
 				comandoSql = conexao
 						.prepareStatement("INSERT INTO produto(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
 			}
 			comandoSql.setString(1, produto.getNome());
-			comandoSql.setString(2, produto.getDescriï¿½ao());
+			comandoSql.setString(2, produto.getDescricao());
 			comandoSql.setInt(3, produto.getPreco().getCentavos());
 			comandoSql.setInt(4, produto.getQuantidade());
 		
@@ -95,11 +95,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			if (existeResultado) {
 				String nome = conjuntoDeResultados.getString("nome");
 				Real preco = new Real(conjuntoDeResultados.getInt("preco"));
-				String descriï¿½ao = conjuntoDeResultados.getString("descricao");
+				String descricao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
 				
 				if (conjuntoDeResultados.getString("isbn") == null) {
-					return new Produto(id, nome, descriï¿½ao, preco, quantidade);
+					return new Produto(id, nome, descricao, preco, quantidade);
 
 				} else {
 					
@@ -108,7 +108,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					String editora = conjuntoDeResultados.getString("editora");
 					
 		
-					return new Livro(nome, descriï¿½ao, preco, quantidade, isbn, autor, editora);
+					return new Livro(nome, descricao, preco, quantidade, isbn, autor, editora);
 
 				}
 

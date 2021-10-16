@@ -8,7 +8,6 @@ import javax.swing.JPanel;
 import config.DevConfig;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
-import repository.jdbc.RepositorioProdutoAndLivroJDBC;
 
 public class GerenciadorProduto extends JPanel {
 
@@ -55,7 +54,7 @@ public class GerenciadorProduto extends JPanel {
 	}
 
 	public void deletarProduto() {
-		this.trocarTela(new PesquisarDeletarProduto(this, this.repositorioProdutoAndLivro));
+		this.trocarTela(new DeletarProduto(this, this.repositorioProdutoAndLivro));
 	}
 
 	public void menuProduto() {
@@ -70,8 +69,8 @@ public class GerenciadorProduto extends JPanel {
 
 	}
 	
-	public void editarProdutos() {
-		this.trocarTela(new EditarProduto());
+	public void editarProdutos(Produto produto) {
+		this.trocarTela(new EditarProduto(this, this.repositorioProdutoAndLivro, produto));
 	}
 
 }

@@ -46,7 +46,7 @@ public class ExibirProduto extends JPanel {
 		tfdescricao.setEditable(false);
 		tfdescricao.setBounds(202, 44, 238, 142);
 		add(tfdescricao);
-		tfdescricao.setText(produto.getDescriçao());
+		tfdescricao.setText(produto.getDescricao());
 		
 		
 		tfPreco = new JTextField();
