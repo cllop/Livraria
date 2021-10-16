@@ -1,36 +1,43 @@
 package view.produto;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.Arrays;
+import java.util.List;
 
-public class PesquisarDeletarProduto extends JPanel {
-	private JTextField textField;
-	private JTextField textField_1;
+import modelo.Produto;
+import repository.RepositorioProdutoAndLivro;
+import view.DadosPesquisa;
 
+public class PesquisarDeletarProduto extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public PesquisarDeletarProduto() {
-		setLayout(null);
+	public PesquisarDeletarProduto(GerenciadorProduto gerenciador,RepositorioProdutoAndLivro repositorio) {
 		
-		JLabel lblNewLabel = new JLabel("Pesquisar Por Nome");
-		lblNewLabel.setBounds(10, 83, 132, 14);
-		add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(10, 52, 186, 20);
-		add(textField);
-		textField.setColumns(10);
+		btnPesquisarPorNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nome = null;
+				
+				Produto p;
+				nome = tfNome.getText();	
+				p = repositorio.findByNome(nome);
+				
+				gerenciador.deletarProduto();
+						
+			}
+		});
 		
-		JLabel lblNewLabel_1 = new JLabel("Pesquisar Por Id");
-		lblNewLabel_1.setBounds(10, 26, 130, 14);
-		add(lblNewLabel_1);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(10, 108, 186, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
+		super.btnPesquisarPorId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id;
+				id= Integer.parseInt(tfId.getText());
+				Produto p;
+				p= repositorio.find(id);	
+				gerenciador.deletarProduto();
+			}
+		});
 		
 	}
 }

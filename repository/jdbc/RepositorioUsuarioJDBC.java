@@ -288,7 +288,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			
 		} else {
 			
-			throw new RuntimeException("Usuario nï¿½o encontrado");
+			throw new RuntimeException("Usuario não encontrado");
 		}
 	}
 

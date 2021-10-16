@@ -55,7 +55,7 @@ public class GerenciadorProduto extends JPanel {
 	}
 
 	public void deletarProduto() {
-		this.trocarTela(new DeletarProduto(this));
+		this.trocarTela(new PesquisarDeletarProduto(this, this.repositorioProdutoAndLivro));
 	}
 
 	public void menuProduto() {
@@ -68,6 +68,10 @@ public class GerenciadorProduto extends JPanel {
 
 	public void exibirprodutos(List<Produto> produto) {
 
+	}
+	
+	public void editarProdutos() {
+		this.trocarTela(new EditarProduto());
 	}
 
 }

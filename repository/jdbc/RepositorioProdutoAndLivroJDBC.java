@@ -40,18 +40,18 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				if(resultadoIdAutor.next()) {
 					idAutor = resultadoIdAutor.getInt(1);
 				}else {
-					throw new UnsupportedOperationException("Mudar para autor não cadastrado não foi implementado ainda");
+					throw new UnsupportedOperationException("Mudar para autor nï¿½o cadastrado nï¿½o foi implementado ainda");
 				}
 				
 				
-				comandoSql = conexao.prepareStatement("INSERT INTO produto(nome, descricao, preço, quantidade) VALUES (?, ?, ?, ?);"
+				comandoSql = conexao.prepareStatement("INSERT INTO produto(nome, descricao, preï¿½o, quantidade) VALUES (?, ?, ?, ?);"
 						+ "INSERT INTO livros(isbn, autor, editora) VALUES (?, ?, ?);");
 			} else {
 				comandoSql = conexao
 						.prepareStatement("INSERT INTO produto(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
 			}
 			comandoSql.setString(1, produto.getNome());
-			comandoSql.setString(2, produto.getDescriçao());
+			comandoSql.setString(2, produto.getDescriï¿½ao());
 			comandoSql.setInt(3, produto.getPreco().getCentavos());
 			comandoSql.setInt(4, produto.getQuantidade());
 		
@@ -64,7 +64,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			comandoSql.execute();
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operação não pode ser concluida");
+			throw new RuntimeException("Operaï¿½ï¿½o nï¿½o pode ser concluida");
 		}
 
 	}
@@ -95,11 +95,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			if (existeResultado) {
 				String nome = conjuntoDeResultados.getString("nome");
 				Real preco = new Real(conjuntoDeResultados.getInt("preco"));
-				String descriçao = conjuntoDeResultados.getString("descricao");
+				String descriï¿½ao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
 				
 				if (conjuntoDeResultados.getString("isbn") == null) {
-					return new Produto(id, nome, descriçao, preco, quantidade);
+					return new Produto(id, nome, descriï¿½ao, preco, quantidade);
 
 				} else {
 					
@@ -108,19 +108,19 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					String editora = conjuntoDeResultados.getString("editora");
 					
 		
-					return new Livro(nome, descriçao, preco, quantidade, isbn, autor, editora);
+					return new Livro(nome, descriï¿½ao, preco, quantidade, isbn, autor, editora);
 
 				}
 
 			}else {
-				throw new RuntimeException("Produto não encontrado");
+				throw new RuntimeException("Produto nï¿½o encontrado");
 			}
 			
 			
 			
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operação não pode ser concluida");
+			throw new RuntimeException("Operaï¿½ï¿½o nï¿½o pode ser concluida");
 
 		}
 	}
@@ -154,11 +154,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				
 				return new Produto(id, nome, descricao, preco, quantidade);
 			}else {
-				throw new RuntimeException("produto não cadastrado.");
+				throw new RuntimeException("produto nï¿½o cadastrado.");
 			}
 			
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar o produto.", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar o produto.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
