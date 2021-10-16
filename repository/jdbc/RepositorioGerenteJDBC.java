@@ -22,7 +22,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
@@ -63,7 +63,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
@@ -80,7 +80,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void uptade(Gerente gerente) {
+	public void update(Gerente gerente) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -91,7 +91,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		}
 		PreparedStatement ps;
 		try {
-			ps = con.prepareStatement("UPTADE gerente SET ativo=?, superGerente=? WHERE id=?");
+			ps = con.prepareStatement("UPDATE gerente SET ativo=?, superGerente=? WHERE id=?");
 			ps.setBoolean(1, gerente.isAtivo());
 			ps.setBoolean(2, gerente.isSuperGerente());
 			ps.setInt(3, gerente.getId());
@@ -110,7 +110,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
@@ -155,7 +155,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}
@@ -200,7 +200,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}

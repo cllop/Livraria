@@ -22,7 +22,8 @@ public class DadosPesquisaFornecedor extends DadosPesquisa {
 				
 				String nome=tfNome.getText();
 				
-				List<Fornecedor> listaDeFornecedor = repositorio.findByNome(nome);
+				Fornecedor fornecedor = repositorio.findByNome(nome);
+				List<Fornecedor> listaDeFornecedor = Arrays.asList(fornecedor);
 				gerenciador.exibirFornecedores(listaDeFornecedor);
 			}
 		});

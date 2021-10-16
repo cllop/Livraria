@@ -10,7 +10,7 @@ public interface RepositorioGerente {
 
 	public void remove(Gerente gerente);
 
-	public void uptade(Gerente gerente);
+	public void update(Gerente gerente);
 
 	public Gerente find(int id);
 
