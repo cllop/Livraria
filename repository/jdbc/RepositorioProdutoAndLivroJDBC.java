@@ -127,28 +127,45 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 
 	
 	public Produto findByNome(String nome) {
-		Connection conecxao = super.getConexao();
-		boolean conecxaoJaExistia;
-		if (conecxao == null) {
-			conecxaoJaExistia = false;
-			super.criarConexao();
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
 		} else {
-			conecxaoJaExistia = true;
+			jaExisteConexao = true;
 		}
-
-		PreparedStatement ps = null;
-		
+		PreparedStatement ps;
 		try {
-			ps = conecxao.prepareStatement("");
+			ps = con.prepareStatement(
+					"SELECT * FROM Produto WHERE nome=?"
+					);
+			ps.setString(1, nome);
+			ps.execute();
 			
-		} catch (SQLException eexecao) {
-			throw new RuntimeException();
+			ResultSet rs = ps.executeQuery();
+			boolean temResultado = rs.next();
+			
+			if(temResultado) {
+				int id = rs.getInt("id");
+				Real preco = new Real (rs.getInt("preco"));
+				String descricao = rs.getString("descricao");	
+				short quantidade = rs.getShort("quantidade");
+				
+				return new Produto(id, nome, descricao, preco, quantidade);
+			}else {
+				throw new RuntimeException("produto não cadastrado.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar o produto.", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
 		}
-		
-		
-		return null;
 	}
-
+		
 	@Override
 	public Produto findByAutor(String autor) {
 		// TODO Auto-generated method stub
