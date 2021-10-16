@@ -126,7 +126,7 @@ public class FabricaDefinicaoDB {
 //		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "devolver"));
 //		atores.get("gerente").atribuirCasoDeUso(uc);
 		
-		uc = new CasoDeUsoDB(6, "CR PagamentoEmCheque");
+		uc = new CasoDeUsoDB(5, "CR PagamentoEmCheque");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "venda"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
 		
@@ -134,19 +134,14 @@ public class FabricaDefinicaoDB {
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT, UPDATE", "funcionario"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
 		
-<<<<<<< Updated upstream
 		//naylane
 		uc = new CasoDeUsoDB(13, "Estorno Assinatura Vip");
 		uc.adicionarPermicao(new PermissoesDB("UPDATE", "assinaturaVip"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
-=======
-		uc = new CasoDeUsoDB(8, "CR PagamentoEmCheque");
+        //sameul
+		uc = new CasoDeUsoDB(6, "CR PagamentoEmDinheiro");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "venda"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
-		
->>>>>>> Stashed changes
-		
-		
 		
 		
 	}
