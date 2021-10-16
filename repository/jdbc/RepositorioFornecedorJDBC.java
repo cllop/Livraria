@@ -123,7 +123,49 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 	}
 
 	public Fornecedor findByNome(String nome) {
-		return null;
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		try {
+			ps = con.prepareStatement(
+					"SELECT * FROM fornecedor WHERE nome=?"
+					);
+			ps.setString(1, nome);
+			ps.execute();
+			
+			ResultSet rs = ps.executeQuery();
+			boolean temResultado = rs.next();
+			
+			if(temResultado) {
+				int id = rs.getInt("id");
+				long cnpj = rs.getLong("cnpj");
+				String rua = rs.getString("rua");
+				String bairro = rs.getString("bairro");
+				int cep = rs.getInt("cep");
+				short numeroDoImovel = rs.getShort("numeroDoImovel");
+				String nomeFantasia = rs.getString("nomeFantasia");
+				short ddd = rs.getShort("DDD");
+				short ddi = rs.getShort("DDI");
+				int numeroTelefone = rs.getInt("numeroTelefone");
+				
+				return new Fornecedor(id, cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel, ddd, ddi, numeroTelefone);
+			}else {
+				throw new RuntimeException("Fornecedor não cadastrado.");
+			}
+			
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar fornecedor.", e);
+		}finally {
+			if(!jaExisteConexao) {
+				super.fecharConexao();
+			}
+		}
 	}
 
 	public Fornecedor findByCnpj(long cnpj) {

@@ -25,7 +25,7 @@ public class EditarFornecedor extends JPanel {
 				Fornecedor fornecedor = panel.lerCamposDigitadosPeloUsuario();
 								
 				try {
-					repositorio.uptade(fornecedor);
+					repositorio.update(fornecedor);
 					JOptionPane.showMessageDialog(btnEditar, "Fornecedor alterado com sucesso!");
 				} catch (Exception ex){
 					JOptionPane.showMessageDialog(btnEditar, "Erro ao editar.");

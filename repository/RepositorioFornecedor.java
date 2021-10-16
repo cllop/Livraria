@@ -1,7 +1,5 @@
 package repository;
 
-import java.util.List;
-
 import modelo.Fornecedor;
 
 public interface RepositorioFornecedor {
