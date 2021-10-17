@@ -28,7 +28,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 				Produto p;
 				p= repositorio.find(id);
 				List<Produto> listaDeProduto= Arrays.asList(p);
-				gerenciador.exibirprodutos(listaDeProduto);
+				gerenciador.exibirProdutos(listaDeProduto);
 			}
 		});
 		

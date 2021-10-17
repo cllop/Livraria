@@ -57,7 +57,7 @@ public class AdicionarLivro extends JPanel {
 				String autor= tfAutor.getText();
 				long isbn= Long.parseLong(tfIsbn.getText());
 				String editora= tfeditora.getText();
-				Livro livro= new Livro(produto.getNome(), produto.getDescriçao(), produto.getPreco(), produto.getQuantidade(), isbn, autor, editora);
+				Livro livro= new Livro(produto.getNome(), produto.getDescricao(), produto.getPreco(), produto.getQuantidade(), isbn, autor, editora);
 				repositorio.add(livro);
 				JOptionPane.showMessageDialog(btnCadastrarLivro, "Livro cadastrado com sucesso");
 				gerenciadorProduto.menuProduto();

@@ -1,14 +1,16 @@
 package view.produto;
 
+import javax.swing.JPanel;
+
 import modelo.Livro;
 
-public class ExibirLivro extends ExibirProduto {
+public class ExibirLivro extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public ExibirLivro(Livro livro) {
-		super(livro);
+	public ExibirLivro(GerenciadorProduto gerenciadorProduto,Livro livro) {
+		
 		
 		
 		

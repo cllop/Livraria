@@ -12,14 +12,14 @@ import repository.RepositorioProdutoAndLivro;
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
-	private RepositorioProdutoAndLivro repositorioProdutoAndLivro;
+	private RepositorioProdutoAndLivro repositorio;
 
 	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}
 		super.setLayout(null);
-		this.repositorioProdutoAndLivro = repositorio;
+		this.repositorio = repositorio;
 
 		this.menuProduto();
 	}
@@ -49,12 +49,12 @@ public class GerenciadorProduto extends JPanel {
 	}
 
 	public void adicionarProduto() {
-		this.trocarTela(new AdicionarProduto(this, this.repositorioProdutoAndLivro));
+		this.trocarTela(new AdicionarProduto(this, this.repositorio));
 
 	}
 
 	public void deletarProduto() {
-		this.trocarTela(new DeletarProduto(this, this.repositorioProdutoAndLivro));
+		this.trocarTela(new DeletarProduto(this, this.repositorio));
 	}
 
 	public void menuProduto() {
@@ -62,15 +62,19 @@ public class GerenciadorProduto extends JPanel {
 	}
 
 	public void adicionarLivro(Produto prod) {
-		this.trocarTela(new AdicionarLivro(this, this.repositorioProdutoAndLivro, prod));
+		this.trocarTela(new AdicionarLivro(this, this.repositorio, prod));
 	}
 
-	public void exibirprodutos(List<Produto> produto) {
+	public void exibirProdutos(List<Produto> produto) {
 
 	}
 	
-	public void editarProdutos(Produto produto) {
-		this.trocarTela(new EditarProduto(this, this.repositorioProdutoAndLivro, produto));
+	public void exibirProduto(Produto produto) {
+		this.trocarTela(new ExibirProduto(this, this.repositorio, produto));
+	}
+	
+	public void editarProdutos() {
+		this.trocarTela(new PesquisarEditarProduto(this, repositorio, null));
 	}
 
 }

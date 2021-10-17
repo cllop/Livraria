@@ -72,7 +72,7 @@ public class DadosLogin extends JPanel {
 				
 			}
 		});
-		btnConfirmar.setBounds(256, 216, 89, 23);
+		btnConfirmar.setBounds(256, 216, 102, 23);
 		add(btnConfirmar);
 		
 		

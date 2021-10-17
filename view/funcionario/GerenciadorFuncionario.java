@@ -10,7 +10,6 @@ import repository.RepositorioCaixa;
 import repository.RepositorioFuncionario;
 import repository.RepositorioGerente;
 import repository.RepositorioVendedor;
-import view.GerenciadorPrincipal;
 import view.MenuBarFuncionario;
 
 public class GerenciadorFuncionario extends JPanel {

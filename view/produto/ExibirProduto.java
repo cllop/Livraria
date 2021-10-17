@@ -6,6 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import modelo.Produto;
+import repository.RepositorioProdutoAndLivro;
 
 public class ExibirProduto extends JPanel {
 	private JTextField tfNome;
@@ -15,7 +16,7 @@ public class ExibirProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ExibirProduto(Produto produto) {
+	public ExibirProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio,Produto produto) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Produtos");

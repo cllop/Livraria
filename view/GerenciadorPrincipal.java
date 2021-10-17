@@ -8,9 +8,9 @@ import config.DevConfig;
 import modelo.Usuario;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
-import repository.jdbc.FabricaDeRepositoriosJDBC;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.GerenciadorProduto;
+import view.produto.MenuProduto;
 
 public class GerenciadorPrincipal extends JPanel {
 
@@ -180,6 +180,8 @@ public class GerenciadorPrincipal extends JPanel {
 		trocarBarraDeMenu(new MenuBarVendedor(this));
 		super.repaint();
 	}
+	
+	
 
 	public void selecionarFabricaDeRepositorios(FabricaDeRepositorios fabricaDeRepositorios) {
 		this.fabricaDeRepositorios = fabricaDeRepositorios;

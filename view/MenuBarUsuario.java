@@ -50,7 +50,7 @@ public class MenuBarUsuario extends JPanel {
 		JButton btnPesquisarPlanoVip = new JButton("Pesquisar Plano Vip");
 		btnPesquisarPlanoVip.addActionListener(new ActionListener() {
 			
-			@Override
+			
 			public void actionPerformed(ActionEvent e) {
 				
 				gerenciadorPrincipal.pesquisarPlanoVip();

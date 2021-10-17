@@ -32,14 +32,29 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE cpf=?");
-			ps.setLong(1, cpf);
-			ps.execute();
+			
+			
 
 			ResultSet rs = ps.executeQuery();
 			boolean temResultado = rs.next();
 
 			if (temResultado) {
 				int id = rs.getInt("id");
+				
+			}else {
+				ps = con.prepareStatement("INSERT INTO perfilCaixa (cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia) "
+						+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+				
+				ps.setLong(1, Caixa.getCpf());
+				ps.setString(2, Caixa.getNome());
+				ps.setString(3, Caixa.getSobrenome());
+				ps.setString(4, Caixa.getNomeDeUsuario());
+				ps.setString(5, Caixa.getRua());
+				ps.setString(6, Caixa.getBairro());
+				ps.setInt(7, Caixa.getCep());
+				ps.setInt(7, Caixa.getNumeroDaResidencia());
+				
+				ps.execute();
 			}
 
 			// ver se existe usuario existe com aquele cpf
@@ -49,11 +64,14 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			// se o usuario não existe voce cria ele e pega o id dele com aquele cpf
 
 			// cria um perfilcaixa com id de usuario
-		} finally {
-			if (!jaExisteConexao) {
-				super.fecharConexao();
+		} catch(SQLException e) {
+			
+			}finally{
+				if (!jaExisteConexao) {
+					super.fecharConexao();
+				}
 			}
-		}
+			
 	}
 
 	public void remove(Caixa caixa) {
@@ -126,20 +144,19 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		try {
 
 			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE id= ?; ");
-			
+
 			ps.setInt(1, id);
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerCaixa(conjuntoDeResultados);
-			
+
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser comcluida");
 		}
 
 	}
-	
 
 	@Override
 	public List<Caixa> findBynome(String nome) {
@@ -153,18 +170,18 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		}
 		PreparedStatement ps;
 		try {
-		ps = con.prepareStatement("SELECT * FROM caixa WHERE nome=?;");
+			ps = con.prepareStatement("SELECT * FROM caixa WHERE nome=?;");
 
-		ResultSet conjuntoDeResultados = ps.executeQuery();
-		
-		return lerCaixas(conjuntoDeResultados);
+			ResultSet conjuntoDeResultados = ps.executeQuery();
 
-	} catch (SQLException execao) {
-		
-		throw new RuntimeException("Operação não pode ser concluida");
-	  }
+			return lerCaixas(conjuntoDeResultados);
 
-    }
+		} catch (SQLException execao) {
+
+			throw new RuntimeException("Operação não pode ser concluida");
+		}
+
+	}
 
 	private List<Caixa> lerCaixas(ResultSet conjuntoDeResultados) throws SQLException {
 
@@ -188,7 +205,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 		return caixa;
 	}
-	
+
 	private Caixa lerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
 
 		if (conjuntoDeResultados.next()) {

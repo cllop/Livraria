@@ -2,6 +2,11 @@ package view;
 
 import javax.swing.JButton;
 
+import repository.RepositorioCaixa;
+import repository.RepositorioFuncionario;
+import repository.RepositorioGerente;
+import repository.RepositorioVendedor;
+
 public class MenuBarFuncionario extends MenuBarUsuario {
 
 	/**
@@ -15,4 +20,6 @@ public class MenuBarFuncionario extends MenuBarUsuario {
 		add(btnNewButton);
 
 	}
+
+	
 }

@@ -189,7 +189,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 			return new Usuario(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
 		} else {
-			throw new RuntimeException("Usuario nï¿½o enconrado");
+			throw new RuntimeException("Usuario não encontrado");
 		}
 	}
 
