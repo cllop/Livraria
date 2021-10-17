@@ -133,6 +133,9 @@ public class FabricaDefinicaoDB {
 //		uc = new CasoDeUsoDB(7,  "CR Funcionario");
 //		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT, UPDATE", "funcionario"));
 //		atores.get("gerente").atribuirCasoDeUso(uc);
+		uc = new CasoDeUsoDB(1, "Cr Autor");
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT","autor"));
+		atores.get("funcionario").atribuirCasoDeUso(uc);
 		
 		//naylane
 		uc = new CasoDeUsoDB(13, "Estorno Assinatura Vip");

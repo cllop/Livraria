@@ -87,11 +87,12 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 
 		try {
 
-//			ps = conecxao.prepareStatement(
-//					"SELECT produto.*, livro.*, autor.nome as autor, editora.nome as editora FROM produto "
-//							+ "LEFT JOIN livro ON produto.id=livro.id " + "LEFT JOIN autor ON livro.idAutor= autor.id "
-//							+ "LEFT JOIN editora On livro.idEditora= editora.id " + "WHERE produto.id= ?;");
-			ps = conexao.prepareStatement("SELECT * FROM produto WHERE id=?;");
+			ps = conexao.prepareStatement(
+					"SELECT produto.*, produtolivro.*, autor.nome as autor FROM produto"
+					+ " LEFT JOIN produtolivro ON produto.id=produtolivro.id"
+					+ " LEFT JOIN autor ON produtolivro.idAutor= autor.id"
+					+ " WHERE produto.id=?;");
+//			
 			ps.setInt(1, id);
 			
 			ResultSet conjuntoDeResultados = ps.executeQuery();
@@ -103,8 +104,8 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				String descricao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
 
-//				if (conjuntoDeResultados.getString("isbn") == null) {
-				if(conjuntoDeResultados != null) {
+			if (conjuntoDeResultados.getString("isbn") == null) {
+//				
 					return new Produto(id, nome, descricao, preco, quantidade);
 
 				} else {
