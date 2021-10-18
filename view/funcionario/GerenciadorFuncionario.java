@@ -51,7 +51,7 @@ public class GerenciadorFuncionario extends JPanel {
 	}
 
 	public void menuFuncionario() {
-		this.trocarTela(new MenuBarFuncionario());
+		this.trocarTela(new MenuBarFuncionario(this));
 
 	}
 

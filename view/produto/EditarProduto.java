@@ -42,8 +42,11 @@ public class EditarProduto extends JPanel {
 		JButton btnComfirmarEdicao = new JButton("Confirmar Edi\u00E7\u00E3o");
 		btnComfirmarEdicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produto produto= panel.lerCampos();
+				
+				Produto produto = panel.lerCampos(produto);
+				
 				try {
+					
 					repositorio.update(produto);
 					
 					JOptionPane.showMessageDialog(null, "Produto editado com sucesso");
@@ -63,6 +66,6 @@ public class EditarProduto extends JPanel {
 		btnComfirmarEdicao.setBounds(561, 412, 148, 23);
 		add(btnComfirmarEdicao);
 		
-		
+		panel.habilitarCamposEditaveis();
 	}
 }

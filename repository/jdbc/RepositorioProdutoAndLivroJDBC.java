@@ -15,6 +15,8 @@ import util.Real;
 
 public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements RepositorioProdutoAndLivro {
 
+	private Livro livro;
+	
 	public RepositorioProdutoAndLivroJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
@@ -167,7 +169,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 		}
 	}
 	
-	public void update(Produto produto, Livro livro) {
+	public void update(Produto produto) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -226,9 +228,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			return produtos;
 		}
 	private Produto lerProduto(ResultSet conjuntoDeResultados) throws SQLException{
+		
 		boolean existeResultado = conjuntoDeResultados.next();
 		
 		if(existeResultado) {
+			
 			int id = conjuntoDeResultados.getInt("id");
 			String nome = conjuntoDeResultados.getString("nome");
 			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
@@ -236,18 +240,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			int quantidade = conjuntoDeResultados.getInt("quantidade");
 			
 			return new Produto(id, nome, descricao, preco, quantidade);
+			
 		}else {
+			
 			throw new RuntimeException("Produto não encontrado");
 		}
 		
 	}
-
-	
-	
-
-	
-
-
-	
-
 }

@@ -20,7 +20,7 @@ public class PesquisarProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PesquisarProduto(GerenciadorPrincipal gerenciadorPrincipal,RepositorioProdutoAndLivro repositorio) {
+	public PesquisarProduto(GerenciadorProduto gerenciadorProduto,RepositorioProdutoAndLivro repositorio) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Id");
@@ -36,9 +36,12 @@ public class PesquisarProduto extends JPanel {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;
+				
 				id = Integer.parseInt(tfId.getText());
+				
 				Produto p =repositorio.find(id);
-				gerenciadorProduto.;
+				
+				gerenciadorProduto.exibirProduto(p);
 				
 			}
 		});
