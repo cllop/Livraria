@@ -116,7 +116,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					String autor = conjuntoDeResultados.getString("autor");
 					String editora = conjuntoDeResultados.getString("editora");
 
-					return new Livro(nome, descricao, preco, quantidade, isbn, autor, editora);
+					return new Livro(id,nome, descricao, preco, quantidade, isbn, autor, editora);
 
 				}
 

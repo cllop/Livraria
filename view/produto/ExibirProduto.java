@@ -7,12 +7,14 @@ import javax.swing.JTextPane;
 
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
+import util.Real;
 
 public class ExibirProduto extends JPanel {
 	private JTextField tfNome;
 	private JTextField tfPreco;
 	private JTextField tfQuantidade;
 	private JTextField tfId;
+	private JTextPane tpDescricao;
 
 	/**
 	 * Create the panel.
@@ -44,7 +46,7 @@ public class ExibirProduto extends JPanel {
 		lblDescricao.setBounds(202, 19, 73, 14);
 		add(lblDescricao);
 		
-		JTextPane tpDescricao = new JTextPane();
+		tpDescricao = new JTextPane();
 		tpDescricao.setEditable(false);
 		tpDescricao.setBounds(202, 44, 238, 142);
 		add(tpDescricao);
@@ -79,20 +81,22 @@ public class ExibirProduto extends JPanel {
 		tfId.setBounds(23, 36, 158, 20);
 		add(tfId);
 		tfId.setColumns(10);
+		tfId.setText((produto.getId()));
 
 	}
 	
 	public void habilitarCamposEditaveis() {
 		tfNome.setEditable(true); 
 		tfPreco.setEditable(true);
+		tpDescricao.setEditable(true);
 	}
 	
 	public Produto lerCampos(Produto produto) {
 		
 		
 		
-		return new Produto(Integer.parseInt(tfId.getText()),tfNome.getText(),tpDescricao.getText(),tfPreco.getText(),tfQuantidade.getText());
-		//Não entendi...
+		return new Produto(Integer.parseInt(tfId.getText()),tfNome.getText(),tpDescricao.getText(),new Real( tfPreco.getText()),Integer.parseInt(tfQuantidade.getText()));
+		
 		
 	}
 }

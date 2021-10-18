@@ -43,9 +43,12 @@ public class EditarProduto extends JPanel {
 		btnComfirmarEdicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Produto produto = panel.lerCampos(produto);
+				Produto produto = null;
+				
+				produto = panel.lerCampos(produto);
 				
 				try {
+					
 					
 					repositorio.update(produto);
 					
