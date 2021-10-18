@@ -39,15 +39,15 @@ public class ExibirProduto extends JPanel {
 		lblNewLabel_2.setBounds(25, 66, 60, 14);
 		add(lblNewLabel_2);
 		
-		JLabel lblNewLabel_3 = new JLabel("Descri\u00E7\u00E3o");
-		lblNewLabel_3.setBounds(202, 19, 73, 14);
-		add(lblNewLabel_3);
+		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o");
+		lblDescricao.setBounds(202, 19, 73, 14);
+		add(lblDescricao);
 		
-		JTextPane tfdescricao = new JTextPane();
-		tfdescricao.setEditable(false);
-		tfdescricao.setBounds(202, 44, 238, 142);
-		add(tfdescricao);
-		tfdescricao.setText(produto.getDescricao());
+		JTextPane tfDescricao = new JTextPane();
+		tfDescricao.setEditable(false);
+		tfDescricao.setBounds(202, 44, 238, 142);
+		add(tfDescricao);
+		tfDescricao.setText(produto.getDescricao());
 		
 		
 		tfPreco = new JTextField();
@@ -69,6 +69,16 @@ public class ExibirProduto extends JPanel {
 		tfQuantidade.setColumns(10);
 		tfQuantidade.setText(Integer.toString(produto.getQuantidade()));
 
+	}
+	
+	public void habilitarCamposEditaveis() {
+		tfNome.setEnabled(true); 
+		tfPreco.setEditable(true);
+		tf
+	}
+	
+	public Produto lerCampos() {
+		
 	}
 	
 }

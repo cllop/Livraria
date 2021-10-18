@@ -32,7 +32,7 @@ public class PesquisarEditarFornecedor extends DadosPesquisa{
 				
 				try {
 					Fornecedor fornecedor = repositorio.find(id);
-					gerenciador.exibirFornecedor(fornecedor);
+					gerenciador.editarFornecedor(fornecedor);
 				} catch(Exception ex) {
 					lblMensagem.setText("Fornecedor não encontrado.");
 				}
@@ -45,7 +45,7 @@ public class PesquisarEditarFornecedor extends DadosPesquisa{
 				
 				try {
 					Fornecedor fornecedor = repositorio.findByNome(nome);
-					gerenciador.exibirFornecedor(fornecedor);
+					gerenciador.editarFornecedor(fornecedor);
 				} catch(Exception ex) {
 					lblMensagem.setText("Fornecedor não encontrado.");
 				}
@@ -68,7 +68,7 @@ public class PesquisarEditarFornecedor extends DadosPesquisa{
 				
 				try {
 					Fornecedor fornecedor = repositorio.findByCnpj(cnpj);
-					gerenciador.exibirFornecedor(fornecedor);
+					gerenciador.editarFornecedor(fornecedor);
 				}catch (Exception ex){
 					lblMensagem.setText("Fornecedor não econtrado.");
 				}

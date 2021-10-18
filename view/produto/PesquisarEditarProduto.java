@@ -45,7 +45,7 @@ public class PesquisarEditarProduto extends JPanel {
 						  gerenciadorProduto.exibirProduto(p);
 					}else {
 						
-						JOptionPane.showMessageDialog(btnPesquisarPorId, "Produto não existe");;
+						JOptionPane.showMessageDialog(null, "Produto não existe");;
 						
 					}
 				  

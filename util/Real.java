@@ -19,6 +19,7 @@ public class Real {
 			this.centavos=( Integer.parseInt(strValor) )*100;
 		}else {
 			if(strValor.length()>(posicaoDaVirgula+3)) {
+				
 				throw new IllegalArgumentException("O maximo que conseguimos armazernar em valor de Reais é a unidade de centavos");
 			}
 			 
