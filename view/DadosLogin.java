@@ -24,7 +24,7 @@ public class DadosLogin extends JPanel {
 	 */
 	public DadosLogin(TelaLogin telaLogin, RepositorioUsuario repositorio) {
 		if (DevConfig.guiDevMode) {
-			this.setBackground(Color.orange);
+			this.setBackground(new Color(30, 168, 189));
 		}
 		setLayout(null);
 		

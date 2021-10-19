@@ -15,6 +15,8 @@ import util.Real;
 
 public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements RepositorioProdutoAndLivro {
 
+	private Livro livro;
+	
 	public RepositorioProdutoAndLivroJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
@@ -92,7 +94,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					+ " LEFT JOIN produtolivro ON produto.id=produtolivro.id"
 					+ " LEFT JOIN autor ON produtolivro.idAutor= autor.id"
 					+ " WHERE produto.id=?;");
-//			
+			
 			ps.setInt(1, id);
 			
 			ResultSet conjuntoDeResultados = ps.executeQuery();
@@ -105,7 +107,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
 
 			if (conjuntoDeResultados.getString("isbn") == null) {
-//				
+				
 					return new Produto(id, nome, descricao, preco, quantidade);
 
 				} else {
@@ -114,7 +116,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					String autor = conjuntoDeResultados.getString("autor");
 					String editora = conjuntoDeResultados.getString("editora");
 
-					return new Livro(nome, descricao, preco, quantidade, isbn, autor, editora);
+					return new Livro(id,nome, descricao, preco, quantidade, isbn, autor, editora);
 
 				}
 
@@ -167,7 +169,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 		}
 	}
 	
-	public void update(Produto produto, Livro livro) {
+	public void update(Produto produto) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -180,7 +182,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 		try {
 			ps = con.prepareStatement("UPDATE produto SET nome=?, preco=?, descricao=?, quantidade=?, isbn=?, autor=?, editora=?  WHERE id=?");
 			ps.setString(1, produto.getNome());
-			//ps.setInt(2, produto.getPreco());
+			ps.setInt(2, produto.getPreco().getCentavos());
 			ps.setString(3, produto.getDescricao());
 			ps.setInt(4, produto.getQuantidade());
 			
@@ -226,9 +228,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			return produtos;
 		}
 	private Produto lerProduto(ResultSet conjuntoDeResultados) throws SQLException{
+		
 		boolean existeResultado = conjuntoDeResultados.next();
 		
 		if(existeResultado) {
+			
 			int id = conjuntoDeResultados.getInt("id");
 			String nome = conjuntoDeResultados.getString("nome");
 			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
@@ -236,18 +240,11 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			int quantidade = conjuntoDeResultados.getInt("quantidade");
 			
 			return new Produto(id, nome, descricao, preco, quantidade);
+			
 		}else {
+			
 			throw new RuntimeException("Produto não encontrado");
 		}
 		
 	}
-
-	
-	
-
-	
-
-
-	
-
 }
