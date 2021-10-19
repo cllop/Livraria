@@ -20,7 +20,7 @@ public class PesquisarDeletarProduto extends JPanel {
 	public PesquisarDeletarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
 		setLayout(null);
 		
-		ExibirProduto panel = new ExibirProduto(gerenciadorProduto, repositorio, produto);
+		ExibirProduto panel = new ExibirProduto(produto);
 		
 		JLabel lblNewLabel = new JLabel("id");
 		lblNewLabel.setBounds(10, 11, 46, 14);
@@ -34,7 +34,9 @@ public class PesquisarDeletarProduto extends JPanel {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Produto produto = panel.lerCampos(produto);
+				Produto produto;
+				
+				produto= panel.lerCampos();
 				
 			}
 		});

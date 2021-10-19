@@ -59,9 +59,7 @@ public class MenuBarUsuario extends JPanel {
 		});
 		add(btnPesquisarPlanoVip);
 		
-		JButton button = new JButton("New button");
-		button.setBounds(270, 193, 89, 23);
-		add(button);
+		
 	}
 	
 	

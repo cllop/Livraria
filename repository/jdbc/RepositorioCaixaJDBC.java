@@ -41,7 +41,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 			} else {
 				ps = con.prepareStatement(
-						"INSERT INTO perfilCaixa (cpf, nome, sobrenome, nomeDeUsuario, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone) "
+						"INSERT INTO perfilCaixa (cpf, nome, sobrenome, nomeDeUsuario, bairro, rua, cep, numeroDaResidencia, ddi, ddd, numeroTelefone) "
 								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
 
 				ps.setLong(1, Caixa.getCpf());
@@ -108,7 +108,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"UPDATE perfilcaixa SET nome=?, sobrenome=?, nomeDeUsuario=?, bairro=?, rua=?, cep=?, numeroDaResidencia=?, ddi=?, ddd=?, telefone=? WHERE id=?");
+					"UPDATE perfilcaixa SET nome=?, sobrenome=?, nomeDeUsuario=?, bairro=?, rua=?, cep=?, numeroDaResidencia=?, ddi=?, ddd=?, numeroTelefone=? WHERE id=?");
 			ps.setString(1, caixa.getNome());
 			ps.setString(2, caixa.getSobrenome());
 			ps.setString(3, caixa.getNomeDeUsuario());
@@ -203,12 +203,11 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			short ddd = conjuntoDeResultados.getShort("DDD");
-			short ddi = conjuntoDeResultados.getShort("DDI");
-			int telefone = conjuntoDeResultados.getInt("Telefone");
-
-			caixa.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddd, ddi,
-					telefone));
+			byte ddd = conjuntoDeResultados.getByte("DDD");
+			byte ddi = conjuntoDeResultados.getByte("DDI");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			
+			caixa.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 
 		}
 
@@ -228,12 +227,11 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			short ddd = conjuntoDeResultados.getShort("DDD");
-			short ddi = conjuntoDeResultados.getShort("DDI");
-			int telefone = conjuntoDeResultados.getInt("Telefone");
+			byte ddd = conjuntoDeResultados.getByte("DDD");
+			byte ddi = conjuntoDeResultados.getByte("DDI");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
 
-			return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddd, ddi,
-					telefone);
+			return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 		} else {
 			throw new RuntimeException("Vendedor não encontrado");
 		}

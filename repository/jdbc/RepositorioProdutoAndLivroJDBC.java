@@ -16,7 +16,7 @@ import util.Real;
 public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements RepositorioProdutoAndLivro {
 
 	private Livro livro;
-	
+
 	public RepositorioProdutoAndLivroJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
@@ -78,9 +78,9 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 	public Produto find(int id) {
 		Connection conexao = super.getConexao();
 		boolean conexaoJaExistia;
-		if (conexao== null) {
+		if (conexao == null) {
 			conexaoJaExistia = false;
-			conexao =super.criarConexao();
+			conexao = super.criarConexao();
 		} else {
 			conexaoJaExistia = true;
 		}
@@ -89,25 +89,23 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 
 		try {
 
-			ps = conexao.prepareStatement(
-					"SELECT produto.*, produtolivro.*, autor.nome as autor FROM produto"
+			ps = conexao.prepareStatement("SELECT produto.*, produtolivro.*, autor.nome as autor FROM produto"
 					+ " LEFT JOIN produtolivro ON produto.id=produtolivro.id"
-					+ " LEFT JOIN autor ON produtolivro.idAutor= autor.id"
-					+ " WHERE produto.id=?;");
-			
+					+ " LEFT JOIN autor ON produtolivro.idAutor= autor.id" + " WHERE produto.id=?;");
+
 			ps.setInt(1, id);
-			
+
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 			boolean existeResultado = conjuntoDeResultados.next();
-			
+
 			if (existeResultado) {
 				String nome = conjuntoDeResultados.getString("nome");
 				Real preco = new Real(conjuntoDeResultados.getInt("preco"));
 				String descricao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
 
-			if (conjuntoDeResultados.getString("isbn") == null) {
-				
+				if (conjuntoDeResultados.getString("isbn") == null) {
+
 					return new Produto(id, nome, descricao, preco, quantidade);
 
 				} else {
@@ -116,7 +114,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 					String autor = conjuntoDeResultados.getString("autor");
 					String editora = conjuntoDeResultados.getString("editora");
 
-					return new Livro(id,nome, descricao, preco, quantidade, isbn, autor, editora);
+					return new Livro(id, nome, descricao, preco, quantidade, isbn, autor, editora);
 
 				}
 
@@ -126,7 +124,7 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operação não pode ser concluida"+ execao);
+			throw new RuntimeException("Operação não pode ser concluida" + execao);
 
 		}
 	}
@@ -168,83 +166,126 @@ public class RepositorioProdutoAndLivroJDBC extends RepositorioJDBC implements R
 			}
 		}
 	}
-	
+
+	public void delete() {
+
+	}
+
 	public void update(Produto produto) {
-		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			con = super.criarConexao();
+		Connection conexao = super.getConexao();
+		boolean conexaoJaExistia;
+		if (conexao== null) {
+			conexaoJaExistia = false;
+			conexao =super.criarConexao();
 		} else {
-			jaExisteConexao = true;
+			conexaoJaExistia = true;
 		}
-		PreparedStatement ps;
+
+		PreparedStatement ps = null;
+
 		try {
-			ps = con.prepareStatement("UPDATE produto SET nome=?, preco=?, descricao=?, quantidade=?, isbn=?, autor=?, editora=?  WHERE id=?");
-			ps.setString(1, produto.getNome());
-			ps.setInt(2, produto.getPreco().getCentavos());
-			ps.setString(3, produto.getDescricao());
-			ps.setInt(4, produto.getQuantidade());
-			
-			ps.setLong(5, livro.getIsbn());
-			ps.setString(6, livro.getAutor());
-			ps.setString(7, livro.getEditora());
-			
-			ps.execute();
-			
-		} catch (SQLException e) {
-			throw new RuntimeException("Os dados não foram alterados " + e);
-		}
 
-	}
-
-	
-	public Produto findByAutor(String autor) {
-	
-		return null;
-	}
-
-	
-	public Produto findByCategoria(String categoria) {
-		
-		return null;
-	}
-
-	private List<Produto> lerProdutos(ResultSet conjuntoDeResultados) throws SQLException {
-		
-		List<Produto> produtos = new ArrayList<>(conjuntoDeResultados.getRow());
-		
-		while(conjuntoDeResultados.next()) {
+			ps = conexao.prepareStatement(
+					"SELECT produto.*, produtolivro.*, autor.nome as autor FROM produto"
+					+ " LEFT JOIN produtolivro ON produto.id=produtolivro.id"
+					+ " LEFT JOIN autor ON produtolivro.idAutor= autor.id"
+					+ " WHERE produto.id=?;");
 			
-				int id = conjuntoDeResultados.getInt("id");
+			ps.setInt(1, produto.getId());
+			
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			boolean existeResultado = conjuntoDeResultados.next();
+			
+			if (existeResultado) {
 				String nome = conjuntoDeResultados.getString("nome");
 				Real preco = new Real(conjuntoDeResultados.getInt("preco"));
 				String descricao = conjuntoDeResultados.getString("descricao");
 				int quantidade = conjuntoDeResultados.getInt("quantidade");
+			}if(conjuntoDeResultados.getString("isbn")==null) {
+				try {
+					
+					ps = conexao.prepareStatement("UPDATE produto SET nome=?, preco=?, descricao=?;");
+					ps.setString(1, produto.getNome());
+					ps.setInt(2, produto.getPreco().getCentavos());
+					ps.setString(3, produto.getDescricao());
 				
-			produtos.add(new Produto(id, nome, descricao, preco, quantidade));
+					ps.execute();
+					
+				} catch (SQLException e) {
+					throw new RuntimeException("Os dados não foram alterados " + e);
+				}
+					}else {
+						try {
+							
+							ps = conexao.prepareStatement("UPDATE produto SET nome=?, preco=?, descricao=?, autor=?, editora=?  WHERE id=?;");
+							ps.setString(1, produto.getNome());
+							ps.setInt(2, produto.getPreco().getCentavos());
+							ps.setString(3, produto.getDescricao());
+					
+							ps.setString(6, livro.getAutor());
+							ps.setString(7, livro.getEditora());
+					
+							ps.execute();
+							
+							}catch(SQLException e) {
+							
+					}
+						
 				
-			}
-			return produtos;
-		}
-	private Produto lerProduto(ResultSet conjuntoDeResultados) throws SQLException{
-		
-		boolean existeResultado = conjuntoDeResultados.next();
-		
-		if(existeResultado) {
+				}
+		}catch(SQLException e) {
 			
+		}
+		
+
+	}
+
+	public Produto findByAutor(String autor) {
+
+		return null;
+	}
+
+	public Produto findByCategoria(String categoria) {
+
+		return null;
+	}
+
+	private List<Produto> lerProdutos(ResultSet conjuntoDeResultados) throws SQLException {
+
+		List<Produto> produtos = new ArrayList<>(conjuntoDeResultados.getRow());
+
+		while (conjuntoDeResultados.next()) {
+
 			int id = conjuntoDeResultados.getInt("id");
 			String nome = conjuntoDeResultados.getString("nome");
 			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
 			String descricao = conjuntoDeResultados.getString("descricao");
 			int quantidade = conjuntoDeResultados.getInt("quantidade");
-			
+
+			produtos.add(new Produto(id, nome, descricao, preco, quantidade));
+
+		}
+		return produtos;
+	}
+
+	private Produto lerProduto(ResultSet conjuntoDeResultados) throws SQLException {
+
+		boolean existeResultado = conjuntoDeResultados.next();
+
+		if (existeResultado) {
+
+			int id = conjuntoDeResultados.getInt("id");
+			String nome = conjuntoDeResultados.getString("nome");
+			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
+			String descricao = conjuntoDeResultados.getString("descricao");
+			int quantidade = conjuntoDeResultados.getInt("quantidade");
+
 			return new Produto(id, nome, descricao, preco, quantidade);
-			
-		}else {
-			
+
+		} else {
+
 			throw new RuntimeException("Produto não encontrado");
 		}
-		
+
 	}
 }

@@ -11,6 +11,7 @@ import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProdutoAndLivro;
 import view.fornecedor.GerenciadorFornecedor;
+import view.produto.DadosPesquisaProdutoLivro;
 import view.produto.ExibirProduto;
 import view.produto.GerenciadorProduto;
 
@@ -87,11 +88,17 @@ public class GerenciadorPrincipal extends JPanel {
 	/*
 	 * Menus Usuario
 	 */
-	public void pesquisarProduto(Produto produto) {
-		
+	public void pesquisarProduto() {
+		trocarTela(new DadosPesquisaProdutoLivro(this,fabricaDeRepositorios.criarRepositorioDeProduto()));
 
 	}
-
+	
+	public void exibirProduto(Produto produto) {
+		
+		this.trocarTela(new ExibirProduto(this, produto));
+		
+	}
+	
 	public void alterarSenha() {
 
 	}
@@ -110,6 +117,10 @@ public class GerenciadorPrincipal extends JPanel {
 
 	public void menuFornecedor() {
 		trocarTela(new GerenciadorFornecedor(this.fabricaDeRepositorios.criarRepositorioFornecedor()));
+	}
+	
+	public void menuCliente() {
+		
 	}
 
 	public void menuSetor() {

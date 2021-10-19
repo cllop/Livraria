@@ -163,8 +163,10 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-
-			return new Vendedor(cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+			byte ddd = conjuntoDeResultados.getByte("DDD");
+			byte ddi = conjuntoDeResultados.getByte("DDI");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			return new Vendedor(numeroDaResidencia, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 
 		} catch (SQLException execao) {
 
@@ -250,9 +252,10 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-
-			vendedor.add(
-					new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, true));
+			byte ddi = conjuntoDeResultados.getByte("DDI");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+		
+			vendedor.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddi, telefone));
 
 		}
 
@@ -274,8 +277,10 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
 			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-
-			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, true);
+			byte ddi = conjuntoDeResultados.getByte("DDI");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			
+			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddi, telefone);
 		} else {
 			throw new RuntimeException("Vendedor não encontrado");
 		}

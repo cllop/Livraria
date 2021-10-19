@@ -20,7 +20,7 @@ public class EditarProduto extends JPanel {
 	public EditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
 		setLayout(null);
 		
-		ExibirProduto panel = new ExibirProduto(gerenciadorProduto, repositorio, produto);
+		ExibirProduto panel = new ExibirProduto(produto);
 		panel.setBounds(10, 11, 739, 390);
 		add(panel);
 		
@@ -43,9 +43,9 @@ public class EditarProduto extends JPanel {
 		btnComfirmarEdicao.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				Produto produto = null;
+				Produto produto;
 				
-				produto = panel.lerCampos(produto);
+				produto = panel.lerCampos();
 				
 				try {
 					

@@ -10,8 +10,30 @@ public class Usuario {
 	private String bairro;
 	private int cep;
 	private int numeroDaResidencia;
+	private byte ddi;
+	private byte ddd;
+	private int telefone;
+	
 
-	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String rua, String bairro, int cep, int numeroDaResidencia) {
+
+	public Usuario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String rua, String bairro, int cep,
+			int numeroDaResidencia, byte ddi, byte ddd, int telefone) {
+		super();
+		this.cpf = cpf;
+		this.nome = nome;
+		this.sobrenome = sobrenome;
+		this.nomeDeUsuario = nomeDeUsuario;
+		this.rua = rua;
+		this.bairro = bairro;
+		this.cep = cep;
+		this.numeroDaResidencia = numeroDaResidencia;
+		this.ddi = ddi;
+		this.ddd = ddd;
+		this.telefone = telefone;
+	}
+
+	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String rua, String bairro,
+			int cep, int numeroDaResidencia, byte ddi, byte ddd, int telefone) {
 		super();
 		this.id = id;
 		this.cpf = cpf;
@@ -22,18 +44,9 @@ public class Usuario {
 		this.bairro = bairro;
 		this.cep = cep;
 		this.numeroDaResidencia = numeroDaResidencia;
-	}
-
-	public Usuario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String rua, String bairro, int cep, int numeroDaResidencia) {
-		super();
-		this.cpf = cpf;
-		this.nome = nome;
-		this.sobrenome = sobrenome;
-		this.nomeDeUsuario = nomeDeUsuario;
-		this.rua = rua;
-		this.bairro = bairro;
-		this.cep = cep;
-		this.numeroDaResidencia = numeroDaResidencia;
+		this.ddi = ddi;
+		this.ddd = ddd;
+		this.telefone = telefone;
 	}
 
 	public int getId() {

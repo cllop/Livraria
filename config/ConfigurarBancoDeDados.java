@@ -10,37 +10,37 @@ public class ConfigurarBancoDeDados {
 	private static FabricaDeConexao fabricaDeConexao;
 	private static DefinicaoDB definicaoDB;
 
-//	public static void main(String[] args) {
-//		fabricaDeConexao = new FabricaDeConexao(ConfiguracoesDeRecursos.URL_DB_MYSQL, "root", null);
-//		definicaoDB = new FabricaDefinicaoDB().criarDefinicaoDB();
-//		// fazer menu com 3 opcoes: cadastrar usuarios, conceder permissoes e deletar
-//		
-//
-//		System.out.println("Digite o menu desejado");
-//		System.out.println("a-Cadastrar Usuario");
-//		System.out.println("b-Conceder Permissoes");
-//		System.out.println("c-Deletar Usuarios");
-//		Scanner sc = new Scanner(System.in);
-//				
-//		char opcao= sc.nextLine().charAt(0);
-//		
-//		switch (opcao) {
-//		
-//		case 'a': 
-//			cadastrarUsuarios();
-//			break;
-//		case 'b':
-//			concederPermissoes();
-//			break;
-//		case 'c':
-//			deletarUsuarios();
-//			break;
-//		default:
-//			
-//			throw new IllegalArgumentException("Ta errado");
-//		}
-//		
-//	}
+	public static void main(String[] args) {
+		fabricaDeConexao = new FabricaDeConexao(ConfiguracoesDeRecursos.URL_DB_MYSQL, "root", null);
+		definicaoDB = new FabricaDefinicaoDB().criarDefinicaoDB();
+		// fazer menu com 3 opcoes: cadastrar usuarios, conceder permissoes e deletar
+		
+
+		System.out.println("Digite o menu desejado");
+		System.out.println("a-Cadastrar Usuario");
+		System.out.println("b-Conceder Permissoes");
+		System.out.println("c-Deletar Usuarios");
+		Scanner sc = new Scanner(System.in);
+				
+		char opcao= sc.nextLine().charAt(0);
+		
+		switch (opcao) {
+		
+		case 'a': 
+			cadastrarUsuarios();
+			break;
+		case 'b':
+			concederPermissoes();
+			break;
+		case 'c':
+			deletarUsuarios();
+			break;
+		default:
+			
+			throw new IllegalArgumentException("Ta errado");
+		}
+		
+	}
 
 	private static void cadastrarUsuarios() {
 		try {

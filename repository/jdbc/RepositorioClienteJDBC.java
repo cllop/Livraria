@@ -136,8 +136,11 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 				String bairro = rs.getString(7);
 				int cep = rs.getInt(8);
 				int numeroDaResidencia = rs.getInt(9);
+				byte ddd = rs.getByte("DDD");
+				byte ddi = rs.getByte("DDI");
+				int telefone = rs.getInt("numeroTelefone");
 				
-				return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+				return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 			}else {
 				throw new RuntimeException("Cliente não cadastrado.");
 			}
@@ -179,8 +182,11 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 				String bairro = rs.getString(7);
 				int cep = rs.getInt(8);
 				int numeroDaResidencia = rs.getInt(9);
+				byte ddd = rs.getByte("DDD");
+				byte ddi = rs.getByte("DDI");
+				int telefone = rs.getInt("numeroTelefone");
 				
-				return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+				return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 			}else {
 				throw new RuntimeException("Cliente não cadastrado.");
 			}

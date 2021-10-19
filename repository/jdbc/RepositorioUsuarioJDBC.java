@@ -186,8 +186,11 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+			byte ddd = conjuntoDeResultados.getByte("ddd");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
 
-			return new Usuario(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia);
+			return new Usuario(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 		} else {
 			throw new RuntimeException("Usuario não encontrado");
 		}
@@ -206,9 +209,11 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-
-			usuarios.add(new Usuario(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-					numeroDaResidencia));
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+			byte ddd = conjuntoDeResultados.getByte("ddd");
+			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			
+			usuarios.add(new Usuario(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 		}
 		return usuarios;
 	}
@@ -228,11 +233,12 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
 				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+				byte ddi = conjuntoDeResultados.getByte("ddi");
+				byte ddd = conjuntoDeResultados.getByte("ddd");
+				int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+				
 
-				// Quando tiver dados de cliente leia aqui
-
-				perfisUsuario.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia));
+				perfisUsuario.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 
 			if (conjuntoDeResultados.getString("idGerente") != null) {
@@ -245,12 +251,14 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
 				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
-
+				byte ddi = conjuntoDeResultados.getByte("ddi");
+				byte ddd = conjuntoDeResultados.getByte("ddd");
+				int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+				
 				boolean ativo = conjuntoDeResultados.getBoolean("perfilDeGerenteEstaAtivo");
 				boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
 
-				perfisUsuario.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia, ativo, superGerente));
+				perfisUsuario.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 
 			if (conjuntoDeResultados.getString("idVendedor") != null) {
@@ -264,9 +272,10 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				int cep = conjuntoDeResultados.getInt("cep");
 				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
 				boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-				
-				perfisUsuario.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia, true));
+				byte ddi = conjuntoDeResultados.getByte("ddi");
+				byte ddd = conjuntoDeResultados.getByte("ddd");
+				int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+				perfisUsuario.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 
 			if (conjuntoDeResultados.getString("idCaixa") != null) {
@@ -279,9 +288,11 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
 				int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-
-				perfisUsuario.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia));
+				byte ddi = conjuntoDeResultados.getByte("ddi");
+				byte ddd = conjuntoDeResultados.getByte("ddd");
+				int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+				
+				perfisUsuario.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 			
 			return perfisUsuario;

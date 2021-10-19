@@ -21,7 +21,7 @@ public class PesquisarEditarProduto extends JPanel {
 	 * Create the panel.
 	 * @param produto 
 	 */
-	public PesquisarEditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
+	public PesquisarEditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio) {
 		setLayout(null);
 		
 		JLabel lblMensagem = new JLabel("");
@@ -42,7 +42,7 @@ public class PesquisarEditarProduto extends JPanel {
 					
 					Produto p = repositorio.find(id);
 					if(p != null) {
-						  gerenciadorProduto.exibirProduto(p);
+						  gerenciadorProduto.editarProdutos(p);
 					}else {
 						
 						JOptionPane.showMessageDialog(null, "Produto não existe");;

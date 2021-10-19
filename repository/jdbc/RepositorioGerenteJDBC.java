@@ -134,9 +134,12 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				int numeroDaResidencia = rs.getInt(9);
 				boolean ativo = rs.getBoolean(10);
 				boolean ehSuperGerente = rs.getBoolean(11);
-
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo,
-						ehSuperGerente);
+				byte ddd = rs.getByte("DDD");
+				byte ddi = rs.getByte("DDI");
+				int telefone = rs.getInt("numeroTelefone");
+				
+				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+				
 			} else {
 				throw new RuntimeException("Gerente não cadastrado.");
 			}
@@ -179,9 +182,11 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				int numeroDaResidencia = rs.getInt(9);
 				boolean ativo = rs.getBoolean(10);
 				boolean ehSuperGerente = rs.getBoolean(11);
+				byte ddd = rs.getByte("DDD");
+				byte ddi = rs.getByte("DDI");
+				int telefone = rs.getInt("numeroTelefone");
 
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ativo,
-						ehSuperGerente);
+				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 			} else {
 				throw new RuntimeException("Gerente não cadastrado.");
 			}
@@ -224,9 +229,11 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				int numeroDaResidencia = rs.getInt(9);
 				boolean ativo = rs.getBoolean(10);
 				boolean ehSuperGerente = rs.getBoolean(11);
+				byte ddd = rs.getByte("DDD");
+				byte ddi = rs.getByte("DDI");
+				int telefone = rs.getInt("numeroTelefone");
 
-				listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep,
-						numeroDaResidencia, ativo, ehSuperGerente));
+				listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 			return listaDeGerente;
 

@@ -51,7 +51,7 @@ public class GerenciadorFuncionario extends JPanel {
 	}
 
 	public void menuFuncionario() {
-		this.trocarTela(new MenuBarFuncionario(this));
+	//Deveria trocar a tela para menu funcionario, e não menu bar funcionario.
 
 	}
 

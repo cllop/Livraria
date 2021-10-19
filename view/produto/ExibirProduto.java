@@ -8,6 +8,10 @@ import javax.swing.JTextPane;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
 import util.Real;
+import view.GerenciadorPrincipal;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ExibirProduto extends JPanel {
 	private JTextField tfNome;
@@ -16,10 +20,13 @@ public class ExibirProduto extends JPanel {
 	private JTextField tfId;
 	private JTextPane tpDescricao;
 
-	/**
-	 * Create the panel.
-	 */
-	public ExibirProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio,Produto produto) {
+	
+	public ExibirProduto(Produto produto) {
+		this(null, produto);
+	}
+	
+	
+	public ExibirProduto(GerenciadorPrincipal gerenciador,Produto produto) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Produtos");
@@ -81,8 +88,21 @@ public class ExibirProduto extends JPanel {
 		tfId.setBounds(23, 36, 158, 20);
 		add(tfId);
 		tfId.setColumns(10);
-		tfId.setText((produto.getId()));
+		tfId.setText(Integer.toString(produto.getId()));
+		
+		if(gerenciador != null) {
+			JButton btnNewButton = new JButton("Pesquisar Outro Produto");
+			btnNewButton.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+					gerenciador.pesquisarProduto();
+					
+				}
+			});
+			btnNewButton.setBounds(25, 266, 178, 23);
+			add(btnNewButton);
 
+		}
 	}
 	
 	public void habilitarCamposEditaveis() {
@@ -91,7 +111,7 @@ public class ExibirProduto extends JPanel {
 		tpDescricao.setEditable(true);
 	}
 	
-	public Produto lerCampos(Produto produto) {
+	public Produto lerCampos() {
 		
 		
 		

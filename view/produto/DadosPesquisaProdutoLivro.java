@@ -12,6 +12,7 @@ import javax.swing.JTextField;
 import modelo.Produto;
 import repository.RepositorioProdutoAndLivro;
 import view.DadosPesquisa;
+import view.GerenciadorPrincipal;
 
 public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	private JTextField tfCategoria;
@@ -20,7 +21,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public DadosPesquisaProdutoLivro(GerenciadorProduto gerenciador,RepositorioProdutoAndLivro repositorio) {
+	public DadosPesquisaProdutoLivro(GerenciadorPrincipal gerenciador,RepositorioProdutoAndLivro repositorio) {
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;
@@ -28,7 +29,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 				Produto p;
 				p= repositorio.find(id);
 				List<Produto> listaDeProduto= Arrays.asList(p);
-				gerenciador.exibirProdutos(listaDeProduto);
+				gerenciador.exibirProduto(p);
 			}
 		});
 		
