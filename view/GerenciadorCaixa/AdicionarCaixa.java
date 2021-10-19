@@ -1,4 +1,4 @@
-package view.caixa;
+package view.GerenciadorCaixa;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -23,7 +23,7 @@ public class AdicionarCaixa extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarCaixa() {
+	public AdicionarCaixa(GerenciadorCaixa gerenciadorCaixa, RepositorioCaixa repositorio) {
 		setLayout(null);
 		
 		JLabel lblCPF = new JLabel("CPF");
@@ -128,7 +128,21 @@ public class AdicionarCaixa extends JPanel {
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			}
+				long cpf = Long.parseLong(tfCPF.getText());
+				String nome = tfNome.getText();
+				String sobrenome = tfSobrenome.getText();
+				String nomeDeUsuario = tfNomeDeUsuario.getText();
+				long cep = Long.parseLong(tfCEP.getText());
+				String bairro = tfBairro.getText();
+				String rua = tfRua.getText();
+				short numeroDaResidencia = Short.parseShort(tfNumeroDaResidencia.getText());
+				short ddi = Short.parseShort(tfDDI.getText());
+				short ddd = Short.parseShort(tfDDD.getText());
+				int telefone = Integer.parseInt(tfTelefone.getText());
+				
+				Caixa caixa = new caixa(cpf, nome, sobrenome, nomeDeUsuario, cep, bairro, rua, numeroDaResidencia, ddi, ddd, telefone);
+				repositorio.add(caixa);
+				}
 		});
 		btnAdicionar.setBounds(650, 400, 89, 23);
 		add(btnAdicionar);
@@ -136,6 +150,7 @@ public class AdicionarCaixa extends JPanel {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 			}
 		});
 		btnCancelar.setBounds(551, 400, 89, 23);

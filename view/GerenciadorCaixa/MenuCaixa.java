@@ -1,4 +1,4 @@
-package view.caixa;
+package view.GerenciadorCaixa;
 
 import javax.swing.JPanel;
 
