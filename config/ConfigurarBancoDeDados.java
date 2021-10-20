@@ -20,6 +20,7 @@ public class ConfigurarBancoDeDados {
 		System.out.println("a-Cadastrar Usuario");
 		System.out.println("b-Conceder Permissoes");
 		System.out.println("c-Deletar Usuarios");
+		System.out.println("d-Cadastrar usuario e conceder permissoes");
 		Scanner sc = new Scanner(System.in);
 				
 		char opcao= sc.nextLine().charAt(0);
@@ -34,6 +35,10 @@ public class ConfigurarBancoDeDados {
 			break;
 		case 'c':
 			deletarUsuarios();
+			break;
+		case 'd':
+			cadastrarUsuarios();
+			concederPermissoes();
 			break;
 		default:
 			

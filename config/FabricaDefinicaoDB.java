@@ -53,7 +53,15 @@ public class FabricaDefinicaoDB {
 		papeisCaixa.add(atores.get("caixa"));
 
 		usuarios.add(new UsuarioDB("caixa", "%", "comsono", papeisCaixa));
-
+		
+		//para Login
+		
+		List<AtorDB> papelLogin = new ArrayList<>(1);
+		
+		papelLogin.add(atores.get("login"));
+		
+		usuarios.add(new UsuarioDB("paraLogin", "%", "3reaix", papelLogin));
+		
 		return usuarios;
 	}
 
@@ -84,6 +92,7 @@ public class FabricaDefinicaoDB {
 		atores.add(new AtorDB("cliente"));
 		atores.add(new AtorDB("funcionario"));
 		atores.add(new AtorDB("usuario"));
+		atores.add(new AtorDB("login"));
 
 		return atores;
 	}
@@ -93,6 +102,14 @@ public class FabricaDefinicaoDB {
 		CasoDeUsoDB uc = new CasoDeUsoDB(1, "CR Cliente");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "perfilCliente"));
 		atores.get("funcionario").atribuirCasoDeUso(uc);
+		
+		uc = new CasoDeUsoDB(0, "Logar");
+		uc.adicionarPermicao(new PermissoesDB("SELECT", "Usuario")); 
+		uc.adicionarPermicao(new PermissoesDB("SELECT", "perfilGerente"));
+		uc.adicionarPermicao(new PermissoesDB("SELECT", "perfilCaixa"));
+		uc.adicionarPermicao(new PermissoesDB("SELECT", "perfilVendedor"));
+		uc.adicionarPermicao(new PermissoesDB("SELECT", "perfilCliente"));
+		atores.get("login").atribuirCasoDeUso(uc);
 
 		uc = new CasoDeUsoDB(1, "CR Usuario");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "Usuario"));
@@ -145,6 +162,7 @@ public class FabricaDefinicaoDB {
 		uc = new CasoDeUsoDB(6, "CR PagamentoEmDinheiro");
 		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "venda"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
+		
 		
 		
 	}
