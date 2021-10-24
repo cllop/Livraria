@@ -34,6 +34,7 @@ public class PesquisarDeletarProduto extends JPanel {
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				Produto produto;
 				
 				produto= panel.lerCampos();

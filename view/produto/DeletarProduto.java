@@ -13,7 +13,7 @@ public class DeletarProduto extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public DeletarProduto(GerenciadorProduto gerenciador,RepositorioProdutoAndLivro repositorio) {
+	public DeletarProduto(GerenciadorProduto gerenciador,Produto produto) {
 		
 		
 		btnPesquisarPorNome.addActionListener(new ActionListener() {
@@ -21,10 +21,11 @@ public class DeletarProduto extends DadosPesquisa {
 				String nome = null;
 				
 				Produto p;
+				p= produto;
 				nome = tfNome.getText();	
-				p = repositorio.findByNome(nome);
 				
-				gerenciador.deletarProduto();
+				
+				gerenciador.deletarProduto(p);
 						
 			}
 		});
