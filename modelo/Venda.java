@@ -52,7 +52,7 @@ public class Venda {
     	return itemDeVenda;
     }
     
-    public List<Pagamento> getPagamento(){
+    public List<Pagamento> getPagamento() {
     	return pagamentos;
     }
 

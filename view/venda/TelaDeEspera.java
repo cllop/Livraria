@@ -1,4 +1,4 @@
-package view.venda;
+package view.Venda;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
