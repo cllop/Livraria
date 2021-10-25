@@ -1,30 +1,33 @@
 package teste.jUnit.funcional.bancoDeDados;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import modelo.Fornecedor;
 import teste.jUnit.ConteudoTabelaDB;
+import teste.jUnit.MapaRegistro;
 import teste.jUnit.RegistrosBD;
 
 public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
-
-	
-	public <T> Map<Class<T>, ConteudoTabelaDB<T>> obterRegistros() {
-		Map <Class<T>, ConteudoTabelaDB<T>> mapaConteudo = new HashMap<>();
-		
-		mapaConteudo.put(Fornecedor.class, this.criarRegistrosFornecedor());
-		
-		return null;
+	public static void main(String[] args) {
+		ConteudoTabelaDB conteudoFornecedores = criarRegistrosFornecedor();
+		System.out.println(conteudoFornecedores.gerarComandosDeInsert());
 	}
 	
-	private ConteudoTabelaDB <Fornecedor> criarRegistrosFornecedor(){
+	public MapaRegistro obterRegistros() {
+		
+		MapaRegistro mapaRegistro = new MapaRegistro();
+		
+		mapaRegistro.put(this.criarRegistrosFornecedor());
+		
+		return mapaRegistro;
+	}
+	
+	private static ConteudoTabelaDB <Fornecedor> criarRegistrosFornecedor(){
 		List <Fornecedor> fornecedores = new ArrayList(4);
-		fornecedores.add(new Fornecedor(1, 21674826000134, "Cota Best Informação e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", 'Rio de Janeiro',"Limoeiro", "Cachoeira", 56, 62, 97634523,7542));
+		fornecedores.add(new Fornecedor(1, 21674826000134l, "Cota Best Informação e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", "Rio de Janeiro", "Limoeiro", "Cachoeira", 674, (short)55, (short)62, (short) 97634523, 7542));
 		//Adicionar os fornecedores desejados
-		return new ConteudoTabelaDB<>(fornecedores);
+		return new ConteudoTabelaDB<>(Fornecedor.class,fornecedores);
 	}
 	
 	//Criar registros de todas as outras tabelas a serem testadas 

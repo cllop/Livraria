@@ -4,22 +4,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 
-public class AdicionarFuncionario extends JPanel {
-	private JTextField tfNome;
-	private JTextField tfSobrenome;
-	private JTextField tfNomeDeUsuario;
-	private JTextField tfCpf;
-	private JTextField tfTelefone;
-	private JTextField tfRua;
+public class DadosFuncionario extends JPanel {
+	protected JTextField tfNome;
+	protected JTextField tfSobrenome;
+	protected JTextField tfNomeDeUsuario;
+	protected JTextField tfCpf;
+	protected JTextField tfTelefone;
+	protected JTextField tfRua;
 	private JLabel lblNewLabel_4;
 	private JLabel lblNewLabel_5;
 	private JLabel lblNewLabel_6;
-	private JTextField textField;
+	protected JTextField tfBairro;
 	private JLabel lblNewLabel_7;
-	private JTextField tfCep;
+	protected JTextField tfCep;
 	private JLabel lblNewLabel_8;
-	private JTextField tfNumeroDaResidencia;
-	public AdicionarFuncionario() {
+	protected JTextField tfNumeroDaResidencia;
+	protected JTextField tfDdi;
+	protected JTextField tfDdd;
+	public DadosFuncionario() {
 		setLayout(null);
 		
 		tfNome = new JTextField();
@@ -43,7 +45,7 @@ public class AdicionarFuncionario extends JPanel {
 		tfCpf.setColumns(10);
 		
 		tfTelefone = new JTextField();
-		tfTelefone.setBounds(10, 197, 86, 20);
+		tfTelefone.setBounds(205, 201, 86, 20);
 		add(tfTelefone);
 		tfTelefone.setColumns(10);
 		
@@ -65,11 +67,11 @@ public class AdicionarFuncionario extends JPanel {
 		add(lblNewLabel_2);
 		
 		JLabel lblNewLabel_3 = new JLabel("cpf");
-		lblNewLabel_3.setBounds(20, 143, 46, 14);
+		lblNewLabel_3.setBounds(10, 142, 46, 14);
 		add(lblNewLabel_3);
 		
 		lblNewLabel_4 = new JLabel("telefone");
-		lblNewLabel_4.setBounds(20, 186, 46, 14);
+		lblNewLabel_4.setBounds(211, 187, 46, 14);
 		add(lblNewLabel_4);
 		
 		lblNewLabel_5 = new JLabel("rua");
@@ -80,10 +82,10 @@ public class AdicionarFuncionario extends JPanel {
 		lblNewLabel_6.setBounds(161, 11, 46, 14);
 		add(lblNewLabel_6);
 		
-		textField = new JTextField();
-		textField.setBounds(129, 24, 86, 20);
-		add(textField);
-		textField.setColumns(10);
+		tfBairro = new JTextField();
+		tfBairro.setBounds(129, 24, 86, 20);
+		add(tfBairro);
+		tfBairro.setColumns(10);
 		
 		lblNewLabel_7 = new JLabel("cep");
 		lblNewLabel_7.setBounds(161, 97, 46, 14);
@@ -102,5 +104,23 @@ public class AdicionarFuncionario extends JPanel {
 		tfNumeroDaResidencia.setBounds(129, 155, 86, 20);
 		add(tfNumeroDaResidencia);
 		tfNumeroDaResidencia.setColumns(10);
+		
+		tfDdi = new JTextField();
+		tfDdi.setBounds(10, 201, 86, 20);
+		add(tfDdi);
+		tfDdi.setColumns(10);
+		
+		tfDdd = new JTextField();
+		tfDdd.setBounds(109, 201, 86, 20);
+		add(tfDdd);
+		tfDdd.setColumns(10);
+		
+		JLabel lblNewLabel_9 = new JLabel("DDI");
+		lblNewLabel_9.setBounds(10, 186, 46, 14);
+		add(lblNewLabel_9);
+		
+		JLabel lblNewLabel_10 = new JLabel("DDD");
+		lblNewLabel_10.setBounds(109, 187, 46, 14);
+		add(lblNewLabel_10);
 	}
 }

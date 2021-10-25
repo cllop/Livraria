@@ -5,6 +5,9 @@ public class Fornecedor{
 	private long cnpj;
 	private String nome;
 	private String nomeFantasia;
+	private String pais;
+	private String estado;
+	private String cidade;
 	private String rua;
 	private String bairro;
 	private int cep;
@@ -13,12 +16,18 @@ public class Fornecedor{
 	private short ddi;
 	private int numeroTelefone;
 
-	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
+	
+
+	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String pais, String estado, String cidade,
+			String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();
 		this.id = id;
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.nomeFantasia = nomeFantasia;
+		this.pais = pais;
+		this.estado = estado;
+		this.cidade = cidade;
 		this.rua = rua;
 		this.bairro = bairro;
 		this.cep = cep;
@@ -28,11 +37,15 @@ public class Fornecedor{
 		this.numeroTelefone = numeroTelefone;
 	}
 
-	public Fornecedor(long cnpj, String nome, String nomeFantasia, String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
+	public Fornecedor(long cnpj, String nome, String nomeFantasia, String pais, String estado, String cidade,
+			String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();
 		this.cnpj = cnpj;
 		this.nome = nome;
 		this.nomeFantasia = nomeFantasia;
+		this.pais = pais;
+		this.estado = estado;
+		this.cidade = cidade;
 		this.rua = rua;
 		this.bairro = bairro;
 		this.cep = cep;
