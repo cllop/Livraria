@@ -55,7 +55,7 @@ public class TesteDeRecuperacao {
 					()->{Assertions.assertEquals(21674826000134l, fornecedores.get(1).getCnpj(), "CNPJ do regitro numero 1 está incorreto");},
 					()->{Assertions.assertEquals(19166074000120l, fornecedores.get(2).getCnpj(), "CNPJ do regitro numero 2 está incorreto");},
 					()->{Assertions.assertEquals(15427207000114l, fornecedores.get(3).getCnpj(), "CNPJ do regitro numero 3 está incorreto");},
-					()->{Assertions.assertEquals(09672580047641l, fornecedores.get(4).getCnpj(), "CNPJ do regitro numero 4 está incorreto");}
+					()->{Assertions.assertEquals(19672580047641l, fornecedores.get(4).getCnpj(), "CNPJ do regitro numero 4 está incorreto");}
 				);
 		
 	}
