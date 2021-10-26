@@ -1,17 +1,21 @@
 package view.Venda;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.Color;
+import java.awt.Font;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import modelo.Vendedor;
+import view.GerenciadorPrincipal;
 
 public class TelaDeEspera extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public TelaDeEspera() {
+	public TelaDeEspera(GerenciadorPrincipal gerenciadorPrincipal ,Vendedor vendedor) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		

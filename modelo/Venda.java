@@ -9,24 +9,31 @@ public class Venda {
 	private Vendedor vendedor; 
 	private Cliente cliente;
 	private Caixa caixa;
-	private ItemDeVenda itemDeVenda;
+	private List<ItemDeVenda> itensDeVenda;
 	private List<Pagamento> pagamentos;
     
-	public Venda(int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa, ItemDeVenda itemDeVenda, List<Pagamento> Pagamentos) {
+	public Venda(int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa, List<ItemDeVenda> itensDeVenda, List<Pagamento> Pagamentos) {
     	this.id = id;
     	this.data = data;
     	this.vendedor = vendedor;
     	this.cliente = cliente;
     	this.caixa = caixa;
-    	this.itemDeVenda = itemDeVenda;
+    	this.itensDeVenda = itensDeVenda;
     	this.pagamentos = pagamentos;
     }
     
-    public Venda(Caixa caixa) {
-    	this.caixa = caixa;
-    }
     
-    public int getId() {
+    
+    public Venda(Vendedor vendedor, Cliente cliente, Caixa caixa) {
+		super();
+		this.vendedor = vendedor;
+		this.cliente = cliente;
+		this.caixa = caixa;
+	}
+
+
+
+	public int getId() {
     	return id;
     } 
     
@@ -48,41 +55,13 @@ public class Venda {
     	
     }
     
-    public ItemDeVenda getItemDeVenda() {
-    	return itemDeVenda;
+    public List<ItemDeVenda> getItensDeVenda() {
+    	return itensDeVenda;
     }
     
     public List<Pagamento> getPagamento() {
     	return pagamentos;
     }
 
-    public void setId (int id) {
-    	
-    }
-
-    public void setData (Date data) {
-    	
-    }
-
-    public void setVendedor (Vendedor vendedor) {
-    	
-    }
-
-    public void setCliente (Cliente cliente) {
-    	
-    }
-    
-    public void setCaixa (Caixa caixa) {
-    	
-    }
-    
-    public void setItemDeVenda (ItemDeVenda itemDeVenda) {
-    	
-    	
-    }
-
-    public void setPagamentos (List<Pagamento> pagamentos){ 
-    	
-    }
 }
 

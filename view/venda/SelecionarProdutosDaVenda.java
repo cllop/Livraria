@@ -1,22 +1,27 @@
 package view.Venda;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.JList;
-import javax.swing.JScrollBar;
-import javax.swing.JSlider;
-import javax.swing.JTable;
-import javax.swing.JSpinner;
-import javax.swing.JToggleButton;
-import javax.swing.JTextPane;
 import java.awt.Color;
-import javax.swing.JScrollPane;
-import javax.swing.JRadioButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JSpinner;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import modelo.Caixa;
+import modelo.Cliente;
+import modelo.Produto;
+import modelo.Venda;
+import modelo.Vendedor;
+import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioVenda;
+import view.GerenciadorPrincipal;
 
 public class SelecionarProdutosDaVenda extends JPanel {
 	private JTextField tfNomeProduto;
@@ -26,9 +31,13 @@ public class SelecionarProdutosDaVenda extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarProdutosDaVenda() {
+	public SelecionarProdutosDaVenda(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, Cliente cliente, Caixa caixa,  RepositorioProdutoAndLivro repositorioProduto, RepositorioVenda repositorioVenda ) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
+		
+		Venda venda = new Venda(vendedor, cliente, caixa);
+		
+		ModeloDeTabelaVenda modeloTabela = new ModeloDeTabelaVenda(venda);
 		
 		JLabel lblNewLabel = new JLabel("Nome do produto:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -60,6 +69,18 @@ public class SelecionarProdutosDaVenda extends JPanel {
 		add(btnInserirPorNome);
 		
 		JButton btnInserirPorID = new JButton("Inserir por ID");
+		btnInserirPorID.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = Integer.parseInt(tfIDDoProduto.getText());
+				try {
+					Produto produto = repositorioProduto.find(id);
+					ItemDeVenda
+				}catch(Exception ex) {
+					JOptionPane.showMessageDialog(btnInserirPorID, "Produto não encontrado.");
+					
+				}
+			}
+		});
 		btnInserirPorID.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnInserirPorID.setBounds(520, 47, 120, 23);
 		add(btnInserirPorID);
@@ -80,16 +101,16 @@ public class SelecionarProdutosDaVenda extends JPanel {
 		
 		JLabel lblNewLabel_2 = new JLabel("Quantidade:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNewLabel_2.setBounds(570, 280, 78, 14);
+		lblNewLabel_2.setBounds(551, 330, 78, 14);
 		add(lblNewLabel_2);
 		
 		JButton btnRemoverProduto = new JButton("Remover produto");
 		btnRemoverProduto.setFont(new Font("Tahoma", Font.BOLD, 11));
-		btnRemoverProduto.setBounds(639, 305, 135, 23);
+		btnRemoverProduto.setBounds(639, 354, 135, 23);
 		add(btnRemoverProduto);
 		
 		JSpinner Quantidade = new JSpinner();
-		Quantidade.setBounds(570, 306, 52, 20);
+		Quantidade.setBounds(551, 355, 52, 20);
 		add(Quantidade);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -99,6 +120,10 @@ public class SelecionarProdutosDaVenda extends JPanel {
 		TabelaProdutos = new JTable();
 		TabelaProdutos.setBackground(new Color(255, 255, 255));
 		scrollPane.setViewportView(TabelaProdutos);
+		
+		ExibicaoProduto panel = new ExibicaoProduto();
+		panel.setBounds(485, 96, 318, 223);
+		add(panel);
 
 	}
 }

@@ -3,6 +3,7 @@ package repository;
 import java.util.List;
 
 import modelo.Cliente;
+import modelo.Usuario;
 
 public interface RepositorioCliente{
 		
@@ -17,5 +18,7 @@ public interface RepositorioCliente{
 	public Cliente findByCpf(long cpf);
 	
 	public List<Cliente> findByNomeDeUsuario(String nomeDeUsuario);
+	
+	public Cliente findByNomeDeUsuarioAndSenha(String nome, String senha);
 	
 }

@@ -1,23 +1,45 @@
 package view.Venda;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class SelecionarVendedor extends JPanel {
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import modelo.Vendedor;
+import repository.RepositorioVendedor;
+import view.GerenciadorPrincipal;
+
+public class SelecionarVendedorParaVenda extends JPanel {
 	private JTextField tfCodigoVendedor;
 
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarVendedor() {
+	public SelecionarVendedorParaVenda(GerenciadorPrincipal gerenciadorPrincipal ,RepositorioVendedor repositorio) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		
 		JButton btnIniciar = new JButton("Iniciar");
+		btnIniciar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int idVendedor = Integer.parseInt(tfCodigoVendedor.getText());
+				try { 
+					Vendedor vendedor = repositorio.find(idVendedor);
+					JanelaSelecionarCliente selecionarCliente = new JanelaSelecionarCliente(gerenciadorPrincipal, vendedor);
+					gerenciadorPrincipal.esperarParaClienteInserirDados(vendedor);
+					
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(btnIniciar, "Vendedor não encontrado. ");
+					
+				}
+			}
+		});
 		btnIniciar.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnIniciar.setBounds(459, 325, 89, 23);
 		add(btnIniciar);
@@ -38,5 +60,4 @@ public class SelecionarVendedor extends JPanel {
 		tfCodigoVendedor.setColumns(10);
 
 	}
-
 }

@@ -5,11 +5,17 @@ import java.awt.Color;
 import javax.swing.JPanel;
 
 import config.DevConfig;
+import modelo.Caixa;
+import modelo.Cliente;
 import modelo.Produto;
 import modelo.Usuario;
+import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProdutoAndLivro;
+import view.Venda.SelecionarProdutosDaVenda;
+import view.Venda.SelecionarVendedorParaVenda;
+import view.Venda.TelaDeEspera;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.DadosPesquisaProdutoLivro;
 import view.produto.ExibirProduto;
@@ -44,7 +50,7 @@ public class GerenciadorPrincipal extends JPanel {
 
 	}
 
-	public void trocarTela(JPanel menuSelecionado) {
+	private void trocarTela(JPanel menuSelecionado) {
 		if (this.menuSelecionado != null) {
 			super.remove(this.menuSelecionado);
 		}
@@ -96,6 +102,20 @@ public class GerenciadorPrincipal extends JPanel {
 	public void exibirProduto(Produto produto) {
 		
 		this.trocarTela(new ExibirProduto(this, produto));
+		
+	}
+	
+	public void iniciarVenda() {
+		this.trocarTela(new SelecionarVendedorParaVenda(this ,this.fabricaDeRepositorios.criarRepositorioVendedor()));
+		
+	}
+	
+	public void esperarParaClienteInserirDados(Vendedor vendedor) {
+		this.trocarTela(new TelaDeEspera(this, vendedor));
+	}
+	
+	public void selecionarProdutosDaVenda(Vendedor vendedor ,Cliente cliente) {
+		this.trocarTela(new SelecionarProdutosDaVenda(this, vendedor , cliente, (Caixa)this.usuarioLogado, this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioVenda()));
 		
 	}
 	
@@ -207,4 +227,5 @@ public class GerenciadorPrincipal extends JPanel {
 		this.usuarioLogado = usuario;
 
 	}
+	
 }

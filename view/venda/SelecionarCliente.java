@@ -1,12 +1,21 @@
 package view.Venda;
 
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import java.awt.Font;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JPasswordField;
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+
+import modelo.Cliente;
+import modelo.Vendedor;
+import repository.RepositorioCliente;
+import view.GerenciadorPrincipal;
 
 public class SelecionarCliente extends JPanel {
 	private JTextField tfNomeDeUsuario;
@@ -15,11 +24,26 @@ public class SelecionarCliente extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarCliente() {
+	public SelecionarCliente(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, RepositorioCliente repositorio) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		
 		JButton btnProximo = new JButton("Proximo");
+		btnProximo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String nomeDeUsuario = tfNomeDeUsuario.getText();
+				String senhaDoUsuario = pfSenha.getText();
+				
+				try {
+					Cliente cliente = repositorio.findByNomeDeUsuarioAndSenha(nomeDeUsuario, senhaDoUsuario);
+					gerenciadorPrincipal.selecionarProdutosDaVenda(vendedor, cliente);
+			
+				}catch(Exception ex){
+					JOptionPane.showMessageDialog(btnProximo, "Cliente não cadastrado");
+					
+				}
+			}
+		});
 		btnProximo.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnProximo.setBounds(407, 350, 89, 23);
 		add(btnProximo);

@@ -95,4 +95,8 @@ public class Real {
 		return centavos;
 	}
 	
+	public Real multiplicar (int quantidade) {
+		*
+	}
+	
 }
