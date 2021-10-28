@@ -9,13 +9,17 @@ import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Produto;
 import modelo.Usuario;
+import modelo.Venda;
 import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProdutoAndLivro;
+import view.Venda.MetodoDePagamento;
 import view.Venda.SelecionarProdutosDaVenda;
 import view.Venda.SelecionarVendedorParaVenda;
 import view.Venda.TelaDeEspera;
+import view.Venda.TelaPagamentoEmDinheiro;
+import view.Venda.TelaPagamentoRealizado;
 import view.fornecedor.GerenciadorFornecedor;
 import view.produto.DadosPesquisaProdutoLivro;
 import view.produto.ExibirProduto;
@@ -115,8 +119,21 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void selecionarProdutosDaVenda(Vendedor vendedor ,Cliente cliente) {
-		this.trocarTela(new SelecionarProdutosDaVenda(this, vendedor , cliente, (Caixa)this.usuarioLogado, this.fabricaDeRepositorios.criarRepositorioDeProduto(), this.fabricaDeRepositorios.criarRepositorioVenda()));
+		this.trocarTela(new SelecionarProdutosDaVenda(this, vendedor , cliente, (Caixa)this.usuarioLogado, this.fabricaDeRepositorios.criarRepositorioDeProduto()));
 		
+	}
+	
+	public void selecionarMetodoDePagamento(Venda venda) {
+		this.trocarTela(new MetodoDePagamento(this, venda));
+		
+	}
+	
+	public void telaDePagamentoEmDinheiro(Venda venda) {
+		this.trocarTela(new TelaPagamentoEmDinheiro(this, venda, this.fabricaDeRepositorios.criarRepositorioVenda()));
+	}
+	
+	public void pagamentoRealizado(Venda venda) {
+		this.trocarTela(new TelaPagamentoRealizado(this, venda));
 	}
 	
 	public void alterarSenha() {

@@ -3,6 +3,8 @@ package modelo;
 import java.util.Date;
 import java.util.List;
 
+import util.Real;
+
 public class Venda {		
 	private int id;
 	private Date data;
@@ -61,6 +63,14 @@ public class Venda {
     
     public List<Pagamento> getPagamento() {
     	return pagamentos;
+    }
+    
+    public Real getValorASerPago() {
+    	*
+    }
+    
+    public boolean estaCompletamentePaga() {
+    	*
     }
 
 }

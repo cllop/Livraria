@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 
 import modelo.Caixa;
 import modelo.Cliente;
+import modelo.ItemDeVenda;
 import modelo.Produto;
 import modelo.Venda;
 import modelo.Vendedor;
@@ -27,17 +28,20 @@ public class SelecionarProdutosDaVenda extends JPanel {
 	private JTextField tfNomeProduto;
 	private JTextField tfIDDoProduto;
 	private JTable TabelaProdutos;
-
+	private ItemDeVenda itemDeVendaSelecionado;
+	private ExibicaoProduto exibicaoProduto;
+	private ModeloDeTabelaVenda modeloTabela;
+	private Venda venda;
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarProdutosDaVenda(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, Cliente cliente, Caixa caixa,  RepositorioProdutoAndLivro repositorioProduto, RepositorioVenda repositorioVenda ) {
+	public SelecionarProdutosDaVenda(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, Cliente cliente, Caixa caixa,  RepositorioProdutoAndLivro repositorioProduto ) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		
-		Venda venda = new Venda(vendedor, cliente, caixa);
+		this.venda = new Venda(vendedor, cliente, caixa);
 		
-		ModeloDeTabelaVenda modeloTabela = new ModeloDeTabelaVenda(venda);
+		this.modeloTabela = new ModeloDeTabelaVenda(venda);
 		
 		JLabel lblNewLabel = new JLabel("Nome do produto:");
 		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 12));
@@ -74,7 +78,8 @@ public class SelecionarProdutosDaVenda extends JPanel {
 				int id = Integer.parseInt(tfIDDoProduto.getText());
 				try {
 					Produto produto = repositorioProduto.find(id);
-					ItemDeVenda
+					adicionarProduto(produto);
+					
 				}catch(Exception ex) {
 					JOptionPane.showMessageDialog(btnInserirPorID, "Produto não encontrado.");
 					
@@ -95,6 +100,14 @@ public class SelecionarProdutosDaVenda extends JPanel {
 		add(btnCancelar);
 		
 		JButton btnFinalizarVenda = new JButton("Finalizar venda");
+		btnFinalizarVenda.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int respostaDoUsuario = JOptionPane.showConfirmDialog(btnFinalizarVenda, "Você tem certeza que deseja finalizar a venda?");
+				if(respostaDoUsuario == JOptionPane.YES_OPTION) {
+					finalizarVenda();
+				}
+			}
+		});
 		btnFinalizarVenda.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnFinalizarVenda.setBounds(654, 422, 120, 23);
 		add(btnFinalizarVenda);
@@ -121,9 +134,31 @@ public class SelecionarProdutosDaVenda extends JPanel {
 		TabelaProdutos.setBackground(new Color(255, 255, 255));
 		scrollPane.setViewportView(TabelaProdutos);
 		
-		ExibicaoProduto panel = new ExibicaoProduto();
-		panel.setBounds(485, 96, 318, 223);
-		add(panel);
+		exibicaoProduto = new ExibicaoProduto();
+		exibicaoProduto.setBounds(485, 96, 318, 223);
+		add(exibicaoProduto);
 
+	}
+	
+	private void adicionarProduto(Produto produto) {
+		ItemDeVenda itemDeVenda = new ItemDeVenda(produto);
+		selecionarItemDeVenda(itemDeVenda);
+		modeloTabela.adicionarItemDeVenda(itemDeVenda);
+		
+	}
+	
+	private void selecionarItemDeVenda(ItemDeVenda itemDeVenda) {
+		this.itemDeVendaSelecionado = itemDeVenda;
+		exibicaoProduto.exibirProduto(itemDeVenda.getProduto());
+	}
+	
+	private void finalizarVenda() {
+		try {
+		
+			
+		}catch(Exception ie) {
+			
+		}
+		
 	}
 }
