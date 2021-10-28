@@ -13,7 +13,7 @@ import modelo.Venda;
 import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import view.Venda.MetodoDePagamento;
 import view.Venda.SelecionarProdutosDaVenda;
 import view.Venda.SelecionarVendedorParaVenda;
@@ -41,7 +41,7 @@ public class GerenciadorPrincipal extends JPanel {
 
 	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 	
-	private RepositorioProdutoAndLivro repositorio;
+	private RepositorioProduto repositorio;
 
 	public GerenciadorPrincipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorio) {
 		setLayout(null);

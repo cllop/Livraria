@@ -9,10 +9,10 @@ import java.util.List;
 
 import config.FabricaDeConexao;
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import util.Real;
 
-public class RepositorioProdutoJDBC extends RepositorioJDBC implements RepositorioProdutoAndLivro {
+public class RepositorioProdutoJDBC extends RepositorioJDBC implements RepositorioProduto {
 
 	public RepositorioProdutoJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
@@ -108,7 +108,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void delete() {
+	public void delete() {//Tem q terminar ainda!!
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -118,7 +118,16 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			jaExisteConexao = true;
 		}
 			PreparedStatement ps;
-			ps = con.prepareStatement("");
+			
+			try {
+				
+				ps = con.prepareStatement("DELETE ");
+				
+			} catch (Exception e) {
+				
+
+			}
+		
 		
 
 	}

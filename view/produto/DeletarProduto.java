@@ -6,7 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import view.DadosPesquisa;
 
 public class DeletarProduto extends DadosPesquisa {

@@ -13,7 +13,7 @@ import javax.swing.JTextPane;
 
 import config.DevConfig;
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import util.Real;
 
 public class AdicionarProduto extends JPanel {
@@ -26,7 +26,7 @@ public class AdicionarProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio) {
+	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProduto repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.pink);
 		}
