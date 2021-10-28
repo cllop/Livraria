@@ -30,11 +30,11 @@ public class FabricaDeRepositoriosJDBC implements FabricaDeRepositorios {
 	}
 	
 	public RepositorioProdutoAndLivro criarRepositorioLivro() {
-		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
+		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
 	
 	public RepositorioProdutoAndLivro  criarRepositorioDeProduto() {
-		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
+		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
 	
 	public RepositorioUsuario criarRepositorioDeUsuario() {
