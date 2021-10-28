@@ -16,8 +16,6 @@ public class Fornecedor{
 	private short ddi;
 	private int numeroTelefone;
 
-	
-
 	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String pais, String estado, String cidade,
 			String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();
@@ -97,6 +95,18 @@ public class Fornecedor{
 
 	public int getNumeroTelefone() {
 		return numeroTelefone;
+	}
+	
+	public String getPais() {
+		return pais;
+	}
+
+	public String getEstado() {
+		return estado;
+	}
+
+	public String getCidade() {
+		return cidade;
 	}
 	
 }
