@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import modelo.Caixa;
+import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
 import modelo.Produto;
@@ -51,7 +52,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return new ConteudoTabelaDB<>(Gerente.class, gerentes);
 	}
 	
-	private static ConteudoTabelaDB<Caixa> criarRegistrosCliente(){
+	private static ConteudoTabelaDB<Caixa> criarRegistrosCaixa(){
 		List<Caixa> caixas = new ArrayList<>(3);
 		
 		caixas.add(new Caixa(1, 17941361533l, "Lucas", "Silva", "luscax", "Rua Lopes Trovao", "Massaranduba", 40435000, (byte)89, (byte)55, (byte)71, 919563879));
@@ -71,6 +72,18 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor1));
 		
 		return new ConteudoTabelaDB<>(Setor.class, setores);
+	}
+	
+	public static ConteudoTabelaDB<Cliente> criarRegistrosCliente(){
+		List<Cliente> clientes = new ArrayList<>(3);
+		
+		int numeroDeUsuariosJaCadastrados = criarRegistrosCaixa().getRegistros().size();
+		
+		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 1, 40028922554l, "Bleinimir", "Cunha", "Blemir", "Dojoland", "Carlitchos", "Coxs de Farinhas", "Mangueira", "Cano PVC", 47474747, (byte)58, (byte)55, (byte)75, 98987744 ));
+		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 2, 98573153332l, "Shinolino", "Soares", "Linoshino", "Lagland", "IsaiEoLag", "Alto da Perturbação", "Carvalho", "Periculosidade", 46464646, (byte)57, (byte)55, (byte)71, 985859979));
+		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "Brasil", "Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Caça da Onça", "Matador de Javalis", 45454545, (byte)56, (byte)1 , (byte)56, 965652287));
+		
+		return new ConteudoTabelaDB<>(Cliente.class, clientes);
 	}
 	
 	
