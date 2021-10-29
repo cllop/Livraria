@@ -11,10 +11,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Setor;
 import repository.FabricaDeRepositorios;
+import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioSetor;
@@ -107,6 +109,29 @@ public class TesteDeRecuperacao {
 								+ fornecedorEsperado + '\n');
 			});
 
+		}
+		Assertions.assertAll(listaDeAssercoes);
+	}
+	
+	@Test
+	public void findCaixa() {
+		
+		ConteudoTabelaDB<Caixa> conteudoDaTabelaCaixa = mapaRegistros.get(Caixa.class);
+		List<Caixa> caixasEsperados = conteudoDaTabelaCaixa.getRegistros();
+		RepositorioCaixa repositorio = fabricaDeRepositorios.criarRepositorioCaixa();
+		
+		iniciarConecxaoSePreciso(repositorio);
+		
+		List<Executable> listaDeAssercoes = new ArrayList<>(caixasEsperados.size());
+		
+		for (Caixa caixaEsperado : caixasEsperados) {
+			
+			Caixa caixaEncontrado = repositorio.find(caixaEsperado.getId());
+			
+			listaDeAssercoes.add(() ->{
+				Assertions.assertEquals(caixaEsperado, caixaEncontrado, "\nCaixa encontrado diferente: \n" + caixaEncontrado + "\nDeveria ser: \n" + caixaEsperado + "\n'");
+			
+			});
 		}
 		Assertions.assertAll(listaDeAssercoes);
 	}
