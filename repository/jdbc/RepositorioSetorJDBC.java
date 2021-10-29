@@ -80,9 +80,11 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		if(conjuntoDeResultados.next()) {
 			
 			int id = conjuntoDeResultados.getInt("id");
+			String nome = conjuntoDeResultados.getString("nome");
+			return new Setor(id, nome, null);
 			
-			return new Setor(id);
 		} else {
+			
 			throw new RuntimeException("Setor não encontrado");
 		}
 	}

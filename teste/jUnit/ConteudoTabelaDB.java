@@ -1,6 +1,8 @@
 package teste.jUnit;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -25,6 +27,8 @@ public class ConteudoTabelaDB <E> {
 	
 	public String gerarComandosDeInsert() {
 		
+		List<Class> listaDeTiposAceitos = Arrays.asList(byte.class, short.class, int.class, long.class, float.class, double.class, boolean.class, char.class,String.class);
+		
 		StringBuilder sb= new StringBuilder();
 		
 		Field atributos[] = classeModelo.getDeclaredFields();
@@ -37,8 +41,12 @@ public class ConteudoTabelaDB <E> {
 			sb.append(" ( ");
 			
 			for (Field field : atributos) {
-				sb.append(field.getName());
-				sb.append(", ");
+				Class classeDoAtributo = field.getType();
+				if(listaDeTiposAceitos.contains(classeDoAtributo)) {
+					sb.append(field.getName());
+					sb.append(", ");
+				}
+				
 			}
 			
 			sb.deleteCharAt(sb.length()-1);
@@ -46,8 +54,22 @@ public class ConteudoTabelaDB <E> {
 			
 			for (Field field : atributos) {		
 				try {
-					sb.append(field.get(registro));
-					sb.append(", ");
+					Class classeDoAtributo = field.getType();
+					field.setAccessible(true);
+					
+					if(listaDeTiposAceitos.contains(classeDoAtributo)){
+						if(classeDoAtributo==char.class|| classeDoAtributo == String.class) {
+							sb.append('\'');
+							sb.append(field.get(registro));
+							sb.append('\'');
+							sb.append(", ");
+						}else {
+							sb.append(field.get(registro));
+							sb.append(", ");
+						}
+					}
+					
+					
 				} catch (IllegalArgumentException | IllegalAccessException e) {
 					
 					throw new RuntimeException("Dificuldade em ler atributos com reflexão");

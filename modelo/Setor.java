@@ -12,5 +12,17 @@ public class Setor {
 		this.id = id;
 		this.produtos = produtos;
 	}
+
+	public int getId() {
+		return id;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
 }
 
