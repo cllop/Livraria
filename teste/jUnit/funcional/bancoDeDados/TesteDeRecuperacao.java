@@ -14,11 +14,13 @@ import org.junit.jupiter.api.function.Executable;
 import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
+import modelo.Produto;
 import modelo.Setor;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
+import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.jdbc.RepositorioJDBC;
 import teste.jUnit.ConteudoTabelaDB;
@@ -117,6 +119,7 @@ public class TesteDeRecuperacao {
 	}
 	
 	@Test
+<<<<<<< HEAD
 	public void findCaixa() {
 		
 		ConteudoTabelaDB<Caixa> conteudoDaTabelaCaixa = mapaRegistros.get(Caixa.class);
@@ -134,6 +137,23 @@ public class TesteDeRecuperacao {
 			listaDeAssercoes.add(() ->{
 				Assertions.assertEquals(caixaEsperado, caixaEncontrado, "\nCaixa encontrado diferente: \n" + caixaEncontrado + "\nDeveria ser: \n" + caixaEsperado + "\n'");
 			
+=======
+	public void findProduto() {
+		ConteudoTabelaDB<Produto> conteudoDaTabelaProduto = mapaRegistros.get(Produto.class);	
+		List<Produto> produtosEsperados = conteudoDaTabelaProduto.getRegistros();
+		RepositorioProduto repositorio = fabricaDeRepositorios.criarRepositorioDeProduto();
+		
+		iniciarConecxaoSePreciso(repositorio);
+		List<Executable> listaDeAssercoes = new ArrayList<>(produtosEsperados.size());
+		
+		for(Produto produtoEsperado : produtosEsperados) {
+			Produto produtoEncontrado = repositorio.find(produtoEsperado.getId());
+			
+			listaDeAssercoes.add(new Executable(){
+				public void execute() throws Throwable {
+					Assertions.assertEquals(produtoEsperado, produtoEncontrado, "\nProduto encontrado diferente: \n" + produtoEncontrado + "\nDeveria ser: \n" + produtoEsperado + "\n");
+				}
+>>>>>>> main
 			});
 		}
 		Assertions.assertAll(listaDeAssercoes);
