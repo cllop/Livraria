@@ -35,7 +35,8 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 			ResultSet rs = ps.executeQuery();
 			boolean temResultado = rs.next();
-
+			boolean existeUsuario = rs.next();
+			
 			if (temResultado) {
 				int id = rs.getInt("id");
 
@@ -54,6 +55,9 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 				ps.setInt(8, Caixa.getNumeroDaResidencia());
 
 				ps.execute();
+			}if(existeUsuario) {
+				
+				
 			}
 
 			// ver se existe usuario existe com aquele cpf
@@ -152,7 +156,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operação não pode ser comcluida");
+			throw new RuntimeException("Operação não pode ser concluida");
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();

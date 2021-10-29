@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 
 public class PesquisarEditarProduto extends JPanel {
 	private JTextField tfId;
@@ -21,7 +21,7 @@ public class PesquisarEditarProduto extends JPanel {
 	 * Create the panel.
 	 * @param produto 
 	 */
-	public PesquisarEditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio) {
+	public PesquisarEditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProduto repositorio) {
 		setLayout(null);
 		
 		JLabel lblMensagem = new JLabel("");

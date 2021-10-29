@@ -17,7 +17,7 @@ public interface RepositorioCliente{
 	
 	public Cliente findByCpf(long cpf);
 	
-	public List<Cliente> findByNomeDeUsuario(String nomeDeUsuario);
+	public Cliente findByNomeDeUsuario(String nomeDeUsuario);
 	
 	public Cliente findByNomeDeUsuarioAndSenha(String nome, String senha);
 	

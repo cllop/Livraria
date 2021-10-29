@@ -3,11 +3,11 @@ package repository;
 public interface FabricaDeRepositorios{
 	
 	
-	public RepositorioProdutoAndLivro criarRepositorioLivro();
+	public RepositorioProduto criarRepositorioLivro();
 		
 	
 	
-	public RepositorioProdutoAndLivro criarRepositorioDeProduto();
+	public RepositorioProduto criarRepositorioDeProduto();
 		
 	
 	
