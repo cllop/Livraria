@@ -1,9 +1,10 @@
 package teste.jUnit;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import modelo.Setor;
 
 
 
@@ -33,7 +34,7 @@ public class ConteudoTabelaDB <E> {
 		
 		Field atributos[] = classeModelo.getDeclaredFields();
 		
-		String nomeDaTabela = classeModelo.getName(); 
+		String nomeDaTabela = classeModelo.getSimpleName(); 
 		
 		for (Object registro : this.registros) {
 			sb.append("INSERT INTO ");
@@ -49,7 +50,7 @@ public class ConteudoTabelaDB <E> {
 				
 			}
 			
-			sb.deleteCharAt(sb.length()-1);
+			sb.deleteCharAt(sb.length()-2);
 			sb.append(" ) VALUES ( ");
 			
 			for (Field field : atributos) {		
@@ -75,7 +76,7 @@ public class ConteudoTabelaDB <E> {
 					throw new RuntimeException("Dificuldade em ler atributos com reflexão");
 				}
 			}
-			sb.deleteCharAt(sb.length()-1);
+			sb.deleteCharAt(sb.length()-2);
 			sb.append(" );\n");
 			
 			
