@@ -68,7 +68,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 
-			lerProduto(conjuntoDeResultados);
+			return lerProduto(conjuntoDeResultados);
 
 		} catch (SQLException execao) {
 
