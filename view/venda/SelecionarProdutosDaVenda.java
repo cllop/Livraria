@@ -20,7 +20,7 @@ import modelo.ItemDeVenda;
 import modelo.Produto;
 import modelo.Venda;
 import modelo.Vendedor;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import repository.RepositorioVenda;
 import view.GerenciadorPrincipal;
 
@@ -35,7 +35,7 @@ public class SelecionarProdutosDaVenda extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarProdutosDaVenda(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, Cliente cliente, Caixa caixa,  RepositorioProdutoAndLivro repositorioProduto ) {
+	public SelecionarProdutosDaVenda(GerenciadorPrincipal gerenciadorPrincipal, Vendedor vendedor, Cliente cliente, Caixa caixa,  RepositorioProduto repositorioProduto ) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		

@@ -6,7 +6,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import util.Real;
 import view.GerenciadorPrincipal;
 import javax.swing.JButton;

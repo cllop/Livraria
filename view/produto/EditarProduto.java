@@ -10,14 +10,14 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 
 public class EditarProduto extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public EditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
+	public EditarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProduto repositorio, Produto produto) {
 		setLayout(null);
 		
 		ExibirProduto panel = new ExibirProduto(produto);

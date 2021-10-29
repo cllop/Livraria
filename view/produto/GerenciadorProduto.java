@@ -7,14 +7,14 @@ import javax.swing.JPanel;
 
 import config.DevConfig;
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 
 public class GerenciadorProduto extends JPanel {
 
 	private JPanel menuSelecionado;
-	private RepositorioProdutoAndLivro repositorio;
+	private RepositorioProduto repositorio;
 
-	public GerenciadorProduto(RepositorioProdutoAndLivro repositorio) {
+	public GerenciadorProduto(RepositorioProduto repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}

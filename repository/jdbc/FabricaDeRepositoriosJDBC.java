@@ -10,7 +10,7 @@ import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
 import repository.RepositorioPagamento;
 import repository.RepositorioPlanoVip;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import repository.RepositorioProdutoCategoria;
 import repository.RepositorioSetor;
 import repository.RepositorioTelefone;
@@ -29,12 +29,12 @@ public class FabricaDeRepositoriosJDBC implements FabricaDeRepositorios {
 		this.fabricaDeConexao = fabricaDeConexao;
 	}
 	
-	public RepositorioProdutoAndLivro criarRepositorioLivro() {
-		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
+	public RepositorioProduto criarRepositorioLivro() {
+		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
 	
-	public RepositorioProdutoAndLivro  criarRepositorioDeProduto() {
-		return new RepositorioProdutoAndLivroJDBC(this.fabricaDeConexao);
+	public RepositorioProduto  criarRepositorioDeProduto() {
+		return new RepositorioProdutoJDBC(this.fabricaDeConexao);
 	}
 	
 	public RepositorioUsuario criarRepositorioDeUsuario() {

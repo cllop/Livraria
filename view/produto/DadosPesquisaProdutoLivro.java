@@ -10,7 +10,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 import view.DadosPesquisa;
 import view.GerenciadorPrincipal;
 
@@ -21,7 +21,7 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public DadosPesquisaProdutoLivro(GerenciadorPrincipal gerenciador,RepositorioProdutoAndLivro repositorio) {
+	public DadosPesquisaProdutoLivro(GerenciadorPrincipal gerenciador,RepositorioProduto repositorio) {
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;

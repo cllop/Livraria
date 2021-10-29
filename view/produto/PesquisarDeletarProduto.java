@@ -5,7 +5,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import modelo.Produto;
-import repository.RepositorioProdutoAndLivro;
+import repository.RepositorioProduto;
 
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -17,7 +17,7 @@ public class PesquisarDeletarProduto extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public PesquisarDeletarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProdutoAndLivro repositorio, Produto produto) {
+	public PesquisarDeletarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProduto repositorio, Produto produto) {
 		setLayout(null);
 		
 		ExibirProduto panel = new ExibirProduto(produto);
