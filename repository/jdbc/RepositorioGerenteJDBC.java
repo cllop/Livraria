@@ -121,29 +121,8 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			ps.setInt(1, id);
 
 			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-
-			if (temResultado) {
-				long cpf = rs.getLong(2);
-				String nome = rs.getString(3);
-				String sobrenome = rs.getString(4);
-				String nomeDeUsuario = rs.getString(5);
-				String rua = rs.getString(6);
-				String bairro = rs.getString(7);
-				int cep = rs.getInt(8);
-				int numeroDaResidencia = rs.getInt(9);
-				boolean ativo = rs.getBoolean(10);
-				boolean ehSuperGerente = rs.getBoolean(11);
-				byte ddd = rs.getByte("DDD");
-				byte ddi = rs.getByte("DDI");
-				int telefone = rs.getInt("numeroTelefone");
-				
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
-				
-			} else {
-				throw new RuntimeException("Gerente não cadastrado.");
-			}
-
+			return lerGerente(rs);
+			
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível encontrar gerente!", e);
 		} finally {
@@ -169,27 +148,8 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			ps.setLong(1, cpf);
 
 			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-
-			if (temResultado) {
-				int id = rs.getInt(1);
-				String nome = rs.getString(3);
-				String sobrenome = rs.getString(4);
-				String nomeDeUsuario = rs.getString(5);
-				String rua = rs.getString(6);
-				String bairro = rs.getString(7);
-				int cep = rs.getInt(8);
-				int numeroDaResidencia = rs.getInt(9);
-				boolean ativo = rs.getBoolean(10);
-				boolean ehSuperGerente = rs.getBoolean(11);
-				byte ddd = rs.getByte("DDD");
-				byte ddi = rs.getByte("DDI");
-				int telefone = rs.getInt("numeroTelefone");
-
-				return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
-			} else {
-				throw new RuntimeException("Gerente não cadastrado.");
-			}
+			return lerGerente(rs);
+		
 
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível encontrar gerente!", e);
@@ -229,11 +189,16 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				int numeroDaResidencia = rs.getInt(9);
 				boolean ativo = rs.getBoolean(10);
 				boolean ehSuperGerente = rs.getBoolean(11);
-				byte ddd = rs.getByte("DDD");
-				byte ddi = rs.getByte("DDI");
-				int telefone = rs.getInt("numeroTelefone");
+				byte ddd = rs.getByte(12);
+				byte ddi = rs.getByte(13);
+				int telefone = rs.getInt(14);
+				String pais = rs.getString(15);
+				String cidade = rs.getString(16);
+				String estado = rs.getString(17);
+					
+				
 
-				listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
+				//listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 			}
 			return listaDeGerente;
 
@@ -244,6 +209,64 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				super.fecharConexao();
 			}
 		}
+	}
+	public Gerente lerGerente(ResultSet conjuntoDeResultados) throws SQLException {
+		
+		boolean existeResultado = conjuntoDeResultados.next();
+		
+		if (existeResultado) {
+			int id = conjuntoDeResultados.getInt("id");
+			String nome = conjuntoDeResultados.getString("nome");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			long telefone = conjuntoDeResultados.getLong("telefone");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+		    byte ddd = conjuntoDeResultados.getByte("ddd");
+		    String pais = conjuntoDeResultados.getString("pais");
+			String cidade = conjuntoDeResultados.getString("cidade");
+			String estado = conjuntoDeResultados.getString("estado");
+			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+			boolean ehSuperGerente = conjuntoDeResultados.getBoolean("ehSuperGerente");
+			
+			return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi,
+					ddd, telefone, ativo, ehSuperGerente);
+			
+		} else {
+			throw new RuntimeException("Gerente não encontrado");
+		}
+	}
+	
+	public Gerente lerGerentes(ResultSet conjuntoDeResultados) throw SQLException {
+		List<Gerente> listaDeGerente = new ArrayList<>(rs.getRow());
+
+		while (rs.next()) {
+			int id = rs.getInt(1);
+			long cpf = rs.getLong(2);
+			String sobrenome = rs.getString(4);
+			String nomeDeUsuario = rs.getString(5);
+			String rua = rs.getString(6);
+			String bairro = rs.getString(7);
+			int cep = rs.getInt(8);
+			int numeroDaResidencia = rs.getInt(9);
+			boolean ativo = rs.getBoolean(10);
+			boolean ehSuperGerente = rs.getBoolean(11);
+			byte ddd = rs.getByte(12);
+			byte ddi = rs.getByte(13);
+			int telefone = rs.getInt(14);
+			String pais = rs.getString(15);
+			String cidade = rs.getString(16);
+			String estado = rs.getString(17);
+				
+			
+
+			//listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
+		}
+		return listaDeGerente;
 	}
 
 }
