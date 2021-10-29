@@ -18,6 +18,7 @@ import repository.FabricaDeRepositorios;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioSetor;
+import repository.jdbc.RepositorioJDBC;
 import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
 
@@ -71,7 +72,9 @@ public class TesteDeRecuperacao {
 		ConteudoTabelaDB<Cliente> conteudoTabelaDB = mapaRegistros.get(Cliente.class);
 		List<Cliente> clientesEsperados = conteudoTabelaDB.getRegistros();
 		RepositorioCliente repositorio = fabricaDeRepositorios.criarRepositorioCliente();
-
+		
+		iniciarConecxaoSePreciso(repositorio);
+		
 		List<Executable> listaDeAssercoes = new ArrayList<>(clientesEsperados.size());
 
 		for (Cliente clienteEsperado : clientesEsperados) {
@@ -111,8 +114,11 @@ public class TesteDeRecuperacao {
 		Assertions.assertAll(listaDeAssercoes);
 	}
 
-	public void iniciarConecxaoSePreciso(RepositorioFornecedor repositorio) {
-
+	public void iniciarConecxaoSePreciso(Object objeto) {
+		
+		if(objeto instanceof RepositorioJDBC) {
+			((RepositorioJDBC)objeto).criarConexao();
+		}
 	}
 
 }
