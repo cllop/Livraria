@@ -43,12 +43,12 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				ps = con.prepareStatement("INSERT INTO PerfilGerente (id, superGerente) VALUES (?,?)");
 
 			} else {
-				// se o usuario não existe voce cria ele e pega o id dele com aquele cpf
+				// se o usuario nï¿½o existe voce cria ele e pega o id dele com aquele cpf
 			}
 			// cria um perfilcaixa com id de usuario
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar gerente!", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
 		}
 
 	}
@@ -69,7 +69,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			
 		} catch (SQLException e) {
 			
-			throw new RuntimeException("Não foi possível remover gerente.", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel remover gerente.", e);
 			
 		} finally {
 			if (!jaExisteConexao) {
@@ -95,7 +95,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			ps.setInt(3, gerente.getId());
 			ps.execute();
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível alterar os dados do gerente!", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel alterar os dados do gerente!", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -122,7 +122,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			return lerGerente(rs);
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar gerente!", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -150,7 +150,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			return lerGerente(rs);
 
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar gerente!", e);
+			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -181,7 +181,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 
 		}catch(SQLException e){
 			
-		throw new RuntimeException("Não foi possível encontrar gerente!", e);
+		throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
 		
 		}finally{
 			
@@ -218,34 +218,14 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 
 		} else {
 
-			throw new RuntimeException("Gerente não encontrado");
+			throw new RuntimeException("Gerente nï¿½o encontrado");
 
 		}
 	}
 
 	public List<Gerente> lerGerentes(ResultSet conjuntoDeResultados) throws SQLException {
 
-		List<Gerente> listaDeGerente = new ArrayList<>(conjuntoDeResultados.getRow());
-
-		while (conjuntoDeResultados.next()) {
-			int id = conjuntoDeResultados.getInt(1);
-			long cpf = conjuntoDeResultados.getLong(2);
-			String sobrenome = conjuntoDeResultados.getString(4);
-			String nomeDeUsuario = conjuntoDeResultados.getString(5);
-			String rua = conjuntoDeResultados.getString(6);
-			String bairro = conjuntoDeResultados.getString(7);
-			int cep = conjuntoDeResultados.getInt(8);
-			int numeroDaResidencia = conjuntoDeResultados.getInt(9);
-			boolean ativo = conjuntoDeResultados.getBoolean(10);
-			boolean ehSuperGerente = conjuntoDeResultados.getBoolean(11);
-			byte ddd = conjuntoDeResultados.getByte(12);
-			byte ddi = conjuntoDeResultados.getByte(13);
-			int telefone = conjuntoDeResultados.getInt(14);
-			String pais = conjuntoDeResultados.getString(15);
-			String cidade = conjuntoDeResultados.getString(16);
-			String estado = conjuntoDeResultados.getString(17);
-
-			
+			//listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, +estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
 		}
 		return listaDeGerente;
 	}
