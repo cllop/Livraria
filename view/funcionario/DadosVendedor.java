@@ -3,18 +3,13 @@ package view.funcionario;
 import modelo.Vendedor;
 
 public class DadosVendedor extends DadosFuncionario {
-
 	
 	public DadosVendedor() {
 		
-
 	}
 	
 	public Vendedor lerVendedor() {
-		
-		return new Vendedor(Long.parseLong(tfCpf.getText()),tfNome.getText(),tfSobrenome.getText(),tfNomeDeUsuario.getText(),tfRua.getText(), tfBairro.getText(), Integer.parseInt(tfCep.getText()),Integer.parseInt(tfNumeroDaResidencia.getText()),Byte.parseByte(tfDdi.getText()),Byte.parseByte(tfDdd.getText()),Integer.parseInt(tfTelefone.getText()));
-		
+		return new Vendedor(Long.parseLong(textCpf.getText()),textNome.getText(),textSobrenome.getText(),textNomeUsuario.getText(),textRua.getText(), textBairro.getText(), Integer.parseInt(textCep.getText()),Integer.parseInt(textNumeroResidencia.getText()),Byte.parseByte(textDdi.getText()),Byte.parseByte(textDdd.getText()),Integer.parseInt(textTelefone.getText()));
 	}
 	
-
 }
