@@ -9,11 +9,11 @@ import modelo.Produto;
 import repository.RepositorioProduto;
 import view.DadosPesquisa;
 
-public class DeletarProduto extends DadosPesquisa {
+public class DadosPesquisaParaDeletarProduto extends DadosPesquisa {
 	/**
 	 * Create the panel.
 	 */
-	public DeletarProduto(GerenciadorProduto gerenciador,Produto produto) {
+	public DadosPesquisaParaDeletarProduto(GerenciadorProduto gerenciador,Produto produto) {
 		
 		
 		btnPesquisarPorNome.addActionListener(new ActionListener() {
