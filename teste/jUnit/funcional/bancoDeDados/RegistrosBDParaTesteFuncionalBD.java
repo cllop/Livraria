@@ -63,14 +63,27 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	}
 	
 	public static ConteudoTabelaDB<Setor> criarRegistrosSetor(){
+		
 		List<Setor> setores = new ArrayList<>(3);
+		List<Produto> produtosSetor1 = new ArrayList<>(3);
+		List<Produto> produtosSetor2 = new ArrayList<>(3);
+		List<Produto> produtosSetor3 = new ArrayList<>(3);
 		
-		List<Produto> produtosSetor1 = new ArrayList<>();
+		setores.add(new Setor(1, "Limpeza pessoal", produtosSetor1));
+		produtosSetor1.add(new Produto(1, "Sabonete", "Antibacteriano", new Real(300), 10));
+		produtosSetor1.add(new Produto(2, "Shampoo", "Anticaspa", new Real(300), 5));
+		produtosSetor1.add(new Produto(3, "Esponja", "Macia", new Real(400), 80));
 		
-		produtosSetor1.add(new Produto(1, "Sabão BacterMais", "Elimina 99% das bacterias", new Real(200), 34));
+		setores.add(new Setor(2, "Lipeza Cozinha", produtosSetor2));
+		produtosSetor2.add(new Produto(1, "Detergente", "Solido", new Real(600), 15));
+		produtosSetor2.add(new Produto(2, "Limpa aluminio", "Da brilho", new Real(400), 13));
+		produtosSetor2.add(new Produto(3, "Rodo de pia", "Pequeno", new Real(800), 30));
 		
 		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor1));
-		
+		produtosSetor3.add(new Produto(1, "Sabão BacterMais", "Elimina 99% das bacterias", new Real(200), 34));
+		produtosSetor3.add(new Produto(2, "Água sanitária", "Ácida", new Real(500), 40));
+		produtosSetor3.add(new Produto(3, "Desinfetante", "Cheiroso", new Real(400), 67));
+	
 		return new ConteudoTabelaDB<>(Setor.class, setores);
 	}
 	
