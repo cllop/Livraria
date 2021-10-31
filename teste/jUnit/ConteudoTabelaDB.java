@@ -1,94 +1,99 @@
 package teste.jUnit;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import modelo.Setor;
 
+public class ConteudoTabelaDB<E> {
 
-
-public class ConteudoTabelaDB <E> {
-	
 	private List<E> registros;
-	private Class <E> classeModelo;
-	
-	public ConteudoTabelaDB(Class <E> clazz, List<E> registros){
+	private Class<E> classeModelo;
+
+	public ConteudoTabelaDB(Class<E> clazz, List<E> registros) {
 		this.classeModelo = clazz;
 		this.registros = registros;
 	}
-	
-	public List<E> getRegistros(){
+
+	public List<E> getRegistros() {
 		return registros;
 	}
-	
+
 	public Class<E> getClasseModelo() {
 		return classeModelo;
 	}
-	
+
 	public String gerarComandosDeInsert() {
 		
-		List<Class> listaDeTiposAceitos = Arrays.asList(byte.class, short.class, int.class, long.class, float.class, double.class, boolean.class, char.class,String.class);
+		return gerarComandosDeInsert(this.registros);
+	}
+
+	private String gerarComandosDeInsert(List registros) {
+		List<Class> listaDeTiposAceitos = Arrays.asList(byte.class, short.class, int.class, long.class, float.class,
+				double.class, boolean.class, char.class, String.class);
 		
-		StringBuilder sb= new StringBuilder();
+		StringBuilder sb = new StringBuilder();
+
+		Field atributos[] = registros.get(0).getClass().getDeclaredFields();
 		
-		Field atributos[] = classeModelo.getDeclaredFields();
-		
-		String nomeDaTabela = classeModelo.getSimpleName(); 
+		String nomeDaTabela = registros.get(0).getClass().getSimpleName();
+
+//		for(Field atributo: atributos) {
+//			Class classeDoAtributo = atributo.getType();
+//			if (!listaDeTiposAceitos.contains(classeDoAtributo)) {
+//				
+//			}			
+//		}
 		
 		for (Object registro : this.registros) {
 			sb.append("INSERT INTO ");
 			sb.append(nomeDaTabela);
 			sb.append(" ( ");
-			
+
 			for (Field field : atributos) {
 				Class classeDoAtributo = field.getType();
-				if(listaDeTiposAceitos.contains(classeDoAtributo)) {
+				if (listaDeTiposAceitos.contains(classeDoAtributo)) {
 					sb.append(field.getName());
 					sb.append(", ");
 				}
-				
+
 			}
-			
-			sb.deleteCharAt(sb.length()-2);
+
+			sb.deleteCharAt(sb.length() - 2);
 			sb.append(" ) VALUES ( ");
-			
-			for (Field field : atributos) {		
+
+			for (Field field : atributos) {
 				try {
 					Class classeDoAtributo = field.getType();
 					field.setAccessible(true);
-					
-					if(listaDeTiposAceitos.contains(classeDoAtributo)){
-						if(classeDoAtributo==char.class|| classeDoAtributo == String.class) {
+
+					if (listaDeTiposAceitos.contains(classeDoAtributo)) {
+						if (classeDoAtributo == char.class || classeDoAtributo == String.class) {
 							sb.append('\'');
 							sb.append(field.get(registro));
 							sb.append('\'');
 							sb.append(", ");
-						}else {
+						} else {
 							sb.append(field.get(registro));
 							sb.append(", ");
 						}
 					}
-					
-					
+
 				} catch (IllegalArgumentException | IllegalAccessException e) {
-					
+
 					throw new RuntimeException("Dificuldade em ler atributos com reflexão");
 				}
 			}
-			sb.deleteCharAt(sb.length()-2);
+			sb.deleteCharAt(sb.length() - 2);
 			sb.append(" );\n");
-			
-			
+
 		}
-			
-			
-			
-			
-			
+
 		return sb.toString();
+
 	}
 
-	
-	
 }

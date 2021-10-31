@@ -33,11 +33,48 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return mapaRegistro;
 	}
 	
+	
+	
+	private static ConteudoTabelaDB<Setor> criarRegistrosSetor(){
+		
+		List<Setor> setores = new ArrayList<>(3);
+		List<Produto> produtosSetor1 = new ArrayList<>(3);
+		List<Produto> produtosSetor2 = new ArrayList<>(3);
+		List<Produto> produtosSetor3 = new ArrayList<>(3);
+		
+		setores.add(new Setor(1, "Limpeza pessoal", produtosSetor1));
+		produtosSetor1.add(new Produto(1, "Sabonete", "Antibacteriano", new Real(300), 10, 1));
+		produtosSetor1.add(new Produto(2, "Shampoo", "Anticaspa", new Real(300), 5, 1));
+		produtosSetor1.add(new Produto(3, "Esponja", "Macia", new Real(400), 80, 1));
+		
+		setores.add(new Setor(2, "Lipeza Cozinha", produtosSetor2));
+		produtosSetor2.add(new Produto(4, "Detergente", "Solido", new Real(600), 15, 2));
+		produtosSetor2.add(new Produto(5, "Limpa aluminio", "Da brilho", new Real(400), 13, 2));
+		produtosSetor2.add(new Produto(6, "Rodo de pia", "Pequeno", new Real(800), 30, 2));
+		
+		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor1));
+		produtosSetor3.add(new Produto(7, "Sabï¿½o BacterMais", "Elimina 99% das bacterias", new Real(200), 34, 3));
+		produtosSetor3.add(new Produto(8, "ï¿½gua sanitï¿½ria", "ï¿½cida", new Real(500), 40, 3));
+		produtosSetor3.add(new Produto(9, "Desinfetante", "Cheiroso", new Real(400), 67, 3));
+	
+		return new ConteudoTabelaDB<>(Setor.class, setores);
+	}
+	
+	private static ConteudoTabelaDB<Produto> criarRegistrosProduto(){
+		List<Produto> listaDeProdutos = new ArrayList<>();
+		List<Setor> listaDeSetor = criarRegistrosSetor().getRegistros();
+		
+		for (Setor setor : listaDeSetor) {
+			listaDeProdutos.addAll(setor.getProdutos());
+		}
+		return new ConteudoTabelaDB<>(Produto.class, listaDeProdutos);
+		
+	}
 	private static ConteudoTabelaDB <Fornecedor> criarRegistrosFornecedor(){
 		List <Fornecedor> fornecedores = new ArrayList(4);
-		fornecedores.add(new Fornecedor(1, 21674826000134l, "Cota Best Informação e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", "Rio de Janeiro", "Limoeiro", "Cachoeira", 4647674, (short) 55, (short)62, (short) 23, 7543532));
-		fornecedores.add(new Fornecedor(2, 19166074000120l, "Barbarex", "Bárbara Rex", "Brasil", "São Paulo", "São Paulo", "Av. Carlos Rosenfeld", "Nova Odessa", 13380374, (short) 4185, (short) 55, (short) 19, 34668888));
-		fornecedores.add(new Fornecedor(3, 15427207000114l, "Ricel Produtos de Limpeza", "Riccel", "Brasil", "São Paulo",  "São Paulo", "Me. de Deus", "Mooca", 33119000, (short) 3689, (short) 55,(short) 11, 26076363));
+		fornecedores.add(new Fornecedor(1, 21674826000134l, "Cota Best Informaï¿½ï¿½o e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", "Rio de Janeiro", "Limoeiro", "Cachoeira", 4647674, (short) 55, (short)62, (short) 23, 7543532));
+		fornecedores.add(new Fornecedor(2, 19166074000120l, "Barbarex", "Bï¿½rbara Rex", "Brasil", "Sï¿½o Paulo", "Sï¿½o Paulo", "Av. Carlos Rosenfeld", "Nova Odessa", 13380374, (short) 4185, (short) 55, (short) 19, 34668888));
+		fornecedores.add(new Fornecedor(3, 15427207000114l, "Ricel Produtos de Limpeza", "Riccel", "Brasil", "Sï¿½o Paulo",  "Sï¿½o Paulo", "Me. de Deus", "Mooca", 33119000, (short) 3689, (short) 55,(short) 11, 26076363));
 		fornecedores.add(new Fornecedor(4, 19672580047641l, "CocaNews", "CocaNW", "Portugal", "Distrito de Lisboa", "Lisboa",  "Limoeiro", "Cachoeira", 44004380, (short) 6387, (short) 55, (short) 23, 934452879));
 		return new ConteudoTabelaDB<>(Fornecedor.class,fornecedores);
 	}
@@ -62,30 +99,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return new ConteudoTabelaDB<>(Caixa.class, caixas);
 	}
 	
-	public static ConteudoTabelaDB<Setor> criarRegistrosSetor(){
-		
-		List<Setor> setores = new ArrayList<>(3);
-		List<Produto> produtosSetor1 = new ArrayList<>(3);
-		List<Produto> produtosSetor2 = new ArrayList<>(3);
-		List<Produto> produtosSetor3 = new ArrayList<>(3);
-		
-		setores.add(new Setor(1, "Limpeza pessoal", produtosSetor1));
-		produtosSetor1.add(new Produto(1, "Sabonete", "Antibacteriano", new Real(300), 10));
-		produtosSetor1.add(new Produto(2, "Shampoo", "Anticaspa", new Real(300), 5));
-		produtosSetor1.add(new Produto(3, "Esponja", "Macia", new Real(400), 80));
-		
-		setores.add(new Setor(2, "Lipeza Cozinha", produtosSetor2));
-		produtosSetor2.add(new Produto(1, "Detergente", "Solido", new Real(600), 15));
-		produtosSetor2.add(new Produto(2, "Limpa aluminio", "Da brilho", new Real(400), 13));
-		produtosSetor2.add(new Produto(3, "Rodo de pia", "Pequeno", new Real(800), 30));
-		
-		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor1));
-		produtosSetor3.add(new Produto(1, "Sabão BacterMais", "Elimina 99% das bacterias", new Real(200), 34));
-		produtosSetor3.add(new Produto(2, "Água sanitária", "Ácida", new Real(500), 40));
-		produtosSetor3.add(new Produto(3, "Desinfetante", "Cheiroso", new Real(400), 67));
 	
-		return new ConteudoTabelaDB<>(Setor.class, setores);
-	}
 	
 	public static ConteudoTabelaDB<Cliente> criarRegistrosCliente(){
 		List<Cliente> clientes = new ArrayList<>(3);
@@ -93,8 +107,8 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		int numeroDeUsuariosJaCadastrados = criarRegistrosCaixa().getRegistros().size();
 		
 		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 1, 40028922554l, "Bleinimir", "Cunha", "Blemir", "Dojoland", "Carlitchos", "Coxs de Farinhas", "Mangueira", "Cano PVC", 47474747, (byte)58, (byte)55, (byte)75, 98987744 ));
-		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 2, 98573153332l, "Shinolino", "Soares", "Linoshino", "Lagland", "IsaiEoLag", "Alto da Perturbação", "Carvalho", "Periculosidade", 46464646, (byte)57, (byte)55, (byte)71, 985859979));
-		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "Brasil", "Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Caça da Onça", "Matador de Javalis", 45454545, (byte)56, (byte)1 , (byte)56, 965652287));
+		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 2, 98573153332l, "Shinolino", "Soares", "Linoshino", "Lagland", "IsaiEoLag", "Alto da Perturbaï¿½ï¿½o", "Carvalho", "Periculosidade", 46464646, (byte)57, (byte)55, (byte)71, 985859979));
+		clientes.add(new Cliente(++numeroDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "Brasil", "Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Caï¿½a da Onï¿½a", "Matador de Javalis", 45454545, (byte)56, (byte)1 , (byte)56, 965652287));
 		
 		return new ConteudoTabelaDB<>(Cliente.class, clientes);
 	}

@@ -55,7 +55,7 @@ public class TesteDeRecuperacao {
 	public void depoisDeCada() {
 
 	}
-
+	@Test
 	public void findSetor() {
 		ConteudoTabelaDB<Setor> conteudoTabelaDB = mapaRegistros.get(Setor.class);
 		List<Setor> setoresEsperados = conteudoTabelaDB.getRegistros();
