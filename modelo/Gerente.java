@@ -1,5 +1,8 @@
 package modelo;
 
+import anotacoes.AnotacaoTabela;
+
+@AnotacaoTabela(getNome="PerfilGerente")
 public class Gerente extends Funcionario {
 	private boolean superGerente;
 

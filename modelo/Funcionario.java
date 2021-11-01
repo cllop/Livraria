@@ -1,13 +1,10 @@
 package modelo;
 
+import anotacoes.TabelaInexistente;
+
+@TabelaInexistente
 public class Funcionario extends Usuario{
 	private boolean ativo;
-
-	
-	
-	
-
-
 
 	public Funcionario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais,
 			String estado, String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi,

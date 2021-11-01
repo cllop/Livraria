@@ -7,13 +7,15 @@ public class Setor {
 	private String nome;
 	private List<Produto> produtos;
 	
-<<<<<<< HEAD
+
 	public Setor(int id, String nome, List<Produto> produtos) {
-=======
-	public Setor( int id, String nome, List<Produto> produtos) {
->>>>>>> main
-		this.nome = nome;
 		this.id = id;
+		this.nome = nome;
+		this.produtos = produtos;
+	}
+
+	public Setor( String nome, List<Produto> produtos) {
+		this.nome = nome;
 		this.produtos = produtos;
 	}
 
