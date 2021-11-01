@@ -107,7 +107,7 @@ public class TesteDeRecuperacao {
 	@Test
 	public void findFornecedor() {
 
-		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get((Fornecedor.class));
+		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get(Fornecedor.class);
 		List<Fornecedor> fornecedoresEsperados = conteudoDaTabelaFornecedor.getRegistros();
 		RepositorioFornecedor repositorio = fabricaDeRepositorios.criarRepositorioFornecedor();
 
