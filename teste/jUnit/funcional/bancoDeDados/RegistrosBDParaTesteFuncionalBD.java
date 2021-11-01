@@ -9,6 +9,7 @@ import modelo.Fornecedor;
 import modelo.Gerente;
 import modelo.Produto;
 import modelo.Setor;
+import modelo.Vendedor;
 import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
 import teste.jUnit.RegistrosBD;
@@ -114,6 +115,19 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "Brasil", "Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Ca�a da On�a", "Matador de Javalis", 45454545, (byte)56, (byte)1 , (byte)56, 965652287));
 		
 		return new ConteudoTabelaDB<>(Cliente.class, clientes);
+	}
+	
+	
+	public static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
+		List<Vendedor> vendedores = new ArrayList<>(3);
+		List<Caixa> caixas = criarRegistrosCaixa().getRegistros();
+		int ultimoIdUsuariosJaCadastrados = vendedores.get(vendedores.size()-1).getId();
+		
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 7145584521l, "Gabriela", "Veiga", "Gazela", "Venezuela", "Rondonia", "Cacatua", "Nave-Mae", "Help", 55655252, 45, (byte)55, (byte)77, 55586858, true));
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 5641578545l, "Geovanna", "Carvalho", "Geogeo", "Vaticano", "Groelandia", "SAnta Maria", "Borboletas Psicodelicas", "Pred. Limpo", 1235896, 78, (byte)29, (byte)00, 75562265, true));
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 4585565145l, "Michele", "Lisboa", "Lesley", "Joanesburgo", "Acre", "Writable", "Undefined", "Source", 236987451, 65, (byte)48, (byte)47, 45785415, true));
+		
+		return new ConteudoTabelaDB<>(Vendedor.class, vendedores);
 	}
 	
 	
