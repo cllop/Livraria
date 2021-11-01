@@ -27,26 +27,31 @@ public class ConteudoTabelaDB<E> {
 	}
 
 	public String gerarComandosDeInsert() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(gerarComandosDeInsert(registros, classeModelo));
+		//gerar inserts da superclasse
+		List<Class> classesAncestrais = getClassesAncestrais(classeModelo);
 		
-		return gerarComandosDeInsert(this.registros);
+		for(Class classeAncestral: classesAncestrais) {
+			sb.append(gerarComandosDeInsert(this.registros, classeAncestral));
+			
+		}
+		return sb.toString();
+	}
+	
+	private static List<Class> getClassesAncestrais(Class classe) {
+		
 	}
 
-	private String gerarComandosDeInsert(List registros) {
+	private String gerarComandosDeInsert(List registros, Class classe) {
 		List<Class> listaDeTiposAceitos = Arrays.asList(byte.class, short.class, int.class, long.class, float.class,
 				double.class, boolean.class, char.class, String.class);
 		
 		StringBuilder sb = new StringBuilder();
 
-		Field atributos[] = registros.get(0).getClass().getDeclaredFields();
+		Field atributos[] = classe.getDeclaredFields();
 		
-		String nomeDaTabela = registros.get(0).getClass().getSimpleName();
-
-//		for(Field atributo: atributos) {
-//			Class classeDoAtributo = atributo.getType();
-//			if (!listaDeTiposAceitos.contains(classeDoAtributo)) {
-//				
-//			}			
-//		}
+		String nomeDaTabela = classe.getSimpleName();
 		
 		for (Object registro : this.registros) {
 			sb.append("INSERT INTO ");

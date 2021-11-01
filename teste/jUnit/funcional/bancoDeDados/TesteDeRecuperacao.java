@@ -1,7 +1,5 @@
 package teste.jUnit.funcional.bancoDeDados;
 
-import static org.junit.jupiter.api.Assertions.assertAll;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,30 +33,32 @@ import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
-
+	
+	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	private MapaRegistro mapaRegistros;
 
 	@BeforeAll
 	public static void antesDeTudo() {
-		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/Livraria", null, null));
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","root", null));
+		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "root", null);
 		
 	}
 
 	@AfterAll
 	public static void depoisDeTudo() {
-
+		
 	}
 
 	@BeforeEach
-
 	public void antesDeCada() {
-
+		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+	
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
-
+		
 	}
 	@Test
 	public void findSetor() {
