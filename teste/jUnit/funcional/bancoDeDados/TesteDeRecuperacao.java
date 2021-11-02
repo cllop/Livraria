@@ -11,6 +11,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import config.FabricaDeConexao;
 import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
@@ -26,36 +27,40 @@ import repository.RepositorioGerente;
 import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
+import repository.jdbc.FabricaDeRepositoriosJDBC;
 import repository.jdbc.RepositorioJDBC;
 import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
-
+	
+	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	private MapaRegistro mapaRegistros;
 
 	@BeforeAll
 	public static void antesDeTudo() {
-
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","root", null));
+		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "root", null);
+		
 	}
 
 	@AfterAll
 	public static void depoisDeTudo() {
-
+		
 	}
 
 	@BeforeEach
-
 	public void antesDeCada() {
-
+		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+	
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
-
+		
 	}
-
+	@Test
 	public void findSetor() {
 		ConteudoTabelaDB<Setor> conteudoTabelaDB = mapaRegistros.get(Setor.class);
 		List<Setor> setoresEsperados = conteudoTabelaDB.getRegistros();
@@ -102,7 +107,7 @@ public class TesteDeRecuperacao {
 	@Test
 	public void findFornecedor() {
 
-		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get((Fornecedor.class));
+		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get(Fornecedor.class);
 		List<Fornecedor> fornecedoresEsperados = conteudoDaTabelaFornecedor.getRegistros();
 		RepositorioFornecedor repositorio = fabricaDeRepositorios.criarRepositorioFornecedor();
 
@@ -172,7 +177,7 @@ public class TesteDeRecuperacao {
 	}
 
 	@Test
-<<<<<<< HEAD
+
 	public void findCaixa() {
 		
 		ConteudoTabelaDB<Caixa> conteudoDaTabelaCaixa = mapaRegistros.get(Caixa.class);
@@ -190,7 +195,11 @@ public class TesteDeRecuperacao {
 			listaDeAssercoes.add(() ->{
 				Assertions.assertEquals(caixaEsperado, caixaEncontrado, "\nCaixa encontrado diferente: \n" + caixaEncontrado + "\nDeveria ser: \n" + caixaEsperado + "\n'");
 			
-=======
+			});
+		}
+		
+		Assertions.assertAll(listaDeAssercoes);
+	}
 	public void findProduto() {
 		ConteudoTabelaDB<Produto> conteudoDaTabelaProduto = mapaRegistros.get(Produto.class);
 		List<Produto> produtosEsperados = conteudoDaTabelaProduto.getRegistros();
@@ -207,7 +216,7 @@ public class TesteDeRecuperacao {
 					Assertions.assertEquals(produtoEsperado, produtoEncontrado, "\nProduto encontrado diferente: \n"
 							+ produtoEncontrado + "\nDeveria ser: \n" + produtoEsperado + "\n");
 				}
->>>>>>> main
+
 			});
 		}
 		Assertions.assertAll(listaDeAssercoes);
