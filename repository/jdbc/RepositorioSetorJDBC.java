@@ -81,10 +81,6 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 	public Setor lerSetor(ResultSet conjuntoDeResultados) throws SQLException {
 		
 		if(conjuntoDeResultados.next()) {
-<<<<<<< Updated upstream
-=======
-			
->>>>>>> Stashed changes
 
 			int id = conjuntoDeResultados.getInt("idSetor");
 			String nome = conjuntoDeResultados.getString("nome");
@@ -107,16 +103,11 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 			}
 		
 			return new Setor(id, nome, produtos);
-<<<<<<< Updated upstream
-			
-=======
 
 			int id = conjuntoDeResultados.getInt("id");
 			String nome = conjuntoDeResultados.getString("nome");
 			return new Setor(id, nome, null);
 			
-
->>>>>>> Stashed changes
 		} else {
 			
 			throw new RuntimeException("Setor não encontrado");
