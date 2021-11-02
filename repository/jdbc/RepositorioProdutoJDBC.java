@@ -198,7 +198,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		Real preco = new Real(conjuntoDeResultados.getInt("preco"));
 		String descricao = conjuntoDeResultados.getString("descricao");
 		int quantidade = conjuntoDeResultados.getInt("quantidade");
-		int idSetor
+		int idSetor = conjuntoDeResultados.getInt("idSetor");
 		
 		return new Produto(id, nome, descricao, preco, quantidade, idSetor);
 	}
