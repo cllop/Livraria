@@ -65,15 +65,17 @@ public class TesteDeRecuperacao {
 		sb.append("Create DataBase ");
 		sb.append(nomeDoDB);
 		sb.append(" ;");
+		sb.append("USE DATABASE "+nomeDoDB);
+		sb.append(" ;");
 		try {
-			Scanner leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeTabelas.sql"));
+			Scanner leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeTabelas.sql"));
 			while(leitor.hasNextLine()) {
-				sb.append(leitor.next());
+				sb.append(leitor.nextLine());
 			}
 			
-			leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeChavesEstrangeiras.sql"));
+			leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeChavesEstrangeiras.sql"));
 			while(leitor.hasNextLine()) {
-				sb.append(leitor.next());
+				sb.append(leitor.nextLine());
 			}
 			sb.append(mapaRegistros.gerarTodosOsInserts());
 			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
@@ -84,7 +86,7 @@ public class TesteDeRecuperacao {
 		} catch (Exception e) {
 			
 			e.printStackTrace();
-			throw new RuntimeException();
+			throw new RuntimeException(e);
 		}
 		
 	}
@@ -97,7 +99,7 @@ public class TesteDeRecuperacao {
 		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
 		try {
 			Statement st = con.createStatement();
-			st.execute("DROP DATABASE "+nomeDoDB+" ;");
+			st.execute("DROP DATABASE IF EXISTS "+nomeDoDB+" ;");
 			
 		} catch (SQLException e) {
 			

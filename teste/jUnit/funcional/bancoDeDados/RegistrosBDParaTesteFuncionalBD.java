@@ -1,5 +1,6 @@
 package teste.jUnit.funcional.bancoDeDados;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,8 +21,9 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	public static void main(String[] args) {
 		
 //	System.out.println(criarRegistrosCiente().gerarComandosDeInsert());
-		System.out.println(new RegistrosBDParaTesteFuncionalBD().obterRegistros().gerarTodosOsInserts());
-		
+//		System.out.println(new RegistrosBDParaTesteFuncionalBD().obterRegistros().gerarTodosOsInserts());
+
+
 		
 	}
 	
