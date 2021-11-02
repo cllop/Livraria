@@ -36,8 +36,8 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		mapaRegistro.put(this.criarRegistrosGerente());
 		mapaRegistro.put(this.criarRegistrosCiente());
 		mapaRegistro.put(this.criarRegistrosVendedor());
-		mapaRegistro.put(this.criarRegistrosProduto());
 		mapaRegistro.put(this.criarRegistrosSetor());
+		mapaRegistro.put(this.criarRegistrosProduto());
 		return mapaRegistro;
 	}
 	
