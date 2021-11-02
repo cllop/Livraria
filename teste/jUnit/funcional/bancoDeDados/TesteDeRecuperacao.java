@@ -42,13 +42,14 @@ public class TesteDeRecuperacao {
 	
 	private static final String nomeDoDB = "testeDB";
 	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
+	private static FabricaDeConexao fabricaParaCadastroDeRegistro=  new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB+"?allowMultiQueries=true", "teste", null);
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	private MapaRegistro mapaRegistros;
 
 	@BeforeAll
 	public static void antesDeTudo() {
-		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","root", null));
-		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "root", null);
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","teste", null));
+		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "teste", null);
 		destruirDB();
 		
 	}
@@ -60,14 +61,21 @@ public class TesteDeRecuperacao {
 
 	@BeforeEach
 	public void antesDeCada() {
-		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
-		StringBuilder sb = new StringBuilder();
-		sb.append("Create DataBase ");
-		sb.append(nomeDoDB);
-		sb.append(" ;");
-		sb.append("USE DATABASE "+nomeDoDB);
-		sb.append(" ;");
+		
 		try {
+			mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+			StringBuilder sb = new StringBuilder();
+			sb.append("Create DataBase ");
+			sb.append(nomeDoDB);
+			sb.append(" ;");
+			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
+			Statement st = con.createStatement();
+			st.execute(sb.toString());
+			con.close();
+			st.close();
+			con = fabricaParaCadastroDeRegistro.criarConecxao();
+			st= con.createStatement();
+			
 			Scanner leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeTabelas.sql"));
 			while(leitor.hasNextLine()) {
 				sb.append(leitor.nextLine());
@@ -78,11 +86,8 @@ public class TesteDeRecuperacao {
 				sb.append(leitor.nextLine());
 			}
 			sb.append(mapaRegistros.gerarTodosOsInserts());
-			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
-			con.setAutoCommit(false);
-			Statement st = con.createStatement();
 			st.execute(sb.toString());
-			con.commit();
+			System.out.println("Cadastrado com sucesso");
 		} catch (Exception e) {
 			
 			e.printStackTrace();
