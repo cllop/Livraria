@@ -1,15 +1,19 @@
 package teste.jUnit.funcional.bancoDeDados;
 
-import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
+import modelo.ItemDeVenda;
+import modelo.Pagamento;
+import modelo.PagamentoEmDinheiro;
 import modelo.Produto;
 import modelo.Setor;
+import modelo.Venda;
 import modelo.Vendedor;
 import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
@@ -34,13 +38,12 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		mapaRegistro.put(this.criarRegistrosFornecedor());
 		mapaRegistro.put(this.criarRegistrosCaixa());
 		mapaRegistro.put(this.criarRegistrosGerente());
-		mapaRegistro.put(this.criarRegistrosCiente());
+		mapaRegistro.put(this.criarRegistrosCliente());
 		mapaRegistro.put(this.criarRegistrosVendedor());
 		mapaRegistro.put(this.criarRegistrosSetor());
 		mapaRegistro.put(this.criarRegistrosProduto());
 		return mapaRegistro;
 	}
-	
 	
 	
 	private static ConteudoTabelaDB<Setor> criarRegistrosSetor(){
@@ -68,6 +71,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return new ConteudoTabelaDB<>(Setor.class, setores);
 	}
 	
+	
 	private static ConteudoTabelaDB<Produto> criarRegistrosProduto(){
 		List<Produto> listaDeProdutos = new ArrayList<>();
 		List<Setor> listaDeSetor = criarRegistrosSetor().getRegistros();
@@ -79,6 +83,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		
 	}
 	
+	
 	private static ConteudoTabelaDB <Fornecedor> criarRegistrosFornecedor(){
 		List <Fornecedor> fornecedores = new ArrayList(4);
 		fornecedores.add(new Fornecedor(1, 21674826000134l, "Cota Best Informacao e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", "Rio de Janeiro", "Limoeiro", "Cachoeira", 4647674, (short) 55, (short)62, (short) 23, 7543532));
@@ -87,6 +92,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		fornecedores.add(new Fornecedor(4, 19672580047641l, "CocaNews", "CocaNW", "Portugal", "Distrito de Lisboa", "Lisboa",  "Limoeiro", "Cachoeira", 44004380, (short) 6387, (short) 55, (short) 23, 934452879));
 		return new ConteudoTabelaDB<>(Fornecedor.class,fornecedores);
 	}
+	
 	
 	private static ConteudoTabelaDB<Gerente> criarRegistrosGerente(){
 		List<Gerente> gerentes = new ArrayList(3);
@@ -97,6 +103,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 
 		return new ConteudoTabelaDB<>(Gerente.class, gerentes);
 	}
+	
 	
 	private static ConteudoTabelaDB<Caixa> criarRegistrosCaixa(){
 		List<Caixa> caixas = new ArrayList<>(3);
@@ -111,8 +118,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	}
 	
 	
-	
-	private static ConteudoTabelaDB<Cliente> criarRegistrosCiente(){
+	private static ConteudoTabelaDB<Cliente> criarRegistrosCliente(){
 		List<Cliente> clientes = new ArrayList<>(3);
 		List<Caixa> caixas = criarRegistrosCaixa().getRegistros();
 		int ultimoIdDeUsuariosJaCadastrados = caixas.get(caixas.size()-1).getId();
@@ -127,7 +133,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	
 	private static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
 		List<Vendedor> vendedores = new ArrayList<>(3);
-		List<Cliente> clientes = criarRegistrosCiente().getRegistros();
+		List<Cliente> clientes = criarRegistrosCliente().getRegistros();
 		int ultimoIdUsuariosJaCadastrados = clientes.get(clientes.size()-1).getId();
 		
 		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 7145584521l, "Gabriela", "Veiga", "Gazela", "Venezuela", "Rondonia", "Cacatua", "Nave-Mae", "Help", 55655252, (short)45, (byte)55, (byte)77, 55586858, true));
@@ -137,8 +143,55 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return new ConteudoTabelaDB<>(Vendedor.class, vendedores);
 	}
 	
+	//vendedor, cliente, caixa
+	private static ConteudoTabelaDB<Venda> CriarRegistrosVenda(){
+		List<Venda> vendas = new ArrayList<>(3);
+		List<Caixa> caixas = criarRegistrosCaixa().getRegistros();
+		List<Vendedor> vendedores = criarRegistrosVendedor().getRegistros();
+		List<Cliente> clientes = criarRegistrosCliente().getRegistros();
+		List<Produto> produtos = criarRegistrosProduto().getRegistros();
+		
+		//venda 1
+		List<ItemDeVenda> itensDeVenda = new ArrayList<>(3);
+		itensDeVenda.add(new ItemDeVenda(1, 1, 6, new Real(550), produtos.get(8)));
+		itensDeVenda.add(new ItemDeVenda(2, 1, 8, new Real(600), produtos.get(7)));
+		itensDeVenda.add(new ItemDeVenda(3, 1, 7, new Real(710), produtos.get(6)));
+		
+		List<Pagamento> pagamentos = new ArrayList<>();	
+		pagamentos.add(new PagamentoEmDinheiro(1, new Real(1810)));
+		
+		//Date(int year, int month, int date, int hrs, int min, int sec)
+		vendas.add(new Venda(1, new Date(2000, 12, 22, 7, 59, 59), vendedores.get(3), clientes.get(3), caixas.get(3), itensDeVenda, pagamentos));
+		
+		//venda 2
+		itensDeVenda = new ArrayList<>(3);
+		itensDeVenda.add(new ItemDeVenda(4, 2, 5, new Real(111), produtos.get(5)));
+		itensDeVenda.add(new ItemDeVenda(5, 2, 4, new Real(569), produtos.get(4)));
+		itensDeVenda.add(new ItemDeVenda(6, 2, 1, new Real(125), produtos.get(3)));
+		
+		pagamentos = new ArrayList<>();	
+		pagamentos.add(new PagamentoEmDinheiro(2, new Real(7894)));
+		
+		//Date(int year, int month, int date, int hrs, int min, int sec)
+		vendas.add(new Venda(2, new Date(1995, 8, 25, 5, 56, 25), vendedores.get(2), clientes.get(2), caixas.get(2), itensDeVenda, pagamentos));
+		
+ 	
 	
+	//venda 3
+	itensDeVenda = new ArrayList<>(3);
+	itensDeVenda.add(new ItemDeVenda(7, 3, 4, new Real(550), produtos.get(2)));
+	itensDeVenda.add(new ItemDeVenda(8, 3, 6, new Real(600), produtos.get(2)));
+	itensDeVenda.add(new ItemDeVenda(9, 3, 7, new Real(710), produtos.get(0)));
 	
+	pagamentos = new ArrayList<>();	
+	pagamentos.add(new PagamentoEmDinheiro(1, new Real(3000)));
+	
+	//Date(int year, int month, int date, int hrs, int min, int sec)
+	vendas.add(new Venda(3, new Date(1452, 12, 24, 15, 59, 59), vendedores.get(3), clientes.get(3), caixas.get(3), itensDeVenda, pagamentos));
+	
+	return new ConteudoTabelaDB<>(Venda.class, vendas);
+	
+	}
 	//Criar registros de todas as outras tabelas a serem testadas 
 	
 }

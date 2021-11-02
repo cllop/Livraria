@@ -66,11 +66,11 @@ public class Venda {
     }
     
     public Real getValorASerPago() {
-    	*
+    	
     }
     
     public boolean estaCompletamentePaga() {
-    	*
+    	
     }
 
 }

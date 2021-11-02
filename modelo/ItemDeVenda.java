@@ -15,7 +15,7 @@ public class ItemDeVenda {
 		this.quantidade = 1;
 	}
 	
-	public ItemDeVenda(int idVenda, int id, int quantidade, Real preco, Produto produto) {
+	public ItemDeVenda( int id,int idVenda, int quantidade, Real preco, Produto produto) {
 		super();
 		this.idVenda = idVenda;
 		this.id = id;
