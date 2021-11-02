@@ -138,9 +138,10 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		
 		try {
 			ps = con.prepareStatement(
-					"SELECT usuario.*, perfilGerente.id AS idPerfilGerente, perfilGerente.ativo FROM perfilGerente LEFT JOIN usuario ON perfilGerente.id = usuario.id WHERE id= ?;");
+					"SELECT usuario.*, perfilGerente.id AS idPerfilGerente, perfilGerente.ativo, perfilGerente.superGerente FROM perfilGerente LEFT JOIN usuario ON perfilGerente.id = usuario.id WHERE PerfilGerente.id=?;");
 			
 			ps.setInt(1, id);
+			
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 			
 			return lerGerente(conjuntoDeResultados);

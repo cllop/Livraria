@@ -121,7 +121,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"SELECT * FROM perfilCliente WHERE id=?"
+					"SELECT * FROM perfilCliente LEFT JOIN usuario ON perfilCliente.id = usuario.id WHERE perfilCliente.id=? "
 					);
 			ps.setInt(1, id);
 			
@@ -230,6 +230,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		while(conjuntoDeResultados.next()) {
 			
 			int id = conjuntoDeResultados.getInt("id");
+			int idCliente = conjuntoDeResultados.getInt("idCliente");
 			long cpf = conjuntoDeResultados.getLong("cpf");
 			String nome = conjuntoDeResultados.getString("nome");
 			String sobrenome = conjuntoDeResultados.getString("sobrenome");
@@ -242,11 +243,11 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
 			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			byte ddd = conjuntoDeResultados.getByte("DDD");
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+			byte ddd = conjuntoDeResultados.getByte("ddd");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 			
-			clientes.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+			clientes.add(new Cliente(id, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 					numeroDaResidencia, ddi, ddd, telefone));
 		}
 		return clientes;
@@ -257,6 +258,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		if(conjuntoDeResultados.next()) {
 			
 			int id = conjuntoDeResultados.getInt("id");
+			int idCliente = conjuntoDeResultados.getInt("idCliente");
 			long cpf = conjuntoDeResultados.getLong("cpf");
 			String nome = conjuntoDeResultados.getString("nome");
 			String sobrenome = conjuntoDeResultados.getString("sobrenome");
@@ -273,7 +275,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			byte ddd = conjuntoDeResultados.getByte("DDD");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 		
-			return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+			return new Cliente(id, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 					numeroDaResidencia, ddi, ddd, telefone);
 		}else {
 			throw new RuntimeException("Cliente não encontrado");

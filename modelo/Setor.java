@@ -30,5 +30,12 @@ public class Setor {
 	public List<Produto> getProdutos() {
 		return produtos;
 	}
+
+	@Override
+	public String toString() {
+		return "Setor [id=" + id + ", nome=" + nome + ", produtos=" + produtos + "]";
+	}
+	
+	
 }
 

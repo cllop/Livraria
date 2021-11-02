@@ -55,7 +55,11 @@ public class Produto {
 	public int getIdSetor() {
 		return idSetor;
 	}
-	
-	
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", idSetor=" + idSetor + ", nome=" + nome + ", preco=" + preco + ", descricao="
+				+ descricao + ", quantidade=" + quantidade + "]";
+	}
 	
 }

@@ -61,7 +61,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			
-			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produtos WHERE setor.id=?;");
+			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produto ON setor.id = produto.id WHERE setor.id=?;");
 			
 			ps.setInt(1, id);
 			

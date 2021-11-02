@@ -149,7 +149,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			ps = con.prepareStatement(
-					"SELECT usuario.*, perfilCaixa.id AS idPerfilCaixa, perfilCaixa.ativo FROM perfilcaixa LEFT JOIN usuario ON perfilCaixa.id = usuario.id WHERE id= ?;");
+					"SELECT usuario.*, perfilCaixa.id AS idPerfilCaixa, perfilCaixa.ativo FROM perfilcaixa LEFT JOIN usuario ON perfilCaixa.id = usuario.id WHERE perfilCaixa.id= ?;");
 
 			ps.setInt(1, id);
 
@@ -221,12 +221,11 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		String rua = conjuntoDeResultados.getString("rua");
 		String bairro = conjuntoDeResultados.getString("bairro");
 		int cep = conjuntoDeResultados.getInt("cep");
-		short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+		short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 		byte ddi = conjuntoDeResultados.getByte("DDI");
 		byte ddd = conjuntoDeResultados.getByte("DDD");
 		int telefone = conjuntoDeResultados.getInt("telefone");
 		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-	
 		
 		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 				numeroDaResidencia, ddi, ddd, telefone, ativo);

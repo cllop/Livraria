@@ -246,7 +246,15 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
+	@Override
+	public String toString() {
+		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nomeDeUsuario="
+				+ nomeDeUsuario + ", senha=" + senha + ", pais=" + pais + ", estado=" + estado + ", cidade=" + cidade
+				+ ", rua=" + rua + ", bairro=" + bairro + ", cep=" + cep + ", numeroDaResidencia=" + numeroDaResidencia
+				+ ", ddi=" + ddi + ", ddd=" + ddd + ", telefone=" + telefone + "]";
+	}
 
+	
 		
 
 }

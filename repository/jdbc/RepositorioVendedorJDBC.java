@@ -93,7 +93,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		try {
 
-			ps = conexao.prepareStatement("Select * From vendedores WHERE id= ?; ");
+			ps = conexao.prepareStatement("SELECT * FROM perfilVendedor LEFT JOIN usuario ON perfilVendedor.id = usuario.id WHERE perfilVendedor.id=?; ");
 			
 			ps.setInt(1, id);
 
@@ -101,9 +101,9 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			
 			return lerVendedor(conjuntoDeResultados);
 			
-		} catch (SQLException execao) {
+		} catch (SQLException e) {
 
-			throw new RuntimeException("Operação não pode ser comcluida");
+			throw new RuntimeException("Operação não pode ser comcluida", e);
 		}
 
 	}
