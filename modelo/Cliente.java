@@ -1,5 +1,8 @@
 package modelo;
 
+import anotacoes.AnotacaoTabela;
+
+@AnotacaoTabela(getNome="PerfilCliente")
 public class Cliente extends Usuario{
 	
 	private int idCliente;

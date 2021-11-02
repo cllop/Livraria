@@ -1,5 +1,8 @@
 package modelo;
 
+import anotacoes.AnotacaoTabela;
+
+@AnotacaoTabela(getNome="PerfilCaixa")
 public class Caixa extends Funcionario {
 
 	public Caixa(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,

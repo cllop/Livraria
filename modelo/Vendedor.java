@@ -1,5 +1,8 @@
 package modelo;
 
+import anotacoes.AnotacaoTabela;
+
+@AnotacaoTabela(getNome="PerfilVendedor")
 public class Vendedor extends Funcionario {
 
 	public Vendedor(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,

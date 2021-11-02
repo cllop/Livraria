@@ -19,8 +19,8 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	
 	public static void main(String[] args) {
 		
-		System.out.println(criarRegistrosGerente().gerarComandosDeInsert());
-//		System.out.println(new RegistrosBDParaTesteFuncionalBD().obterRegistros().gerarTodosOsInserts());
+//	System.out.println(criarRegistrosCiente().gerarComandosDeInsert());
+		System.out.println(new RegistrosBDParaTesteFuncionalBD().obterRegistros().gerarTodosOsInserts());
 		
 		
 	}
@@ -33,7 +33,9 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		mapaRegistro.put(this.criarRegistrosCaixa());
 		mapaRegistro.put(this.criarRegistrosGerente());
 		mapaRegistro.put(this.criarRegistrosCiente());
-//		mapaRegistro.put(this.criarRegistrosVendedor());
+		mapaRegistro.put(this.criarRegistrosVendedor());
+		mapaRegistro.put(this.criarRegistrosProduto());
+		mapaRegistro.put(this.criarRegistrosSetor());
 		return mapaRegistro;
 	}
 	
@@ -56,7 +58,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		produtosSetor2.add(new Produto(5, "Limpa aluminio", "Da brilho", new Real(400), 13, 2));
 		produtosSetor2.add(new Produto(6, "Rodo de pia", "Pequeno", new Real(800), 30, 2));
 		
-		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor1));
+		setores.add(new Setor(3,"Limpeza de Banheiro", produtosSetor3));
 		produtosSetor3.add(new Produto(7, "Sabao BacterMais", "Elimina 99% das bacterias", new Real(200), 34, 3));
 		produtosSetor3.add(new Produto(8, "agua sanitaria", "acida", new Real(500), 40, 3));
 		produtosSetor3.add(new Produto(9, "Desinfetante", "Cheiroso", new Real(400), 67, 3));
@@ -74,6 +76,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		return new ConteudoTabelaDB<>(Produto.class, listaDeProdutos);
 		
 	}
+	
 	private static ConteudoTabelaDB <Fornecedor> criarRegistrosFornecedor(){
 		List <Fornecedor> fornecedores = new ArrayList(4);
 		fornecedores.add(new Fornecedor(1, 21674826000134l, "Cota Best Informacao e Tecnologia", "Cota Best", "Brasil", "Rio de Janeiro", "Rio de Janeiro", "Limoeiro", "Cachoeira", 4647674, (short) 55, (short)62, (short) 23, 7543532));
@@ -97,9 +100,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		List<Caixa> caixas = new ArrayList<>(3);
 		List<Gerente> gerentes = criarRegistrosGerente().getRegistros();
 		int ultimoIdDeUsuariosJaCadastrados = gerentes.get(gerentes.size()-1).getId();
-//		(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-//				String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd, int telefone,
-//				boolean ativo)
+				
 		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 17941361533l, "Lucas", "Silva", "luscax","Portugal","Distrito de Lisboa","Lisboa","Rua Lopes Trovao", "Massaranduba", 40435000, 798, (byte)55, (byte)71, 919563879, true));
 		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 15342341407l, "Stephanie", "Neves", "ster", "Japao","Hokkaido","Sapporo" ,"Rua Lopes Trovao", "Massaranduba", 40435000, 109, (byte)55, (byte)71, 942567798, true));
 		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 82183837983l, "Fabio Henrique", "Ferreira", "Fabio", "Estados Unidos", "Alasca", "Anchorage", "Rua Beatriz", "Barroso", 60862700, 749, (byte)55, (byte)85, 944002892, true));
@@ -124,8 +125,8 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	
 	public static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
 		List<Vendedor> vendedores = new ArrayList<>(3);
-		List<Caixa> caixas = criarRegistrosCaixa().getRegistros();
-		int ultimoIdUsuariosJaCadastrados = vendedores.get(vendedores.size()-1).getId();
+		List<Cliente> clientes = criarRegistrosCiente().getRegistros();
+		int ultimoIdUsuariosJaCadastrados = clientes.get(clientes.size()-1).getId();
 		
 		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 7145584521l, "Gabriela", "Veiga", "Gazela", "Venezuela", "Rondonia", "Cacatua", "Nave-Mae", "Help", 55655252, 45, (byte)55, (byte)77, 55586858, true));
 		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 5641578545l, "Geovanna", "Carvalho", "Geogeo", "Vaticano", "Groelandia", "SAnta Maria", "Borboletas Psicodelicas", "Pred. Limpo", 1235896, 78, (byte)29, (byte)00, 75562265, true));

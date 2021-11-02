@@ -64,7 +64,6 @@ public class ConteudoTabelaDB<E> {
 
 	public String gerarComandosDeInsert() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(gerarComandosDeInsert(registros, classeModelo));
 		// gerar inserts da superclasse
 		List<Class> tabelasAncestrais = getTabelasAncestrais(classeModelo);
 
@@ -72,6 +71,7 @@ public class ConteudoTabelaDB<E> {
 			sb.append(gerarComandosDeInsert(this.registros, classeAncestral));
 
 		}
+		sb.append(gerarComandosDeInsert(registros, classeModelo));
 		return sb.toString();
 	}
 
@@ -140,8 +140,12 @@ public class ConteudoTabelaDB<E> {
 							sb.append(atributoId.get(registro));
 							sb.append("', ");
 	
-						}else if(atributoId.getBoolean(registro)== boolean.class){
-							
+						}else if(atributoId.getType()== boolean.class){
+							if(atributoId.getBoolean(registro)) {
+								sb.append("1, ");
+							}else {
+								sb.append("0, ");
+							}
 						}else {
 							sb.append(atributoId.get(registro));
 							sb.append(", ");

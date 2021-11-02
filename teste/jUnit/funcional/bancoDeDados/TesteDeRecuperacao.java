@@ -1,7 +1,13 @@
 package teste.jUnit.funcional.bancoDeDados;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -34,6 +40,7 @@ import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
 	
+	private static final String nomeDoDB = "testeDB";
 	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	private MapaRegistro mapaRegistros;
@@ -42,6 +49,7 @@ public class TesteDeRecuperacao {
 	public static void antesDeTudo() {
 		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","root", null));
 		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "root", null);
+		destruirDB();
 		
 	}
 
@@ -53,13 +61,53 @@ public class TesteDeRecuperacao {
 	@BeforeEach
 	public void antesDeCada() {
 		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
-	
+		StringBuilder sb = new StringBuilder();
+		sb.append("Create DataBase ");
+		sb.append(nomeDoDB);
+		sb.append(" ;");
+		try {
+			Scanner leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeTabelas.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.next());
+			}
+			
+			leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeChavesEstrangeiras.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.next());
+			}
+			sb.append(mapaRegistros.gerarTodosOsInserts());
+			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
+			con.setAutoCommit(false);
+			Statement st = con.createStatement();
+			st.execute(sb.toString());
+			con.commit();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
+		depoisDeTudo();
+	}
+	private static void destruirDB() {
+		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
+		try {
+			Statement st = con.createStatement();
+			st.execute("DROP DATABASE "+nomeDoDB+" ;");
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
 		
 	}
+	
+	
 	@Test
 	public void findSetor() {
 		ConteudoTabelaDB<Setor> conteudoTabelaDB = mapaRegistros.get(Setor.class);

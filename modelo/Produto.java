@@ -4,11 +4,12 @@ import util.Real;
 
 public class Produto {
 	private int id;
+	private int idSetor;
 	private String nome;
 	private Real preco;
 	private String descricao;
 	private int quantidade;
-	private int idSetor;
+
 	
 	public Produto(String nome, String descricao, Real preco, int quantidade, int idSetor) {
 		super();
@@ -51,7 +52,9 @@ public class Produto {
 		return quantidade;
 	}
 
-	
+	public int getIdSetor() {
+		return idSetor;
+	}
 	
 	
 	
