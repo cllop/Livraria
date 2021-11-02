@@ -14,7 +14,7 @@ public class Venda {
 	private List<ItemDeVenda> itensDeVenda;
 	private List<Pagamento> pagamentos;
     
-	public Venda(int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa, List<ItemDeVenda> itensDeVenda, List<Pagamento> Pagamentos) {
+	public Venda(int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa, List<ItemDeVenda> itensDeVenda, List<Pagamento> pagamentos) {
     	this.id = id;
     	this.data = data;
     	this.vendedor = vendedor;
