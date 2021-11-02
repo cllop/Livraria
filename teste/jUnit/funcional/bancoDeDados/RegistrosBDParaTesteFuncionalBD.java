@@ -36,8 +36,8 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		mapaRegistro.put(this.criarRegistrosGerente());
 		mapaRegistro.put(this.criarRegistrosCiente());
 		mapaRegistro.put(this.criarRegistrosVendedor());
-		mapaRegistro.put(this.criarRegistrosProduto());
 		mapaRegistro.put(this.criarRegistrosSetor());
+		mapaRegistro.put(this.criarRegistrosProduto());
 		return mapaRegistro;
 	}
 	
@@ -125,7 +125,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	}
 	
 	
-	public static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
+	private static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
 		List<Vendedor> vendedores = new ArrayList<>(3);
 		List<Cliente> clientes = criarRegistrosCiente().getRegistros();
 		int ultimoIdUsuariosJaCadastrados = clientes.get(clientes.size()-1).getId();

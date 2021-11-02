@@ -1,13 +1,7 @@
 package teste.jUnit.funcional.bancoDeDados;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -36,22 +30,22 @@ import repository.RepositorioVendedor;
 import repository.jdbc.FabricaDeRepositoriosJDBC;
 import repository.jdbc.RepositorioJDBC;
 import teste.jUnit.ConteudoTabelaDB;
+import teste.jUnit.GerenciarDB;
 import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
 	
 	private static final String nomeDoDB = "testeDB";
-	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
-	private static FabricaDeConexao fabricaParaCadastroDeRegistro=  new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB+"?allowMultiQueries=true", "teste", null);
 	private static FabricaDeRepositorios fabricaDeRepositorios;
-	private MapaRegistro mapaRegistros;
+	private static MapaRegistro mapaRegistros;
+	private static GerenciarDB gerenciarDB;
 
 	@BeforeAll
 	public static void antesDeTudo() {
 		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","teste", null));
-		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "teste", null);
-		destruirDB();
-		
+		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+		gerenciarDB = new GerenciarDB(mapaRegistros, nomeDoDB);
+		gerenciarDB.destruirDB();
 	}
 
 	@AfterAll
@@ -61,58 +55,15 @@ public class TesteDeRecuperacao {
 
 	@BeforeEach
 	public void antesDeCada() {
-		
-		try {
-			mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
-			StringBuilder sb = new StringBuilder();
-			sb.append("Create DataBase ");
-			sb.append(nomeDoDB);
-			sb.append(" ;");
-			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
-			Statement st = con.createStatement();
-			st.execute(sb.toString());
-			con.close();
-			st.close();
-			con = fabricaParaCadastroDeRegistro.criarConecxao();
-			st= con.createStatement();
-			
-			Scanner leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeTabelas.sql"));
-			while(leitor.hasNextLine()) {
-				sb.append(leitor.nextLine());
-			}
-			
-			leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeChavesEstrangeiras.sql"));
-			while(leitor.hasNextLine()) {
-				sb.append(leitor.nextLine());
-			}
-			sb.append(mapaRegistros.gerarTodosOsInserts());
-			st.execute(sb.toString());
-			System.out.println("Cadastrado com sucesso");
-		} catch (Exception e) {
-			
-			e.printStackTrace();
-			throw new RuntimeException(e);
-		}
-		
+		gerenciarDB.criarDB();
+		gerenciarDB.criarTabelasEInserirDados();
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
-		depoisDeTudo();
+		gerenciarDB.destruirDB();
 	}
-	private static void destruirDB() {
-		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
-		try {
-			Statement st = con.createStatement();
-			st.execute("DROP DATABASE IF EXISTS "+nomeDoDB+" ;");
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			throw new RuntimeException();
-		}
-		
-	}
+	
 	
 	
 	@Test
