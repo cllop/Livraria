@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 import util.Real;
 
 public class Produto {
@@ -10,7 +12,6 @@ public class Produto {
 	private String descricao;
 	private int quantidade;
 
-	
 	public Produto(String nome, String descricao, Real preco, int quantidade, int idSetor) {
 		super();
 		this.nome = nome;
@@ -30,6 +31,7 @@ public class Produto {
 		this.quantidade = quantidade;
 		this.idSetor = idSetor;
 	}
+	
 	//setters
 
 	public int getId() {
@@ -61,5 +63,24 @@ public class Produto {
 		return "Produto [id=" + id + ", idSetor=" + idSetor + ", nome=" + nome + ", preco=" + preco + ", descricao="
 				+ descricao + ", quantidade=" + quantidade + "]";
 	}
-	
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(descricao, id, idSetor, nome, preco, quantidade);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Produto other = (Produto) obj;
+		return Objects.equals(descricao, other.descricao) && id == other.id && idSetor == other.idSetor
+				&& Objects.equals(nome, other.nome) && Objects.equals(preco, other.preco)
+				&& quantidade == other.quantidade;
+	}
+
 }

@@ -24,4 +24,5 @@ public class Caixa extends Funcionario {
 		return "Caixa []" + super.toString();
 	}
 
+	
 }
