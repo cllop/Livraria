@@ -97,9 +97,9 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	private static ConteudoTabelaDB<Gerente> criarRegistrosGerente(){
 		List<Gerente> gerentes = new ArrayList(3);
 		
-		gerentes.add(new Gerente(1, 18942361422l, "Claudia", "Alvares", "Claudinha", "Brasil", "Bahia", "Salvador", "Rua Lopes Trovao", "Massaranduba", 40435000, (short)62, (byte)55, (byte)71, 984824479, true, false));
-		gerentes.add(new Gerente(2, 19455377833l, "Juliana", "Oliveira", "july", "Brasil", "Bahia", "Camacari", "Rua Coracao de Maria", "Phoc I", 42800970, (short)281, (byte)55, (byte)71, 915680927, true, false));
-		gerentes.add(new Gerente(3, 19455377833l, "Victor", "Araujo", "vitinho", "Brasil", "Bahia", "Salvavor", "Rua Iracema", "Pituacu", 41740140, (short)43, (byte)55, (byte)71, 909738266, true, false));
+		gerentes.add(new Gerente(1, 18942361422l, "Claudia", "Alvares", "Claudinha", "1234", "Brasil", "Bahia", "Salvador", "Rua Lopes Trovao", "Massaranduba", 40435000, (short)62, (byte)55, (byte)71, 984824479, true, false));
+		gerentes.add(new Gerente(2, 19455377833l, "Juliana", "Oliveira", "july", "2090", "Brasil", "Bahia", "Camacari", "Rua Coracao de Maria", "Phoc I", 42800970, (short)281, (byte)55, (byte)71, 915680927, true, false));
+		gerentes.add(new Gerente(3, 19455377833l, "Victor", "Araujo", "vitinho", "8990", "Brasil", "Bahia", "Salvavor", "Rua Iracema", "Pituacu", 41740140, (short)43, (byte)55, (byte)71, 909738266, true, false));
 
 		return new ConteudoTabelaDB<>(Gerente.class, gerentes);
 	}
@@ -110,9 +110,9 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		List<Gerente> gerentes = criarRegistrosGerente().getRegistros();
 		int ultimoIdDeUsuariosJaCadastrados = gerentes.get(gerentes.size()-1).getId();
 				
-		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 17941361533l, "Lucas", "Silva", "luscax","Portugal","Distrito de Lisboa","Lisboa","Rua Lopes Trovao", "Massaranduba", 40435000, (short)798, (byte)55, (byte)71, 919563879, true));
-		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 15342341407l, "Stephanie", "Neves", "ster", "Japao","Hokkaido","Sapporo" ,"Rua Lopes Trovao", "Massaranduba", 40435000, (short)109, (byte)55, (byte)71, 942567798, true));
-		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 82183837983l, "Fabio Henrique", "Ferreira", "Fabio", "Estados Unidos", "Alasca", "Anchorage", "Rua Beatriz", "Barroso", 60862700, (short)749, (byte)55, (byte)85, 944002892, true));
+		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 17941361533l, "Lucas", "Silva", "luscax", "123abc","Portugal","Distrito de Lisboa","Lisboa","Rua Lopes Trovao", "Massaranduba", 40435000, (short)798, (byte)55, (byte)71, 919563879, true));
+		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 15342341407l, "Stephanie", "Neves", "ster", "123qwr", "Japao","Hokkaido","Sapporo" ,"Rua Lopes Trovao", "Massaranduba", 40435000, (short)109, (byte)55, (byte)71, 942567798, true));
+		caixas.add(new Caixa(++ultimoIdDeUsuariosJaCadastrados, 82183837983l, "Fabio Henrique", "Ferreira", "Fabio", "love999","Estados Unidos", "Alasca", "Anchorage", "Rua Beatriz", "Barroso", 60862700, (short)749, (byte)55, (byte)85, 944002892, true));
 
 		return new ConteudoTabelaDB<>(Caixa.class, caixas);
 	}
@@ -122,10 +122,10 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		List<Cliente> clientes = new ArrayList<>(3);
 		List<Caixa> caixas = criarRegistrosCaixa().getRegistros();
 		int ultimoIdDeUsuariosJaCadastrados = caixas.get(caixas.size()-1).getId();
-		
-		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 1, 40028922554l, "Bleinimir", "Cunha", "Blemir", "Dojoland", "Carlitchos", "Coxs de Farinhas", "Mangueira", "Cano PVC", 47474747, (short)58, (byte)55, (byte)75, 98987744 ));
-		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 2, 98573153332l, "Shinolino", "Soares", "Linoshino", "Lagland", "IsaiEoLag", "Alto da Perturbaco", "Carvalho", "Periculosidade", 46464646, (short)57, (byte)55, (byte)71, 985859979));
-		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "Brasil", "Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Caca da Onca", "Matador de Javalis", 45454545, (short)56, (byte)1 , (byte)56, 965652287));
+
+		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 1, 40028922554l, "Bleinimir", "Cunha", "Blemir", "lourasbrasil9", "Dojoland", "Carlitchos","Coxs de Farinhas", "Mangueira", "Bairro aleatorio", 47474747, (short)58, (byte)55, (byte)75, 98987744));
+		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 2, 98573153332l, "Shinolino", "Soares", "Linoshino", "missbundamole2","Lagland", "IsaiEoLag", "Alto da Perturbaco", "Carvalho", "Periculosidade", 46464646, (short)57, (byte)55, (byte)71, 985859979));
+		clientes.add(new Cliente(++ultimoIdDeUsuariosJaCadastrados, 3, 11919554488l, "Sonyscleison", "Fernandes", "sony", "minecraft00","Estados Zunidos", "Matatatu de Brotas", "Eucalipto", "Caca da Onca", "Matador de Javalis", 45454545, (short)56, (byte)1 , (byte)56, 965652287));
 		
 		return new ConteudoTabelaDB<>(Cliente.class, clientes);
 	}
@@ -136,9 +136,9 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 		List<Cliente> clientes = criarRegistrosCliente().getRegistros();
 		int ultimoIdUsuariosJaCadastrados = clientes.get(clientes.size()-1).getId();
 		
-		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 7145584521l, "Gabriela", "Veiga", "Gazela", "Venezuela", "Rondonia", "Cacatua", "Nave-Mae", "Help", 55655252, (short)45, (byte)55, (byte)77, 55586858, true));
-		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 5641578545l, "Geovanna", "Carvalho", "Geogeo", "Vaticano", "Groelandia", "SAnta Maria", "Borboletas Psicodelicas", "Pred. Limpo", 1235896, (short)78, (byte)29, (byte)00, 75562265, true));
-		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 4585565145l, "Michele", "Lisboa", "Lesley", "Joanesburgo", "Acre", "Writable", "Undefined", "Source", 236987451, (short)65, (byte)48, (byte)47, 45785415, true));
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 7145584521l, "Gabriela", "Veiga", "Gazela", "amazonia78","Venezuela", "Rondonia", "Cacatua", "Nave-Mae", "Help", 55655252, (short)45, (byte)55, (byte)77, 55586858, true));
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 5641578545l, "Geovanna", "Carvalho", "Geogeo", "madeira222","Vaticano", "Groelandia", "SAnta Maria", "Borboletas Psicodelicas", "Pred. Limpo", 1235896, (short)78, (byte)29, (byte)00, 75562265, true));
+		vendedores.add(new Vendedor(++ultimoIdUsuariosJaCadastrados, 4585565145l, "Michele", "Lisboa", "Lesley", "88barackobama","Joanesburgo", "Acre", "Writable", "Undefined", "Source", 236987451, (short)65, (byte)48, (byte)47, 45785415, true));
 		
 		return new ConteudoTabelaDB<>(Vendedor.class, vendedores);
 	}

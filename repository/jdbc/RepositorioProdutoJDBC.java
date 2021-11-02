@@ -62,7 +62,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 		try {
 
-			ps = conexao.prepareStatement("SELECT produto FROM produto WHERE produto.id=?;");
+			ps = conexao.prepareStatement("SELECT * FROM produto WHERE produto.id=?;");
 
 			ps.setInt(1, id);
 

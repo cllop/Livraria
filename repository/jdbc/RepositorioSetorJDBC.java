@@ -46,7 +46,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 	
-	public Setor findById(int id) {
+	public Setor find(int id) {
 		Connection con = super.getConexao();
 
 		boolean jaExisteConexao;
@@ -61,7 +61,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			
-			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produtos WHERE setor.id=? ");
+			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produtos WHERE setor.id=?;");
 			
 			ps.setInt(1, id);
 			
@@ -70,7 +70,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 			return lerSetor(rs);
 			
 		}catch(SQLException e) {
-			throw new RuntimeException("Operação não pode ser concluida");
+			throw new RuntimeException("Operação não pode ser concluida", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -111,9 +111,4 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 
-	
-	public Setor find(int id) {
-		return null;
-	}
-	
 }

@@ -121,7 +121,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"SELECT * FROM cliente WHERE id=?"
+					"SELECT * FROM perfilCliente WHERE id=?"
 					);
 			ps.setInt(1, id);
 			
@@ -130,7 +130,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			return lerCliente(rs);
 			
 		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível encontrar cliente!", e);
+			throw new RuntimeException("Não foi possível encontrar cliente.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
