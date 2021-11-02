@@ -1,7 +1,13 @@
 package teste.jUnit.funcional.bancoDeDados;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -11,6 +17,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import config.FabricaDeConexao;
+import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
@@ -18,42 +26,89 @@ import modelo.Produto;
 import modelo.Setor;
 import modelo.Vendedor;
 import repository.FabricaDeRepositorios;
+import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
 import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
+import repository.jdbc.FabricaDeRepositoriosJDBC;
 import repository.jdbc.RepositorioJDBC;
 import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
-
+	
+	private static final String nomeDoDB = "testeDB";
+	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	private MapaRegistro mapaRegistros;
 
 	@BeforeAll
 	public static void antesDeTudo() {
-
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","root", null));
+		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "root", null);
+		destruirDB();
+		
 	}
 
 	@AfterAll
 	public static void depoisDeTudo() {
-
+		
 	}
 
 	@BeforeEach
-
 	public void antesDeCada() {
-
+		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+		StringBuilder sb = new StringBuilder();
+		sb.append("Create DataBase ");
+		sb.append(nomeDoDB);
+		sb.append(" ;");
+		try {
+			Scanner leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeTabelas.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.next());
+			}
+			
+			leitor = new Scanner(new File("Dados Teste/Para Teste/CodigoDsParaCriacaoDeChavesEstrangeiras.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.next());
+			}
+			sb.append(mapaRegistros.gerarTodosOsInserts());
+			Connection con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
+			con.setAutoCommit(false);
+			Statement st = con.createStatement();
+			st.execute(sb.toString());
+			con.commit();
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
-
+		depoisDeTudo();
 	}
-
+	private static void destruirDB() {
+		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
+		try {
+			Statement st = con.createStatement();
+			st.execute("DROP DATABASE "+nomeDoDB+" ;");
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException();
+		}
+		
+	}
+	
+	
+	@Test
 	public void findSetor() {
 		ConteudoTabelaDB<Setor> conteudoTabelaDB = mapaRegistros.get(Setor.class);
 		List<Setor> setoresEsperados = conteudoTabelaDB.getRegistros();
@@ -100,7 +155,7 @@ public class TesteDeRecuperacao {
 	@Test
 	public void findFornecedor() {
 
-		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get((Fornecedor.class));
+		ConteudoTabelaDB<Fornecedor> conteudoDaTabelaFornecedor = mapaRegistros.get(Fornecedor.class);
 		List<Fornecedor> fornecedoresEsperados = conteudoDaTabelaFornecedor.getRegistros();
 		RepositorioFornecedor repositorio = fabricaDeRepositorios.criarRepositorioFornecedor();
 
@@ -170,6 +225,29 @@ public class TesteDeRecuperacao {
 	}
 
 	@Test
+
+	public void findCaixa() {
+		
+		ConteudoTabelaDB<Caixa> conteudoDaTabelaCaixa = mapaRegistros.get(Caixa.class);
+		List<Caixa> caixasEsperados = conteudoDaTabelaCaixa.getRegistros();
+		RepositorioCaixa repositorio = fabricaDeRepositorios.criarRepositorioCaixa();
+		
+		iniciarConecxaoSePreciso(repositorio);
+		
+		List<Executable> listaDeAssercoes = new ArrayList<>(caixasEsperados.size());
+		
+		for (Caixa caixaEsperado : caixasEsperados) {
+			
+			Caixa caixaEncontrado = repositorio.find(caixaEsperado.getId());
+			
+			listaDeAssercoes.add(() ->{
+				Assertions.assertEquals(caixaEsperado, caixaEncontrado, "\nCaixa encontrado diferente: \n" + caixaEncontrado + "\nDeveria ser: \n" + caixaEsperado + "\n'");
+			
+			});
+		}
+		
+		Assertions.assertAll(listaDeAssercoes);
+	}
 	public void findProduto() {
 		ConteudoTabelaDB<Produto> conteudoDaTabelaProduto = mapaRegistros.get(Produto.class);
 		List<Produto> produtosEsperados = conteudoDaTabelaProduto.getRegistros();
@@ -186,6 +264,7 @@ public class TesteDeRecuperacao {
 					Assertions.assertEquals(produtoEsperado, produtoEncontrado, "\nProduto encontrado diferente: \n"
 							+ produtoEncontrado + "\nDeveria ser: \n" + produtoEsperado + "\n");
 				}
+
 			});
 		}
 		Assertions.assertAll(listaDeAssercoes);

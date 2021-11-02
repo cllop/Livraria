@@ -24,4 +24,12 @@ public class MapaRegistro {
 		return map.get(clazz);
 	}
 	
+	public String gerarTodosOsInserts() {
+		StringBuilder sb = new StringBuilder();
+		for(ConteudoTabelaDB conteudoTabela: this.map.values()) {
+			sb.append(conteudoTabela.gerarComandosDeInsert());
+		}
+		return sb.toString();
+	}
+	
 }

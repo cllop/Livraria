@@ -60,12 +60,12 @@ public class AdicionarProduto extends JPanel {
 		add(lblNewLabel_3);
 		
 		tfPreco = new JTextField();
-		tfPreco.setBounds(10, 75, 86, 20);
+		tfPreco.setBounds(10, 75, 259, 20);
 		add(tfPreco);
 		tfPreco.setColumns(10);
 		
 		tfQuantidade = new JTextField();
-		tfQuantidade.setBounds(10, 119, 86, 20);
+		tfQuantidade.setBounds(10, 119, 259, 20);
 		add(tfQuantidade);
 		tfQuantidade.setColumns(10);
 		
@@ -93,20 +93,6 @@ public class AdicionarProduto extends JPanel {
 			}
 		});
 		add(btnCadastrarProduto);
-		
-		JButton btnCadastrarLivro = new JButton("Cadastrar Livro");
-		btnCadastrarLivro.setBounds(390, 266, 161, 23);
-		btnCadastrarLivro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nome= tfNome.getText();
-				String descricao= tfDescricao.getText();
-				Real preco= new Real(tfPreco.getText());
-				int quantidade= Integer.parseInt(tfQuantidade.getText());
-				Produto produto= new Produto(nome, descricao, preco, quantidade);
-				gerenciadorProduto.adicionarLivro(produto);
-			}
-		});
-		add(btnCadastrarLivro);
 
 	}
 }

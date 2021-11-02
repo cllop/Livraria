@@ -172,13 +172,9 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 		while (conjuntoDeResultados.next()) {
 
-			int id = conjuntoDeResultados.getInt("id");
-			String nome = conjuntoDeResultados.getString("nome");
-			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
-			String descricao = conjuntoDeResultados.getString("descricao");
-			int quantidade = conjuntoDeResultados.getInt("quantidade");
+			
 
-			produtos.add(new Produto(id, nome, descricao, preco, quantidade));
+			produtos.add(apenasLerProduto(conjuntoDeResultados));
 
 		}
 		return produtos;
@@ -189,19 +185,20 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		boolean existeResultado = conjuntoDeResultados.next();
 
 		if (existeResultado) {
-
-			int id = conjuntoDeResultados.getInt("id");
-			String nome = conjuntoDeResultados.getString("nome");
-			Real preco = new Real(conjuntoDeResultados.getInt("preco"));
-			String descricao = conjuntoDeResultados.getString("descricao");
-			int quantidade = conjuntoDeResultados.getInt("quantidade");
-
-			return new Produto(id, nome, descricao, preco, quantidade);
-
+			return apenasLerProduto(conjuntoDeResultados);	
 		} else {
-
 			throw new RuntimeException("Produto não encontrado");
 		}
+	}
+	
+	public static Produto apenasLerProduto(ResultSet conjuntoDeResultados) throws SQLException {
+		
+		int id = conjuntoDeResultados.getInt("id");
+		String nome = conjuntoDeResultados.getString("nome");
+		Real preco = new Real(conjuntoDeResultados.getInt("preco"));
+		String descricao = conjuntoDeResultados.getString("descricao");
+		int quantidade = conjuntoDeResultados.getInt("quantidade");
 
+		return new Produto(id, nome, descricao, preco, quantidade);
 	}
 }

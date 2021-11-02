@@ -4,8 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import config.FabricaDeConexao;
+import modelo.Produto;
 import modelo.Setor;
 import repository.RepositorioSetor;
 
@@ -26,7 +29,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 		PreparedStatement ps;
 		try {
-			ps = con.prepareStatement("SELECT * FROM setor WHERE nome=?");
+			ps = con.prepareStatement("SELECT produto.*, setor.id AS idSetor, setor.nome FROM setor LEFT JOIN produtos WHERE setor.id=? ");
 			ps.setString(1, nome);
 			ps.execute();
 			
@@ -58,7 +61,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			
-			ps = con.prepareStatement("SELECT * FROM setor WHERE id=? ");
+			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produtos WHERE setor.id=? ");
 			
 			ps.setInt(1, id);
 			
@@ -75,17 +78,54 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 	
-	public Setor lerSetor(ResultSet conjuntoDeResultados) {
+	public Setor lerSetor(ResultSet conjuntoDeResultados) throws SQLException {
 		
 		if(conjuntoDeResultados.next()) {
+<<<<<<< Updated upstream
+=======
 			
+>>>>>>> Stashed changes
+
+			int id = conjuntoDeResultados.getInt("idSetor");
+			String nome = conjuntoDeResultados.getString("nome");
+			String strIdProduto = conjuntoDeResultados.getString("id");
+			int atualId = id;
+			
+			List<Produto> produtos = new ArrayList<>(conjuntoDeResultados.getRow());
+			
+			if(strIdProduto != null) {
+				Produto produto = RepositorioProdutoJDBC.apenasLerProduto(conjuntoDeResultados);
+				produtos.add(produto);
+			}
+			
+			while(conjuntoDeResultados.next() && id == atualId) {
+				if(strIdProduto != null) {
+					Produto produto = RepositorioProdutoJDBC.apenasLerProduto(conjuntoDeResultados);
+					produtos.add(produto);
+				}
+				atualId = conjuntoDeResultados.getInt("idSetor");
+			}
+		
+			return new Setor(id, nome, produtos);
+<<<<<<< Updated upstream
+			
+=======
+
 			int id = conjuntoDeResultados.getInt("id");
 			String nome = conjuntoDeResultados.getString("nome");
 			return new Setor(id, nome, null);
 			
+
+>>>>>>> Stashed changes
 		} else {
 			
 			throw new RuntimeException("Setor não encontrado");
 		}
 	}
+
+	
+	public Setor find(int id) {
+		return null;
+	}
+	
 }

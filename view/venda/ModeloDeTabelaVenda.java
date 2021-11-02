@@ -31,10 +31,15 @@ public class ModeloDeTabelaVenda implements TableModel{
 	public String getColumnName(int columnIndex) {
 		switch(columnIndex){
 		case 0:
-			return "ID Produto ";
+			return "ID Produto: ";
 		case 1:
-			return "Nome ";
-		***
+			return "Nome: ";
+		case 3:
+			return "Quantidade: ";
+		case 4:
+			return "Valor unitário(R$): ";
+		case 5:
+			return "Valor total(R$): ";
 		}
 		return null;
 	}

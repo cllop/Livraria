@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import modelo.Vendedor;
+import repository.RepositorioCliente;
 import repository.RepositorioVendedor;
 import view.GerenciadorPrincipal;
 
@@ -21,7 +22,7 @@ public class SelecionarVendedorParaVenda extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public SelecionarVendedorParaVenda(GerenciadorPrincipal gerenciadorPrincipal ,RepositorioVendedor repositorio) {
+	public SelecionarVendedorParaVenda(GerenciadorPrincipal gerenciadorPrincipal ,RepositorioVendedor repositorio, RepositorioCliente repositorioCliente) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
 		
@@ -31,7 +32,7 @@ public class SelecionarVendedorParaVenda extends JPanel {
 				int idVendedor = Integer.parseInt(tfCodigoVendedor.getText());
 				try { 
 					Vendedor vendedor = repositorio.find(idVendedor);
-					JanelaSelecionarCliente selecionarCliente = new JanelaSelecionarCliente(gerenciadorPrincipal, vendedor);
+					JanelaSelecionarCliente selecionarCliente = new JanelaSelecionarCliente(gerenciadorPrincipal, vendedor, repositorioCliente);
 					gerenciadorPrincipal.esperarParaClienteInserirDados(vendedor);
 					
 				}catch(Exception ex){
