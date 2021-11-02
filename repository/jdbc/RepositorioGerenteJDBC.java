@@ -12,7 +12,6 @@ import modelo.Gerente;
 import repository.RepositorioGerente;
 
 public class RepositorioGerenteJDBC extends RepositorioJDBC implements RepositorioGerente {
-
 	public RepositorioGerenteJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
@@ -28,29 +27,51 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		}
 		PreparedStatement ps;
 		try {
-			// ver se existe usuario existe com aquele cpf
 			ps = con.prepareStatement("SELECT id FROM usuario WHERE cpf=?");
 			ps.setLong(1, gerente.getCpf());
 
 			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
-			int id = -1;
+			boolean existeUsuario = rs.next();
 
-			if (temResultado) {
-				// se o usuario existe voce pega o id dele com aquele cpf
-				id = rs.getInt(1);
-				ps.close();
-				ps = con.prepareStatement("INSERT INTO PerfilGerente (id, superGerente) VALUES (?,?)");
-
+			if (existeUsuario) {
+				int id = rs.getInt("id");
+				ps = con.prepareStatement("INSERT INTO perfilGerente (id, ativo, superGerente) VALUES (?,?,?)");
+				ps.setInt(1, id);
+				ps.setBoolean(2, gerente.isAtivo());
+				ps.setBoolean(3, gerente.isSuperGerente());
+				ps.execute();
 			} else {
-				// se o usuario nï¿½o existe voce cria ele e pega o id dele com aquele cpf
+				ps = con.prepareStatement(
+						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone) "
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+								+ "INSERT INTO perfilGerente (id, ativo, superGerente) VALUES (LAST_INSERT_ID(), ?, ?)");
+
+				ps.setLong(1, gerente.getCpf());
+				ps.setString(2, gerente.getNome());
+				ps.setString(3, gerente.getSobrenome());
+				ps.setString(4, gerente.getNomeDeUsuario());
+				ps.setString(5, gerente.getPais());
+				ps.setString(6, gerente.getEstado());
+				ps.setString(7, gerente.getCidade());
+				ps.setString(8, gerente.getBairro());
+				ps.setString(9, gerente.getRua());
+				ps.setInt(10, gerente.getCep());
+				ps.setInt(11, gerente.getNumeroDaResidencia());
+				ps.setShort(12, gerente.getDdi());
+				ps.setShort(13, gerente.getDdd());
+				ps.setInt(14, gerente.getTelefone());
+				ps.setBoolean(15, gerente.isAtivo());
+				ps.setBoolean(16, gerente.isSuperGerente());
+
+				ps.execute();
 			}
-			// cria um perfilcaixa com id de usuario
-
 		} catch (SQLException e) {
-			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
+			throw new RuntimeException("Não foi possível cadastrar este gerente.", e);
+		} finally {
+			if (!jaExisteConexao) {
+				super.fecharConexao();
+			}
 		}
-
 	}
 
 	public void remove(Gerente gerente) {
@@ -66,11 +87,11 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		try {
 			ps = con.prepareStatement("DELETE INTO gerente WHERE id=?");
 			ps.setInt(1, gerente.getId());
-			
+
 		} catch (SQLException e) {
-			
+
 			throw new RuntimeException("Nï¿½o foi possï¿½vel remover gerente.", e);
-			
+
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -105,6 +126,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 
 	public Gerente find(int id) {
 		Connection con = super.getConexao();
+		
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
@@ -112,17 +134,18 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		} else {
 			jaExisteConexao = true;
 		}
-		PreparedStatement ps;
+		PreparedStatement ps = null;
+		
 		try {
 			ps = con.prepareStatement(
-					"SELECT * FROM usuario INNER JOIN gerente ON usuario.id = gerente.id WHERE gerente.id=?");
+					"SELECT usuario.*, perfilGerente.id AS idPerfilGerente, perfilGerente.ativo FROM perfilGerente LEFT JOIN usuario ON perfilGerente.id = usuario.id WHERE id= ?;");
+			
 			ps.setInt(1, id);
-
-			ResultSet rs = ps.executeQuery();
-			return lerGerente(rs);
-
+			ResultSet conjuntoDeResultados = ps.executeQuery();
+			
+			return lerGerente(conjuntoDeResultados);
 		} catch (SQLException e) {
-			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
+			throw new RuntimeException("Não foi possível encontrar gerente.", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -146,7 +169,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			ps.setLong(1, cpf);
 
 			ResultSet rs = ps.executeQuery();
-			
+
 			return lerGerente(rs);
 
 		} catch (SQLException e) {
@@ -176,58 +199,58 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			ResultSet rs = ps.executeQuery();
 
 			return lerGerentes(rs);
-			
-	
 
-		}catch(SQLException e){
-			
-		throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
-		
-		}finally{
-			
+		} catch (SQLException e) {
+
+			throw new RuntimeException("Nï¿½o foi possï¿½vel encontrar gerente!", e);
+
+		} finally {
+
 			if (!jaExisteConexao) {
-			super.fecharConexao();
+				super.fecharConexao();
 			}
 		}
 	}
 
-	public Gerente lerGerente(ResultSet conjuntoDeResultados) throws SQLException {
-		boolean existeResultado = conjuntoDeResultados.next();
-
-		if (existeResultado) {
-			int id = conjuntoDeResultados.getInt("id");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			long telefone = conjuntoDeResultados.getLong("telefone");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
-			byte ddi = conjuntoDeResultados.getByte("ddi");
-			byte ddd = conjuntoDeResultados.getByte("ddd");
-			String pais = conjuntoDeResultados.getString("pais");
-			String cidade = conjuntoDeResultados.getString("cidade");
-			String estado = conjuntoDeResultados.getString("estado");
-			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-			boolean ehSuperGerente = conjuntoDeResultados.getBoolean("ehSuperGerente");
-
-			return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep,
-					numeroDaResidencia, ddi, ddd, ddd, ativo, ehSuperGerente);
-
+	private static Gerente lerGerente(ResultSet conjuntoDeResultados) throws SQLException {
+		if (conjuntoDeResultados.next()) {
+			return apenasLerGerente(conjuntoDeResultados);
 		} else {
-
-			throw new RuntimeException("Gerente nï¿½o encontrado");
-
+			throw new RuntimeException("Gerente não encontrado");
 		}
 	}
 
 	public List<Gerente> lerGerentes(ResultSet conjuntoDeResultados) throws SQLException {
+		List<Gerente> gerentes = new ArrayList<>();
 
-			//listaDeGerente.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, +estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
+		while (conjuntoDeResultados.next()) {
+			gerentes.add(apenasLerGerente(conjuntoDeResultados));
 		}
-		return listaDeGerente;
+
+		return gerentes;
+	}
+
+	private static Gerente apenasLerGerente(ResultSet conjuntoDeResultados) throws SQLException {
+		int id = conjuntoDeResultados.getInt("id");
+		long cpf = conjuntoDeResultados.getLong("cpf");
+		String nome = conjuntoDeResultados.getString("nome");
+		String sobrenome = conjuntoDeResultados.getString("sobrenome");
+		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String pais = conjuntoDeResultados.getString("pais");
+		String cidade = conjuntoDeResultados.getString("cidade");
+		String estado = conjuntoDeResultados.getString("estado");
+		String rua = conjuntoDeResultados.getString("rua");
+		String bairro = conjuntoDeResultados.getString("bairro");
+		int cep = conjuntoDeResultados.getInt("cep");
+		int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
+		byte ddi = conjuntoDeResultados.getByte("ddi");
+		byte ddd = conjuntoDeResultados.getByte("ddd");
+		int telefone = conjuntoDeResultados.getInt("telefone");
+		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+		boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
+	
+		return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep,
+				numeroDaResidencia, ddi, ddd, telefone, ativo, superGerente);
 	}
 
 }

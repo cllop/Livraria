@@ -9,18 +9,14 @@ import java.util.List;
 
 import config.FabricaDeConexao;
 import modelo.Caixa;
-import modelo.Fornecedor;
-import modelo.Vendedor;
 import repository.RepositorioCaixa;
 
 public class RepositorioCaixaJDBC extends RepositorioJDBC implements RepositorioCaixa {
-
 	public RepositorioCaixaJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
 
-	@Override
-	public void add(Caixa Caixa) {
+	public void add(Caixa caixa) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -30,51 +26,50 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			jaExisteConexao = true;
 		}
 		PreparedStatement ps;
+
 		try {
-			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE cpf=?");
+			ps = con.prepareStatement("SELECT id FROM usuario WHERE cpf=?");
 
 			ResultSet rs = ps.executeQuery();
-			boolean temResultado = rs.next();
 			boolean existeUsuario = rs.next();
-			
-			if (temResultado) {
-				int id = rs.getInt("id");
 
+			if (existeUsuario) {
+				int id = rs.getInt("id");
+				ps = con.prepareStatement("INSERT INTO perfilCaixa (id, ativo) VALUES (?, ?)");
+				ps.setInt(1, id);
+				ps.setBoolean(2, caixa.isAtivo());
+				ps.execute();
 			} else {
 				ps = con.prepareStatement(
-						"INSERT INTO perfilCaixa (cpf, nome, sobrenome, nomeDeUsuario, bairro, rua, cep, numeroDaResidencia, ddi, ddd, numeroTelefone) "
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone) "
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
+								+ "INSERT INTO perfilCaixa (id, ativo) VALUES (LAST_INSERT_ID(), ?)");
 
-				ps.setLong(1, Caixa.getCpf());
-				ps.setString(2, Caixa.getNome());
-				ps.setString(3, Caixa.getSobrenome());
-				ps.setString(4, Caixa.getNomeDeUsuario());
-				ps.setString(5, Caixa.getRua());
-				ps.setString(6, Caixa.getBairro());
-				ps.setInt(7, Caixa.getCep());
-				ps.setInt(8, Caixa.getNumeroDaResidencia());
+				ps.setLong(1, caixa.getCpf());
+				ps.setString(2, caixa.getNome());
+				ps.setString(3, caixa.getSobrenome());
+				ps.setString(4, caixa.getNomeDeUsuario());
+				ps.setString(5, caixa.getPais());
+				ps.setString(6, caixa.getEstado());
+				ps.setString(7, caixa.getCidade());
+				ps.setString(8, caixa.getBairro());
+				ps.setString(9, caixa.getRua());
+				ps.setInt(10, caixa.getCep());
+				ps.setInt(11, caixa.getNumeroDaResidencia());
+				ps.setShort(12, caixa.getDdi());
+				ps.setShort(13, caixa.getDdd());
+				ps.setInt(14, caixa.getTelefone());
+				ps.setBoolean(15, caixa.isAtivo());
 
 				ps.execute();
-			}if(existeUsuario) {
-				
-				
 			}
-
-			// ver se existe usuario existe com aquele cpf
-
-			// se o usuario existe voce pega o id dele com aquele cpf
-
-			// se o usuario não existe voce cria ele e pega o id dele com aquele cpf
-
-			// cria um perfilcaixa com id de usuario
 		} catch (SQLException e) {
-
+			throw new RuntimeException("Não foi possível cadastrar este caixa.", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
 			}
 		}
-
 	}
 
 	public void remove(Caixa caixa) {
@@ -110,16 +105,25 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			jaExisteConexao = true;
 		}
 		PreparedStatement ps;
+
 		try {
 			ps = con.prepareStatement(
-					"UPDATE perfilcaixa SET nome=?, sobrenome=?, nomeDeUsuario=?, bairro=?, rua=?, cep=?, numeroDaResidencia=?, ddi=?, ddd=?, numeroTelefone=? WHERE id=?");
+					"UPDATE usuario SET nome=?, sobrenome=?, nomeDeUsuario=?, pais=?, estado=?, cidade=?, rua=?, bairro=?, cep=?, numeroDaResidencia=?, ddi=?, ddd=?, numeroTelefone=? WHERE id=?;"
+							+ "UPTADE perfilCaixa SET ativo=? WHERE id=?;");
 			ps.setString(1, caixa.getNome());
 			ps.setString(2, caixa.getSobrenome());
 			ps.setString(3, caixa.getNomeDeUsuario());
-			ps.setString(4, caixa.getRua());
-			ps.setString(5, caixa.getBairro());
-			ps.setInt(6, caixa.getCep());
-			ps.setInt(7, caixa.getNumeroDaResidencia());
+			ps.setString(4, caixa.getPais());
+			ps.setString(5, caixa.getEstado());
+			ps.setString(6, caixa.getCidade());
+			ps.setString(7, caixa.getRua());
+			ps.setString(8, caixa.getBairro());
+			ps.setInt(9, caixa.getCep());
+			ps.setInt(10, caixa.getNumeroDaResidencia());
+			ps.setShort(11, caixa.getDdi());
+			ps.setShort(12, caixa.getDdd());
+			ps.setInt(13, caixa.getTelefone());
+			ps.setBoolean(14, caixa.isAtivo());
 
 			ps.execute();
 		} catch (SQLException e) {
@@ -141,22 +145,19 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		} else {
 			jaExisteConexao = true;
 		}
-
 		PreparedStatement ps = null;
 
 		try {
-
-			ps = con.prepareStatement("SELECT * FROM perfilcaixa WHERE id= ?; ");
+			ps = con.prepareStatement(
+					"SELECT usuario.*, perfilCaixa.id AS idPerfilCaixa, perfilCaixa.ativo FROM perfilcaixa LEFT JOIN usuario ON perfilCaixa.id = usuario.id WHERE id= ?;");
 
 			ps.setInt(1, id);
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 
 			return lerCaixa(conjuntoDeResultados);
-
-		} catch (SQLException execao) {
-
-			throw new RuntimeException("Operação não pode ser concluida");
+		} catch (SQLException e) {
+			throw new RuntimeException("Não foi possível encontrar este caixa.", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -164,7 +165,6 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 
-	@Override
 	public List<Caixa> findBynome(String nome) {
 		Connection con = super.getConexao();
 		boolean jaExisteConexao;
@@ -175,16 +175,14 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 			jaExisteConexao = true;
 		}
 		PreparedStatement ps;
+
 		try {
 			ps = con.prepareStatement("SELECT * FROM caixa WHERE nome=?;");
-
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 
 			return lerCaixas(conjuntoDeResultados);
-
-		} catch (SQLException execao) {
-
-			throw new RuntimeException("Operação não pode ser concluida");
+		} catch (SQLException e) {
+			throw new RuntimeException("Operação não pode ser concluida", e);
 		} finally {
 			if (!jaExisteConexao) {
 				super.fecharConexao();
@@ -192,53 +190,43 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 
-	private List<Caixa> lerCaixas(ResultSet conjuntoDeResultados) throws SQLException {
-
-		List<Caixa> caixa = new ArrayList<>();
+	private static List<Caixa> lerCaixas(ResultSet conjuntoDeResultados) throws SQLException {
+		List<Caixa> caixas = new ArrayList<>();
 
 		while (conjuntoDeResultados.next()) {
-
-			int id = conjuntoDeResultados.getInt("id");
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			byte ddd = conjuntoDeResultados.getByte("DDD");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
-			
-			caixa.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
-
+			caixas.add(apenasLerCaixa(conjuntoDeResultados));
 		}
 
-		return caixa;
+		return caixas;
 	}
 
-	private Caixa lerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
-
+	private static Caixa lerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
 		if (conjuntoDeResultados.next()) {
-
-			int id = conjuntoDeResultados.getInt("id");
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			byte ddd = conjuntoDeResultados.getByte("DDD");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
-
-			return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+			return apenasLerCaixa(conjuntoDeResultados);
 		} else {
 			throw new RuntimeException("Vendedor não encontrado");
 		}
+	}
 
+	private static Caixa apenasLerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
+		int id = conjuntoDeResultados.getInt("id");
+		long cpf = conjuntoDeResultados.getLong("cpf");
+		String nome = conjuntoDeResultados.getString("nome");
+		String sobrenome = conjuntoDeResultados.getString("sobrenome");
+		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String pais = conjuntoDeResultados.getString("pais");
+		String estado = conjuntoDeResultados.getString("estado");
+		String cidade = conjuntoDeResultados.getString("cidade");
+		String rua = conjuntoDeResultados.getString("rua");
+		String bairro = conjuntoDeResultados.getString("bairro");
+		int cep = conjuntoDeResultados.getInt("cep");
+		int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+		byte ddi = conjuntoDeResultados.getByte("DDI");
+		byte ddd = conjuntoDeResultados.getByte("DDD");
+		int telefone = conjuntoDeResultados.getInt("telefone");
+		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+
+		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep,
+				numeroDaResidencia, ddi, ddd, telefone, ativo);
 	}
 }
