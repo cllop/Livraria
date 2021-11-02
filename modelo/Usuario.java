@@ -6,20 +6,21 @@ public class Usuario {
 	private String nome;
 	private String sobrenome;
 	private String nomeDeUsuario;
+	private String senha;
 	private String pais;
 	private String estado;
 	private String cidade;
 	private String rua;
 	private String bairro;
 	private int cep;
-	private int numeroDaResidencia;
+	private short numeroDaResidencia;
 	private byte ddi;
 	private byte ddd;
 	private int telefone;
 	
 	
 	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd,
+			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
 			int telefone) {
 		super();
 		this.id = id;
@@ -42,7 +43,7 @@ public class Usuario {
 	
 
 	public Usuario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd,
+			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
 			int telefone) {
 		super();
 		this.cpf = cpf;
@@ -195,13 +196,13 @@ public class Usuario {
 
 
 
-	public int getNumeroDaResidencia() {
+	public short getNumeroDaResidencia() {
 		return numeroDaResidencia;
 	}
 
 
 
-	public void setNumeroDaResidencia(int numeroDaResidencia) {
+	public void setNumeroDaResidencia(short numeroDaResidencia) {
 		this.numeroDaResidencia = numeroDaResidencia;
 	}
 

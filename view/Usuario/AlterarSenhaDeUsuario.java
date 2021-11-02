@@ -1,9 +1,15 @@
 package view.Usuario;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JPasswordField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+
+import modelo.Usuario;
+import view.GerenciadorPrincipal;
 
 public class AlterarSenhaDeUsuario extends JPanel {
 	private JPasswordField ptfSenhaAntiga;
@@ -13,7 +19,7 @@ public class AlterarSenhaDeUsuario extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AlterarSenhaDeUsuario() {
+	public AlterarSenhaDeUsuario(GerenciadorPrincipal gerenciadorPrincipal, Usuario usuario) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Senha Antiga");
@@ -40,13 +46,17 @@ public class AlterarSenhaDeUsuario extends JPanel {
 		lblComfirmarSenhaNova.setBounds(10, 123, 149, 14);
 		add(lblComfirmarSenhaNova);
 		
-		JButton btnConfirmar = new JButton("Confirmar ");
+		JButton btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String senhaAntiga = ptfSenhaAntiga.getText();
+				String senhaNova = ptfSenhaNova.getText();
+				String senhaConfirmarSenhaString = ptfConfirmarSenha.getText();
+				
+			}
+		});
 		btnConfirmar.setBounds(422, 374, 89, 23);
 		add(btnConfirmar);
-		
-		JButton btnVoltar = new JButton("Voltar");
-		btnVoltar.setBounds(10, 374, 89, 23);
-		add(btnVoltar);
 
 	}
 }

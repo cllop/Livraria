@@ -8,7 +8,7 @@ public class Cliente extends Usuario{
 	private int idCliente;
 	
 	public Cliente(int id, int idCliente, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd,
+			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
 			int telefone) {
 		super(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd,
 				telefone);
@@ -16,7 +16,7 @@ public class Cliente extends Usuario{
 	}
 
 	public Cliente(long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd,
+			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
 			int telefone) {
 		super(cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd,
 				telefone);
