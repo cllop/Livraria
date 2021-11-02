@@ -52,7 +52,7 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(10, 314, 161, 20);
+		textRua.setBounds(10, 314, 365, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
@@ -66,20 +66,20 @@ public class AdicionarFornecedor extends JPanel {
 		textBairro.setColumns(10);
 		
 		textCEP = new JTextField();
-		textCEP.setBounds(214, 316, 161, 20);
+		textCEP.setBounds(10, 370, 161, 20);
 		add(textCEP);
 		textCEP.setColumns(10);
 		
 		JLabel lblCEP = new JLabel("CEP");
-		lblCEP.setBounds(214, 289, 46, 14);
+		lblCEP.setBounds(10, 345, 46, 14);
 		add(lblCEP);
 		
 		JLabel lblNumeroDoImovel = new JLabel("N\u00FAmero do Im\u00F3vel");
-		lblNumeroDoImovel.setBounds(10, 409, 167, 14);
+		lblNumeroDoImovel.setBounds(214, 345, 148, 14);
 		add(lblNumeroDoImovel);
 		
 		textNumeroDoImovel = new JTextField();
-		textNumeroDoImovel.setBounds(10, 442, 161, 20);
+		textNumeroDoImovel.setBounds(214, 370, 161, 20);
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
 		
@@ -119,36 +119,6 @@ public class AdicionarFornecedor extends JPanel {
 		add(textNumeroTelefone);
 		textNumeroTelefone.setColumns(10);
 		
-		JButton btnAdicionar = new JButton("Adicionar");
-		btnAdicionar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				long cnpj=Long.parseLong(textCNPJ.getText());
-				String nome=textNome.getText();
-				String nomeFantasia=textNomeFantasia.getText();
-				String rua=textRua.getText();
-				String bairro=textBairro.getText();
-				int cep=Integer.parseInt(textCEP.getText());
-				short numeroDoImovel=Short.parseShort(textNumeroDoImovel.getText());
-				short ddd = Short.parseShort(textDdd.getText());
-				short ddi = Short.parseShort(textDdi.getText());
-				int numeroTelefone = Integer.parseInt(textNumeroTelefone.getText());
-				
-				Fornecedor fornecedor=new Fornecedor(cnpj, nome, nomeFantasia, rua, bairro, cep, numeroDoImovel, ddd, ddi, numeroTelefone);
-				repositorio.add(fornecedor);
-			}
-		});
-		btnAdicionar.setBounds(692, 458, 98, 23);
-		add(btnAdicionar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				gerenciadorFornecedor.menuFornecedor();
-			}
-		});
-		btnCancelar.setBounds(584, 458, 98, 23);
-		add(btnCancelar);
-		
 		JLabel lblPais = new JLabel("Pa\u00EDs");
 		lblPais.setBounds(10, 181, 46, 14);
 		add(lblPais);
@@ -176,6 +146,39 @@ public class AdicionarFornecedor extends JPanel {
 		add(textCidade);
 		textCidade.setColumns(10);
 		
+		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				long cnpj=Long.parseLong(textCNPJ.getText());
+				String nome=textNome.getText();
+				String nomeFantasia=textNomeFantasia.getText();
+				String pais = textPais.getText();
+				String estado = textEstado.getText();
+				String cidade = textCidade.getText();
+				String rua=textRua.getText();
+				String bairro=textBairro.getText();
+				int cep=Integer.parseInt(textCEP.getText());
+				short numeroDoImovel=Short.parseShort(textNumeroDoImovel.getText());
+				short ddd = Short.parseShort(textDdd.getText());
+				short ddi = Short.parseShort(textDdi.getText());
+				int numeroTelefone = Integer.parseInt(textNumeroTelefone.getText());
+				
+				Fornecedor fornecedor=new Fornecedor(cnpj, nome, nomeFantasia, pais, estado, cidade, rua, bairro, cep, numeroDoImovel, ddd, ddi, numeroTelefone);
+				repositorio.add(fornecedor);
+			}
+		});
+		btnAdicionar.setBounds(692, 458, 98, 23);
+		add(btnAdicionar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciadorFornecedor.menuFornecedor();
+			}
+		});
+		btnCancelar.setBounds(584, 458, 98, 23);
+		add(btnCancelar);
+				
 		
 	}
 }
