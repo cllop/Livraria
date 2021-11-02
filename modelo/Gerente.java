@@ -6,7 +6,6 @@ import anotacoes.AnotacaoTabela;
 public class Gerente extends Funcionario {
 	private boolean superGerente;
 
-	
 	public Gerente(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
 			String cidade, String rua, String bairro, int cep, int numeroDaResidencia, byte ddi, byte ddd, int telefone,
 			boolean ativo, boolean superGerente) {
@@ -23,7 +22,6 @@ public class Gerente extends Funcionario {
 				ddd, telefone, ativo);
 		this.superGerente = superGerente;
 	}
-
 
 	public boolean isSuperGerente() {
 		return superGerente;
