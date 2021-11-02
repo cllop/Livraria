@@ -18,6 +18,7 @@ import modelo.Fornecedor;
 import modelo.Gerente;
 import modelo.Produto;
 import modelo.Setor;
+import modelo.Venda;
 import modelo.Vendedor;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioCaixa;
@@ -26,6 +27,7 @@ import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
 import repository.RepositorioProduto;
 import repository.RepositorioSetor;
+import repository.RepositorioVenda;
 import repository.RepositorioVendedor;
 import repository.jdbc.FabricaDeRepositoriosJDBC;
 import repository.jdbc.RepositorioJDBC;
@@ -224,10 +226,33 @@ public class TesteDeRecuperacao {
 				}
 
 			});
+			
 		}
 		Assertions.assertAll(listaDeAssercoes);
 	}
 
+	@Test
+	private void findVenda() {
+		ConteudoTabelaDB<Venda> conteudoTabelaVenda = mapaRegistros.get(Venda.class);
+		List<Venda> vendasEsperadas = conteudoTabelaVenda.getRegistros();
+		RepositorioVenda repositorio = fabricaDeRepositorios.criarRepositorioVenda();
+		
+		iniciarConecxaoSePreciso(repositorio);
+		List<Executable> listaDeAssercoes = new ArrayList<>(vendasEsperadas.size());
+		
+		for (Venda vendaEsperada : vendasEsperadas) {
+			Venda vendaEncontrada = repositorio.find(vendaEsperada.getId());
+			
+			listaDeAssercoes.add(new Executable() {
+				public void execute() throws Throwable {
+					Assertions.assertEquals(vendaEsperada, vendaEncontrada, "\nVenda encontrada diferente: \n"
+							+ vendaEncontrada + "\nDeveria ser: \n" + vendaEsperada + "\n");
+				}
+			});
+		}
+		Assertions.assertAll(listaDeAssercoes);
+	}
+	
 	private void iniciarConecxaoSePreciso(Object objeto) {
 
 		if (objeto instanceof RepositorioJDBC) {
