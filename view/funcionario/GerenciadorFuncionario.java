@@ -10,7 +10,6 @@ import repository.RepositorioCaixa;
 import repository.RepositorioFuncionario;
 import repository.RepositorioGerente;
 import repository.RepositorioVendedor;
-import view.MenuBarFuncionario;
 
 public class GerenciadorFuncionario extends JPanel {
 	private Container menuSelecionado;
@@ -50,32 +49,23 @@ public class GerenciadorFuncionario extends JPanel {
 		super.setBounds(x, y, width, height);
 	}
 
-	public void menuFuncionario() {
-	//Deveria trocar a tela para menu funcionario, e não menu bar funcionario.
-
+	public void menuFuncionario() { // deveria trocar a tela para menu funcionario, e não menu bar funcionario.
+		trocarTela(new MenuFuncionario(this));
 	}
 
 	public void cadastrarFuncionario() {
-
+		trocarTela(new TelaCadastroDeFuncionarios(this, repositorioGerente, repositorioCaixa, repositorioVendedor));
 	}
 
-	public void atualizarFuncionario() {
+	public void editarFuncionario() {
 
+	}
+	
+	public void removerFuncionario() {
+		
 	}
 
 	public void exibirFuncionarios(List<Funcionario> listaDeFuncionario) {
-
-	}
-
-	public void cadastrarGerente(Funcionario funcionario) {
-
-	}
-
-	public void cadastrarCaixa(Funcionario funcionario) {
-
-	}
-
-	public void cadastrarVendedor(Funcionario funcionario) {
 
 	}
 

@@ -14,16 +14,17 @@ import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProduto;
-import view.Venda.MetodoDePagamento;
-import view.Venda.SelecionarProdutosDaVenda;
-import view.Venda.SelecionarVendedorParaVenda;
-import view.Venda.TelaDeEspera;
-import view.Venda.TelaPagamentoEmDinheiro;
-import view.Venda.TelaPagamentoRealizado;
 import view.fornecedor.GerenciadorFornecedor;
+import view.funcionario.GerenciadorFuncionario;
 import view.produto.DadosPesquisaProdutoLivro;
 import view.produto.ExibirProduto;
 import view.produto.GerenciadorProduto;
+import view.venda.MetodoDePagamento;
+import view.venda.SelecionarProdutosDaVenda;
+import view.venda.SelecionarVendedorParaVenda;
+import view.venda.TelaDeEspera;
+import view.venda.TelaPagamentoEmDinheiro;
+import view.venda.TelaPagamentoRealizado;
 
 public class GerenciadorPrincipal extends JPanel {
 
@@ -145,7 +146,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 
 	public void menuFuncionario() {
-
+		trocarTela(new GerenciadorFuncionario(null, null, null, null));
 	}
 
 	public void menuProduto() {

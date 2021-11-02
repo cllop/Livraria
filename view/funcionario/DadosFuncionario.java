@@ -9,14 +9,12 @@ public class DadosFuncionario extends DadosUsuario {
 	JCheckBox checkBoxAtivo;
 	
 	public DadosFuncionario() {
-		
-		this.checkBoxAtivo = new JCheckBox("Ativo");
-		checkBoxAtivo.setBounds(10, 459, 97, 23);
-		add(checkBoxAtivo);
+		iniciarComponentes();
 	}
 	
 	public DadosFuncionario(Funcionario funcionario, boolean exibicao) {
 		super(funcionario, exibicao);
+		iniciarComponentes();
 		
 		if(exibicao) {
 			checkBoxAtivo.setEnabled(false);
@@ -24,4 +22,12 @@ public class DadosFuncionario extends DadosUsuario {
 		
 		checkBoxAtivo.setSelected(funcionario.isAtivo());
 	}
+	
+	private void iniciarComponentes() {
+		this.checkBoxAtivo = new JCheckBox("Ativo");
+		checkBoxAtivo.setBounds(10, 459, 97, 23);
+		add(checkBoxAtivo);
+	}
+	
+	
 }

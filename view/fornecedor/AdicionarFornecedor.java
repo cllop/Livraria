@@ -22,6 +22,9 @@ public class AdicionarFornecedor extends JPanel {
 	private JTextField textDdd;
 	private JTextField textDdi;
 	private JTextField textNumeroTelefone;
+	private JTextField textPais;
+	private JTextField textEstado;
+	private JTextField textCidade;
 
 	public AdicionarFornecedor(GerenciadorFornecedor gerenciadorFornecedor, RepositorioFornecedor repositorio) {
 		setLayout(null);
@@ -45,43 +48,43 @@ public class AdicionarFornecedor extends JPanel {
 		textNome.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 291, 46, 14);
+		lblRua.setBounds(10, 289, 46, 14);
 		add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(10, 316, 365, 20);
+		textRua.setBounds(10, 314, 161, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(10, 235, 46, 14);
+		lblBairro.setBounds(214, 233, 46, 14);
 		add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(10, 260, 365, 20);
+		textBairro.setBounds(214, 258, 161, 20);
 		add(textBairro);
 		textBairro.setColumns(10);
 		
 		textCEP = new JTextField();
-		textCEP.setBounds(10, 204, 365, 20);
+		textCEP.setBounds(214, 316, 161, 20);
 		add(textCEP);
 		textCEP.setColumns(10);
 		
 		JLabel lblCEP = new JLabel("CEP");
-		lblCEP.setBounds(10, 179, 46, 14);
+		lblCEP.setBounds(214, 289, 46, 14);
 		add(lblCEP);
 		
 		JLabel lblNumeroDoImovel = new JLabel("N\u00FAmero do Im\u00F3vel");
-		lblNumeroDoImovel.setBounds(10, 349, 109, 14);
+		lblNumeroDoImovel.setBounds(10, 409, 167, 14);
 		add(lblNumeroDoImovel);
 		
 		textNumeroDoImovel = new JTextField();
-		textNumeroDoImovel.setBounds(10, 374, 365, 20);
+		textNumeroDoImovel.setBounds(10, 442, 161, 20);
 		add(textNumeroDoImovel);
 		textNumeroDoImovel.setColumns(10);
 		
 		JLabel lblNomeFantasia = new JLabel("Nome Fantasia");
-		lblNomeFantasia.setBounds(10, 123, 98, 14);
+		lblNomeFantasia.setBounds(10, 123, 137, 14);
 		add(lblNomeFantasia);
 		
 		textNomeFantasia = new JTextField();
@@ -94,25 +97,25 @@ public class AdicionarFornecedor extends JPanel {
 		add(lblDdd);
 		
 		textDdd = new JTextField();
-		textDdd.setBounds(425, 36, 365, 20);
+		textDdd.setBounds(425, 36, 161, 20);
 		add(textDdd);
 		textDdd.setColumns(10);
 		
 		JLabel lblDdi = new JLabel("DDI");
-		lblDdi.setBounds(425, 67, 46, 14);
+		lblDdi.setBounds(626, 11, 46, 14);
 		add(lblDdi);
 		
 		textDdi = new JTextField();
-		textDdi.setBounds(425, 92, 365, 20);
+		textDdi.setBounds(626, 36, 161, 20);
 		add(textDdi);
 		textDdi.setColumns(10);
 		
 		JLabel lblNumeroTelefone = new JLabel("N\u00FAmero de Telefone");
-		lblNumeroTelefone.setBounds(425, 123, 119, 14);
+		lblNumeroTelefone.setBounds(425, 67, 119, 14);
 		add(lblNumeroTelefone);
 		
 		textNumeroTelefone = new JTextField();
-		textNumeroTelefone.setBounds(425, 148, 365, 20);
+		textNumeroTelefone.setBounds(425, 92, 365, 20);
 		add(textNumeroTelefone);
 		textNumeroTelefone.setColumns(10);
 		
@@ -145,6 +148,33 @@ public class AdicionarFornecedor extends JPanel {
 		});
 		btnCancelar.setBounds(584, 458, 98, 23);
 		add(btnCancelar);
+		
+		JLabel lblPais = new JLabel("Pa\u00EDs");
+		lblPais.setBounds(10, 181, 46, 14);
+		add(lblPais);
+		
+		textPais = new JTextField();
+		textPais.setBounds(10, 202, 161, 20);
+		add(textPais);
+		textPais.setColumns(10);
+		
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setBounds(214, 181, 46, 14);
+		add(lblEstado);
+		
+		textEstado = new JTextField();
+		textEstado.setBounds(214, 202, 161, 20);
+		add(textEstado);
+		textEstado.setColumns(10);
+		
+		JLabel lblCidade = new JLabel("Cidade");
+		lblCidade.setBounds(10, 233, 46, 14);
+		add(lblCidade);
+		
+		textCidade = new JTextField();
+		textCidade.setBounds(10, 258, 161, 20);
+		add(textCidade);
+		textCidade.setColumns(10);
 		
 		
 	}

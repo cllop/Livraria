@@ -1,21 +1,19 @@
 package view.funcionario;
 
-import javax.swing.JCheckBox;
+import modelo.Caixa;
 
-import modelo.Vendedor;
+public class DadosCaixa extends DadosFuncionario {
 
-public class DadosVendedor extends DadosFuncionario {
-
-	public DadosVendedor() {
+	public DadosCaixa() {
 
 	}
-
-	public DadosVendedor(Vendedor vendedor, boolean exibicao) {
+	
+	public DadosCaixa(Caixa caixa, boolean exibicao) {
 		super();
 	}
-
-	public Vendedor lerVendedor() { 
-		return new Vendedor(Long.parseLong(textCpf.getText()), textNome.getText(), textSobrenome.getText(),
+	
+	public Caixa lerCaixa() {
+		return new Caixa(Long.parseLong(textCpf.getText()), textNome.getText(), textSobrenome.getText(),
 				textNomeUsuario.getText(), textPais.getText(), textEstado.getText(), textCidade.getText(),
 				textRua.getText(), textBairro.getText(), Integer.parseInt(textCep.getText()),
 				Integer.parseInt(textNumeroResidencia.getText()), Byte.parseByte(textDdi.getText()),
