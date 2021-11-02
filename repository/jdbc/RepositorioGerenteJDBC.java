@@ -236,20 +236,21 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		String nome = conjuntoDeResultados.getString("nome");
 		String sobrenome = conjuntoDeResultados.getString("sobrenome");
 		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String senha = conjuntoDeResultados.getString("senha");
 		String pais = conjuntoDeResultados.getString("pais");
 		String cidade = conjuntoDeResultados.getString("cidade");
 		String estado = conjuntoDeResultados.getString("estado");
 		String rua = conjuntoDeResultados.getString("rua");
 		String bairro = conjuntoDeResultados.getString("bairro");
 		int cep = conjuntoDeResultados.getInt("cep");
-		int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDaResidencia");
+		Short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 		byte ddi = conjuntoDeResultados.getByte("ddi");
 		byte ddd = conjuntoDeResultados.getByte("ddd");
 		int telefone = conjuntoDeResultados.getInt("telefone");
 		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
 		boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
-	
-		return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep,
+		
+		return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 				numeroDaResidencia, ddi, ddd, telefone, ativo, superGerente);
 	}
 

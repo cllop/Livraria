@@ -214,19 +214,21 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		String nome = conjuntoDeResultados.getString("nome");
 		String sobrenome = conjuntoDeResultados.getString("sobrenome");
 		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String senha = conjuntoDeResultados.getString("senha");
 		String pais = conjuntoDeResultados.getString("pais");
 		String estado = conjuntoDeResultados.getString("estado");
 		String cidade = conjuntoDeResultados.getString("cidade");
 		String rua = conjuntoDeResultados.getString("rua");
 		String bairro = conjuntoDeResultados.getString("bairro");
 		int cep = conjuntoDeResultados.getInt("cep");
-		int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+		short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
 		byte ddi = conjuntoDeResultados.getByte("DDI");
 		byte ddd = conjuntoDeResultados.getByte("DDD");
 		int telefone = conjuntoDeResultados.getInt("telefone");
 		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-
-		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, rua, bairro, cep,
+	
+		
+		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 				numeroDaResidencia, ddi, ddd, telefone, ativo);
 	}
 }

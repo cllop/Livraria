@@ -15,7 +15,7 @@ public class Fornecedor{
 	private short ddd;
 	private short ddi;
 	private int numeroTelefone;
-
+	
 	public Fornecedor(int id, long cnpj, String nome, String nomeFantasia, String pais, String estado, String cidade,
 			String rua, String bairro, int cep, short numeroDoImovel, short ddd, short ddi, int numeroTelefone) {
 		super();

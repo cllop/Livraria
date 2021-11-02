@@ -154,20 +154,9 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			ps.setLong(1, vendedor.getCpf());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			boolean existeResultado = conjuntoDeResultados.next();
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			byte ddd = conjuntoDeResultados.getByte("DDD");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
-			return new Vendedor(numeroDaResidencia, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
-
+			
+			return lerVendedor(conjuntoDeResultados);
+			
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser comcluida");
@@ -248,14 +237,21 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			String nome = conjuntoDeResultados.getString("nome");
 			String sobrenome = conjuntoDeResultados.getString("sobrenome");
 			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String senha = conjuntoDeResultados.getString("senha");
+			String pais = conjuntoDeResultados.getString("pais");
+			String cidade = conjuntoDeResultados.getString("cidade");
+			String estado = conjuntoDeResultados.getString("estado");
 			String rua = conjuntoDeResultados.getString("rua");
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			Short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+			byte ddd = conjuntoDeResultados.getByte("ddd");
+			int telefone = conjuntoDeResultados.getInt("telefone");
+			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
 		
-			vendedor.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddi, telefone));
+			vendedor.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+					numeroDaResidencia, ddi, ddd, telefone, ativo));
 
 		}
 
@@ -272,15 +268,21 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			String nome = conjuntoDeResultados.getString("nome");
 			String sobrenome = conjuntoDeResultados.getString("sobrenome");
 			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String senha = conjuntoDeResultados.getString("senha");
+			String pais = conjuntoDeResultados.getString("pais");
+			String cidade = conjuntoDeResultados.getString("cidade");
+			String estado = conjuntoDeResultados.getString("estado");
 			String rua = conjuntoDeResultados.getString("rua");
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
+			Short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
+			byte ddi = conjuntoDeResultados.getByte("ddi");
+			byte ddd = conjuntoDeResultados.getByte("ddd");
+			int telefone = conjuntoDeResultados.getInt("telefone");
 			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
 			
-			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddi, telefone);
+			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+					numeroDaResidencia, ddi, ddd, telefone, ativo);
 		} else {
 			throw new RuntimeException("Vendedor não encontrado");
 		}

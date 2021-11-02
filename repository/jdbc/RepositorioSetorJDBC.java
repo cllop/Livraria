@@ -104,9 +104,6 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		
 			return new Setor(id, nome, produtos);
 
-			int id = conjuntoDeResultados.getInt("id");
-			String nome = conjuntoDeResultados.getString("nome");
-			return new Setor(id, nome, null);
 			
 		} else {
 			

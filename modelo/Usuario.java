@@ -19,15 +19,19 @@ public class Usuario {
 	private int telefone;
 	
 	
-	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
-			int telefone) {
+	
+
+
+	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String senha, String pais,
+			String estado, String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi,
+			byte ddd, int telefone) {
 		super();
 		this.id = id;
 		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
+		this.senha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -40,16 +44,16 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 	
-	
 
-	public Usuario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String pais, String estado,
-			String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi, byte ddd,
-			int telefone) {
+	public Usuario(long cpf, String nome, String sobrenome, String nomeDeUsuario, String senha, String pais,
+			String estado, String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi,
+			byte ddd, int telefone) {
 		super();
 		this.cpf = cpf;
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
+		this.senha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;

@@ -229,19 +229,25 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		
 		while(conjuntoDeResultados.next()) {
 			
-			int id = conjuntoDeResultados.getInt(2);
-			String nome = conjuntoDeResultados.getString(3);
-			String sobrenome = conjuntoDeResultados.getString(4);
-			String nomeDeUsuario = conjuntoDeResultados.getString(5);
-			String rua = conjuntoDeResultados.getString(6);
-			String bairro = conjuntoDeResultados.getString(7);
-			int cep = conjuntoDeResultados.getInt(8);
-			int numeroDaResidencia = conjuntoDeResultados.getInt(9);
-			byte ddd = conjuntoDeResultados.getByte("DDD");
+			int id = conjuntoDeResultados.getInt("id");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String nome = conjuntoDeResultados.getString("nome");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String senha = conjuntoDeResultados.getString("senha");
+			String pais = conjuntoDeResultados.getString("pais");
+			String estado = conjuntoDeResultados.getString("estado");
+			String cidade = conjuntoDeResultados.getString("cidade");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
 			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			byte ddd = conjuntoDeResultados.getByte("DDD");
+			int telefone = conjuntoDeResultados.getInt("telefone");
 			
-			clientes.add(new Cliente(numeroDaResidencia, id, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone));
+			clientes.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+					numeroDaResidencia, ddi, ddd, telefone));
 		}
 		return clientes;
 	}
@@ -250,19 +256,25 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		
 		if(conjuntoDeResultados.next()) {
 			
-			int id = conjuntoDeResultados.getInt(2);
-			String nome = conjuntoDeResultados.getString(3);
-			String sobrenome = conjuntoDeResultados.getString(4);
-			String nomeDeUsuario = conjuntoDeResultados.getString(5);
-			String rua = conjuntoDeResultados.getString(6);
-			String bairro = conjuntoDeResultados.getString(7);
-			int cep = conjuntoDeResultados.getInt(8);
-			int numeroDaResidencia = conjuntoDeResultados.getInt(9);
-			byte ddd = conjuntoDeResultados.getByte("DDD");
+			int id = conjuntoDeResultados.getInt("id");
+			long cpf = conjuntoDeResultados.getLong("cpf");
+			String nome = conjuntoDeResultados.getString("nome");
+			String sobrenome = conjuntoDeResultados.getString("sobrenome");
+			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+			String senha = conjuntoDeResultados.getString("senha");
+			String pais = conjuntoDeResultados.getString("pais");
+			String estado = conjuntoDeResultados.getString("estado");
+			String cidade = conjuntoDeResultados.getString("cidade");
+			String rua = conjuntoDeResultados.getString("rua");
+			String bairro = conjuntoDeResultados.getString("bairro");
+			int cep = conjuntoDeResultados.getInt("cep");
+			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
 			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+			byte ddd = conjuntoDeResultados.getByte("DDD");
+			int telefone = conjuntoDeResultados.getInt("telefone");
 		
-			return new Cliente(numeroDaResidencia, id, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+			return new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+					numeroDaResidencia, ddi, ddd, telefone);
 		}else {
 			throw new RuntimeException("Cliente não encontrado");
 		}

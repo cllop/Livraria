@@ -135,7 +135,7 @@ public class TesteDeRecuperacao {
 		}
 	}
 	
-	
+	@Test
 	public void findGerente() {
 		ConteudoTabelaDB<Gerente> conteudoDaTabelaGerente = mapaRegistros.get(Gerente.class);
 		List<Gerente> gerentesEsperados = conteudoDaTabelaGerente.getRegistros();
@@ -183,7 +183,6 @@ public class TesteDeRecuperacao {
 	}
 
 	@Test
-
 	public void findCaixa() {
 		
 		ConteudoTabelaDB<Caixa> conteudoDaTabelaCaixa = mapaRegistros.get(Caixa.class);
@@ -206,6 +205,7 @@ public class TesteDeRecuperacao {
 		
 		Assertions.assertAll(listaDeAssercoes);
 	}
+	@Test
 	public void findProduto() {
 		ConteudoTabelaDB<Produto> conteudoDaTabelaProduto = mapaRegistros.get(Produto.class);
 		List<Produto> produtosEsperados = conteudoDaTabelaProduto.getRegistros();
