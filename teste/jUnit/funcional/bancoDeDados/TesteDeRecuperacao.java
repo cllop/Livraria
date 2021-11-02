@@ -36,17 +36,16 @@ import teste.jUnit.MapaRegistro;
 public class TesteDeRecuperacao {
 	
 	private static final String nomeDoDB = "testeDB";
-	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
-	private MapaRegistro mapaRegistros;
-	private GerenciarDB gerenciarDB;
+	private static MapaRegistro mapaRegistros;
+	private static GerenciarDB gerenciarDB;
 
 	@BeforeAll
 	public static void antesDeTudo() {
 		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/TesteLivraria","teste", null));
-		fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "teste", null);
-		
-		
+		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+		gerenciarDB = new GerenciarDB(mapaRegistros, nomeDoDB);
+		gerenciarDB.destruirDB();
 	}
 
 	@AfterAll
@@ -56,11 +55,13 @@ public class TesteDeRecuperacao {
 
 	@BeforeEach
 	public void antesDeCada() {
+		gerenciarDB.criarDB();
+		gerenciarDB.criarTabelasEInserirDados();
 	}
 
 	@AfterEach
 	public void depoisDeCada() {
-		depoisDeTudo();
+		gerenciarDB.destruirDB();
 	}
 	
 	

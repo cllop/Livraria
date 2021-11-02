@@ -125,7 +125,7 @@ public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
 	}
 	
 	
-	public static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
+	private static ConteudoTabelaDB<Vendedor> criarRegistrosVendedor(){
 		List<Vendedor> vendedores = new ArrayList<>(3);
 		List<Cliente> clientes = criarRegistrosCiente().getRegistros();
 		int ultimoIdUsuariosJaCadastrados = clientes.get(clientes.size()-1).getId();

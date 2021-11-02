@@ -44,7 +44,7 @@ public class  GerenciarDB {
 		}
 	}
 	
-	private void criarTabelasEInserirDados() {
+	public void criarTabelasEInserirDados() {
 		try {
 			StringBuilder sb = new StringBuilder();
 			
@@ -71,7 +71,7 @@ public class  GerenciarDB {
 		}
 	}
 	
-	private void destruirDB() {
+	public void destruirDB() {
 		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
 		try {
 			Statement st = con.createStatement();
