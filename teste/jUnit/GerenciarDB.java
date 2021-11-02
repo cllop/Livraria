@@ -11,12 +11,19 @@ import teste.jUnit.funcional.bancoDeDados.RegistrosBDParaTesteFuncionalBD;
 
 public class  GerenciarDB {
 	
-	private  MapaRegistro mapaRegistros;
-	private static final String nomeDoDB = "testeDB";
-	private static FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
-	private static FabricaDeConexao fabricaParaCadastroDeRegistro=  new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB+"?allowMultiQueries=true", "teste", null);
+	private MapaRegistro mapaRegistros;
+	private FabricaDeConexao fabricaDeConexaoParaCriacaoDelecao;
+	private FabricaDeConexao fabricaParaCadastroDeRegistro;
+	private String nomeDoDB;
 	
-	public static void criarConexao(){
+	public GerenciarDB(MapaRegistro mapaDeRegistro, String nomeDoDB) {
+		this.mapaRegistros = mapaDeRegistro;
+		this.nomeDoDB = nomeDoDB;
+		this.fabricaDeConexaoParaCriacaoDelecao = new FabricaDeConexao("jdbc:mysql://localhost:3306/?allowMultiQueries=true", "teste", null);
+		this.fabricaParaCadastroDeRegistro = new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB+"?allowMultiQueries=true", "teste", null);
+	}
+
+	public void criarDB(){
 		try {
 			mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
 			StringBuilder sb = new StringBuilder();
@@ -28,7 +35,21 @@ public class  GerenciarDB {
 			st.execute(sb.toString());
 			con.close();
 			st.close();
-			con = fabricaParaCadastroDeRegistro.criarConecxao();
+		
+			
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	}
+	
+	private void criarTabelasEInserirDados() {
+		try {
+			StringBuilder sb = new StringBuilder();
+			
+			Connection con = fabricaParaCadastroDeRegistro.criarConecxao();
+			Statement st = con.createStatement();
 			st= con.createStatement();
 			
 			Scanner leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeTabelas.sql"));
@@ -42,7 +63,7 @@ public class  GerenciarDB {
 			}
 			sb.append(mapaRegistros.gerarTodosOsInserts());
 			st.execute(sb.toString());
-			System.out.println("Cadastrado com sucesso");
+			System.out.println("Tabelas criadas e dados inseridos");
 		} catch (Exception e) {
 			
 			e.printStackTrace();
@@ -50,7 +71,7 @@ public class  GerenciarDB {
 		}
 	}
 	
-	private static void destruirDB() {
+	private void destruirDB() {
 		Connection   con = fabricaDeConexaoParaCriacaoDelecao.criarConecxao();
 		try {
 			Statement st = con.createStatement();
