@@ -12,11 +12,13 @@ import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
+import modelo.Setor;
 import modelo.Vendedor;
 import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
+import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
 
 public class TesteDeInsercao {
@@ -89,11 +91,12 @@ public class TesteDeInsercao {
 	}
 	
 	public void addSetor() {
-		RepositorioSetor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioCliente();
-		List<Cliente> list = TesteDeRecuperacao.mapaRegistros.get(Cliente.class).getRegistros();
-		for(Cliente model : list) {
+		RepositorioSetor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioSetor();
+		List<Setor> list = TesteDeRecuperacao.mapaRegistros.get(Setor.class).getRegistros();
+		for(Setor model : list) {
 			repositorio.add(model);
 		}
-		testeDeRecuperacao.findCliente();
+		testeDeRecuperacao.findSetor();
 	}
+	
 }
