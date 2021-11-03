@@ -22,11 +22,11 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 		setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 44, 520, 410);
+		scrollPane.setBounds(10, 32, 553, 399);
 		add(scrollPane);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 11, 520, 22);
+		comboBox.setBounds(10, 11, 553, 22);
 		add(comboBox);
 		comboBox.addItem("Gerente");
 		comboBox.addItem("Caixa");

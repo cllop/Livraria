@@ -48,14 +48,15 @@ public class TesteDeInsercao {
 	}
 	@BeforeEach
 	public void antesDeCada() {
-		
 		gerenciarDB.criarDB();
 		gerenciarDB.criarTabelas();
 	}
+	
 	@AfterAll
 	public static void depoisDeTudo() {
 	
 	}
+	
 	@AfterEach
 	public void depoisDeCada() {
 		gerenciarDB.destruirDB();
@@ -70,6 +71,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findFornecedor();
 	}
+	
 	@Test
 	public void addCaixa() {
 		RepositorioCaixa repositorio = fabricaDeRepositorios.criarRepositorioCaixa();
@@ -79,6 +81,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findCaixa();
 	}
+	
 	@Test
 	public void addGerente() {
 		RepositorioGerente repositorio =fabricaDeRepositorios.criarRepositorioGerente();
@@ -88,6 +91,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findGerente();
 	}
+	
 	@Test
 	public void addVendedor() {
 		RepositorioVendedor repositorio =fabricaDeRepositorios.criarRepositorioVendedor();
@@ -97,6 +101,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findVendedor();
 	}
+	
 	@Test
 	public void addCliente() {
 		RepositorioCliente repositorio =fabricaDeRepositorios.criarRepositorioCliente();
@@ -106,6 +111,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findCliente();
 	}
+	
 	@Test
 	public void addSetor() {
 		RepositorioSetor repositorio = fabricaDeRepositorios.criarRepositorioSetor();
@@ -115,6 +121,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findSetor();
 	}
+	
 	@Test
 	public void addProduto() {
 		RepositorioProduto repositorio = fabricaDeRepositorios.criarRepositorioDeProduto();
