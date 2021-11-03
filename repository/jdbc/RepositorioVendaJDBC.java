@@ -87,8 +87,7 @@ public class RepositorioVendaJDBC extends RepositorioJDBC implements Repositorio
 			atualId = conjuntoDeResultados.getInt("idVenda");
 
 		}
-		// int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa,
-		// List<ItemDeVenda> itensDeVenda, List<Pagamento> pagamentos
+		
 		return new Venda(id, data, apenasLerVendedor(conjuntoDeResultados), apenasLerCliente(conjuntoDeResultados),
 				apenasLerCaixa(conjuntoDeResultados), itensDeVenda, pagamentos);
 	}
