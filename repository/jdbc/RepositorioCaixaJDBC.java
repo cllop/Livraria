@@ -29,7 +29,8 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			ps = con.prepareStatement("SELECT id FROM usuario WHERE cpf=?");
-
+			ps.setLong(1, caixa.getCpf());
+			
 			ResultSet rs = ps.executeQuery();
 			boolean existeUsuario = rs.next();
 

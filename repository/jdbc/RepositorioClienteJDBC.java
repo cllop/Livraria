@@ -22,7 +22,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
-			super.criarConexao();
+			con = super.criarConexao();
 		} else {
 			jaExisteConexao = true;
 		}

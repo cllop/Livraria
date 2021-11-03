@@ -33,7 +33,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		try {
 
 			comandoSql = conexao
-					.prepareStatement("INSERT INTO produto(nome, descricao, preço, quantidade) VALUES (?, ?, ?, ?);");
+					.prepareStatement("INSERT INTO produto(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
 
 			comandoSql.setString(1, produto.getNome());
 			comandoSql.setString(2, produto.getDescricao());
@@ -43,7 +43,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			comandoSql.execute();
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operaï¿½ï¿½o nï¿½o pode ser concluida");
+			throw new RuntimeException("Operaï¿½ï¿½o nï¿½o pode ser concluida", execao);
 		}
 
 	}

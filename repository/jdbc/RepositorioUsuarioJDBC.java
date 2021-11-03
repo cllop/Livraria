@@ -39,6 +39,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			ps = conexao.prepareStatement(
 					"INSERT INTO usuario (id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia) "
 							+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+			ps.setInt(1, usuario.getId());
 			ps.setLong(2, usuario.getCpf());
 			ps.setString(3, usuario.getNome());
 			ps.setString(4, usuario.getSobrenome());
@@ -51,7 +52,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 			ps.execute();
 		} catch (SQLException e) {
 
-			throw new RuntimeException("Opera��o n�o pode ser comcluida");
+			throw new RuntimeException("Opera��o n�o pode ser comcluida", e);
 		}
 	}
 
@@ -74,7 +75,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 					+ " perfilCliente.id as idCliente,"
 					+ " perfilGerente.id as idGerente, perfilGerente.ativo as perfilDeGerenteEstaAtivo, perfilGerente.superGerente,"
 					+ " perfilVendedor.id as idVendedor, perfilVendedor.ativo as perfilVendedorEstaAtivo,"
-					+ " perfilCaixa.id as idCaixa, perfilCaixa.ativo as perfilCaixa"
+					+ " perfilCaixa.id as idCaixa, perfilCaixa.ativo as perfilCaixaEstaAtivo"
 					+ " FROM usuario LEFT JOIN perfilCliente ON usuario.id = perfilCliente.id"
 					+ " LEFT JOIN perfilGerente ON usuario.id= perfilGerente.id"
 					+ " LEFT JOIN perfilCaixa ON usuario.id = perfilCaixa.id"
@@ -274,7 +275,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				byte ddi = conjuntoDeResultados.getByte("ddi");
 				byte ddd = conjuntoDeResultados.getByte("ddd");
 				int telefone = conjuntoDeResultados.getInt("telefone");
-				boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+				boolean ativo = conjuntoDeResultados.getBoolean("perfilDeGerenteEstaAtivo");
 				boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
 
 				perfisUsuario.add(new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
@@ -298,7 +299,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				byte ddi = conjuntoDeResultados.getByte("DDI");
 				byte ddd = conjuntoDeResultados.getByte("DDD");
 				int telefone = conjuntoDeResultados.getInt("telefone");
-				boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+				boolean ativo = conjuntoDeResultados.getBoolean("perfilVendedorEstaAtivo");
 				
 				perfisUsuario.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 						numeroDaResidencia, ddi, ddd, telefone, ativo));
@@ -321,7 +322,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				byte ddi = conjuntoDeResultados.getByte("DDI");
 				byte ddd = conjuntoDeResultados.getByte("DDD");
 				int telefone = conjuntoDeResultados.getInt("telefone");
-				boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+				boolean ativo = conjuntoDeResultados.getBoolean("perfilCaixaEstaAtivo");
 				
 				perfisUsuario.add(new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 						numeroDaResidencia, ddi, ddd, telefone, ativo));

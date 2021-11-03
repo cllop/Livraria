@@ -23,7 +23,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		boolean conecxaoJaExistia;
 		if (conexao == null) {
 			conecxaoJaExistia = false;
-			super.criarConexao();
+		     conexao = super.criarConexao();
 		} else {
 			conecxaoJaExistia = true;
 		}
@@ -33,7 +33,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		try {
 
 			ps = conexao.prepareStatement("Select id FROM usuario WHERE cpf=?");
-
+			
 			ps.setLong(1, vendedor.getCpf());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
@@ -70,7 +70,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		} catch (SQLException execao) {
 
-			throw new RuntimeException("Operação não pode ser comcluida");
+			throw new RuntimeException("Operação não pode ser concluida", execao);
 		}
 
 	}
