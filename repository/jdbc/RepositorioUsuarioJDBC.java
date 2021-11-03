@@ -248,7 +248,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String rua = conjuntoDeResultados.getString("rua");
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
-				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 				byte ddi = conjuntoDeResultados.getByte("DDI");
 				byte ddd = conjuntoDeResultados.getByte("DDD");
 				int telefone = conjuntoDeResultados.getInt("telefone");
@@ -295,7 +295,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String rua = conjuntoDeResultados.getString("rua");
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
-				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 				byte ddi = conjuntoDeResultados.getByte("DDI");
 				byte ddd = conjuntoDeResultados.getByte("DDD");
 				int telefone = conjuntoDeResultados.getInt("telefone");
@@ -318,7 +318,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				String rua = conjuntoDeResultados.getString("rua");
 				String bairro = conjuntoDeResultados.getString("bairro");
 				int cep = conjuntoDeResultados.getInt("cep");
-				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+				short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 				byte ddi = conjuntoDeResultados.getByte("DDI");
 				byte ddd = conjuntoDeResultados.getByte("DDD");
 				int telefone = conjuntoDeResultados.getInt("telefone");
