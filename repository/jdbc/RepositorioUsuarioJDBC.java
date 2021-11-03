@@ -235,6 +235,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 
 			if (conjuntoDeResultados.getString("idCliente") != null) {
 				int id = conjuntoDeResultados.getInt("id");
+				int idCliente = conjuntoDeResultados.getInt("idCliente");
 				long cpf = conjuntoDeResultados.getLong("cpf");
 				String nome = conjuntoDeResultados.getString("nome");
 				String sobrenome = conjuntoDeResultados.getString("sobrenome");
@@ -252,7 +253,7 @@ public class RepositorioUsuarioJDBC extends RepositorioJDBC implements Repositor
 				int telefone = conjuntoDeResultados.getInt("telefone");
 				
 
-				perfisUsuario.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+				perfisUsuario.add(new Cliente(id, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 						numeroDaResidencia, ddi, ddd, telefone));
 			}
 

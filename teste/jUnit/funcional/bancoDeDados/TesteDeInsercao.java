@@ -57,7 +57,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findFornecedor();
 	}
-	
+	@Test
 	public void addCaixa() {
 		RepositorioCaixa repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioCaixa();
 		List<Caixa> list = TesteDeRecuperacao.mapaRegistros.get(Caixa.class).getRegistros();
@@ -66,7 +66,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findCaixa();
 	}
-	
+	@Test
 	public void addGerente() {
 		RepositorioGerente repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioGerente();
 		List<Gerente> list = TesteDeRecuperacao.mapaRegistros.get(Gerente.class).getRegistros();
@@ -75,6 +75,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findGerente();
 	}
+	@Test
 	public void addVendedor() {
 		RepositorioVendedor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioVendedor();
 		List<Vendedor> list = TesteDeRecuperacao.mapaRegistros.get(Vendedor.class).getRegistros();
@@ -83,6 +84,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findVendedor();
 	}
+	@Test
 	public void addCliente() {
 		RepositorioCliente repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioCliente();
 		List<Cliente> list = TesteDeRecuperacao.mapaRegistros.get(Cliente.class).getRegistros();
@@ -91,7 +93,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findCliente();
 	}
-	
+	@Test
 	public void addSetor() {
 		RepositorioSetor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioSetor();
 		List<Setor> list = TesteDeRecuperacao.mapaRegistros.get(Setor.class).getRegistros();
@@ -100,6 +102,7 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findSetor();
 	}
+	@Test
 	public void addProduto() {
 		RepositorioProduto repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioDeProduto();
 		List<Produto> list = TesteDeRecuperacao.mapaRegistros.get(Produto.class).getRegistros();
