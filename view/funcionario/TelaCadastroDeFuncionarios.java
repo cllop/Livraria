@@ -76,7 +76,7 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 				gerenciadorFuncionario.menuFuncionario();
 			}
 		});
-		btnCancelar.setBounds(20, 465, 89, 23);
+		btnCancelar.setBounds(20, 465, 120, 23);
 		add(btnCancelar);
 
 	}
