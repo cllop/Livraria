@@ -160,6 +160,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void menuCliente() {
+		trocarTela(new GerenciadorCliente(this.fabricaDeRepositorios.criarRepositorioCliente()));
 		
 	}
 
