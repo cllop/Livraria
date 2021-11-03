@@ -40,7 +40,7 @@ public class DadosPesquisaFuncionarios extends DadosPesquisa {
 			public void actionPerformed(ActionEvent e) {
 				if(dadosFuncionario instanceof DadosGerente) {
 					Gerente gerente = ((DadosGerente)dadosFuncionario).lerGerente();
-					scrollPane.setViewportView(new EditarFuncionarios(gerente, rpGerente));
+					scrollPane.setViewportView(new EditarFuncionarios(gerente, rpGerente, rpCaixa, rpVendedor));
 				}
 			}
 		});
