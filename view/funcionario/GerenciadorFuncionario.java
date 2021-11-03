@@ -24,6 +24,8 @@ public class GerenciadorFuncionario extends JPanel {
 		this.repositorioGerente = repositorioGerente;
 		this.repositorioCaixa = repositorioCaixa;
 		this.repositorioVendedor = repositorioVendedor;
+		
+		menuFuncionario();
 	}
 
 	private void trocarTela(Container menuSelecionado) {

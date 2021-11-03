@@ -8,7 +8,7 @@ import java.util.Map;
 public class FabricaDefinicaoDB {
 
 	public DefinicaoDB criarDefinicaoDB() {
-		return new DefinicaoDB(criarUsuarioDB(), "livraria");
+		return new DefinicaoDB(criarUsuarioDB(), "kathariclean");
 	}
 
 	private List<UsuarioDB> criarUsuarioDB() {

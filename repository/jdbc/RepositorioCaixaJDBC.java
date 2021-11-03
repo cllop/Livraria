@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +43,8 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 				ps.execute();
 			} else {
 				ps = con.prepareStatement(
-						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone) "
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-								+ "INSERT INTO perfilCaixa (id, ativo) VALUES (LAST_INSERT_ID(), ?)");
+						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone, senha) "
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);", Statement.RETURN_GENERATED_KEYS);
 
 				ps.setLong(1, caixa.getCpf());
 				ps.setString(2, caixa.getNome());
@@ -60,9 +60,16 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 				ps.setShort(12, caixa.getDdi());
 				ps.setShort(13, caixa.getDdd());
 				ps.setInt(14, caixa.getTelefone());
-				ps.setBoolean(15, caixa.isAtivo());
-
+				ps.setString(15, caixa.getSenha());
 				ps.execute();
+				
+				ResultSet crid = ps.getGeneratedKeys();
+				crid.next();
+				int id = crid.getInt(1);
+				
+				ps = con.prepareStatement("INSERT INTO perfilCaixa (id, ativo) VALUES (?, ?)");
+				ps.setInt(1, id);
+				ps.setBoolean(2, caixa.isAtivo());
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível cadastrar este caixa.", e);
@@ -227,7 +234,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 		byte ddd = conjuntoDeResultados.getByte("DDD");
 		int telefone = conjuntoDeResultados.getInt("telefone");
 		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-		
+
 		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 				numeroDaResidencia, ddi, ddd, telefone, ativo);
 	}

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,9 +43,9 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				ps.execute();
 			} else {
 				ps = con.prepareStatement(
-						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone) "
-								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);"
-								+ "INSERT INTO perfilGerente (id, ativo, superGerente) VALUES (LAST_INSERT_ID(), ?, ?)");
+						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, pais, estado, cidade, bairro, rua, cep, numeroDaResidencia, ddi, ddd, telefone, senha) "
+								+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+						Statement.RETURN_GENERATED_KEYS);
 
 				ps.setLong(1, gerente.getCpf());
 				ps.setString(2, gerente.getNome());
@@ -60,10 +61,19 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				ps.setShort(12, gerente.getDdi());
 				ps.setShort(13, gerente.getDdd());
 				ps.setInt(14, gerente.getTelefone());
-				ps.setBoolean(15, gerente.isAtivo());
-				ps.setBoolean(16, gerente.isSuperGerente());
-
+				ps.setString(15, gerente.getSenha());
 				ps.execute();
+
+				ResultSet crid = ps.getGeneratedKeys();
+				crid.next();
+				int id = crid.getInt(1);
+				
+				ps = con.prepareStatement(
+						"INSERT INTO perfilGerente (id, ativo, superGerente) VALUES (?, ?, ?)");
+				ps.setInt(1, id);
+				ps.setBoolean(2, gerente.isAtivo());
+				ps.setBoolean(3, gerente.isSuperGerente());
+
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível cadastrar este gerente.", e);
@@ -126,7 +136,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 
 	public Gerente find(int id) {
 		Connection con = super.getConexao();
-		
+
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
@@ -135,15 +145,15 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 			jaExisteConexao = true;
 		}
 		PreparedStatement ps = null;
-		
+
 		try {
 			ps = con.prepareStatement(
 					"SELECT usuario.*, perfilGerente.id AS idPerfilGerente, perfilGerente.ativo, perfilGerente.superGerente FROM perfilGerente LEFT JOIN usuario ON perfilGerente.id = usuario.id WHERE PerfilGerente.id=?;");
-			
+
 			ps.setInt(1, id);
-			
+
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerGerente(conjuntoDeResultados);
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível encontrar gerente.", e);
@@ -250,7 +260,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 		int telefone = conjuntoDeResultados.getInt("telefone");
 		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
 		boolean superGerente = conjuntoDeResultados.getBoolean("superGerente");
-		
+
 		return new Gerente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 				numeroDaResidencia, ddi, ddd, telefone, ativo, superGerente);
 	}

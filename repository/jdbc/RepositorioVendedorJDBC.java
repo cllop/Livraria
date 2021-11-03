@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		boolean conecxaoJaExistia;
 		if (conexao == null) {
 			conecxaoJaExistia = false;
-		     conexao = super.criarConexao();
+			conexao = super.criarConexao();
 		} else {
 			conecxaoJaExistia = true;
 		}
@@ -31,28 +32,21 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		PreparedStatement ps = null;
 
 		try {
-
 			ps = conexao.prepareStatement("Select id FROM usuario WHERE cpf=?");
-			
 			ps.setLong(1, vendedor.getCpf());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
 
 			if (conjuntoDeResultados.next()) {
 				int id = conjuntoDeResultados.getInt("id");
-
-				ps.close();
-
 				ps = conexao.prepareStatement("INSERT INTO vendedor (id, ativo) VALUES (?, ?)");
-
 				ps.setInt(1, id);
 				ps.setBoolean(2, vendedor.isAtivo());
-
+				ps.execute();
 			} else {
-
 				ps = conexao.prepareStatement(
-						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia) VALUES (?, ?, ?, ?, ?, ?, ?, ?); "
-								+ "INSERT INTO funcionario (id, ativo) VALUES (LAST_INSERT_ID(), ?);");
+						"INSERT INTO usuario (cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, pais, cidade, estado, ddd, ddi, telefone, senha) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+						Statement.RETURN_GENERATED_KEYS);
 
 				ps.setLong(1, vendedor.getCpf());
 				ps.setString(2, vendedor.getNome());
@@ -62,12 +56,23 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 				ps.setString(6, vendedor.getBairro());
 				ps.setInt(7, vendedor.getCep());
 				ps.setInt(8, vendedor.getNumeroDaResidencia());
-
-				ps.setBoolean(9, vendedor.isAtivo());
-
+				ps.setString(9, vendedor.getPais());
+				ps.setString(10, vendedor.getCidade());
+				ps.setString(11, vendedor.getEstado());
+				ps.setShort(12, vendedor.getDdd());
+				ps.setShort(13, vendedor.getDdi());
+				ps.setInt(14, vendedor.getTelefone());
+				ps.setString(15, vendedor.getSenha());
 				ps.execute();
-			}
 
+				ResultSet crid = ps.getGeneratedKeys();
+				crid.next();
+				int id = crid.getInt(1);
+
+				ps = conexao.prepareStatement("INSERT INTO funcionario (id, ativo) VALUES (?, ?);");
+				ps.setInt(1, id);
+				ps.setBoolean(2, vendedor.isAtivo());
+			}
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser concluida", execao);
@@ -80,7 +85,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		Connection conexao = super.getConexao();
 
 		boolean conecxaoJaExistia;
-		
+
 		if (conexao == null) {
 
 			conecxaoJaExistia = false;
@@ -93,14 +98,15 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 
 		try {
 
-			ps = conexao.prepareStatement("SELECT * FROM perfilVendedor LEFT JOIN usuario ON perfilVendedor.id = usuario.id WHERE perfilVendedor.id=?; ");
-			
+			ps = conexao.prepareStatement(
+					"SELECT * FROM perfilVendedor LEFT JOIN usuario ON perfilVendedor.id = usuario.id WHERE perfilVendedor.id=?; ");
+
 			ps.setInt(1, id);
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerVendedor(conjuntoDeResultados);
-			
+
 		} catch (SQLException e) {
 
 			throw new RuntimeException("Operação não pode ser comcluida", e);
@@ -125,11 +131,11 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			ps = conexao.prepareStatement("SELECT * FROM vendedor WHERE nome=?;");
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerVendedores(conjuntoDeResultados);
 
 		} catch (SQLException execao) {
-			
+
 			throw new RuntimeException("Operação não pode ser concluida");
 		}
 
@@ -154,9 +160,9 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			ps.setLong(1, vendedor.getCpf());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerVendedor(conjuntoDeResultados);
-			
+
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operação não pode ser comcluida");
@@ -184,9 +190,8 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			ps.setString(1, vendedor.getSobrenome());
 
 			ResultSet conjuntoDeResultados = ps.executeQuery();
-			
+
 			return lerVendedores(conjuntoDeResultados);
-		
 
 		} catch (SQLException execao) {
 
@@ -210,9 +215,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 		PreparedStatement ps = null;
 
 		try {
-			ps = conexao.prepareStatement("UPDATE vendedor" 
-					+ " SET ativo=? "
-					+ "WHERE Id=?;");
+			ps = conexao.prepareStatement("UPDATE vendedor" + " SET ativo=? " + "WHERE Id=?;");
 
 			ps.setBoolean(1, vendedor.isAtivo());
 			ps.setInt(2, vendedor.getId());
@@ -249,9 +252,9 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			byte ddd = conjuntoDeResultados.getByte("ddd");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-		
-			vendedor.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
-					numeroDaResidencia, ddi, ddd, telefone, ativo));
+
+			vendedor.add(new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro,
+					cep, numeroDaResidencia, ddi, ddd, telefone, ativo));
 
 		}
 
@@ -280,7 +283,7 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 			byte ddd = conjuntoDeResultados.getByte("ddd");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-			
+
 			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
 					numeroDaResidencia, ddi, ddd, telefone, ativo);
 		} else {

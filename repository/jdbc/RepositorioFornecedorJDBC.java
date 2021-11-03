@@ -168,12 +168,12 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setString(1, fornecedor.getNomeFantasia());
 			ps.setString(2, fornecedor.getRua());
 			ps.setString(3, fornecedor.getBairro());
-			ps.setLong(4, fornecedor.getCep());
+			ps.setInt(4, fornecedor.getCep());
 			ps.setShort(5, fornecedor.getNumeroDoImovel());
-			ps.setInt(6, fornecedor.getId());
-			ps.setShort(7, fornecedor.getDdd());
-			ps.setShort(8, fornecedor.getDdi());
-			ps.setInt(9, fornecedor.getNumeroTelefone());
+			ps.setShort(6, fornecedor.getDdd());
+			ps.setShort(7, fornecedor.getDdi());
+			ps.setInt(8, fornecedor.getNumeroTelefone());
+			ps.setInt(9, fornecedor.getId());
 
 			ps.execute();
 		} catch (SQLException e) {
