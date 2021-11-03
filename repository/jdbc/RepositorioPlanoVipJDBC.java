@@ -107,6 +107,7 @@ public class RepositorioPlanoVipJDBC extends RepositorioJDBC implements Reposito
 	}
 	
 	private List<PlanoVip> lerListaDePlanosVip(ResultSet conjutosResultados) {
+		return null;
 		
 	}
 

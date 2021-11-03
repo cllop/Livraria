@@ -33,17 +33,22 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		try {
 
 			comandoSql = conexao
-					.prepareStatement("INSERT INTO produto(nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?);");
+					.prepareStatement("INSERT INTO produto(idSetor, nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?, ?);");
 
-			comandoSql.setString(1, produto.getNome());
-			comandoSql.setString(2, produto.getDescricao());
-			comandoSql.setInt(3, produto.getPreco().getCentavos());
-			comandoSql.setInt(4, produto.getQuantidade());
+			comandoSql.setInt(1, produto.getIdSetor());
+			comandoSql.setString(2, produto.getNome());
+			comandoSql.setString(3, produto.getDescricao());
+			comandoSql.setInt(4, produto.getPreco().getCentavos());
+			comandoSql.setInt(5, produto.getQuantidade());
 
 			comandoSql.execute();
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Operaï¿½ï¿½o nï¿½o pode ser concluida", execao);
+		}finally {
+			if(conexaoJaExistia) {
+				super.fecharConexao();
+			}
 		}
 
 	}
@@ -74,6 +79,10 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 			throw new RuntimeException("Operação não pode ser concluida" + execao);
 
+		}finally {
+			if(conexaoJaExistia) {
+				super.fecharConexao();
+			}
 		}
 	}
 
@@ -108,48 +117,48 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void delete() {//Tem q terminar ainda!!
+	public void delete(Produto produto) {//Tem q terminar ainda!!
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
 			jaExisteConexao = false;
 			con = super.criarConexao();
-		}else {
+		} else {
 			jaExisteConexao = true;
 		}
 			PreparedStatement ps;
+		try {
 			
-			try {
-				
-				ps = con.prepareStatement("DELETE ");
-				
-			} catch (Exception e) {
-				
-
+			ps = con.prepareStatement("DELETE INTO produto WHERE ID=?");
+			ps.setInt(1, produto.getId());	
+		} catch (Exception e) {
+			throw new RuntimeException ("Não foi possivel deletar o produto", e);
+		}finally {
+			if(jaExisteConexao) {
+				super.fecharConexao();
 			}
-		
-		
-
+		}
 	}
 
 	public void update(Produto produto) {
-		Connection conexao = super.getConexao();
-		boolean conexaoJaExistia;
-		if (conexao == null) {
-			conexaoJaExistia = false;
-			conexao = super.criarConexao();
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
 		} else {
-			conexaoJaExistia = true;
+			jaExisteConexao = true;
 		}
-
-		PreparedStatement ps = null;
+		PreparedStatement ps;
 
 		try {
 
-			ps = conexao.prepareStatement("UPDATE produto SET nome=?, preco=?, descricao=?;");
-			ps.setString(1, produto.getNome());
-			ps.setInt(2, produto.getPreco().getCentavos());
-			ps.setString(3, produto.getDescricao());
+			ps = con.prepareStatement("UPDATE produto SET idSetor=? nome=?, preco=?, descricao=?;");
+			
+			ps.setInt(1, produto.getIdSetor());
+			ps.setString(2, produto.getNome());
+			ps.setInt(3, produto.getPreco().getCentavos());
+			ps.setString(4, produto.getDescricao());
 
 			ps.execute();
 
@@ -157,6 +166,10 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 			throw new RuntimeException("Os dados não foram alterados " + e);
 
+		}finally {
+			if (!jaExisteConexao) {
+				super.fecharConexao();
+			}
 		}
 
 	}
