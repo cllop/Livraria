@@ -12,12 +12,14 @@ import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
+import modelo.Produto;
 import modelo.Setor;
 import modelo.Vendedor;
 import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
+import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
 
@@ -98,5 +100,12 @@ public class TesteDeInsercao {
 		}
 		testeDeRecuperacao.findSetor();
 	}
-	
+	public void addProduto() {
+		RepositorioProduto repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioDeProduto();
+		List<Produto> list = TesteDeRecuperacao.mapaRegistros.get(Produto.class).getRegistros();
+		for(Produto model : list) {
+			repositorio.add(model);
+		}
+		testeDeRecuperacao.findProduto();
+	}
 }
