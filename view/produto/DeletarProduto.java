@@ -19,9 +19,9 @@ public class DeletarProduto extends JPanel {
 		btnDeletar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					repositorio.remove(produto);
+					repositorio.delete(produto);
 				} catch (Exception ex){
-					throw new RuntimeException("Não foi possível deletar este produto.");
+					throw new RuntimeException("Não foi possível deletar este produto."+ex);
 				}
 			}
 		});

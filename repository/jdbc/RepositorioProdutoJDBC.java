@@ -129,8 +129,9 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			PreparedStatement ps;
 		try {
 			
-			ps = con.prepareStatement("DELETE INTO produto WHERE ID=?");
+			ps = con.prepareStatement("DELETE FROM produto WHERE id=?");
 			ps.setInt(1, produto.getId());	
+			ps.execute();
 		} catch (Exception e) {
 			throw new RuntimeException ("Não foi possivel deletar o produto", e);
 		}finally {
@@ -216,28 +217,6 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		return new Produto(id, nome, descricao, preco, quantidade, idSetor);
 	}
 	
-	public void remove(Produto produto) {
-		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			con = super.criarConexao();
-		} else {
-			jaExisteConexao = true;
-		}
-		PreparedStatement ps;
-		
-		try {
-			ps = con.prepareStatement("DELETE FROM produto WHERE id=?");
-			ps.setLong(1, produto.getId());
-			ps.execute();
-		} catch (SQLException e) {
-			throw new RuntimeException("Não foi possível remover produto.", e);
-		} finally {
-			if (!jaExisteConexao) {
-				super.fecharConexao();
-			}
-		}
-	}
+	
 	
 }

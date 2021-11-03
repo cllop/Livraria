@@ -16,6 +16,6 @@ public interface RepositorioProduto {
 	
 	public Produto findByCategoria(String categoria);
 	
-	public void remove(Produto produto);
+	public void delete(Produto produto);
 	
 }
