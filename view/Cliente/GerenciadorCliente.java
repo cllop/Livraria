@@ -4,11 +4,17 @@ import java.awt.Container;
 
 import javax.swing.JPanel;
 
+import repository.RepositorioCliente;
+
 public class GerenciadorCliente extends JPanel {
 	private Container menuSelecionado;
-
-	public GerenciadorCliente() {
-
+	private RepositorioCliente repositorioCliente;
+	
+	public GerenciadorCliente(RepositorioCliente repositorioCliente) {
+		setLayout(null);
+		this.repositorioCliente = repositorioCliente;
+		
+		menuCliente();
 	}
 	
 	private void trocarTela(Container menuSelecionado) {
@@ -28,6 +34,19 @@ public class GerenciadorCliente extends JPanel {
 		if (this.menuSelecionado != null) {
 			this.menuSelecionado.setBounds(0, 0, largura, altura);
 		}
+	}
+	
+	public void setBounds(int x, int y, int width, int height) {
+		redimensionar(width, height);
+		super.setBounds(x, y, width, height);
+	}
+	
+	public void menuCliente() {
+		trocarTela(new MenuCliente(this));
+	}
+	
+	public void cadastrarCliente() {
+		trocarTela(new TelaCadastrarCliente(this, this.repositorioCliente));
 	}
 
 }
