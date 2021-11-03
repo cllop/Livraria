@@ -247,7 +247,8 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			byte ddd = conjuntoDeResultados.getByte("ddd");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 			
-			clientes.add(new Cliente(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,numeroDaResidencia, ddi, ddd, telefone));
+			clientes.add(new Cliente(id, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+					numeroDaResidencia, ddi, ddd, telefone));
 		}
 		return clientes;
 	}

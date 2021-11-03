@@ -17,7 +17,20 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 	public RepositorioSetorJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
-	
+		
+	public void add(Setor model) {
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+			
+	}
+
 	public Setor findByNome(String nome) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
@@ -132,4 +145,6 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 
+	
+	
 }
