@@ -17,7 +17,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 		super(fabricaDeConexao);
 	}
 
-	public void add(Fornecedor fornecedor) { // corrigir
+	public void add(Fornecedor fornecedor) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -29,7 +29,7 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 		PreparedStatement ps;
 		try {
 			ps = con.prepareStatement(
-					"INSERT INTO Fornecedor(CNPJ, nome, rua, bairro, CEP, numeroDoImovel, nomeFantasia, ddd, ddi, numeroTelefone) VALUES (?,?,?,?,?,?,?,?,?,?)");
+					"INSERT INTO Fornecedor(CNPJ, nome, rua, bairro, CEP, numeroDoImovel, nomeFantasia, ddd, ddi, numeroTelefone, pais, estado, cidade) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)");
 			ps.setLong(1, fornecedor.getCnpj());
 			ps.setString(2, fornecedor.getNome());
 			ps.setString(3, fornecedor.getRua());
@@ -40,6 +40,9 @@ public class RepositorioFornecedorJDBC extends RepositorioJDBC implements Reposi
 			ps.setShort(8, fornecedor.getDdd());
 			ps.setShort(9, fornecedor.getDdi());
 			ps.setShort(10, fornecedor.getNumeroDoImovel());
+			ps.setString(11, fornecedor.getPais());
+			ps.setString(12, fornecedor.getEstado());
+			ps.setString(13, fornecedor.getCidade());
 
 			ps.execute();
 		} catch (SQLException e) {
