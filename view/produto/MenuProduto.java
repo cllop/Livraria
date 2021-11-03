@@ -17,7 +17,7 @@ public class MenuProduto extends JPanel {
 			gerenciadorProduto.adicionarProduto();
 			}
 		});
-		btnAdicionarProduto.setBounds(10, 11, 137, 23);
+		btnAdicionarProduto.setBounds(10, 11, 430, 23);
 		add(btnAdicionarProduto);
 		
 		JButton btnDeletarProduto = new JButton("Deletar Produto");
@@ -26,7 +26,7 @@ public class MenuProduto extends JPanel {
 				gerenciadorProduto.deletarProduto();
 			}
 		});
-		btnDeletarProduto.setBounds(10, 83, 137, 23);
+		btnDeletarProduto.setBounds(10, 83, 430, 23);
 		add(btnDeletarProduto);
 		try {
 			JButton btnEditarProduto = new JButton("Editar Produto");
@@ -36,7 +36,7 @@ public class MenuProduto extends JPanel {
 				}
 			});
 			
-			btnEditarProduto.setBounds(10, 45, 137, 23);
+			btnEditarProduto.setBounds(10, 45, 430, 23);
 			add(btnEditarProduto);
 		}catch(Exception execao){
 			System.out.println("O erro"+execao);

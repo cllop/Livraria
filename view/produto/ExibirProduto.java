@@ -43,7 +43,7 @@ public class ExibirProduto extends JPanel {
 		add(lblNewLabel_2);
 
 		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o");
-		lblDescricao.setBounds(304, 11, 73, 14);
+		lblDescricao.setBounds(304, 11, 89, 14);
 		add(lblDescricao);
 
 		tpDescricao = new JTextPane();
@@ -90,6 +90,15 @@ public class ExibirProduto extends JPanel {
 		textIdSetor.setBounds(10, 274, 259, 20);
 		add(textIdSetor);
 		textIdSetor.setColumns(10);
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciador.menuProduto();
+			}
+		});
+		btnVoltar.setBounds(474, 453, 89, 23);
+		add(btnVoltar);
 
 		if (gerenciador != null) {
 			JButton btnNewButton = new JButton("Pesquisar Outro Produto");
@@ -115,5 +124,4 @@ public class ExibirProduto extends JPanel {
 		return new Produto(Integer.parseInt(tfId.getText()), tfNome.getText(), tpDescricao.getText(), new Real(tfPreco.getText()), Integer.parseInt(tfQuantidade.getText()), Integer.parseInt(textIdSetor.getText()));
 
 	}
-	
 }
