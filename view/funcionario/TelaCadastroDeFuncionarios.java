@@ -22,11 +22,11 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 		setLayout(null);
 
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(10, 32, 553, 399);
+		scrollPane.setBounds(10, 32, 796, 422);
 		add(scrollPane);
 
 		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(10, 11, 553, 22);
+		comboBox.setBounds(10, 11, 796, 22);
 		add(comboBox);
 		comboBox.addItem("Gerente");
 		comboBox.addItem("Caixa");
@@ -67,7 +67,7 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 				}
 			}
 		});
-		btnConfirmar.setBounds(445, 465, 89, 23);
+		btnConfirmar.setBounds(603, 465, 89, 23);
 		add(btnConfirmar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -76,7 +76,7 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 				gerenciadorFuncionario.menuFuncionario();
 			}
 		});
-		btnCancelar.setBounds(351, 465, 89, 23);
+		btnCancelar.setBounds(20, 465, 89, 23);
 		add(btnCancelar);
 
 	}
