@@ -105,8 +105,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void exibirProduto(Produto produto) {
-		
-		this.trocarTela(new ExibirProduto(this, produto));
+		this.trocarTela(new ExibirProduto(null, produto));
 		
 	}
 	
