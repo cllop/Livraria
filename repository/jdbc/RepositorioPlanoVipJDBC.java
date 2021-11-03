@@ -96,15 +96,32 @@ public class RepositorioPlanoVipJDBC extends RepositorioJDBC implements Reposito
 
 	@Override
 	public List<PlanoVip> getAll() {
-		// TODO Auto-generated method stub
+	
 		return null;
 	}
 
 	@Override
 	public PlanoVip findByNome(String nome) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
-
-
+	
+	private List<PlanoVip> lerLIstaDePlanosVip() {
+		Connection con = super.getConexao();
+		Boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+		PreparedStatement ps;
+		
+		try {
+			ps = con.prepareStatement("SELECT *");
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
+		}
+	}
 }

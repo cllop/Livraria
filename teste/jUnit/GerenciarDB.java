@@ -44,7 +44,35 @@ public class  GerenciarDB {
 		}
 	}
 	
+	public void criarTabelas() {
+		try {
+			StringBuilder sb = new StringBuilder();
+			
+			Connection con = fabricaParaCadastroDeRegistro.criarConecxao();
+			Statement st = con.createStatement();
+			st= con.createStatement();
+			
+			Scanner leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeTabelas.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.nextLine());
+			}
+			
+			leitor = new Scanner(new File("DadosTeste/ParaTeste/CodigosParaCriacaoDeChavesEstrangeiras.sql"));
+			while(leitor.hasNextLine()) {
+				sb.append(leitor.nextLine());
+			}
+			st.execute(sb.toString());
+			System.out.println("Tabelas criadas e dados inseridos");
+		} catch (Exception e) {
+			
+			e.printStackTrace();
+			throw new RuntimeException(e);
+		}
+	
+	}
+	
 	public void criarTabelasEInserirDados() {
+		
 		try {
 			StringBuilder sb = new StringBuilder();
 			

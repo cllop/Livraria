@@ -1,12 +1,15 @@
 package modelo;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 public class Usuario {
 	private int id;
 	private long cpf;
 	private String nome;
 	private String sobrenome;
 	private String nomeDeUsuario;
-	private String senha;
+	private String AntigaSenha;
 	private String pais;
 	private String estado;
 	private String cidade;
@@ -31,7 +34,7 @@ public class Usuario {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
-		this.senha = senha;
+		this.AntigaSenha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -53,7 +56,7 @@ public class Usuario {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
-		this.senha = senha;
+		this.AntigaSenha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -126,7 +129,19 @@ public class Usuario {
 		this.nomeDeUsuario = nomeDeUsuario;
 	}
 
-
+	public void setSenha(String senha) {
+		MessageDigest m = MessageDigest.getInstance("MD5");
+		byte[] v = m.digest(senha.getBytes());
+		String hashDaSenha= new String(v);
+		if(this.AntigaSenha.equals(hashDaSenha)) {
+			this.AntigaSenha = hashDaSenha;
+		}else {
+			throw new 
+		}
+		
+	}
+	
+	
 
 	public String getPais() {
 		return pais;
@@ -249,7 +264,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nomeDeUsuario="
-				+ nomeDeUsuario + ", senha=" + senha + ", pais=" + pais + ", estado=" + estado + ", cidade=" + cidade
+				+ nomeDeUsuario + ", senha=" + AntigaSenha + ", pais=" + pais + ", estado=" + estado + ", cidade=" + cidade
 				+ ", rua=" + rua + ", bairro=" + bairro + ", cep=" + cep + ", numeroDaResidencia=" + numeroDaResidencia
 				+ ", ddi=" + ddi + ", ddd=" + ddd + ", telefone=" + telefone + "]";
 	}

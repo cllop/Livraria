@@ -37,10 +37,10 @@ import teste.jUnit.MapaRegistro;
 
 public class TesteDeRecuperacao {
 	
-	private static final String nomeDoDB = "testeDB";
-	private static FabricaDeRepositorios fabricaDeRepositorios;
-	private static MapaRegistro mapaRegistros;
-	private static GerenciarDB gerenciarDB;
+	public static final String nomeDoDB = "testeDB";
+	public static FabricaDeRepositorios fabricaDeRepositorios;
+	public static MapaRegistro mapaRegistros;
+	public static GerenciarDB gerenciarDB;
 
 	@BeforeAll
 	public static void antesDeTudo() {

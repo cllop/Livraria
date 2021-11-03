@@ -110,5 +110,26 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 			throw new RuntimeException("Setor não encontrado");
 		}
 	}
+	
+	public void updade(int id) {
+		Connection con = super.getConexao();
+
+		boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement("UPDATE ");
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
+		}
+	}
 
 }
