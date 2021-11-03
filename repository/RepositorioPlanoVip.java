@@ -3,6 +3,7 @@ package repository;
 import java.util.List;
 
 import modelo.PlanoVip;
+import modelo.Venda;
 
 public interface RepositorioPlanoVip {
 	
@@ -12,5 +13,6 @@ public interface RepositorioPlanoVip {
 	
 	public PlanoVip findByNome(String nome);
 	
+	public PlanoVip find(int id);
 	
 }

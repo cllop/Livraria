@@ -2,7 +2,7 @@ package modelo;
 
 import util.Real;
 
-public class PlanoVip extends AssinaturaVip {
+public class PlanoVip {
 	private int id;
 	private Real preco;
 	private String descricao;

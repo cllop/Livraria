@@ -16,6 +16,7 @@ import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
 import modelo.Gerente;
+import modelo.PlanoVip;
 import modelo.Produto;
 import modelo.Setor;
 import modelo.Venda;
@@ -25,6 +26,7 @@ import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
 import repository.RepositorioGerente;
+import repository.RepositorioPlanoVip;
 import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVenda;
@@ -251,6 +253,30 @@ public class TesteDeRecuperacao {
 			});
 		}
 		Assertions.assertAll(listaDeAssercoes);
+	}
+	
+	
+	@Test
+	private void findPlanoVip() {
+		ConteudoTabelaDB<PlanoVip> conteudoTabelaPlanoVip = mapaRegistros.get(PlanoVip.class);
+		List<PlanoVip> planosVipEsperados = conteudoTabelaPlanoVip.getRegistros();
+		RepositorioPlanoVip repositorio = fabricaDeRepositorios.criarRepositorioPlanoVip();
+		
+		iniciarConecxaoSePreciso(repositorio);
+		List<Executable> listaDeAssercoes = new ArrayList<>(planosVipEsperados.size());
+		
+		for (PlanoVip planoVipEsperado : planosVipEsperados) {
+			PlanoVip planoVipEncontrado = repositorio.find(planoVipEsperado.getId());
+			
+			listaDeAssercoes.add(new Executable() {
+				public void execute() throws Throwable {
+					Assertions.assertEquals(planoVipEsperado, planoVipEncontrado, "\nPlanoVip encontrado diferente: \n"
+							+ planoVipEncontrado + "\nDeveria ser: \n" + planoVipEsperado + "\n");
+				}
+			});
+		}
+		Assertions.assertAll(listaDeAssercoes);
+		
 	}
 	
 	private void iniciarConecxaoSePreciso(Object objeto) {
