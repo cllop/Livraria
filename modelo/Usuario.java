@@ -20,10 +20,6 @@ public class Usuario {
 	private byte ddi;
 	private byte ddd;
 	private int telefone;
-	
-	
-	
-
 
 	public Usuario(int id, long cpf, String nome, String sobrenome, String nomeDeUsuario, String senha, String pais,
 			String estado, String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi,
@@ -269,7 +265,29 @@ public class Usuario {
 				+ ", ddi=" + ddi + ", ddd=" + ddd + ", telefone=" + telefone + "]";
 	}
 
-	
-		
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(bairro, cep, cidade, cpf, ddd, ddi, estado, id, nome, nomeDeUsuario, numeroDaResidencia,
+				pais, rua, senha, sobrenome, telefone);
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Usuario other = (Usuario) obj;
+		return Objects.equals(bairro, other.bairro) && cep == other.cep && Objects.equals(cidade, other.cidade)
+				&& cpf == other.cpf && ddd == other.ddd && ddi == other.ddi && Objects.equals(estado, other.estado)
+				&& id == other.id && Objects.equals(nome, other.nome)
+				&& Objects.equals(nomeDeUsuario, other.nomeDeUsuario) && numeroDaResidencia == other.numeroDaResidencia
+				&& Objects.equals(pais, other.pais) && Objects.equals(rua, other.rua)
+				&& Objects.equals(senha, other.senha) && Objects.equals(sobrenome, other.sobrenome)
+				&& telefone == other.telefone;
+	}
 }

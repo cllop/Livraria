@@ -101,7 +101,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			ps.setLong(6, cliente.getCep());
 			ps.setInt(7, cliente.getNumeroDaResidencia());
 		}catch (SQLException e){
-			throw new RuntimeException("Não foi possível alterar os dados do cliente!", e);
+			throw new RuntimeException("Não foi possível alterar os dados do cliente.", e);
 		}finally {
 			if(!jaExisteConexao) {
 				super.fecharConexao();
@@ -242,7 +242,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			String rua = conjuntoDeResultados.getString("rua");
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
-			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 			byte ddi = conjuntoDeResultados.getByte("ddi");
 			byte ddd = conjuntoDeResultados.getByte("ddd");
 			int telefone = conjuntoDeResultados.getInt("telefone");
@@ -269,7 +269,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			String rua = conjuntoDeResultados.getString("rua");
 			String bairro = conjuntoDeResultados.getString("bairro");
 			int cep = conjuntoDeResultados.getInt("cep");
-			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDeResidencia");
+			short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
 			byte ddi = conjuntoDeResultados.getByte("DDI");
 			byte ddd = conjuntoDeResultados.getByte("DDD");
 			int telefone = conjuntoDeResultados.getInt("telefone");

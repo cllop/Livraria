@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.Objects;
+
 import anotacoes.TabelaInexistente;
 
 @TabelaInexistente
@@ -29,6 +31,26 @@ public class Funcionario extends Usuario{
 	@Override
 	public String toString() {
 		return "Funcionario [ativo=" + ativo + "]" + super.toString();
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + Objects.hash(ativo);
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Funcionario other = (Funcionario) obj;
+		return ativo == other.ativo;
 	}
 
 }
