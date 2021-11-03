@@ -8,9 +8,6 @@ import javax.swing.JPanel;
 
 public class MenuProduto extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
 	public MenuProduto(GerenciadorProduto gerenciadorProduto) {
 		setLayout(null);
 		
@@ -35,7 +32,6 @@ public class MenuProduto extends JPanel {
 			JButton btnEditarProduto = new JButton("Editar Produto");
 			btnEditarProduto.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
 					gerenciadorProduto.editarProdutos();
 				}
 			});

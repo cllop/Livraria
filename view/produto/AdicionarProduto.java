@@ -22,10 +22,9 @@ public class AdicionarProduto extends JPanel {
 	private JTextField tfPreco;
 	private JTextField tfQuantidade;
 	private JButton btnCadastrarProduto;
+	private JLabel lblIdSetor;
+	private JTextField textIdSetor;
 
-	/**
-	 * Create the panel.
-	 */
 	public AdicionarProduto(GerenciadorProduto gerenciadorProduto, RepositorioProduto repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(Color.pink);
@@ -33,44 +32,52 @@ public class AdicionarProduto extends JPanel {
 		AdicionarProduto esseAdicionarProduto= this;
 		setLayout(null);
 		
-		JLabel lblNewLabel = new JLabel("Nome ");
-		lblNewLabel.setBounds(29, 11, 46, 14);
-		add(lblNewLabel);
+		JLabel lblNome = new JLabel("Nome ");
+		lblNome.setBounds(10, 11, 46, 14);
+		add(lblNome);
 		
 		tfNome = new JTextField();
-		tfNome.setBounds(10, 30, 259, 20);
+		tfNome.setBounds(10, 36, 259, 20);
 		add(tfNome);
 		tfNome.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Descricao");
-		lblNewLabel_1.setBounds(307, 11, 52, 14);
-		add(lblNewLabel_1);
+		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o");
+		lblDescricao.setBounds(307, 11, 52, 14);
+		add(lblDescricao);
 		
 		tfDescricao = new JTextPane();
-		tfDescricao.setBounds(307, 30, 364, 225);
+		tfDescricao.setBounds(307, 36, 259, 256);
 		add(tfDescricao);
 		
+		JLabel lblPreco = new JLabel("Pre\u00E7o");
+		lblPreco.setBounds(10, 67, 46, 14);
+		add(lblPreco);
 		
-		JLabel lblNewLabel_2 = new JLabel("Preco");
-		lblNewLabel_2.setBounds(29, 61, 46, 14);
-		add(lblNewLabel_2);
-		
-		JLabel lblNewLabel_3 = new JLabel("Quantidade");
-		lblNewLabel_3.setBounds(20, 106, 86, 14);
-		add(lblNewLabel_3);
+		JLabel lblQuantidade = new JLabel("Quantidade");
+		lblQuantidade.setBounds(10, 123, 86, 14);
+		add(lblQuantidade);
 		
 		tfPreco = new JTextField();
-		tfPreco.setBounds(10, 75, 259, 20);
+		tfPreco.setBounds(10, 92, 259, 20);
 		add(tfPreco);
 		tfPreco.setColumns(10);
 		
 		tfQuantidade = new JTextField();
-		tfQuantidade.setBounds(10, 119, 259, 20);
+		tfQuantidade.setBounds(10, 148, 259, 20);
 		add(tfQuantidade);
 		tfQuantidade.setColumns(10);
 		
+		lblIdSetor = new JLabel("ID do Setor");
+		lblIdSetor.setBounds(10, 179, 145, 14);
+		add(lblIdSetor);
+		
+		textIdSetor = new JTextField();
+		textIdSetor.setBounds(10, 204, 259, 20);
+		add(textIdSetor);
+		textIdSetor.setColumns(10);
+		
 		JButton btnVoltarAoMenuProduto = new JButton("Voltar ao Menu Produto");
-		btnVoltarAoMenuProduto.setBounds(104, 266, 145, 23);
+		btnVoltarAoMenuProduto.setBounds(290, 435, 145, 23);
 		btnVoltarAoMenuProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorProduto.menuProduto();
@@ -79,20 +86,24 @@ public class AdicionarProduto extends JPanel {
 		add(btnVoltarAoMenuProduto);
 		
 		btnCadastrarProduto = new JButton("Cadastrar Produto");
-		btnCadastrarProduto.setBounds(259, 266, 121, 23);
+		btnCadastrarProduto.setBounds(445, 435, 121, 23);
 		btnCadastrarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome= tfNome.getText();
 				String descricao= tfDescricao.getText();
 				Real preco= new Real(tfPreco.getText());
 				int quantidade= Integer.parseInt(tfQuantidade.getText());
-				Produto produto= new Produto(nome, descricao, preco, quantidade);
+				int idSetor = Integer.parseInt(textIdSetor.getText());
+				
+				Produto produto= new Produto(nome, descricao, preco, quantidade, idSetor);
 				repositorio.add(produto);
-				JOptionPane.showMessageDialog(esseAdicionarProduto, "Produto adicionado com sucesso!");
+				JOptionPane.showMessageDialog(esseAdicionarProduto, "Produto adicionado com sucesso.");
 				gerenciadorProduto.menuProduto();
 			}
 		});
 		add(btnCadastrarProduto);
+		
+		
 
 	}
 }

@@ -14,7 +14,7 @@ public class GerenciadorProduto extends JPanel {
 	private JPanel menuSelecionado;
 	private RepositorioProduto repositorio;
 
-	public GerenciadorProduto(RepositorioProduto repositorio) {
+	public GerenciadorProduto(RepositorioProduto repositorio, Produto produto) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}
@@ -53,27 +53,36 @@ public class GerenciadorProduto extends JPanel {
 
 	}
 
-	public void deletarProduto(Produto produto) {
-		this.trocarTela(new DadosPesquisaParaDeletarProduto(this, produto));
+	public void deletarProduto() {
+		this.trocarTela(new DadosPesquisaParaDeletarProduto(this, repositorio));
 	}
 
+	public void deletarProduto(Produto produto) {
+		this.trocarTela(new DeletarProduto(this, repositorio, produto));
+	}
+	
 	public void menuProduto() {
 		this.trocarTela(new MenuProduto(this));
+	}
+	
+	public void exibirProduto(Produto produto) {
+		this.trocarTela(new ExibirProduto(this, produto));
 	}
 
 	public void exibirProdutos(List<Produto> produto) {
 
 	}
 	
-	
-	
 	public void editarProdutos(Produto produto) {
 		this.trocarTela(new EditarProduto(this, repositorio, produto));
 	}
 	
-
 	public void editarProdutos() {
 		this.trocarTela(new PesquisarEditarProduto(this, repositorio));
+	}
+	
+	public void pesquisarProduto() {
+		this.trocarTela(new PesquisarProduto(this, repositorio));
 	}
 
 }

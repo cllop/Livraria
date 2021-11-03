@@ -18,9 +18,6 @@ public class DadosPesquisaProdutoLivro extends DadosPesquisa {
 	private JTextField tfCategoria;
 	private JTextField tfAutor;
 
-	/**
-	 * Create the panel.
-	 */
 	public DadosPesquisaProdutoLivro(GerenciadorPrincipal gerenciador,RepositorioProduto repositorio) {
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
