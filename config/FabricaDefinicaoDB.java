@@ -60,7 +60,7 @@ public class FabricaDefinicaoDB {
 		
 		papelLogin.add(atores.get("login"));
 		
-		usuarios.add(new UsuarioDB("paraLogin", "%", "3reaix", papelLogin));
+		usuarios.add(new UsuarioDB("paraLogin", "%", "09876Logoff", papelLogin));
 		
 		return usuarios;
 	}

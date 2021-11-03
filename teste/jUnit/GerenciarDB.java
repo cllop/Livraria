@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.Scanner;
 
 import config.FabricaDeConexao;
-import teste.jUnit.funcional.bancoDeDados.RegistrosBDParaTesteFuncionalBD;
+import teste.jUnit.funcional.bancoDeDados.RegistrosBDParaTesteRecuperacao;
 
 public class  GerenciarDB {
 	
@@ -25,7 +25,7 @@ public class  GerenciarDB {
 
 	public void criarDB(){
 		try {
-			mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+			mapaRegistros = new RegistrosBDParaTesteRecuperacao().obterRegistros();
 			StringBuilder sb = new StringBuilder();
 			sb.append("Create DataBase ");
 			sb.append(nomeDoDB);

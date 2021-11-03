@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import config.FabricaDeConexao;
 import modelo.Caixa;
 import modelo.Cliente;
 import modelo.Fornecedor;
@@ -15,6 +16,7 @@ import modelo.Gerente;
 import modelo.Produto;
 import modelo.Setor;
 import modelo.Vendedor;
+import repository.FabricaDeRepositorios;
 import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioFornecedor;
@@ -22,22 +24,33 @@ import repository.RepositorioGerente;
 import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
+import repository.jdbc.FabricaDeRepositoriosJDBC;
+import teste.jUnit.GerenciarDB;
+import teste.jUnit.MapaRegistro;
+import teste.jUnit.RegistrosBD;
 
 public class TesteDeInsercao {
 
 	private static TesteDeRecuperacao testeDeRecuperacao;
+	private static GerenciarDB gerenciarDB;
+	private static MapaRegistro mapaRegistros;
+	private static FabricaDeRepositorios fabricaDeRepositorios;
+	public static final String nomeDoDB = "testeDB";
 	
 	@BeforeAll
 	public static void antesDeTudo() {
-		TesteDeRecuperacao.antesDeTudo();
-		TesteDeRecuperacao.gerenciarDB.destruirDB();
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB,"teste", null));
+		mapaRegistros = new RegistroDBParaTesteInsercao(new RegistrosBDParaTesteRecuperacao()).obterRegistros();
+		gerenciarDB = new GerenciarDB(null, nomeDoDB);
+		gerenciarDB.destruirDB();
 		testeDeRecuperacao = new TesteDeRecuperacao();
+		TesteDeRecuperacao.fabricaDeRepositorios = fabricaDeRepositorios;
 	}
 	@BeforeEach
 	public void antesDeCada() {
 		
-		TesteDeRecuperacao.gerenciarDB.criarDB();
-		TesteDeRecuperacao.gerenciarDB.criarTabelas();
+		gerenciarDB.criarDB();
+		gerenciarDB.criarTabelas();
 	}
 	@AfterAll
 	public static void depoisDeTudo() {
@@ -45,13 +58,13 @@ public class TesteDeInsercao {
 	}
 	@AfterEach
 	public void depoisDeCada() {
-		TesteDeRecuperacao.gerenciarDB.destruirDB();
+		gerenciarDB.destruirDB();
 	}
 	
 	@Test
 	public void addFornecedor() {
-		RepositorioFornecedor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioFornecedor();
-		List<Fornecedor> list = TesteDeRecuperacao.mapaRegistros.get(Fornecedor.class).getRegistros();
+		RepositorioFornecedor repositorio = fabricaDeRepositorios.criarRepositorioFornecedor();
+		List<Fornecedor> list = mapaRegistros.get(Fornecedor.class).getRegistros();
 		for(Fornecedor model : list) {
 			repositorio.add(model);
 		}
@@ -59,8 +72,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addCaixa() {
-		RepositorioCaixa repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioCaixa();
-		List<Caixa> list = TesteDeRecuperacao.mapaRegistros.get(Caixa.class).getRegistros();
+		RepositorioCaixa repositorio = fabricaDeRepositorios.criarRepositorioCaixa();
+		List<Caixa> list = mapaRegistros.get(Caixa.class).getRegistros();
 		for(Caixa model : list) {
 			repositorio.add(model);
 		}
@@ -68,8 +81,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addGerente() {
-		RepositorioGerente repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioGerente();
-		List<Gerente> list = TesteDeRecuperacao.mapaRegistros.get(Gerente.class).getRegistros();
+		RepositorioGerente repositorio =fabricaDeRepositorios.criarRepositorioGerente();
+		List<Gerente> list = mapaRegistros.get(Gerente.class).getRegistros();
 		for(Gerente model : list) {
 			repositorio.add(model);
 		}
@@ -77,8 +90,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addVendedor() {
-		RepositorioVendedor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioVendedor();
-		List<Vendedor> list = TesteDeRecuperacao.mapaRegistros.get(Vendedor.class).getRegistros();
+		RepositorioVendedor repositorio =fabricaDeRepositorios.criarRepositorioVendedor();
+		List<Vendedor> list = mapaRegistros.get(Vendedor.class).getRegistros();
 		for(Vendedor model : list) {
 			repositorio.add(model);
 		}
@@ -86,8 +99,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addCliente() {
-		RepositorioCliente repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioCliente();
-		List<Cliente> list = TesteDeRecuperacao.mapaRegistros.get(Cliente.class).getRegistros();
+		RepositorioCliente repositorio =fabricaDeRepositorios.criarRepositorioCliente();
+		List<Cliente> list = mapaRegistros.get(Cliente.class).getRegistros();
 		for(Cliente model : list) {
 			repositorio.add(model);
 		}
@@ -95,8 +108,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addSetor() {
-		RepositorioSetor repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioSetor();
-		List<Setor> list = TesteDeRecuperacao.mapaRegistros.get(Setor.class).getRegistros();
+		RepositorioSetor repositorio = fabricaDeRepositorios.criarRepositorioSetor();
+		List<Setor> list = mapaRegistros.get(Setor.class).getRegistros();
 		for(Setor model : list) {
 			repositorio.add(model);
 		}
@@ -104,8 +117,8 @@ public class TesteDeInsercao {
 	}
 	@Test
 	public void addProduto() {
-		RepositorioProduto repositorio =TesteDeRecuperacao.fabricaDeRepositorios.criarRepositorioDeProduto();
-		List<Produto> list = TesteDeRecuperacao.mapaRegistros.get(Produto.class).getRegistros();
+		RepositorioProduto repositorio = fabricaDeRepositorios.criarRepositorioDeProduto();
+		List<Produto> list = mapaRegistros.get(Produto.class).getRegistros();
 		for(Produto model : list) {
 			repositorio.add(model);
 		}

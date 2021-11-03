@@ -20,12 +20,12 @@ import teste.jUnit.MapaRegistro;
 import teste.jUnit.RegistrosBD;
 import util.Real;
 
-public class RegistrosBDParaTesteFuncionalBD implements RegistrosBD{
+public class RegistrosBDParaTesteRecuperacao implements RegistrosBD{
 	
 	public static void main(String[] args) {
 		
 //	System.out.println(criarRegistrosCiente().gerarComandosDeInsert());
-		System.out.println(new RegistrosBDParaTesteFuncionalBD().obterRegistros().gerarTodosOsInserts());
+		System.out.println(new RegistrosBDParaTesteRecuperacao().obterRegistros().gerarTodosOsInserts());
 
 
 		

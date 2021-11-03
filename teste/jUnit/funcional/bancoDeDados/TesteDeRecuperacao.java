@@ -47,7 +47,7 @@ public class TesteDeRecuperacao {
 	@BeforeAll
 	public static void antesDeTudo() {
 		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB,"teste", null));
-		mapaRegistros = new RegistrosBDParaTesteFuncionalBD().obterRegistros();
+		mapaRegistros = new RegistrosBDParaTesteRecuperacao().obterRegistros();
 		gerenciarDB = new GerenciarDB(mapaRegistros, nomeDoDB);
 		gerenciarDB.destruirDB();
 	}
