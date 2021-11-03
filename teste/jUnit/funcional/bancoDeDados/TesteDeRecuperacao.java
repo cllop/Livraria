@@ -68,8 +68,6 @@ public class TesteDeRecuperacao {
 		gerenciarDB.destruirDB();
 	}
 	
-	
-	
 	@Test
 	public void findSetor() {
 		ConteudoTabelaDB<Setor> conteudoTabelaDB = mapaRegistros.get(Setor.class);

@@ -42,7 +42,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 		PreparedStatement ps;
 		try {
-			ps = con.prepareStatement("SELECT produto.*, setor.id AS idSetor, setor.nome FROM setor LEFT JOIN produtos WHERE setor.id=? ");
+			ps = con.prepareStatement("SELECT produto.*, setor.id AS idSetor, setor.nome AS nomeSet FROM setor LEFT JOIN produtos WHERE setor.id=? ");
 			ps.setString(1, nome);
 			ps.execute();
 			
@@ -74,7 +74,7 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 
 		try {
 			
-			ps = con.prepareStatement("SELECT * FROM setor LEFT JOIN produto ON setor.id = produto.id WHERE setor.id=?;");
+			ps = con.prepareStatement("SELECT produto.*, setor.id AS idSetor, setor.nome AS nomeSet FROM setor LEFT JOIN produto ON setor.id = produto.id WHERE setor.id=?;");
 			
 			ps.setInt(1, id);
 			
@@ -91,12 +91,34 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 		}
 	}
 	
-	public Setor lerSetor(ResultSet conjuntoDeResultados) throws SQLException {
+	
+	public void updade(int id) {
+		Connection con = super.getConexao();
+
+		boolean jaExisteConexao;
+		if (con == null) {
+			jaExisteConexao = false;
+			con = super.criarConexao();
+		} else {
+			jaExisteConexao = true;
+		}
+
+		PreparedStatement ps = null;
+		
+		try {
+			ps = con.prepareStatement("UPDATE ");
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
+		}
+	}
+
+public Setor lerSetor(ResultSet conjuntoDeResultados) throws SQLException {
 		
 		if(conjuntoDeResultados.next()) {
 
-			int id = conjuntoDeResultados.getInt("idSetor");
-			String nome = conjuntoDeResultados.getString("nome");
+			int id = conjuntoDeResultados.getInt("idSet");
+			String nome = conjuntoDeResultados.getString("nomeSetor");
 			String strIdProduto = conjuntoDeResultados.getString("id");
 			int atualId = id;
 			
@@ -123,28 +145,6 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 			throw new RuntimeException("Setor não encontrado");
 		}
 	}
-	
-	public void updade(int id) {
-		Connection con = super.getConexao();
-
-		boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			con = super.criarConexao();
-		} else {
-			jaExisteConexao = true;
-		}
-
-		PreparedStatement ps = null;
-		
-		try {
-			ps = con.prepareStatement("UPDATE ");
-		} catch (Exception e) {
-			
-			throw new RuntimeException(e);
-		}
-	}
-
 	
 	
 }

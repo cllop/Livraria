@@ -81,8 +81,7 @@ public class Real {
 		return new Real(centavosTotais);
 	}
 
-	public int getCentavos() {
-		int centavos = this.centavos / 100;
+	public int getCentavos() {	
 		return centavos;
 	}
 

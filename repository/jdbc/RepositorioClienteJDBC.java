@@ -257,7 +257,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		
 		if(conjuntoDeResultados.next()) {
 			
-			int idUsuario = conjuntoDeResultados.getInt("idUsuario");
+			int idUsuario = conjuntoDeResultados.getInt("id");
 			int idCliente = conjuntoDeResultados.getInt("idCliente");
 			long cpf = conjuntoDeResultados.getLong("cpf");
 			String nome = conjuntoDeResultados.getString("nome");
