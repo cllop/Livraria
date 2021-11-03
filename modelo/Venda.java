@@ -73,8 +73,18 @@ public class Venda {
     	return totalASerPago;
     }
     
+    public Real getValorPago() {
+    	Real valorPago = new Real(0);
+    	for(Pagamento pagamento : pagamentos) {
+    		valorPago = valorPago.adicionar(pagamento.getValor());
+    	}
+    	return valorPago;
+    }
+    
+    
+    
     public boolean estaCompletamentePaga() {
-    	
+    	return getValorASerPago().equals(getValorPago());
     }
 
 }

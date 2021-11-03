@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 
 import modelo.Usuario;
+import repository.RepositorioUsuario;
 import view.GerenciadorPrincipal;
 
 public class AlterarSenhaDeUsuario extends JPanel {
@@ -19,7 +20,7 @@ public class AlterarSenhaDeUsuario extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AlterarSenhaDeUsuario(GerenciadorPrincipal gerenciadorPrincipal, Usuario usuario) {
+	public AlterarSenhaDeUsuario(GerenciadorPrincipal gerenciadorPrincipal, Usuario usuario, RepositorioUsuario repositorio) {
 		setLayout(null);
 		
 		JLabel lblNewLabel = new JLabel("Senha Antiga");

@@ -14,6 +14,9 @@ import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProduto;
+import view.Setor.GerenciadorSetor;
+import view.Usuario.AlterarSenhaDeUsuario;
+import view.Usuario.ApagarDadosDoCliente;
 import view.fornecedor.GerenciadorFornecedor;
 import view.funcionario.GerenciadorFuncionario;
 import view.produto.DadosPesquisaProdutoLivro;
@@ -137,11 +140,11 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void alterarSenha() {
-
+		trocarTela(new AlterarSenhaDeUsuario(this, usuarioLogado, fabricaDeRepositorios.criarRepositorioDeUsuario()));
 	}
 
 	public void apagarDadosPessoais() {
-
+		trocarTela(new ApagarDadosDoCliente(this, (Cliente)usuarioLogado, fabricaDeRepositorios.criarRepositorioCliente()));
 	}
 
 	public void menuFuncionario() {
@@ -161,7 +164,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 
 	public void menuSetor() {
-
+		trocarTela(new GerenciadorSetor(this.fabricaDeRepositorios.criarRepositorioSetor()));
 	}
 
 	public void menuCompras() {

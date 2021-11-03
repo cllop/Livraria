@@ -13,6 +13,16 @@ public class Pagamento {
 		this.valor = valor;
 		this.id = id;
 	}
+
+
+	public int getId() {
+		return id;
+	}
+
+
+	public Real getValor() {
+		return valor;
+	}
 	
 	
 		
