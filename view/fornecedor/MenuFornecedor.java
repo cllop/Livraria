@@ -13,7 +13,7 @@ public class MenuFornecedor extends JPanel {
 
 	public MenuFornecedor(GerenciadorFornecedor gerenciadorFornecedor) {
 		if(DevConfig.guiDevMode) {
-			super.setBackground(Color.white);
+			super.setBackground(Color.cyan);
 		}
 		setLayout(null);
 

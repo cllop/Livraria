@@ -26,7 +26,7 @@ public class EditarFornecedor extends JPanel {
 								
 				try {
 					repositorio.update(fornecedor);
-					JOptionPane.showMessageDialog(btnEditar, "Fornecedor alterado com sucesso!");
+					JOptionPane.showMessageDialog(btnEditar, "Fornecedor alterado com sucesso.");
 				} catch (Exception ex){
 					JOptionPane.showMessageDialog(btnEditar, "Erro ao editar.");
 				}

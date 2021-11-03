@@ -1,4 +1,4 @@
-package view.Venda;
+package view.venda;
 
 import javax.swing.JButton;
 import javax.swing.event.TableModelListener;

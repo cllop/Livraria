@@ -15,6 +15,7 @@ import repository.RepositorioFornecedor;
 public class DeletarFornecedor extends JPanel {
 	private JTextField textCnpj;
 	private ExibirFornecedor fornecedorSendoExibido;
+	private JTextField textId;
 
 	public DeletarFornecedor(GerenciadorFornecedor gerenciador, RepositorioFornecedor repositorio) {
 		DeletarFornecedor esseDeletarFornecedor = this;
@@ -25,7 +26,7 @@ public class DeletarFornecedor extends JPanel {
 		add(lblCnpj);
 		
 		textCnpj = new JTextField();
-		textCnpj.setBounds(10, 36, 219, 20);
+		textCnpj.setBounds(10, 36, 331, 20);
 		add(textCnpj);
 		textCnpj.setColumns(10);
 		
@@ -98,6 +99,41 @@ public class DeletarFornecedor extends JPanel {
 		});
 		btnNewButton.setBounds(351, 266, 89, 23);
 		add(btnNewButton);
+		
+		JLabel lblId = new JLabel("ID");
+		lblId.setBounds(10, 67, 46, 14);
+		add(lblId);
+		
+		textId = new JTextField();
+		textId.setBounds(10, 92, 331, 20);
+		add(textId);
+		textId.setColumns(10);
+		
+		JButton btnBuscarId = new JButton("Buscar");
+		btnBuscarId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int id = Integer.parseInt(textId.getText());
+				Fornecedor fornecedor = repositorio.find(id);
+				
+				if(fornecedor == null) {
+					lblMensagem.setText("Fornecedor não encontrado.");
+				} else {
+					lblMensagem.setText("");
+					esseDeletarFornecedor.add(btnCancelar);
+					
+					ExibirFornecedor exibirFornecedor = new ExibirFornecedor(fornecedor);
+									
+					esseDeletarFornecedor.add(exibirFornecedor);
+					exibirFornecedor.setBounds(0, 300, esseDeletarFornecedor.getWidth(), esseDeletarFornecedor.getHeight()-300);
+					esseDeletarFornecedor.fornecedorSendoExibido = exibirFornecedor;
+					
+					esseDeletarFornecedor.add(btnDeletar);
+				}
+				esseDeletarFornecedor.repaint();
+			}
+		});
+		btnBuscarId.setBounds(351, 91, 89, 23);
+		add(btnBuscarId);
 		
 	}
 }

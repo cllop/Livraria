@@ -66,8 +66,6 @@ public class Usuario {
 		this.telefone = telefone;
 	}
 
-
-
 	public int getId() {
 		return id;
 	}
@@ -251,7 +249,10 @@ public class Usuario {
 	public int getTelefone() {
 		return telefone;
 	}
-
+	
+	public String getSenha() {
+		return senha;
+	}
 
 
 	public void setTelefone(int telefone) {

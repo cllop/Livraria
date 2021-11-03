@@ -1,4 +1,4 @@
-package view.Venda;
+package view.venda;
 
 import java.awt.EventQueue;
 

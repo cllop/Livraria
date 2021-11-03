@@ -21,6 +21,8 @@ public class DadosUsuario extends JPanel {
 	protected JTextField textDdi;
 	protected JTextField textDdd;
 	protected JTextField textTelefone;
+	protected JLabel lblSenha;
+	protected JTextField textSenha;
 
 	public DadosUsuario() {
 		setLayout(null);
@@ -30,7 +32,7 @@ public class DadosUsuario extends JPanel {
 		add(lblCpf);
 		
 		textCpf = new JTextField();
-		textCpf.setBounds(10, 36, 430, 20);
+		textCpf.setBounds(10, 36, 365, 20);
 		add(textCpf);
 		textCpf.setColumns(10);
 		
@@ -39,7 +41,7 @@ public class DadosUsuario extends JPanel {
 		add(lblNome);
 		
 		textNome = new JTextField();
-		textNome.setBounds(10, 92, 430, 20);
+		textNome.setBounds(10, 92, 365, 20);
 		add(textNome);
 		textNome.setColumns(10);
 		
@@ -48,7 +50,7 @@ public class DadosUsuario extends JPanel {
 		add(lblSobrenome);
 		
 		textSobrenome = new JTextField();
-		textSobrenome.setBounds(10, 148, 430, 20);
+		textSobrenome.setBounds(10, 148, 365, 20);
 		add(textSobrenome);
 		textSobrenome.setColumns(10);
 		
@@ -56,101 +58,109 @@ public class DadosUsuario extends JPanel {
 		lblNomeUsuario.setBounds(10, 179, 137, 14);
 		add(lblNomeUsuario);
 		
+		lblSenha = new JLabel("Senha");
+		lblSenha.setBounds(214, 179, 46, 14);
+		add(lblSenha);
+		
+		textSenha = new JTextField();
+		textSenha.setBounds(214, 204, 161, 20);
+		add(textSenha);
+		textSenha.setColumns(10);
+		
 		textNomeUsuario = new JTextField();
-		textNomeUsuario.setBounds(10, 204, 198, 20);
+		textNomeUsuario.setBounds(10, 204, 161, 20);
 		add(textNomeUsuario);
 		textNomeUsuario.setColumns(10);
 		
 		JLabel lblPais = new JLabel("Pa\u00EDs");
-		lblPais.setBounds(242, 179, 46, 14);
+		lblPais.setBounds(10, 235, 46, 14);
 		add(lblPais);
 		
 		textPais = new JTextField();
-		textPais.setBounds(242, 204, 198, 20);
+		textPais.setBounds(10, 260, 161, 20);
 		add(textPais);
 		textPais.setColumns(10);
 		
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setBounds(242, 235, 46, 14);
+		lblEstado.setBounds(214, 235, 46, 14);
 		add(lblEstado);
 		
 		textEstado = new JTextField();
-		textEstado.setBounds(242, 260, 198, 20);
+		textEstado.setBounds(214, 260, 161, 20);
 		add(textEstado);
 		textEstado.setColumns(10);
 		
 		JLabel lblCidade = new JLabel("Cidade");
-		lblCidade.setBounds(10, 235, 46, 14);
+		lblCidade.setBounds(10, 291, 46, 14);
 		add(lblCidade);
 		
 		textCidade = new JTextField();
-		textCidade.setBounds(10, 260, 198, 20);
+		textCidade.setBounds(10, 316, 161, 20);
 		add(textCidade);
 		textCidade.setColumns(10);
 		
 		JLabel lblRua = new JLabel("Rua");
-		lblRua.setBounds(10, 292, 46, 14);
+		lblRua.setBounds(10, 347, 46, 14);
 		add(lblRua);
 		
 		textRua = new JTextField();
-		textRua.setBounds(10, 317, 198, 20);
+		textRua.setBounds(10, 372, 161, 20);
 		add(textRua);
 		textRua.setColumns(10);
 		
 		JLabel lblBairro = new JLabel("Bairro");
-		lblBairro.setBounds(242, 292, 46, 14);
+		lblBairro.setBounds(214, 291, 46, 14);
 		add(lblBairro);
 		
 		textBairro = new JTextField();
-		textBairro.setBounds(242, 317, 198, 20);
+		textBairro.setBounds(214, 316, 161, 20);
 		add(textBairro);
 		textBairro.setColumns(10);
 		
 		JLabel lblCep = new JLabel("CEP");
-		lblCep.setBounds(10, 351, 46, 14);
+		lblCep.setBounds(10, 403, 46, 14);
 		add(lblCep);
 		
 		textCep = new JTextField();
-		textCep.setBounds(10, 376, 198, 20);
+		textCep.setBounds(10, 428, 161, 20);
 		add(textCep);
 		textCep.setColumns(10);
 		
 		JLabel lblNumeroResidencia = new JLabel("N\u00FAmero da Resid\u00EAncia");
-		lblNumeroResidencia.setBounds(242, 351, 198, 14);
+		lblNumeroResidencia.setBounds(214, 347, 198, 14);
 		add(lblNumeroResidencia);
 		
 		textNumeroResidencia = new JTextField();
-		textNumeroResidencia.setBounds(242, 376, 198, 20);
+		textNumeroResidencia.setBounds(214, 372, 161, 20);
 		add(textNumeroResidencia);
 		textNumeroResidencia.setColumns(10);
 		
 		JLabel lblDdi = new JLabel("DDI");
-		lblDdi.setBounds(10, 407, 46, 14);
+		lblDdi.setBounds(433, 11, 46, 14);
 		add(lblDdi);
 		
 		textDdi = new JTextField();
-		textDdi.setBounds(10, 432, 109, 20);
+		textDdi.setBounds(433, 36, 161, 20);
 		add(textDdi);
 		textDdi.setColumns(10);
 		
 		JLabel lblDdd = new JLabel("DDD");
-		lblDdd.setBounds(162, 407, 46, 14);
+		lblDdd.setBounds(635, 11, 46, 14);
 		add(lblDdd);
 		
 		textDdd = new JTextField();
-		textDdd.setBounds(162, 432, 109, 20);
+		textDdd.setBounds(635, 36, 161, 20);
 		add(textDdd);
 		textDdd.setColumns(10);
 		
 		JLabel lblTelefone = new JLabel("N\u00FAmero de Telefone");
-		lblTelefone.setBounds(302, 407, 198, 14);
+		lblTelefone.setBounds(433, 67, 198, 14);
 		add(lblTelefone);
 		
 		textTelefone = new JTextField();
-		textTelefone.setBounds(302, 432, 138, 20);
+		textTelefone.setBounds(433, 92, 161, 20);
 		add(textTelefone);
 		textTelefone.setColumns(10);
-
 	}
 	
 	public DadosUsuario(Usuario usuario, boolean exibicao) {
@@ -165,6 +175,7 @@ public class DadosUsuario extends JPanel {
 			textNome.setEditable(false);
 			textSobrenome.setEditable(false);
 			textNomeUsuario.setEditable(false);
+			textSenha.setEditable(false);
 			textPais.setEditable(false);
 			textEstado.setEditable(false);
 			textCidade.setEditable(false);
@@ -183,6 +194,7 @@ public class DadosUsuario extends JPanel {
 		textNome.setText(usuario.getNome());
 		textSobrenome.setText(usuario.getSobrenome());
 		textNomeUsuario.setText(usuario.getNomeDeUsuario());
+		textSenha.setText(usuario.getSenha());
 		textPais.setText(usuario.getPais());
 		textEstado.setText(usuario.getEstado());
 		textCidade.setText(usuario.getCidade());
