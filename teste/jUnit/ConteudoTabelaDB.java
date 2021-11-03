@@ -7,6 +7,7 @@ import java.util.List;
 
 import anotacoes.AnotacaoTabela;
 import anotacoes.TabelaInexistente;
+import util.Real;
 
 public class ConteudoTabelaDB<E> {
 
@@ -90,7 +91,7 @@ public class ConteudoTabelaDB<E> {
 
 	private String gerarComandosDeInsert(List registros, Class classe) {
 		List<Class> listaDeTiposAceitos = Arrays.asList(byte.class, short.class, int.class, long.class, float.class,
-				double.class, boolean.class, char.class, String.class);
+				double.class, boolean.class, char.class, String.class, Real.class);
 
 		StringBuilder sb = new StringBuilder();
 
@@ -172,7 +173,10 @@ public class ConteudoTabelaDB<E> {
 							sb.append(field.get(registro));
 							sb.append('\'');
 							sb.append(", ");
-						} else {
+						} else if(classeDoAtributo == Real.class){
+							sb.append(((Real)field.get(registro)).getCentavos());
+							sb.append(", ");
+						}else {
 							sb.append(field.get(registro));
 							sb.append(", ");
 						}

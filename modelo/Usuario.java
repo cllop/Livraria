@@ -2,6 +2,7 @@ package modelo;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Objects;
 
 public class Usuario {
 	private int id;
@@ -9,7 +10,7 @@ public class Usuario {
 	private String nome;
 	private String sobrenome;
 	private String nomeDeUsuario;
-	private String AntigaSenha;
+	private String senha;
 	private String pais;
 	private String estado;
 	private String cidade;
@@ -30,7 +31,7 @@ public class Usuario {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
-		this.AntigaSenha = senha;
+		this.senha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -52,7 +53,7 @@ public class Usuario {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.nomeDeUsuario = nomeDeUsuario;
-		this.AntigaSenha = senha;
+		this.senha = senha;
 		this.pais = pais;
 		this.estado = estado;
 		this.cidade = cidade;
@@ -125,17 +126,17 @@ public class Usuario {
 		this.nomeDeUsuario = nomeDeUsuario;
 	}
 
-	public void setSenha(String senha) {
-		MessageDigest m = MessageDigest.getInstance("MD5");
-		byte[] v = m.digest(senha.getBytes());
-		String hashDaSenha= new String(v);
-		if(this.AntigaSenha.equals(hashDaSenha)) {
-			this.AntigaSenha = hashDaSenha;
-		}else {
-			throw new 
-		}
-		
-	}
+//	public void setSenha(String senha) {
+//		MessageDigest m = MessageDigest.getInstance("MD5");
+//		byte[] v = m.digest(senha.getBytes());
+//		String hashDaSenha= new String(v);
+//		if(this.senha.equals(hashDaSenha)) {
+//			this.senha = hashDaSenha;
+//		}else {
+//			throw new 
+//		}
+//		
+//	}
 	
 	
 
@@ -260,7 +261,7 @@ public class Usuario {
 	@Override
 	public String toString() {
 		return "Usuario [id=" + id + ", cpf=" + cpf + ", nome=" + nome + ", sobrenome=" + sobrenome + ", nomeDeUsuario="
-				+ nomeDeUsuario + ", senha=" + AntigaSenha + ", pais=" + pais + ", estado=" + estado + ", cidade=" + cidade
+				+ nomeDeUsuario + ", senha=" + senha + ", pais=" + pais + ", estado=" + estado + ", cidade=" + cidade
 				+ ", rua=" + rua + ", bairro=" + bairro + ", cep=" + cep + ", numeroDaResidencia=" + numeroDaResidencia
 				+ ", ddi=" + ddi + ", ddd=" + ddd + ", telefone=" + telefone + "]";
 	}
@@ -290,4 +291,10 @@ public class Usuario {
 				&& Objects.equals(senha, other.senha) && Objects.equals(sobrenome, other.sobrenome)
 				&& telefone == other.telefone;
 	}
+
+
+	
+	
+
+	
 }
