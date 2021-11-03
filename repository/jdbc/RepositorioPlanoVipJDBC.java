@@ -2,6 +2,7 @@ package repository.jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -102,26 +103,16 @@ public class RepositorioPlanoVipJDBC extends RepositorioJDBC implements Reposito
 
 	@Override
 	public PlanoVip findByNome(String nome) {
-		
 		return null;
 	}
 	
-	private List<PlanoVip> lerLIstaDePlanosVip() {
-		Connection con = super.getConexao();
-		Boolean jaExisteConexao;
-		if (con == null) {
-			jaExisteConexao = false;
-			con = super.criarConexao();
-		} else {
-			jaExisteConexao = true;
-		}
-		PreparedStatement ps;
+	private List<PlanoVip> lerListaDePlanosVip(ResultSet conjutosResultados) {
 		
-		try {
-			ps = con.prepareStatement("SELECT *");
-		} catch (Exception e) {
-			
-			throw new RuntimeException(e);
-		}
+	}
+
+	@Override
+	public PlanoVip find(int id) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

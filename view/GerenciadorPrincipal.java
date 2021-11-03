@@ -110,7 +110,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void iniciarVenda() {
-		this.trocarTela(new SelecionarVendedorParaVenda(this ,this.fabricaDeRepositorios.criarRepositorioVendedor()));
+		this.trocarTela(new SelecionarVendedorParaVenda(this ,this.fabricaDeRepositorios.criarRepositorioVendedor(), this.fabricaDeRepositorios.criarRepositorioCliente()));
 		
 	}
 	
@@ -145,7 +145,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 
 	public void menuFuncionario() {
-		trocarTela(new GerenciadorFuncionario(null, null, null, null));
+		trocarTela(new GerenciadorFuncionario(fabricaDeRepositorios.criarRepositorioFuncionario(), fabricaDeRepositorios.criarRepositorioGerente(), fabricaDeRepositorios.criarRepositorioCaixa(), fabricaDeRepositorios.criarRepositorioVendedor()));
 	}
 
 	public void menuProduto() {

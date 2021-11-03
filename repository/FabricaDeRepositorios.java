@@ -71,6 +71,11 @@ public interface FabricaDeRepositorios{
 	
 	public RepositorioFornecedor criarRepositorioFornecedor();
 	
+	
+	public RepositorioFuncionario criarRepositorioFuncionario();
+	
+	
+	
 		
 }
 	

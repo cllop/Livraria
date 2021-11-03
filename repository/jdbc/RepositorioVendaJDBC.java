@@ -22,6 +22,16 @@ public class RepositorioVendaJDBC extends RepositorioJDBC implements Repositorio
 	public RepositorioVendaJDBC(FabricaDeConexao fabricadeconexoes) {
 		super(fabricadeconexoes);
 	}
+	
+	@Override
+	public void salvarVenda(Venda venda) {
+		// TODO Auto-generated method stub	
+	}
+	@Override
+	public Venda find(int id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	public static ItemDeVenda apenasLerItemDeVenda(ResultSet conjuntoDeResultados) throws SQLException {
 
@@ -29,14 +39,15 @@ public class RepositorioVendaJDBC extends RepositorioJDBC implements Repositorio
 		int id = conjuntoDeResultados.getInt("Id");
 		int quantidade = conjuntoDeResultados.getInt("Quantidade");
 		Real preco = new Real(conjuntoDeResultados.getInt("preco"));
-
 		int idProduto = conjuntoDeResultados.getInt("id");
 		String nome = conjuntoDeResultados.getString("nome");
 		Real precoProduto = new Real(conjuntoDeResultados.getInt("preco"));
 		String descricao = conjuntoDeResultados.getString("descricao");
 		int quantidadeProduto = conjuntoDeResultados.getInt("quantidade");
+		int idSetor = conjuntoDeResultados.getInt("idSetor");
+		
 
-		Produto produto = new Produto(idProduto, nome, descricao, precoProduto, quantidadeProduto);
+		Produto produto = new Produto(idProduto, nome, descricao, precoProduto, quantidadeProduto, idSetor);
 
 		return new ItemDeVenda(idVenda, id, quantidade, preco, produto);
 
@@ -47,94 +58,113 @@ public class RepositorioVendaJDBC extends RepositorioJDBC implements Repositorio
 		if (conjuntoDeResultados.next()) {
 
 			return apenasLerVenda(conjuntoDeResultados);
-
+		} else {
+			throw new RuntimeException("venda nao encontrada");
 		}
 	}
 
 	public static Venda apenasLerVenda(ResultSet conjuntoDeResultados) throws SQLException {
-		
+
 		int id = conjuntoDeResultados.getInt("IdVenda");
 		int valor = conjuntoDeResultados.getInt("Valor");
 		Date data = conjuntoDeResultados.getDate("Data");
 		String strIdItemDeVenda = conjuntoDeResultados.getString("idItemDeVenda");
 		int atualId = id;
-		
+
 		List<ItemDeVenda> itensDeVenda = new ArrayList<>(conjuntoDeResultados.getRow());
 		List<Pagamento> pagamentos = new ArrayList<>(conjuntoDeResultados.getRow());
-		
-		if(strIdItemDeVenda != null) {
+
+		if (strIdItemDeVenda != null) {
 			ItemDeVenda itemDeVenda = apenasLerItemDeVenda(conjuntoDeResultados);
-			itensDeVenda.add(itemDeVenda); 
-			
+			itensDeVenda.add(itemDeVenda);
+
 		}
-		while(conjuntoDeResultados.next() && id == atualId) {
-			if(strIdItemDeVenda != null) {
+		while (conjuntoDeResultados.next() && id == atualId) {
+			if (strIdItemDeVenda != null) {
 				ItemDeVenda itemDeVenda = apenasLerItemDeVenda(conjuntoDeResultados);
 				itensDeVenda.add(itemDeVenda);
 			}
-			atualId  = conjuntoDeResultados.getInt("idVenda");
-			
+			atualId = conjuntoDeResultados.getInt("idVenda");
+
 		}
+		// int id, Date data, Vendedor vendedor, Cliente cliente, Caixa caixa,
 		// List<ItemDeVenda> itensDeVenda, List<Pagamento> pagamentos
-		return new Venda(id, data, apenasLerVendedor(conjuntoDeResultados), apenasLerCliente(conjuntoDeResultados), apenasLerCaixa(conjuntoDeResultados), valor, strIdItemDeVenda, itensDeVenda, pagamentos);
+		return new Venda(id, data, apenasLerVendedor(conjuntoDeResultados), apenasLerCliente(conjuntoDeResultados),
+				apenasLerCaixa(conjuntoDeResultados), itensDeVenda, pagamentos);
 	}
-	
+
 	private static Vendedor apenasLerVendedor(ResultSet conjuntoDeResultados) throws SQLException {
 
-			int id = conjuntoDeResultados.getInt("id");
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			boolean ativo = conjuntoDeResultados.getBoolean("ativo");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
-			
-			return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddi, telefone);
+		int id = conjuntoDeResultados.getInt("id");
+		long cpf = conjuntoDeResultados.getLong("cpf");
+		String nome = conjuntoDeResultados.getString("nome");
+		String sobrenome = conjuntoDeResultados.getString("sobrenome");
+		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String senha = conjuntoDeResultados.getString("senha");
+		String pais = conjuntoDeResultados.getString("pais");
+		String cidade = conjuntoDeResultados.getString("cidade");
+		String estado = conjuntoDeResultados.getString("estado");
+		String rua = conjuntoDeResultados.getString("rua");
+		String bairro = conjuntoDeResultados.getString("bairro");
+		int cep = conjuntoDeResultados.getInt("cep");
+		Short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
+		byte ddi = conjuntoDeResultados.getByte("ddi");
+		byte ddd = conjuntoDeResultados.getByte("ddd");
+		int telefone = conjuntoDeResultados.getInt("telefone");
+		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
+
+		return new Vendedor(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+				numeroDaResidencia, ddi, ddd, telefone, ativo);
 
 	}
-	
+
 	private static Caixa apenasLerCaixa(ResultSet conjuntoDeResultados) throws SQLException {
 
-			int id = conjuntoDeResultados.getInt("id");
-			long cpf = conjuntoDeResultados.getLong("cpf");
-			String nome = conjuntoDeResultados.getString("nome");
-			String sobrenome = conjuntoDeResultados.getString("sobrenome");
-			String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
-			String rua = conjuntoDeResultados.getString("rua");
-			String bairro = conjuntoDeResultados.getString("bairro");
-			int cep = conjuntoDeResultados.getInt("cep");
-			int numeroDaResidencia = conjuntoDeResultados.getInt("numeroDeResidencia");
-			byte ddd = conjuntoDeResultados.getByte("DDD");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
+		int id = conjuntoDeResultados.getInt("id");
+		long cpf = conjuntoDeResultados.getLong("cpf");
+		String nome = conjuntoDeResultados.getString("nome");
+		String sobrenome = conjuntoDeResultados.getString("sobrenome");
+		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String senha = conjuntoDeResultados.getString("senha");
+		String pais = conjuntoDeResultados.getString("pais");
+		String estado = conjuntoDeResultados.getString("estado");
+		String cidade = conjuntoDeResultados.getString("cidade");
+		String rua = conjuntoDeResultados.getString("rua");
+		String bairro = conjuntoDeResultados.getString("bairro");
+		int cep = conjuntoDeResultados.getInt("cep");
+		short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
+		byte ddi = conjuntoDeResultados.getByte("DDI");
+		byte ddd = conjuntoDeResultados.getByte("DDD");
+		int telefone = conjuntoDeResultados.getInt("telefone");
+		boolean ativo = conjuntoDeResultados.getBoolean("ativo");
 
-			return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+		return new Caixa(id, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep,
+				numeroDaResidencia, ddi, ddd, telefone, ativo);
 
 	}
-	
+
 	public static Cliente apenasLerCliente(ResultSet conjuntoDeResultados) throws SQLException {
-		
-		if(conjuntoDeResultados.next()) {
-			
-			int id = conjuntoDeResultados.getInt(2);
-			String nome = conjuntoDeResultados.getString(3);
-			String sobrenome = conjuntoDeResultados.getString(4);
-			String nomeDeUsuario = conjuntoDeResultados.getString(5);
-			String rua = conjuntoDeResultados.getString(6);
-			String bairro = conjuntoDeResultados.getString(7);
-			int cep = conjuntoDeResultados.getInt(8);
-			int numeroDaResidencia = conjuntoDeResultados.getInt(9);
-			byte ddd = conjuntoDeResultados.getByte("DDD");
-			byte ddi = conjuntoDeResultados.getByte("DDI");
-			int telefone = conjuntoDeResultados.getInt("numeroTelefone");
-		
-//			return new Cliente(id, nome, sobrenome, nomeDeUsuario, rua, bairro, cep, numeroDaResidencia, ddd, ddi, telefone);
-			return null;
-		}
+
+		int idUsuario = conjuntoDeResultados.getInt("idUsuario");
+		int idCliente = conjuntoDeResultados.getInt("idCliente");
+		long cpf = conjuntoDeResultados.getLong("cpf");
+		String nome = conjuntoDeResultados.getString("nome");
+		String sobrenome = conjuntoDeResultados.getString("sobrenome");
+		String nomeDeUsuario = conjuntoDeResultados.getString("nomeDeUsuario");
+		String senha = conjuntoDeResultados.getString("senha");
+		String pais = conjuntoDeResultados.getString("pais");
+		String estado = conjuntoDeResultados.getString("estado");
+		String cidade = conjuntoDeResultados.getString("cidade");
+		String rua = conjuntoDeResultados.getString("rua");
+		String bairro = conjuntoDeResultados.getString("bairro");
+		int cep = conjuntoDeResultados.getInt("cep");
+		short numeroDaResidencia = conjuntoDeResultados.getShort("numeroDaResidencia");
+		byte ddi = conjuntoDeResultados.getByte("DDI");
+		byte ddd = conjuntoDeResultados.getByte("DDD");
+		int telefone = conjuntoDeResultados.getInt("telefone");
+
+		return new Cliente(idUsuario, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua,
+				bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+
 	}
 }

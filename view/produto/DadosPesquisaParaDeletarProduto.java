@@ -10,16 +10,17 @@ import view.DadosPesquisa;
 public class DadosPesquisaParaDeletarProduto extends DadosPesquisa {
 
 	public DadosPesquisaParaDeletarProduto(GerenciadorProduto gerenciador, RepositorioProduto repositorio) {
-		btnPesquisarPorNome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				String nome = null;
-				Produto p;
-				nome = tfNome.getText();
+//		btnPesquisarPorNome.addActionListener(new ActionListener() {
+//			public void actionPerformed(ActionEvent e) {
+//				String nome = null;
+//				nome = tfNome.getText();
+//				Produto p = repositorio.findByNome(nome);
+//				gerenciador.deletarProduto(p);
+//			}
+//		});
 
-				gerenciador.deletarProduto(p);
-			}
-		});
-
+		
+		btnPesquisarPorNome.setVisible(false);
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;

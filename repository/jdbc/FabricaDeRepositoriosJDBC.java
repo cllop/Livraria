@@ -7,6 +7,7 @@ import repository.RepositorioCaixa;
 import repository.RepositorioCliente;
 import repository.RepositorioCompra;
 import repository.RepositorioFornecedor;
+import repository.RepositorioFuncionario;
 import repository.RepositorioGerente;
 import repository.RepositorioPagamento;
 import repository.RepositorioPlanoVip;
@@ -99,6 +100,11 @@ public class FabricaDeRepositoriosJDBC implements FabricaDeRepositorios {
 	
 	public RepositorioTelefoneFornecedor criarRepositorioTelefoneFornecedor() {
 		return new RepositorioTelefoneFornecedorJDBC(this.fabricaDeConexao);
+	}
+
+	@Override
+	public RepositorioFuncionario criarRepositorioFuncionario() {
+		return new RepositorioFuncionarioJDBC(this.fabricaDeConexao);
 	}
 	
 }

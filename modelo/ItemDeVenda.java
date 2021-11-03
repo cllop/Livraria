@@ -41,5 +41,9 @@ public class ItemDeVenda {
 	public int getId() {
 		return id;
 	}
+	
+	public Real getTotal() {
+		return preco.multiplicar(quantidade);
+	}
 }
 

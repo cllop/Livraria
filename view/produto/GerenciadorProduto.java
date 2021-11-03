@@ -14,7 +14,7 @@ public class GerenciadorProduto extends JPanel {
 	private JPanel menuSelecionado;
 	private RepositorioProduto repositorio;
 
-	public GerenciadorProduto(RepositorioProduto repositorio, Produto produto) {
+	public GerenciadorProduto(RepositorioProduto repositorio) {
 		if (DevConfig.guiDevMode) {
 			super.setBackground(new Color(0, 0, 100, 255));
 		}

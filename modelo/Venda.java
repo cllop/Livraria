@@ -66,7 +66,11 @@ public class Venda {
     }
     
     public Real getValorASerPago() {
-    	
+    	Real totalASerPago = new Real(0);
+    	for(ItemDeVenda itemDeVenda : itensDeVenda) {
+    		totalASerPago = totalASerPago.adicionar(itemDeVenda.getTotal());
+    	}
+    	return totalASerPago;
     }
     
     public boolean estaCompletamentePaga() {
