@@ -284,8 +284,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 		
 		if(conjuntoDeResultados.next()) {
 			
-			int idUsuario = conjuntoDeResultados.getInt("id");
-			int idUsuario = conjuntoDeResultados.getInt("idUsuario");
+			int id = conjuntoDeResultados.getInt("id");
 			int idCliente = conjuntoDeResultados.getInt("idCliente");
 			long cpf = conjuntoDeResultados.getLong("cpf");
 			String nome = conjuntoDeResultados.getString("nome");
@@ -303,7 +302,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 			byte ddd = conjuntoDeResultados.getByte("DDD");
 			int telefone = conjuntoDeResultados.getInt("telefone");
 
-			return new Cliente(idUsuario, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade,
+			return new Cliente(id, idCliente, cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade,
 					rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 		} else {
 			throw new RuntimeException("Cliente n�o encontrado");
