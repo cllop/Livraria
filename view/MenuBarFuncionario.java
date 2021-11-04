@@ -27,6 +27,4 @@ public class MenuBarFuncionario extends MenuBarUsuario {
 		add(btnNewButton);
 
 	}
-
-	
 }
