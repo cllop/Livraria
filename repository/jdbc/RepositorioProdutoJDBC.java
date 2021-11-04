@@ -132,8 +132,11 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			ps = con.prepareStatement("DELETE FROM produto WHERE id=?");
 			ps.setInt(1, produto.getId());	
 			ps.execute();
+			
 		} catch (Exception e) {
+			
 			throw new RuntimeException ("Não foi possivel deletar o produto", e);
+			
 		}finally {
 			if(jaExisteConexao) {
 				super.fecharConexao();
@@ -216,7 +219,6 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		
 		return new Produto(id, nome, descricao, preco, quantidade, idSetor);
 	}
-	
 	
 	
 }

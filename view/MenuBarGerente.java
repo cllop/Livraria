@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-public class MenuBarGerente extends MenuBarUsuario {
+public class MenuBarGerente extends MenuBarFuncionario {
 
 	
 	public MenuBarGerente(GerenciadorPrincipal gerenciadorPrincipal) {
