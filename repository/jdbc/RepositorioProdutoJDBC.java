@@ -117,7 +117,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public void delete(Produto produto) {//Tem q terminar ainda!!
+	public void delete(Produto produto) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -131,6 +131,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			
 			ps = con.prepareStatement("DELETE FROM produto WHERE id=?");
 			ps.setInt(1, produto.getId());	
+			
 			ps.execute();
 			
 		} catch (Exception e) {
@@ -209,6 +210,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 	}
 	
 	public static Produto apenasLerProduto(ResultSet conjuntoDeResultados) throws SQLException {
+		
 		
 		int id = conjuntoDeResultados.getInt("id");
 		String nome = conjuntoDeResultados.getString("nome");
