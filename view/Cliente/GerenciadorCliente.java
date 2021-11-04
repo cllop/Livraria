@@ -4,6 +4,7 @@ import java.awt.Container;
 
 import javax.swing.JPanel;
 
+import modelo.Cliente;
 import repository.RepositorioCliente;
 
 public class GerenciadorCliente extends JPanel {
@@ -47,6 +48,10 @@ public class GerenciadorCliente extends JPanel {
 	
 	public void cadastrarCliente() {
 		trocarTela(new TelaCadastrarCliente(this, this.repositorioCliente));
+	}
+	
+	public void exibirCliente(Cliente cliente) {
+		
 	}
 
 }
