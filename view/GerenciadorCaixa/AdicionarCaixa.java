@@ -1,11 +1,16 @@
 package view.GerenciadorCaixa;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import modelo.Caixa;
+import repository.RepositorioCaixa;
+import javax.swing.JPasswordField;
 
 public class AdicionarCaixa extends JPanel {
 	private JTextField tfCPF;
@@ -19,6 +24,7 @@ public class AdicionarCaixa extends JPanel {
 	private JTextField tfDDI;
 	private JTextField tfDDD;
 	private JTextField tfTelefone;
+	private JPasswordField pfSenha;
 
 	/**
 	 * Create the panel.
@@ -54,20 +60,20 @@ public class AdicionarCaixa extends JPanel {
 		tfSobrenome.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("CEP");
-		lblNewLabel_2.setBounds(10, 230, 113, 14);
+		lblNewLabel_2.setBounds(10, 289, 113, 14);
 		add(lblNewLabel_2);
 		
 		tfCEP = new JTextField();
-		tfCEP.setBounds(10, 255, 238, 20);
+		tfCEP.setBounds(10, 314, 238, 20);
 		add(tfCEP);
 		tfCEP.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Bairro");
-		lblNewLabel_3.setBounds(10, 286, 103, 14);
+		lblNewLabel_3.setBounds(10, 345, 103, 14);
 		add(lblNewLabel_3);
 		
 		tfBairro = new JTextField();
-		tfBairro.setBounds(10, 311, 238, 20);
+		tfBairro.setBounds(10, 370, 238, 20);
 		add(tfBairro);
 		tfBairro.setColumns(10);
 		
@@ -132,15 +138,21 @@ public class AdicionarCaixa extends JPanel {
 				String nome = tfNome.getText();
 				String sobrenome = tfSobrenome.getText();
 				String nomeDeUsuario = tfNomeDeUsuario.getText();
-				long cep = Long.parseLong(tfCEP.getText());
-				String bairro = tfBairro.getText();
+				String senha = pfSenha.getText();
+				String pais = tfPais.getText();
+				String estado = tfEstado.getText();
+				String cidade = tfCidade.getText();
 				String rua = tfRua.getText();
+				String bairro = tfBairro.getText();
+				int cep = Long.parseLong(tfCEP.getText());
 				short numeroDaResidencia = Short.parseShort(tfNumeroDaResidencia.getText());
-				short ddi = Short.parseShort(tfDDI.getText());
-				short ddd = Short.parseShort(tfDDD.getText());
+				byte ddi = Byte.parseByte(tfDDI.getText());
+				byte ddd = Byte.parseByte(tfDDD.getText());
 				int telefone = Integer.parseInt(tfTelefone.getText());
+				boolean ativo;
+//				 String pais,String estado, String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi,byte ddd, int telefone, boolean ativo
 				
-				Caixa caixa = new caixa(cpf, nome, sobrenome, nomeDeUsuario, cep, bairro, rua, numeroDaResidencia, ddi, ddd, telefone);
+				Caixa caixa = new Caixa(cpf, nome, sobrenome, nomeDeUsuario, cep, bairro, rua, numeroDaResidencia, ddi, ddd, telefone);
 				repositorio.add(caixa);
 				}
 		});
@@ -155,6 +167,14 @@ public class AdicionarCaixa extends JPanel {
 		});
 		btnCancelar.setBounds(551, 400, 89, 23);
 		add(btnCancelar);
+		
+		JLabel lblNewLabel_10 = new JLabel("Senha");
+		lblNewLabel_10.setBounds(10, 232, 46, 14);
+		add(lblNewLabel_10);
+		
+		pfSenha = new JPasswordField();
+		pfSenha.setBounds(10, 255, 238, 20);
+		add(pfSenha);
 
 	}
 }

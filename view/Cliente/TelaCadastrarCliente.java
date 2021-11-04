@@ -31,9 +31,6 @@ public class TelaCadastrarCliente extends JPanel {
 	private JTextField tfTelefone;
 	private JTextField tfCPF;
 
-	/**
-	 * Create the panel.
-	 */
 	public TelaCadastrarCliente(GerenciadorCliente gerenciadorCliente, RepositorioCliente repositorioCliente) {
 		setBackground(new Color(0, 102, 102));
 		setLayout(null);
