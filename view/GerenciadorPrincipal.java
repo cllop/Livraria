@@ -14,6 +14,7 @@ import modelo.Vendedor;
 import repository.FabricaDeFabricaDeRepositorios;
 import repository.FabricaDeRepositorios;
 import repository.RepositorioProduto;
+import view.Cliente.GerenciadorCliente;
 import view.Setor.GerenciadorSetor;
 import view.Usuario.AlterarSenhaDeUsuario;
 import view.Usuario.ApagarDadosDoCliente;

@@ -11,6 +11,7 @@ import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
+import modelo.Cliente;
 import repository.RepositorioCliente;
 
 public class TelaCadastrarCliente extends JPanel {
@@ -184,7 +185,6 @@ public class TelaCadastrarCliente extends JPanel {
 		JButton btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				String pais,String estado, String cidade, String rua, String bairro, int cep, short numeroDaResidencia, byte ddi,byte ddd, int telefone
 				long cpf = Long.parseLong(tfCPF.getText());
 				String nome = tfNome.getText();
 				String sobrenome = tfSobrenome.getText();
@@ -194,7 +194,15 @@ public class TelaCadastrarCliente extends JPanel {
 				String estado = tfEstado.getText();
 				String cidade = tfCidade.getText();
 				String rua = tfRua.getText();
+				String bairro = tfBairro.getText();
+				int cep = Integer.parseInt(tfCEP.getText());
+				short numeroDaResidencia = Short.parseShort(tfNumeroDaResidencia.getText());
+				byte ddi = Byte.parseByte(tfDDI.getText());
+				byte ddd = Byte.parseByte(tfDDD.getText());
+				int telefone = Integer.parseInt(tfTelefone.getText());
 				
+				Cliente cliente = new Cliente(cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
+				repositorioCliente.add(cliente);
 				
 			}
 		});
