@@ -51,8 +51,8 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					
-					if (comboBox.getSelectedItem().equals("Gerente")) {
+				
+					 if (comboBox.getSelectedItem().equals("Gerente")) {
 						rpGerente.add(((DadosGerente)dadosUsuario).lerGerente());
 					} else if (comboBox.getSelectedItem().equals("Caixa")) {
 						rpCaixa.add(((DadosCaixa)dadosUsuario).lerCaixa());
@@ -67,7 +67,7 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 				}
 			}
 		});
-		btnConfirmar.setBounds(603, 475, 100, 23);
+		btnConfirmar.setBounds(650, 500, 100, 23);
 		add(btnConfirmar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -76,7 +76,7 @@ public class TelaCadastroDeFuncionarios extends JPanel {
 				gerenciadorFuncionario.menuFuncionario();
 			}
 		});
-		btnCancelar.setBounds(20, 475, 89, 23);
+		btnCancelar.setBounds(10, 500, 89, 23);
 		add(btnCancelar);
 
 	}
