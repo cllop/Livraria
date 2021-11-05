@@ -73,6 +73,7 @@ public class RepositorioGerenteJDBC extends RepositorioJDBC implements Repositor
 				ps.setInt(1, id);
 				ps.setBoolean(2, gerente.isAtivo());
 				ps.setBoolean(3, gerente.isSuperGerente());
+				ps.execute();
 
 			}
 		} catch (SQLException e) {

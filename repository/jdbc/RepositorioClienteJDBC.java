@@ -76,6 +76,7 @@ public class RepositorioClienteJDBC extends RepositorioJDBC implements Repositor
 
 				ps = con.prepareStatement("INSERT INTO perfilCliente (id) VALUES (?)");
 				ps.setInt(1, id);
+				ps.execute();
 				if (transacaoFoiAutomatica) {
 					con.commit();
 					con.setAutoCommit(true);

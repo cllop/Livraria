@@ -70,6 +70,7 @@ public class RepositorioCaixaJDBC extends RepositorioJDBC implements Repositorio
 				ps = con.prepareStatement("INSERT INTO perfilCaixa (id, ativo) VALUES (?, ?)");
 				ps.setInt(1, id);
 				ps.setBoolean(2, caixa.isAtivo());
+				ps.execute();
 			}
 		} catch (SQLException e) {
 			throw new RuntimeException("Não foi possível cadastrar este caixa.", e);

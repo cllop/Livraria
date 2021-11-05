@@ -69,9 +69,10 @@ public class RepositorioVendedorJDBC extends RepositorioJDBC implements Reposito
 				crid.next();
 				int id = crid.getInt(1);
 
-				ps = conexao.prepareStatement("INSERT INTO funcionario (id, ativo) VALUES (?, ?);");
+				ps = conexao.prepareStatement("INSERT INTO perfilVendedor (id, ativo) VALUES (?, ?);");
 				ps.setInt(1, id);
 				ps.setBoolean(2, vendedor.isAtivo());
+				ps.execute();
 			}
 		} catch (SQLException execao) {
 

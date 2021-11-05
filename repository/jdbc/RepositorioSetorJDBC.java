@@ -29,7 +29,16 @@ public class RepositorioSetorJDBC extends RepositorioJDBC implements Repositorio
 			jaExisteConexao = true;
 		}
 		PreparedStatement ps;
-
+		try {
+			ps = con.prepareStatement("INSERT INTO setor (id, nome) VALUES (?, ?)");
+			ps.setInt(1, model.getId());
+			ps.setString(2, model.getNome());
+			ps.execute();
+			
+		} catch (Exception e) {
+			throw new RuntimeException("Setor não pode ser inserido"+e);
+		}
+	
 	}
 
 	public Setor findByNome(String nome) {

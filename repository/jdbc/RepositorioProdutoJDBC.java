@@ -28,20 +28,20 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			conexaoJaExistia = true;
 		}
 
-		PreparedStatement comandoSql = null;
+		PreparedStatement ps;
 
 		try {
 
-			comandoSql = conexao
+			ps = conexao
 					.prepareStatement("INSERT INTO produto(idSetor, nome, descricao, preco, quantidade) VALUES (?, ?, ?, ?, ?);");
+			
+			ps.setInt(1, produto.getIdSetor());
+			ps.setString(2, produto.getNome());
+			ps.setString(3, produto.getDescricao());
+			ps.setInt(4, produto.getPreco().getCentavos());
+			ps.setInt(5, produto.getQuantidade());
 
-			comandoSql.setInt(1, produto.getIdSetor());
-			comandoSql.setString(2, produto.getNome());
-			comandoSql.setString(3, produto.getDescricao());
-			comandoSql.setInt(4, produto.getPreco().getCentavos());
-			comandoSql.setInt(5, produto.getQuantidade());
-
-			comandoSql.execute();
+			ps.execute();
 		} catch (SQLException execao) {
 
 			throw new RuntimeException("Opera��o n�o pode ser concluida", execao);

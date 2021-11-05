@@ -1,5 +1,7 @@
 package teste.jUnit.funcional.bancoDeDados;
 
+import java.sql.Connection;
+import java.sql.Statement;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterAll;
@@ -25,9 +27,9 @@ import repository.RepositorioProduto;
 import repository.RepositorioSetor;
 import repository.RepositorioVendedor;
 import repository.jdbc.FabricaDeRepositoriosJDBC;
+import teste.jUnit.ConteudoTabelaDB;
 import teste.jUnit.GerenciarDB;
 import teste.jUnit.MapaRegistro;
-import teste.jUnit.RegistrosBD;
 
 public class TesteDeInsercao {
 
@@ -36,15 +38,17 @@ public class TesteDeInsercao {
 	private static MapaRegistro mapaRegistros;
 	private static FabricaDeRepositorios fabricaDeRepositorios;
 	public static final String nomeDoDB = "testeDB";
-	
+	public static FabricaDeConexao  fabricaDeConexao;
 	@BeforeAll
 	public static void antesDeTudo() {
-		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB,"teste", null));
+		fabricaDeConexao = new FabricaDeConexao("jdbc:mysql://localhost:3306/"+nomeDoDB+"?allowMultiQueries=true","teste", null);
+		fabricaDeRepositorios = new FabricaDeRepositoriosJDBC(fabricaDeConexao);
 		mapaRegistros = new RegistroDBParaTesteInsercao(new RegistrosBDParaTesteRecuperacao()).obterRegistros();
 		gerenciarDB = new GerenciarDB(null, nomeDoDB);
 		gerenciarDB.destruirDB();
 		testeDeRecuperacao = new TesteDeRecuperacao();
 		TesteDeRecuperacao.fabricaDeRepositorios = fabricaDeRepositorios;
+		TesteDeRecuperacao.mapaRegistros = mapaRegistros;
 	}
 	@BeforeEach
 	public void antesDeCada() {
@@ -114,21 +118,45 @@ public class TesteDeInsercao {
 	
 	@Test
 	public void addSetor() {
-		RepositorioSetor repositorio = fabricaDeRepositorios.criarRepositorioSetor();
-		List<Setor> list = mapaRegistros.get(Setor.class).getRegistros();
-		for(Setor model : list) {
-			repositorio.add(model);
+		try {
+			RepositorioSetor repositorio = fabricaDeRepositorios.criarRepositorioSetor();
+			List<Setor> list = mapaRegistros.get(Setor.class).getRegistros();
+			
+
+			for(Setor model : list) {
+				repositorio.add(model);
+			}
+			ConteudoTabelaDB<Produto> conteudoTabelaProduto = mapaRegistros.get(Produto.class);
+			Connection con = fabricaDeConexao.criarConecxao();
+			Statement ps = con.createStatement();
+			ps.execute(conteudoTabelaProduto.gerarComandosDeInsert());
+			testeDeRecuperacao.findSetor();
+			
+		} catch (Exception e) {
+			
+			throw new RuntimeException(e);
 		}
-		testeDeRecuperacao.findSetor();
+		
 	}
 	
 	@Test
 	public void addProduto() {
-		RepositorioProduto repositorio = fabricaDeRepositorios.criarRepositorioDeProduto();
-		List<Produto> list = mapaRegistros.get(Produto.class).getRegistros();
-		for(Produto model : list) {
-			repositorio.add(model);
+		try {
+			ConteudoTabelaDB<Setor> conteudoTabelaSetor = mapaRegistros.get(Setor.class);
+			Connection con = fabricaDeConexao.criarConecxao();
+			Statement ps = con.createStatement();
+			ps.execute(conteudoTabelaSetor.gerarComandosDeInsert());
+			
+			RepositorioProduto repositorio = fabricaDeRepositorios.criarRepositorioDeProduto();
+			List<Produto> list = mapaRegistros.get(Produto.class).getRegistros();
+			for(Produto model : list) {
+				repositorio.add(model);
+			}
+			testeDeRecuperacao.findProduto();
+			
+		} catch (Exception e) {
+			throw new RuntimeException(e);
 		}
-		testeDeRecuperacao.findProduto();
+		
 	}
 }
