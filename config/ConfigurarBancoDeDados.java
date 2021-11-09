@@ -80,7 +80,7 @@ public class ConfigurarBancoDeDados {
 			System.out.println("Cadastrado com sucesso!!");
 
 		} catch (Exception e) {
-			System.out.println("N�o foi possivel cadastrar usuario");
+			System.out.println("Nao foi possivel cadastrar usuario");
 			e.printStackTrace();
 		}
 
@@ -127,7 +127,7 @@ public class ConfigurarBancoDeDados {
 			
 			conexao.commit();
 
-			System.out.println("Permiss�es concedidas com sucesso!");
+			System.out.println("Permissoes concedidas com sucesso!");
 
 		} catch (Exception e) {
 			
@@ -165,7 +165,7 @@ public class ConfigurarBancoDeDados {
 
 		} catch (Exception e) {
 
-			System.out.println("N�o foi possivel deletar usuario");
+			System.out.println("Nao foi possivel deletar usuario");
 			e.printStackTrace();
 		}
 

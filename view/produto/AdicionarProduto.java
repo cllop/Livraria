@@ -42,7 +42,7 @@ public class AdicionarProduto extends JPanel {
 		tfNome.setColumns(10);
 		
 		JLabel lblDescricao = new JLabel("Descri\u00E7\u00E3o");
-		lblDescricao.setBounds(307, 11, 52, 14);
+		lblDescricao.setBounds(307, 11, 79, 14);
 		add(lblDescricao);
 		
 		tfDescricao = new JTextPane();
@@ -77,7 +77,7 @@ public class AdicionarProduto extends JPanel {
 		textIdSetor.setColumns(10);
 		
 		JButton btnVoltarAoMenuProduto = new JButton("Voltar ao Menu Produto");
-		btnVoltarAoMenuProduto.setBounds(290, 435, 145, 23);
+		btnVoltarAoMenuProduto.setBounds(10, 435, 169, 23);
 		btnVoltarAoMenuProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				gerenciadorProduto.menuProduto();
@@ -86,7 +86,7 @@ public class AdicionarProduto extends JPanel {
 		add(btnVoltarAoMenuProduto);
 		
 		btnCadastrarProduto = new JButton("Cadastrar Produto");
-		btnCadastrarProduto.setBounds(445, 435, 121, 23);
+		btnCadastrarProduto.setBounds(421, 435, 145, 23);
 		btnCadastrarProduto.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nome= tfNome.getText();

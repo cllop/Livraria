@@ -107,7 +107,7 @@ public class ExibirProduto extends JPanel {
 					gerenciador.pesquisarProduto();
 				}
 			});
-			btnNewButton.setBounds(25, 266, 178, 23);
+			btnNewButton.setBounds(10, 453, 89, 23);
 			add(btnNewButton);
 
 		}

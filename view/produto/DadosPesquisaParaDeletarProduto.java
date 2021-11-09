@@ -6,10 +6,20 @@ import java.awt.event.ActionListener;
 import modelo.Produto;
 import repository.RepositorioProduto;
 import view.DadosPesquisa;
+import javax.swing.JButton;
 
 public class DadosPesquisaParaDeletarProduto extends DadosPesquisa {
 
 	public DadosPesquisaParaDeletarProduto(GerenciadorProduto gerenciador, RepositorioProduto repositorio) {
+		
+		JButton btnVoltar = new JButton("Voltar");
+		btnVoltar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				gerenciador.menuProduto();
+			}
+		});
+		btnVoltar.setBounds(10, 427, 89, 23);
+		add(btnVoltar);
 //		btnPesquisarPorNome.addActionListener(new ActionListener() {
 //			public void actionPerformed(ActionEvent e) {
 //				String nome = null;

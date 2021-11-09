@@ -129,12 +129,11 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			PreparedStatement ps;
 		try {
 			
-			ps = con.prepareStatement("DELETE FROM produto WHERE id=?");
+			ps = con.prepareStatement("DELETE FROM produto WHERE id=?;");
 			ps.setInt(1, produto.getId());	
-			
 			ps.execute();
 			
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			
 			throw new RuntimeException ("Não foi possivel deletar o produto", e);
 			

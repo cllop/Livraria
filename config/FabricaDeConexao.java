@@ -18,11 +18,11 @@ public class FabricaDeConexao {
 	}
 	public Connection criarConecxao(){
 		
-		 Connection conecxao = null;
+		 Connection conexao = null;
 		 
 		 try {
 			 
-			 conecxao = DriverManager.getConnection(url, usuario, senha);
+			 conexao = DriverManager.getConnection(url, usuario, senha);
 			 
 		} catch (SQLException execao) {
 			if(DevConfig.devMode) {
@@ -34,7 +34,7 @@ public class FabricaDeConexao {
 			
 		}
 		 
-		return conecxao;
+		return conexao;
 		
 	}
 	

@@ -116,7 +116,7 @@ public class FabricaDefinicaoDB {
 		atores.get("funcionario").atribuirCasoDeUso(uc);
 
 		uc = new CasoDeUsoDB(1, "CR Produto");
-		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT", "produto"));
+		uc.adicionarPermicao(new PermissoesDB("INSERT, SELECT, UPDATE, DELETE", "produto"));
 		atores.get("gerente").atribuirCasoDeUso(uc);
 		
 		uc = new CasoDeUsoDB(1, "CR ProdutoLivro");
