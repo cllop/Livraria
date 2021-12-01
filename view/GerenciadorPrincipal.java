@@ -20,7 +20,7 @@ import view.Usuario.AlterarSenhaDeUsuario;
 import view.Usuario.ApagarDadosDoCliente;
 import view.fornecedor.GerenciadorFornecedor;
 import view.funcionario.GerenciadorFuncionario;
-import view.produto.DadosPesquisaProdutoLivro;
+import view.produto.DadosPesquisaProduto;
 import view.produto.ExibirProduto;
 import view.produto.GerenciadorProduto;
 import view.venda.MetodoDePagamento;
@@ -104,7 +104,7 @@ public class GerenciadorPrincipal extends JPanel {
 	 * Menus Usuario
 	 */
 	public void pesquisarProduto() {
-		trocarTela(new DadosPesquisaProdutoLivro(this,fabricaDeRepositorios.criarRepositorioDeProduto()));
+		trocarTela(new DadosPesquisaProduto(this,fabricaDeRepositorios.criarRepositorioDeProduto()));
 
 	}
 	

@@ -18,7 +18,7 @@ public class ExibirProduto extends JPanel {
 	private JTextField tfQuantidade;
 	private JTextField tfId;
 	private JTextPane tpDescricao;
-	private JTextField textIdSetor;
+	private JTextField tfIdSetor;
 
 	public ExibirProduto(GerenciadorProduto gerenciador, Produto produto) {
 		setLayout(null);
@@ -85,11 +85,12 @@ public class ExibirProduto extends JPanel {
 		lblIDSetor.setBounds(10, 249, 124, 14);
 		add(lblIDSetor);
 
-		textIdSetor = new JTextField();
-		textIdSetor.setEditable(false);
-		textIdSetor.setBounds(10, 274, 259, 20);
-		add(textIdSetor);
-		textIdSetor.setColumns(10);
+		tfIdSetor = new JTextField();
+		tfIdSetor.setEditable(false);
+		tfIdSetor.setBounds(10, 274, 259, 20);
+		add(tfIdSetor);
+		tfIdSetor.setColumns(10);
+		tfIdSetor.setText(Integer.toString(produto.getIdSetor()));
 		
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
@@ -107,7 +108,7 @@ public class ExibirProduto extends JPanel {
 					gerenciador.pesquisarProduto();
 				}
 			});
-			btnNewButton.setBounds(10, 453, 89, 23);
+			btnNewButton.setBounds(30, 453, 89, 23);
 			add(btnNewButton);
 
 		}
@@ -117,11 +118,10 @@ public class ExibirProduto extends JPanel {
 		tfNome.setEditable(true);
 		tfPreco.setEditable(true);
 		tpDescricao.setEditable(true);
-		textIdSetor.setEditable(true);
+		tfIdSetor.setEditable(true);
 	}
 
-	public Produto lerCampos() {		
-		return new Produto(Integer.parseInt(tfId.getText()), tfNome.getText(), tpDescricao.getText(), new Real(tfPreco.getText()), Integer.parseInt(tfQuantidade.getText()), Integer.parseInt(textIdSetor.getText()));
-
+	public Produto lerCampos() {
+		return new Produto(Integer.parseInt(tfId.getText()), tfNome.getText(), tpDescricao.getText(), new Real(tfPreco.getText()), Integer.parseInt(tfQuantidade.getText()), Integer.parseInt(tfIdSetor.getText()));
 	}
 }

@@ -14,11 +14,15 @@ import repository.RepositorioProduto;
 import view.DadosPesquisa;
 import view.GerenciadorPrincipal;
 
-public class DadosPesquisaProdutoLivro extends DadosPesquisa {
+public class DadosPesquisaProduto extends DadosPesquisa {
 	private JTextField tfCategoria;
 	private JTextField tfAutor;
 
-	public DadosPesquisaProdutoLivro(GerenciadorPrincipal gerenciador,RepositorioProduto repositorio) {
+	public DadosPesquisaProduto(GerenciadorPrincipal gerenciador,RepositorioProduto repositorio) {
+		btnPesquisarPorId.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		super.btnPesquisarPorId.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				int id;

@@ -6,11 +6,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import modelo.Caixa;
 import repository.RepositorioCaixa;
-import javax.swing.JPasswordField;
+import view.GerenciadorPrincipal;
 
 public class AdicionarCaixa extends JPanel {
 	private JTextField tfCPF;
@@ -29,7 +30,7 @@ public class AdicionarCaixa extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public AdicionarCaixa(GerenciadorCaixa gerenciadorCaixa, RepositorioCaixa repositorio) {
+	public AdicionarCaixa(GerenciadorPrincipal gerenciadorPrincipal, RepositorioCaixa repositorio) {
 		setLayout(null);
 		
 		JLabel lblCPF = new JLabel("CPF");
