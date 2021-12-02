@@ -31,9 +31,22 @@ public class MenuCliente extends JPanel {
 		add(btnCadastrarCliente);
 		
 		JButton btnPesquisarCliente = new JButton("Pesquisar Cliente");
+		btnPesquisarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		btnPesquisarCliente.setFont(new Font("Tahoma", Font.BOLD, 11));
 		btnPesquisarCliente.setBounds(10, 55, 228, 23);
 		add(btnPesquisarCliente);
+		
+		JButton btnEditarCliente = new JButton("Editar Cliente");
+		btnEditarCliente.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnEditarCliente.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnEditarCliente.setBounds(10, 89, 228, 23);
+		add(btnEditarCliente);
 
 	}
 }

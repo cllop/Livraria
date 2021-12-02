@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -205,6 +206,8 @@ public class TelaCadastrarCliente extends JPanel {
 				
 				Cliente cliente = new Cliente(cpf, nome, sobrenome, nomeDeUsuario, senha, pais, estado, cidade, rua, bairro, cep, numeroDaResidencia, ddi, ddd, telefone);
 				repositorioCliente.add(cliente);
+				
+				JOptionPane.showMessageDialog(btnConfirmar, "Cliente cadastrado com sucesso!");
 				
 			}
 		});
