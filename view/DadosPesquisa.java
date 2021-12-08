@@ -4,6 +4,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class DadosPesquisa extends JPanel {
 	protected JTextField tfId;
@@ -33,12 +35,17 @@ public class DadosPesquisa extends JPanel {
 		tfNome.setColumns(10);
 		
 		this.btnPesquisarPorNome = new JButton("Pesquisar por Nome");
+		btnPesquisarPorNome.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		this.btnPesquisarPorNome.setBounds(282, 83, 158, 23);
 		add(this.btnPesquisarPorNome);
 		
 		this.btnPesquisarPorId= new JButton("Pesquisar por Id");
 		this.btnPesquisarPorId.setBounds(282, 27, 158, 23);
 		add(this.btnPesquisarPorId);
+		
 
 	}
 }

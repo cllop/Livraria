@@ -12,7 +12,7 @@ public interface RepositorioProduto {
 	
 	public Produto find(int id);
 	
-	public List<Produto> findByNome(String nome);
+	public Produto findByNome(String nome);
 	
 	public Produto findByCategoria(String categoria);
 	

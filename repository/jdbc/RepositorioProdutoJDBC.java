@@ -86,7 +86,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 		}
 	}
 
-	public List<Produto> findByNome(String nome) {
+	public Produto findByNome(String nome) {
 		Connection con = super.getConexao();
 		Boolean jaExisteConexao;
 		if (con == null) {
@@ -103,7 +103,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 
 			ResultSet rs = ps.executeQuery();
 
-			return lerProdutos(rs);
+			return lerProduto(rs);
 
 		} catch (SQLException e) {
 

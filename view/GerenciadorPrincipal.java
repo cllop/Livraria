@@ -47,7 +47,8 @@ public class GerenciadorPrincipal extends JPanel {
 	private FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorios;
 	
 	private RepositorioProduto repositorio;
-
+	
+	
 	public GerenciadorPrincipal(FabricaDeFabricaDeRepositorios fabricaDeFabricaDeRepositorio) {
 		setLayout(null);
 		if (DevConfig.guiDevMode) {
@@ -109,7 +110,7 @@ public class GerenciadorPrincipal extends JPanel {
 	}
 	
 	public void exibirProduto(Produto produto) {
-		this.trocarTela(new ExibirProduto(null, produto));
+		this.trocarTela(new ExibirProdutoView(this, produto));
 		
 	}
 	
@@ -249,5 +250,8 @@ public class GerenciadorPrincipal extends JPanel {
 		this.usuarioLogado = usuario;
 
 	}
+	
+	
+	
 	
 }
