@@ -95,7 +95,7 @@ public class ExibirProdutoView extends JPanel {
 		JButton btnVoltar = new JButton("Voltar");
 		btnVoltar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				gerenciador.menuProduto();
+				gerenciador.pesquisarProduto();
 			}
 		});
 		btnVoltar.setBounds(474, 453, 89, 23);
@@ -108,7 +108,7 @@ public class ExibirProdutoView extends JPanel {
 					gerenciador.pesquisarProduto();
 				}
 			});
-			btnNewButton.setBounds(30, 453, 89, 23);
+			btnNewButton.setBounds(30, 453, 180, 23);
 			add(btnNewButton);
 
 		}

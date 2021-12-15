@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import config.FabricaDeConexao;
 import modelo.Produto;
 import repository.RepositorioProduto;
@@ -205,6 +207,7 @@ public class RepositorioProdutoJDBC extends RepositorioJDBC implements Repositor
 			return apenasLerProduto(conjuntoDeResultados);	
 		} else {
 			throw new RuntimeException("Produto não encontrado");
+		
 		}
 	}
 	
